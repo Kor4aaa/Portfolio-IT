@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>À propos — Wensel Reyes</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .page-hero { padding:120px var(--space-8) var(--space-12);max-width:1100px;margin:0 auto; }
+    .about-layout { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:start; }
+    .about-text p { color:var(--color-text-muted);margin-bottom:var(--space-5);line-height:1.85;max-width:52ch; }
+    .about-text strong { color:var(--color-primary);font-weight:600; }
+    .info-grid { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-top:var(--space-8); }
+    .info-item { display:flex;flex-direction:column;gap:4px; }
+    .info-label { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-faint);letter-spacing:.1em;text-transform:uppercase; }
+    .info-val { font-size:var(--text-sm);font-weight:500; }
+    .passions { display:flex;flex-direction:column;gap:var(--space-3);margin-top:var(--space-8); }
+    .passion-item { display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4) var(--space-5);background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-lg);transition:all var(--transition); }
+    .passion-item:hover { border-color:var(--color-border);transform:translateX(6px);background:var(--color-primary-dim); }
+    .passion-emoji { font-size:24px;width:36px;text-align:center; }
+    .passion-info { flex:1; }
+    .passion-name { font-size:var(--text-sm);font-weight:600; }
+    .passion-desc { font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px; }
+
+    /* Timeline améliorée */
+    .tl-section-label {
+      font-family:var(--font-mono);font-size:var(--text-xs);
+      color:var(--color-primary);letter-spacing:.12em;text-transform:uppercase;
+      margin:var(--space-8) 0 var(--space-4);
+      display:flex;align-items:center;gap:var(--space-3);
+    }
+    .tl-section-label::after { content:'';flex:1;height:1px;background:var(--color-border-soft); }
+    .timeline { display:flex;flex-direction:column; }
+    .tl-item { display:flex;gap:var(--space-5);padding-bottom:var(--space-6);position:relative; }
+    .tl-item:not(:last-child)::before { content:'';position:absolute;left:4px;top:18px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--color-primary),transparent);opacity:.25; }
+    .tl-dot-wrap { display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:5px; }
+    .tl-dot { width:10px;height:10px;border-radius:50%;border:2px solid var(--color-bg);flex-shrink:0; }
+    .tl-dot.green  { background:var(--color-primary); }
+    .tl-dot.blue   { background:var(--color-secondary); }
+    .tl-dot.purple { background:#a78bfa; }
+    .tl-dot.orange { background:#fb923c; }
+    .tl-dot.gray   { background:#64748b; }
+    .tl-content { flex:1; }
+    .tl-header { display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;margin-bottom:4px; }
+    .tl-title { font-size:var(--text-sm);font-weight:700; }
+    .tl-role { font-size:var(--text-xs);color:var(--color-primary);font-style:italic;margin-bottom:4px; }
+    .tl-date { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-faint);white-space:nowrap; }
+    .tl-sub { font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.7; }
+    .tl-sub li { list-style:none;padding-left:var(--space-3);position:relative; }
+    .tl-sub li::before { content:'–';position:absolute;left:0;color:var(--color-primary);opacity:.6; }
+    .tl-badge { display:inline-flex;margin-top:var(--space-2); }
+    .reveal-left { opacity:0;transform:translateX(-30px); }
+    .reveal-right { opacity:0;transform:translateX(30px); }
+    @media(max-width:768px){ .about-layout{grid-template-columns:1fr;gap:var(--space-10);} }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo" data-transition>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    portfolio.wenselreyes
+  </a>
+  <ul class="nav-links">
+    <li><a href="competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="projets.html" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="profil.html" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="apropos.html" class="active" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="section-label reveal">04. Identité</p>
+  <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
+    À <span style="background:linear-gradient(135deg,#00ffaa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">propos</span>
+  </h1>
+  <p class="reveal" style="color:var(--color-text-muted);max-width:52ch;line-height:1.8;margin-bottom:var(--space-8);">
+    Qui je suis, d'où je viens, ce qui me passionne au-delà de l'écran.
+  </p>
+  <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;" class="reveal">
+    <a href="profil.html" class="btn btn-ghost" data-transition>← Profil</a>
+    <a href="contact.html" class="btn btn-primary" data-transition>Me contacter →</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<section class="section" style="background:var(--color-surface)">
+  <div class="section-inner">
+    <div class="about-layout">
+
+      <!-- GAUCHE : Texte + infos + passions -->
+      <div class="reveal-left">
+        <div class="about-text">
+          <h2 style="font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-6);">Qui suis-je ?</h2>
+          <p>Je m'appelle <strong>Wensel Reyes</strong>, technicien support en alternance chez <strong>Econocom</strong> pour le client <strong>Engie</strong>. Je cumule 7 mois d'expérience active et <strong>5 stages</strong> dans des structures de référence — Château de Versailles, Ministère des Affaires Sociales, Alten, Cité des Sciences.</p>
+          <p>Passionné de cybersécurité <strong>depuis l'enfance</strong>, ma formation BTS SIO me confère une maîtrise solide des SI, réseaux et cybersécurité. Autonome, rigoureux et orienté solution, je m'adapte efficacement à tout environnement technique et humain.</p>
+          <p>En alternance chez Engie, je gère des incidents techniques au quotidien avec un workflow rigoureux sous pression — <strong>résolution de tickets en moins de 25 minutes</strong> dans un environnement grand compte.</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Nom</span>
+            <span class="info-val">Wensel Reyes</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Formation</span>
+            <span class="info-val">BTS SIO SISR — ESUP</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Localisation</span>
+            <span class="info-val">Boulogne-Billancourt (92)</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Bac obtenu</span>
+            <span class="info-val">2024 — mention</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Entreprise</span>
+            <span class="info-val">Econocom × Engie</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Poste</span>
+            <span class="info-val">Technicien Support</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Depuis</span>
+            <span class="info-val">Octobre 2025</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Statut</span>
+            <span class="info-val" style="color:var(--color-primary)">● Alternant actif</span>
+          </div>
+        </div>
+
+        <div class="passions" style="margin-top:var(--space-10)">
+          <p class="section-label">Centres d'intérêt</p>
+          <div class="passion-item">
+            <span class="passion-emoji">🔒</span>
+            <div class="passion-info">
+              <div class="passion-name">Cybersécurité</div>
+              <div class="passion-desc">Pentest, audits, veille vulnérabilités — depuis l'enfance</div>
+            </div>
+          </div>
+          <div class="passion-item">
+            <span class="passion-emoji">🎹</span>
+            <div class="passion-info">
+              <div class="passion-name">Piano</div>
+              <div class="passion-desc">Depuis 11 ans</div>
+            </div>
+          </div>
+          <div class="passion-item">
+            <span class="passion-emoji">📷</span>
+            <div class="passion-info">
+              <div class="passion-name">Photographie & Vidéo</div>
+              <div class="passion-desc">Portraits, événements, étalonnage et post-production</div>
+            </div>
+          </div>
+          <div class="passion-item">
+            <span class="passion-emoji">⚽</span>
+            <div class="passion-info">
+              <div class="passion-name">Football & Sports de combat</div>
+              <div class="passion-desc">Sport collectif et la Photographie</div>
+            </div>
+          </div>
+          <div class="passion-item">
+            <span class="passion-emoji">🎮</span>
+            <div class="passion-info">
+              <div class="passion-name">Jeux vidéo</div>
+              <div class="passion-desc">Gaming, culture geek</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DROITE : Timeline complète -->
+      <div class="reveal-right">
+
+        <!-- EXPÉRIENCES PRO -->
+        <h2 style="font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-2);">Expériences</h2>
+        <div class="tl-section-label">Pro</div>
+        <div class="timeline">
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot green"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">Econocom — Client : Engie</div>
+                <span class="tl-date">Oct. 2025 → Auj.</span>
+              </div>
+              <div class="tl-role">Technicien Support Utilisateurs · Alternance</div>
+              <ul class="tl-sub">
+                <li>Support IT quotidien, suivi tickets et résolution d'incidents en grand compte</li>
+                <li><strong style="color:var(--color-text)">Optimisation logicielle</strong> des postes — compétence principale</li>
+                <li>Respect des processus clients stricts, image pro et relation utilisateur soignée</li>
+              </ul>
+              <span class="tl-badge"><span class="tag tag-green">● En cours</span></span>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot blue"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">Cité des Sciences & de l'Industrie</div>
+                <span class="tl-date">2024 · 4 semaines</span>
+              </div>
+              <div class="tl-role">Stagiaire Technicien Support Proximité</div>
+              <ul class="tl-sub">
+                <li>Support IT, help desk, masterisation et déploiement de postes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot purple"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">Alten</div>
+                <span class="tl-date">2023 · 4 semaines</span>
+              </div>
+              <div class="tl-role">Stagiaire Technicien Support Proximité</div>
+              <ul class="tl-sub">
+                <li><strong style="color:var(--color-text)">Masterisation multi-modes</strong> : réseau PXE, filaire, clé USB — banc à +20 PC/jour</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot orange"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">Ministère des Affaires Sociales</div>
+                <span class="tl-date">2022 · 4 semaines</span>
+              </div>
+              <div class="tl-role">Stagiaire Technicien Support IT</div>
+              <ul class="tl-sub">
+                <li>Support auprès d'<strong style="color:var(--color-text)">utilisateurs à profil sensible</strong> — autonomie complète sur ticketing</li>
+                <li>Gestion sous pression, organisation et réactivité</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot blue"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">Château de Versailles</div>
+                <span class="tl-date">2022 · 4 semaines</span>
+              </div>
+              <div class="tl-role">Stagiaire Technicien Réseau & Systèmes</div>
+              <ul class="tl-sub">
+                <li>Configuration de <strong style="color:var(--color-text)">baies de brassage</strong> et administration du réseau interne</li>
+                <li>Administration de <strong style="color:var(--color-text)">serveurs physiques</strong> : disques et redondance</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot gray"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">Econocom</div>
+                <span class="tl-date">2021 · 4 semaines</span>
+              </div>
+              <div class="tl-role">Stagiaire Technicien Support Proximité</div>
+              <ul class="tl-sub">
+                <li>Découverte des process support, help desk et premières opérations de masterisation</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FORMATION -->
+        <div class="tl-section-label">Formation</div>
+        <div class="timeline">
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot green"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">ESUP — BTS SIO 1ère année</div>
+                <span class="tl-date">2025 → En cours</span>
+              </div>
+              <div class="tl-role">BTS Services Informatiques aux Organisations — option SISR</div>
+              <ul class="tl-sub">
+                <li>Réseaux : Active Directory, VLAN Cisco, routage/switching</li>
+                <li>Virtualisation : Proxmox, VMware, VirtualBox</li>
+                <li>Cybersécurité : audits Kali Linux, pentesting, analyse de vulnérabilités</li>
+              </ul>
+              <span class="tl-badge"><span class="tag tag-green">● En cours</span></span>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot-wrap"><div class="tl-dot orange"></div></div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <div class="tl-title">Lycée Les Côtes de Villebon</div>
+                <span class="tl-date">2021 – 2024</span>
+              </div>
+              <div class="tl-role">Baccalauréat avec mention — Option Cybersécurité (C)</div>
+              <span class="tl-badge"><span class="tag tag-green">Obtenu 2024</span></span>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:var(--space-6)">
+          <a href="contact.html" class="btn btn-primary" data-transition>Travaillons ensemble →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2025–2027</p>
+</footer>
+
+<script src="../nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.fromTo('.page-hero .reveal',
+    { opacity:0, y:28 },
+    { opacity:1, y:0, duration:.75, ease:'power3.out', stagger:.1, delay:.3 }
+  );
+
+  ScrollTrigger.create({
+    trigger: '.about-layout', start: 'top 80%',
+    onEnter: () => {
+      gsap.to('.reveal-left',  { opacity:1, x:0, duration:.8, ease:'power3.out' });
+      gsap.to('.reveal-right', { opacity:1, x:0, duration:.8, ease:'power3.out', delay:.15 });
+    }
+  });
+
+  initReveal();
+});
+</script>
+</body>
+</html>

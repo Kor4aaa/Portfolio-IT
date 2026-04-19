@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Profil — Wensel Reyes</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .page-hero { padding:120px var(--space-8) var(--space-12);max-width:1100px;margin:0 auto; }
+    .terminal { background:#0a0d12;border:1px solid var(--color-border-soft);border-radius:var(--radius-xl);overflow:hidden;max-width:700px;margin:0 auto var(--space-16);box-shadow:0 24px 80px rgba(0,0,0,.6); }
+    [data-theme="light"] .terminal { background:#1a1d24; }
+    .terminal-bar { display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);background:rgba(0,0,0,.4);border-bottom:1px solid rgba(255,255,255,.06); }
+    .dot { width:12px;height:12px;border-radius:50%; }
+    .dot.r{background:#ff5f57;} .dot.y{background:#febc2e;} .dot.g{background:#28c840;}
+    .t-title { font-family:var(--font-mono);font-size:var(--text-xs);color:#555e70;margin:0 auto; }
+    .terminal-body { padding:var(--space-6) var(--space-8);font-family:var(--font-mono);font-size:var(--text-sm);line-height:2.1; }
+    .t-line { display:flex;gap:var(--space-2);flex-wrap:wrap; }
+    .t-p{color:#00ffaa;} .t-c{color:#e2e8f0;} .t-o{color:#8892a4;} .t-k{color:#00b4ff;} .t-v{color:#a78bfa;} .t-cm{color:#3d4a5c;font-style:italic;}
+    .tools-section { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:start; }
+    .tools-group { display:flex;flex-direction:column;gap:var(--space-4); }
+    .tools-group-title { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);letter-spacing:.12em;text-transform:uppercase;margin-bottom:var(--space-2);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-border-soft); }
+    .tool-row { display:flex;align-items:center;gap:var(--space-4);padding:var(--space-3) var(--space-4);background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-lg);transition:all var(--transition); }
+    .tool-row:hover { border-color:var(--color-border);background:var(--color-primary-dim);transform:translateX(4px); }
+    .tool-icon { font-size:20px;width:32px;text-align:center;flex-shrink:0; }
+    .tool-info { flex:1; }
+    .tool-name { font-size:var(--text-sm);font-weight:500; }
+    .tool-sub { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted); }
+    .tool-level { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);background:var(--color-primary-dim);padding:2px var(--space-2);border-radius:var(--radius-full); }
+    @media(max-width:768px){ .tools-section{grid-template-columns:1fr;gap:var(--space-8);} }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo" data-transition>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    wenselreyes.dev
+  </a>
+  <ul class="nav-links">
+    <li><a href="competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="projets.html" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="profil.html" class="active" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="section-label reveal">03. Stack</p>
+  <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
+    Profil <span style="background:linear-gradient(135deg,#00ffaa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">technique</span>
+  </h1>
+  <p class="reveal" style="color:var(--color-text-muted);max-width:50ch;line-height:1.8;margin-bottom:var(--space-8);">
+    Mon stack complet — outils utilisés en cours à l'ESUP, en lab perso et en alternance chez Econocom pour le client Engie.
+  </p>
+  <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;" class="reveal">
+    <a href="projets.html" class="btn btn-ghost" data-transition>← Projets</a>
+    <a href="apropos.html" class="btn btn-outline" data-transition>À propos →</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<section class="section" style="background:var(--color-surface)">
+  <div class="section-inner">
+
+    <div class="terminal reveal">
+      <div class="terminal-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <span class="t-title">wensel@kali ~ zsh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-p">❯</span><span class="t-c">&nbsp;cat profil.json</span></div>
+        <div class="t-line"><span class="t-o">{</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"nom"</span><span class="t-o">:</span><span class="t-v">&nbsp;"Wensel Reyes"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"formation"</span><span class="t-o">:</span><span class="t-v">&nbsp;"BTS SIO SISR — ESUP, Paris"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"bac"</span><span class="t-o">:</span><span class="t-v">&nbsp;"Lycée les Côtes de Villebon — 2024"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"alternance"</span><span class="t-o">:</span><span class="t-v">&nbsp;"Econocom × Engie — depuis oct. 2025"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"poste"</span><span class="t-o">:</span><span class="t-v">&nbsp;"Technicien Support Utilisateurs"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"os_favori"</span><span class="t-o">:</span><span class="t-v">&nbsp;"Kali Linux"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"exploit_notable"</span><span class="t-o">:</span><span class="t-v">&nbsp;"Pixie Dust WPS — Wi-Fi école"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"sla_tickets"</span><span class="t-o">:</span><span class="t-v">&nbsp;"&lt; 25 minutes"</span><span class="t-o">,</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"langages"</span><span class="t-o">: [</span><span class="t-v">"PowerShell"</span><span class="t-o">,</span><span class="t-v">&nbsp;"Bash"</span><span class="t-o">,</span><span class="t-v">&nbsp;"Python"</span><span class="t-o">,</span><span class="t-v">&nbsp;"PHP"</span><span class="t-o">,</span><span class="t-v">&nbsp;"SQL"</span><span class="t-o">],</span></div>
+        <div class="t-line"><span class="t-o">&nbsp;&nbsp;</span><span class="t-k">"disponible"</span><span class="t-o">:</span><span class="t-p">&nbsp;true</span>&nbsp;<span class="t-cm">// alternance active</span></div>
+        <div class="t-line"><span class="t-o">}</span></div>
+        <div class="t-line" style="margin-top:var(--space-3)"><span class="t-p">❯</span><span class="cursor-dot"></span></div>
+      </div>
+    </div>
+
+    <div class="tools-section">
+
+      <div class="tools-group">
+        <p class="section-label reveal">Sécurité & Pentest</p>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🐧</span>
+          <div class="tool-info"><div class="tool-name">Kali Linux</div><div class="tool-sub">OS principal pour les audits</div></div>
+          <span class="tool-level">Expert</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">💣</span>
+          <div class="tool-info"><div class="tool-name">Metasploit Framework</div><div class="tool-sub">Exploitation — lab Metasploitable</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🔍</span>
+          <div class="tool-info"><div class="tool-name">Nmap</div><div class="tool-sub">Scan & énumération de services</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">📡</span>
+          <div class="tool-info"><div class="tool-name">Aircrack-ng</div><div class="tool-sub">Wi-Fi — Pixie Dust WPS</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🦈</span>
+          <div class="tool-info"><div class="tool-name">Wireshark</div><div class="tool-sub">Analyse de trames réseau</div></div>
+          <span class="tool-level">Intermédiaire</span>
+        </div>
+
+        <p class="section-label reveal" style="margin-top:var(--space-8)">Réseau & Infrastructure</p>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🌐</span>
+          <div class="tool-info"><div class="tool-name">Cisco Packet Tracer</div><div class="tool-sub">VLAN, routage, ACL</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🛡️</span>
+          <div class="tool-info"><div class="tool-name">DMZ / Pare-feu</div><div class="tool-sub">Segmentation réseau Proxmox</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🔵</span>
+          <div class="tool-info"><div class="tool-name">Proxmox VE</div><div class="tool-sub">Hyperviseur — DMZ, VMs</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+      </div>
+
+      <div class="tools-group">
+        <p class="section-label reveal">Système & Administration</p>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🪟</span>
+          <div class="tool-info"><div class="tool-name">Windows Server 2022</div><div class="tool-sub">AD DS, GPO, DHCP, DNS</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">📦</span>
+          <div class="tool-info"><div class="tool-name">VMware Workstation</div><div class="tool-sub">Labs, snapshots, réseaux isolés</div></div>
+          <span class="tool-level">Expert</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🐧</span>
+          <div class="tool-info"><div class="tool-name">Debian / Ubuntu Server</div><div class="tool-sub">Apache, GLPI, Kanboard, SSH</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+
+        <p class="section-label reveal" style="margin-top:var(--space-8)">Support & ITSM</p>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🎫</span>
+          <div class="tool-info"><div class="tool-name">GLPI</div><div class="tool-sub">Helpdesk, inventaire, tickets</div></div>
+          <span class="tool-level">Intermédiaire</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">📋</span>
+          <div class="tool-info"><div class="tool-name">Kanboard</div><div class="tool-sub">Gestion de projet agile</div></div>
+          <span class="tool-level">Intermédiaire</span>
+        </div>
+
+        <p class="section-label reveal" style="margin-top:var(--space-8)">Langages</p>
+        <div class="tool-row reveal">
+          <span class="tool-icon">⚡</span>
+          <div class="tool-info"><div class="tool-name">PowerShell</div><div class="tool-sub">Scripts AD, automatisation</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🐚</span>
+          <div class="tool-info"><div class="tool-name">Bash / Shell</div><div class="tool-sub">Automatisation Linux</div></div>
+          <span class="tool-level">Avancé</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🐍</span>
+          <div class="tool-info"><div class="tool-name">Python</div><div class="tool-sub">Scripting & automatisation</div></div>
+          <span class="tool-level">Intermédiaire</span>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tool-icon">🐘</span>
+          <div class="tool-info"><div class="tool-name">PHP + SQL</div><div class="tool-sub">Dev web, bases de données</div></div>
+          <span class="tool-level">Intermédiaire</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
+</footer>
+
+<script src="../nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.fromTo('.page-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.1,delay:.3 });
+  initReveal();
+});
+</script>
+</body>
+</html>

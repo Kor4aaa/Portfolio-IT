@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Projets — Wensel Reyes</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .page-hero { padding:120px var(--space-8) var(--space-12);max-width:1100px;margin:0 auto; }
+    .filters { display:flex;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-8); }
+    .filter-btn { padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:1px solid var(--color-border-soft);font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted);transition:all var(--transition);cursor:pointer; }
+    .filter-btn:hover,.filter-btn.active { border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-dim); }
+    .projects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:var(--space-6); }
+    .project-card { background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-xl);padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-4);transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden; }
+    .project-card::after { content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(0,255,170,.05),transparent 60%);opacity:0;transition:opacity .3s; }
+    .project-card:hover::after { opacity:1; }
+    .project-card:hover { border-color:var(--color-border);transform:translateY(-6px);box-shadow:var(--shadow-card),var(--shadow-glow); }
+    .project-card.hidden { display:none; }
+    .project-header { display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4); }
+    .project-icon { font-size:30px; }
+    .project-name { font-size:var(--text-lg);font-weight:600; }
+    .project-desc { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;flex:1; }
+    .project-stack { display:flex;flex-wrap:wrap;gap:var(--space-2); }
+    .project-arrow { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);opacity:0;transform:translateX(-6px);transition:all var(--transition);margin-top:auto; }
+    .project-card:hover .project-arrow { opacity:1;transform:translateX(0); }
+    .project-card.featured { grid-column:span 2;flex-direction:row;gap:var(--space-8);align-items:center; }
+    .project-card.featured .project-body { flex:1; }
+    .project-card.featured .project-visual { width:180px;flex-shrink:0;background:var(--color-primary-dim);border:1px solid rgba(0,255,170,.15);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:60px;height:130px; }
+    @media(max-width:900px){ .project-card.featured{grid-column:span 1;flex-direction:column;} .project-card.featured .project-visual{width:100%;} }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo" data-transition>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    wenselreyes.dev
+  </a>
+  <ul class="nav-links">
+    <li><a href="competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="projets.html" class="active" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="profil.html" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="section-label reveal">02. Réalisations</p>
+  <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
+    Projets <span style="background:linear-gradient(135deg,#00ffaa,#00b4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">&amp; TP</span>
+  </h1>
+  <p class="reveal" style="color:var(--color-text-muted);max-width:55ch;line-height:1.8;margin-bottom:var(--space-8);">
+    6 projets réalisés en BTS SIO SISR à l'ESUP — de l'audit de sécurité Kali au déploiement d'une DMZ sous Proxmox, en passant par Active Directory et GLPI.
+  </p>
+  <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;" class="reveal">
+    <a href="competences.html" class="btn btn-ghost" data-transition>← Compétences</a>
+    <a href="profil.html" class="btn btn-outline" data-transition>Profil technique →</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<section class="section" style="background:var(--color-surface)">
+  <div class="section-inner">
+
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">Tout voir</button>
+      <button class="filter-btn" data-filter="secu">🔒 Sécurité</button>
+      <button class="filter-btn" data-filter="reseau">🌐 Réseau</button>
+      <button class="filter-btn" data-filter="systeme">🖥️ Système</button>
+      <button class="filter-btn" data-filter="support">🎫 Support</button>
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+
+      <!-- FEATURED — Audit Kali -->
+      <div class="project-card featured reveal" data-cat="secu">
+        <div class="project-visual">🔍</div>
+        <div class="project-body">
+          <div class="project-header">
+            <h3 class="project-name">Audit de Sécurité — Kali Linux</h3>
+            <span class="tag tag-red">⚡ Exploit réel</span>
+          </div>
+          <p class="project-desc">
+            Audit complet en environnement contrôlé : <strong style="color:var(--color-primary)">MITM</strong>,
+            <strong style="color:var(--color-primary)">Aircrack-ng (Pixie Dust WPS)</strong>,
+            <strong style="color:var(--color-primary)">Nmap</strong>, Wireshark et brute force.
+            Démonstration live de la compromission du Wi-Fi des 2ème année avec accord professeur.
+            Rapport de vulnérabilités + contre-mesures présentés en classe.
+          </p>
+          <div class="project-stack">
+            <span class="tag tag-green">Kali Linux</span>
+            <span class="tag tag-green">Aircrack-ng</span>
+            <span class="tag tag-blue">Nmap</span>
+            <span class="tag tag-blue">Wireshark</span>
+            <span class="tag tag-green">MITM</span>
+            <span class="tag tag-blue">Bruteforce</span>
+          </div>
+          <span class="project-arrow">Voir le détail →</span>
+        </div>
+      </div>
+
+      <!-- AD -->
+      <div class="project-card reveal" data-cat="systeme">
+        <div class="project-header">
+          <div class="project-icon">🏢</div>
+          <span class="tag tag-green">Terminé</span>
+        </div>
+        <h3 class="project-name">Active Directory — Windows Server</h3>
+        <p class="project-desc">
+          Déploiement d'un domaine AD complet sous Windows Server 2022.
+          Création des UO, comptes utilisateurs, groupes de sécurité,
+          stratégies GPO, DHCP et DNS intégrés. Scripts PowerShell
+          pour automatisation de la création de comptes en masse.
+        </p>
+        <div class="project-stack">
+          <span class="tag tag-blue">Win Server 2022</span>
+          <span class="tag tag-blue">AD DS</span>
+          <span class="tag tag-blue">GPO</span>
+          <span class="tag tag-blue">DHCP/DNS</span>
+          <span class="tag tag-green">PowerShell</span>
+        </div>
+        <span class="project-arrow">Voir le détail →</span>
+      </div>
+
+      <!-- Metasploitable -->
+      <div class="project-card reveal" data-cat="secu">
+        <div class="project-header">
+          <div class="project-icon">💣</div>
+          <span class="tag tag-green">Terminé</span>
+        </div>
+        <h3 class="project-name">Lab Metasploitable — Pentest</h3>
+        <p class="project-desc">
+          Exploitation de la VM Metasploitable 2 en environnement VMware isolé.
+          Scan Nmap, énumération des services, exploitation via Metasploit Framework,
+          génération de reverse shells et web shells PHP.
+        </p>
+        <div class="project-stack">
+          <span class="tag tag-green">Kali Linux</span>
+          <span class="tag tag-blue">Metasploit</span>
+          <span class="tag tag-blue">Nmap</span>
+          <span class="tag tag-purple">PHP</span>
+          <span class="tag tag-purple">VMware</span>
+        </div>
+        <span class="project-arrow">Voir le détail →</span>
+      </div>
+
+      <!-- VLAN -->
+      <div class="project-card reveal" data-cat="reseau">
+        <div class="project-header">
+          <div class="project-icon">📡</div>
+          <span class="tag tag-green">Terminé</span>
+        </div>
+        <h3 class="project-name">Infrastructure VLAN — Cisco</h3>
+        <p class="project-desc">
+          Conception et déploiement d'une architecture réseau segmentée
+          sous Cisco Packet Tracer. VLANs par département, routage inter-VLAN,
+          ACLs de sécurité et QoS. Schéma réseau complet documenté.
+        </p>
+        <div class="project-stack">
+          <span class="tag tag-blue">Cisco PT</span>
+          <span class="tag tag-blue">VLAN</span>
+          <span class="tag tag-green">Routage</span>
+          <span class="tag tag-blue">ACL</span>
+          <span class="tag tag-blue">TCP/IP</span>
+        </div>
+        <span class="project-arrow">Voir le détail →</span>
+      </div>
+
+      <!-- DMZ Proxmox -->
+      <div class="project-card reveal" data-cat="reseau">
+        <div class="project-header">
+          <div class="project-icon">🛡️</div>
+          <span class="tag tag-green">Terminé</span>
+        </div>
+        <h3 class="project-name">DMZ — Proxmox VE</h3>
+        <p class="project-desc">
+          Mise en place d'une zone démilitarisée (DMZ) sur Proxmox VE.
+          Segmentation réseau entre LAN, DMZ et WAN, configuration du pare-feu,
+          serveur web en DMZ et règles de filtrage strictes.
+        </p>
+        <div class="project-stack">
+          <span class="tag tag-purple">Proxmox VE</span>
+          <span class="tag tag-blue">DMZ</span>
+          <span class="tag tag-blue">Pare-feu</span>
+          <span class="tag tag-green">Linux</span>
+          <span class="tag tag-blue">Réseau</span>
+        </div>
+        <span class="project-arrow">Voir le détail →</span>
+      </div>
+
+      <!-- GLPI + Kanboard -->
+      <div class="project-card reveal" data-cat="support">
+        <div class="project-header">
+          <div class="project-icon">🎫</div>
+          <span class="tag tag-green">Terminé</span>
+        </div>
+        <h3 class="project-name">Système d'information — GLPI & Kanboard</h3>
+        <p class="project-desc">
+          Déploiement et configuration d'un système de gestion des incidents
+          avec GLPI (helpdesk, inventaire, tickets) et Kanboard (gestion
+          de projet agile). Mise en place sur serveur Debian.
+        </p>
+        <div class="project-stack">
+          <span class="tag tag-blue">GLPI</span>
+          <span class="tag tag-blue">Kanboard</span>
+          <span class="tag tag-green">Apache</span>
+          <span class="tag tag-purple">MySQL</span>
+          <span class="tag tag-green">Debian</span>
+        </div>
+        <span class="project-arrow">Voir le détail →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
+</footer>
+
+<script src="../nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.fromTo('.page-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.1,delay:.3 });
+  initReveal();
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+          card.classList.remove('hidden');
+          gsap.fromTo(card, { opacity:0,y:16 }, { opacity:1,y:0,duration:.4,ease:'power2.out' });
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>

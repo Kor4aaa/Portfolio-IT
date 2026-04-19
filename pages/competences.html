@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Compétences — Wensel Reyes</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <style>
+    .page-hero { padding:120px var(--space-8) var(--space-16);max-width:1100px;margin:0 auto; }
+    .page-hero-inner { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center; }
+    .radar-wrap { position:relative;height:340px;display:flex;align-items:center;justify-content:center; }
+    #radar-canvas { width:100%;height:100%; }
+    .anecdote { background:linear-gradient(135deg,rgba(0,255,170,.06),rgba(0,180,255,.03));border:1px solid rgba(0,255,170,.15);border-left:3px solid var(--color-primary);border-radius:var(--radius-lg);padding:var(--space-6) var(--space-8);margin-bottom:var(--space-10); }
+    [data-theme="light"] .anecdote { background:linear-gradient(135deg,rgba(0,136,85,.05),transparent); }
+    .anecdote-label { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);letter-spacing:.1em;text-transform:uppercase;margin-bottom:var(--space-3); }
+    .anecdote p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.8; }
+    .anecdote strong { color:var(--color-primary); }
+    .skills-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:var(--space-6); }
+    .skill-card { background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-xl);padding:var(--space-8);transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden; }
+    .skill-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--color-primary),var(--color-secondary));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1); }
+    .skill-card:hover::before { transform:scaleX(1); }
+    .skill-card:hover { border-color:var(--color-border);transform:translateY(-5px);box-shadow:var(--shadow-card),var(--shadow-glow); }
+    .skill-icon { width:48px;height:48px;border-radius:var(--radius-lg);background:var(--color-primary-dim);border:1px solid var(--color-border-soft);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:var(--space-4); }
+    .skill-name { font-size:var(--text-lg);font-weight:600;margin-bottom:var(--space-2); }
+    .skill-desc { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;margin-bottom:var(--space-4); }
+    .skill-tags { display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-4); }
+    @media(max-width:768px){ .page-hero-inner{grid-template-columns:1fr;} .radar-wrap{height:260px;} }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo" data-transition>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    wenselreyes.dev
+  </a>
+  <ul class="nav-links">
+    <li><a href="competences.html" class="active" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="projets.html" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="profil.html" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <p class="section-label reveal">01. Savoir-faire</p>
+      <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
+        Mes<br>
+        <span style="background:linear-gradient(135deg,#00ffaa,#00b4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Compétences</span>
+      </h1>
+      <p class="reveal" style="color:var(--color-text-muted);max-width:42ch;line-height:1.8;margin-bottom:var(--space-8);">
+        Cybersécurité offensive, infrastructure réseau, virtualisation et support IT — acquis en cours, en lab et en alternance chez Econocom × Engie.
+      </p>
+      <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;" class="reveal">
+        <a href="projets.html" class="btn btn-primary" data-transition>Voir les projets →</a>
+        <a href="../index.html" class="btn btn-ghost" data-transition>← Accueil</a>
+      </div>
+    </div>
+
+    <!-- RADAR 3D -->
+    <div class="radar-wrap reveal-right" id="radar-wrap">
+      <canvas id="radar-canvas"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<section class="section" style="background:var(--color-surface)">
+  <div class="section-inner">
+
+    <div class="anecdote reveal">
+      <div class="anecdote-label">⚡ Exploit réel — accord professeur</div>
+      <p>En TP sécurité sans fil, j'ai démontré la vulnérabilité <strong>Pixie Dust (WPS)</strong> en compromettant le réseau Wi-Fi des 2ème année avec autorisation explicite. Outil : <strong>Aircrack-ng sur Kali Linux</strong>. Résultat : sensibilisation immédiate + désactivation WPS sur l'infrastructure de l'école.</p>
+    </div>
+
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔒</div>
+        <h3 class="skill-name">Cybersécurité & Pentest</h3>
+        <p class="skill-desc">Ma passion depuis l'enfance. MITM, brute force, exploitation de vulnérabilités, reverse shells — réalisés en environnement isolé lors d'audits Kali.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Maîtrise</span><span>90%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag tag-green">Kali Linux</span>
+          <span class="tag tag-green">Metasploit</span>
+          <span class="tag tag-blue">Nmap</span>
+          <span class="tag tag-blue">Wireshark</span>
+          <span class="tag tag-green">MITM</span>
+          <span class="tag tag-blue">Bruteforce</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <h3 class="skill-name">Infrastructure Réseau</h3>
+        <p class="skill-desc">VLANs, routage inter-VLAN, ACLs, DMZ sous Proxmox. Maîtrise des architectures réseau sécurisées et de la segmentation.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Maîtrise</span><span>87%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="87"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">VLAN</span>
+          <span class="tag tag-blue">DMZ</span>
+          <span class="tag tag-blue">TCP/IP</span>
+          <span class="tag tag-blue">Cisco</span>
+          <span class="tag tag-green">Routage</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📶</div>
+        <h3 class="skill-name">Sécurité Wi-Fi</h3>
+        <p class="skill-desc">Capture WPA, exploitation Pixie Dust WPS, analyse de trames Wireshark. Démonstration réelle réalisée en cours avec résultats concrets.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Maîtrise</span><span>88%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag tag-green">Aircrack-ng</span>
+          <span class="tag tag-blue">Wireshark</span>
+          <span class="tag tag-blue">WPA2/WPS</span>
+          <span class="tag tag-green">Pixie Dust</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🖥️</div>
+        <h3 class="skill-name">Active Directory</h3>
+        <p class="skill-desc">Déploiement complet d'un domaine AD sous Windows Server — UO, utilisateurs, groupes de sécurité, GPO, DHCP et DNS intégrés.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Maîtrise</span><span>83%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="83"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">AD DS</span>
+          <span class="tag tag-blue">GPO</span>
+          <span class="tag tag-blue">DHCP/DNS</span>
+          <span class="tag tag-blue">Win Server</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📦</div>
+        <h3 class="skill-name">Virtualisation</h3>
+        <p class="skill-desc">VMware Workstation et Proxmox VE pour labs sécurité. Snapshots, clonage, réseaux isolés, VMs Kali/Windows Server/Debian.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Maîtrise</span><span>85%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag tag-purple">VMware</span>
+          <span class="tag tag-purple">Proxmox</span>
+          <span class="tag tag-blue">VirtualBox</span>
+          <span class="tag tag-blue">Docker</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🎫</div>
+        <h3 class="skill-name">Support IT & GLPI</h3>
+        <p class="skill-desc">Suivi de tickets, gestion d'incidents, workflow sous pression. Résolution en moins de 25 min chez Econocom. Déploiement GLPI + Kanboard en TP.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Maîtrise</span><span>70%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">GLPI</span>
+          <span class="tag tag-blue">Kanboard</span>
+          <span class="tag tag-green">Help Desk</span>
+          <span class="tag tag-green">ITIL</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
+</footer>
+
+<script src="../nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.fromTo('.page-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.12,delay:.3 });
+  gsap.fromTo('.page-hero .reveal-right', { opacity:0,x:40 }, { opacity:1,x:0,duration:.8,ease:'power3.out',delay:.5 });
+  initReveal(); initSkillBars(); initRadar();
+});
+
+function initRadar() {
+  const canvas = document.getElementById('radar-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+  const wrap = document.getElementById('radar-wrap');
+  const W = wrap.offsetWidth || 340, H = wrap.offsetHeight || 340;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, W/H, .1, 100);
+  camera.position.set(0, 0, 5.5);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(W, H);
+  renderer.setClearColor(0x000000, 0);
+
+  const skills = [
+    { name:'Pentest',  val:.90 },
+    { name:'Réseau',   val:.87 },
+    { name:'Wi-Fi',    val:.88 },
+    { name:'AD',       val:.83 },
+    { name:'Virt.',    val:.85 },
+    { name:'Support',  val:.70 }
+  ];
+  const N = skills.length, R = 1.9;
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const getCol = () => document.documentElement.getAttribute('data-theme') !== 'light' ? 0x00ffaa : 0x008855;
+
+  [.25,.5,.75,1].forEach(r => {
+    const pts = [];
+    for (let i=0;i<=64;i++){const a=(i/64)*Math.PI*2;pts.push(new THREE.Vector3(Math.cos(a)*R*r,Math.sin(a)*R*r,0));}
+    group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({color:getCol(),transparent:true,opacity:.1})));
+  });
+
+  for (let i=0;i<N;i++){
+    const a=(i/N)*Math.PI*2-Math.PI/2;
+    group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0),new THREE.Vector3(Math.cos(a)*R,Math.sin(a)*R,0)]),new THREE.LineBasicMaterial({color:getCol(),transparent:true,opacity:.15})));
+  }
+
+  const skillPts = skills.map((s,i)=>{const a=(i/N)*Math.PI*2-Math.PI/2;return new THREE.Vector3(Math.cos(a)*R*s.val,Math.sin(a)*R*s.val,.02);});
+  skillPts.push(skillPts[0].clone());
+  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(skillPts),new THREE.LineBasicMaterial({color:getCol(),transparent:true,opacity:.95})));
+
+  skills.forEach((s,i)=>{
+    const a=(i/N)*Math.PI*2-Math.PI/2;
+    const m=new THREE.Mesh(new THREE.SphereGeometry(.07,12,12),new THREE.MeshBasicMaterial({color:getCol()}));
+    m.position.set(Math.cos(a)*R*s.val,Math.sin(a)*R*s.val,.03);
+    group.add(m);
+  });
+
+  const shape=new THREE.Shape(skillPts.slice(0,-1).map(p=>new THREE.Vector2(p.x,p.y)));
+  group.add(new THREE.Mesh(new THREE.ShapeGeometry(shape),new THREE.MeshBasicMaterial({color:getCol(),transparent:true,opacity:.08,side:THREE.DoubleSide})));
+
+  window.addEventListener('resize',()=>{const W2=wrap.offsetWidth,H2=wrap.offsetHeight;camera.aspect=W2/H2;camera.updateProjectionMatrix();renderer.setSize(W2,H2);});
+  const clock=new THREE.Clock();
+  (function loop(){requestAnimationFrame(loop);const t=clock.getElapsedTime();group.rotation.y=Math.sin(t*.35)*.3;group.rotation.x=Math.sin(t*.2)*.08;renderer.render(scene,camera);})();
+}
+</script>
+</body>
+</html>

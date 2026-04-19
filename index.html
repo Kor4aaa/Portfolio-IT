@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Wensel Reyes — Portfolio BTS SIO</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    .hero {
+      min-height: 100dvh;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 0 var(--space-8);
+      max-width: 1100px; margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-sm);
+      color: var(--color-primary); margin-bottom: var(--space-6); opacity: 0;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-hero);
+      font-weight: 800; line-height: 1.0;
+      margin-bottom: var(--space-6); opacity: 0;
+    }
+    .hero-title .accent {
+      background: linear-gradient(135deg, #00ffaa 0%, #00b4ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: var(--text-lg); color: var(--color-text-muted);
+      max-width: 54ch; line-height: 1.75;
+      margin-bottom: var(--space-10); opacity: 0;
+    }
+    .hero-sub strong { color: var(--color-primary); font-weight: 600; }
+    .hero-cta { display: flex; gap: var(--space-4); flex-wrap: wrap; opacity: 0; }
+    .hero-terminal {
+      margin-top: var(--space-16);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-soft);
+      border-radius: var(--radius-xl);
+      overflow: hidden; max-width: 660px; opacity: 0;
+    }
+    .t-bar {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      background: rgba(0,0,0,.3);
+      border-bottom: 1px solid var(--color-border-soft);
+    }
+    .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .t-dot.r{background:#ff5f57;} .t-dot.y{background:#febc2e;} .t-dot.g{background:#28c840;}
+    .t-name { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted);margin:0 auto; }
+    .t-body { padding:var(--space-6);font-family:var(--font-mono);font-size:var(--text-sm);line-height:2; }
+    .t-row { display:flex;gap:var(--space-2);flex-wrap:wrap; }
+    .t-p{color:#00ffaa;} .t-c{color:#e2e8f0;} .t-o{color:var(--color-text-muted);} .t-k{color:#00b4ff;} .t-v{color:#a78bfa;}
+
+    .nav-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(220px,100%), 1fr));
+      gap: var(--space-4);
+    }
+    .nav-card {
+      background: var(--card-bg);
+      border: 1px solid var(--color-border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      display: flex; flex-direction: column; gap: var(--space-3);
+      transition: all .35s cubic-bezier(.16,1,.3,1);
+      text-decoration: none; color: inherit;
+      position: relative; overflow: hidden;
+    }
+    .nav-card::before {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    .nav-card:hover::before { transform: scaleX(1); }
+    .nav-card:hover { border-color:var(--color-border);transform:translateY(-6px);box-shadow:var(--shadow-card),var(--shadow-glow); }
+    .nav-card-num { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);opacity:.6; }
+    .nav-card-icon { font-size:28px; }
+    .nav-card-title { font-size:var(--text-base);font-weight:600; }
+    .nav-card-desc { font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6; }
+    .nav-card-arrow { margin-top:auto;font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);opacity:0;transform:translateX(-6px);transition:all var(--transition); }
+    .nav-card:hover .nav-card-arrow { opacity:1;transform:translateX(0); }
+
+    .stats { display:flex;gap:var(--space-8);flex-wrap:wrap;padding:var(--space-8) 0;border-top:1px solid var(--color-border-soft);border-bottom:1px solid var(--color-border-soft);margin-bottom:var(--space-12); }
+    .stat-item { display:flex;flex-direction:column;gap:2px; }
+    .stat-val { font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;color:var(--color-primary); }
+    .stat-label { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted); }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    wenselreyes.dev
+  </a>
+  <ul class="nav-links">
+    <li><a href="pages/competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="pages/projets.html" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="pages/profil.html" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="pages/apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="pages/contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Thème">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="hero-eyebrow" id="eyebrow">// BTS SIO SISR · ESUP · Technicien Support @ Econocom × Engie</p>
+    <h1 class="hero-title" id="hero-title">
+      <span style="display:block">Wensel Reyes,</span>
+      <span style="display:block"><span class="accent">Technicien IT</span></span>
+      <span style="display:block">& Passionné Cyber.</span>
+    </h1>
+    <p class="hero-sub" id="hero-sub">
+      En 1ère année de BTS SIO SISR à l'<strong>ESUP</strong>, alternant chez
+      <strong>Econocom pour le client Engie</strong>. Je construis des infrastructures
+      robustes, je gère des incidents sous pression — et dans les labs, je cherche
+      activement leurs failles.
+    </p>
+    <div class="hero-cta" id="hero-cta">
+      <a href="pages/projets.html" class="btn btn-primary" data-transition>Voir mes projets →</a>
+      <a href="pages/contact.html" class="btn btn-ghost" data-transition>Me contacter</a>
+    </div>
+
+    <div class="hero-terminal" id="hero-terminal">
+      <div class="t-bar">
+        <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+        <span class="t-name">wensel@kali ~ zsh</span>
+      </div>
+      <div class="t-body">
+        <div class="t-row"><span class="t-p">❯</span><span class="t-c">&nbsp;whoami</span></div>
+        <div class="t-row"><span class="t-o">wensel-reyes — BTS SIO SISR · Econocom × Engie · ESUP 2024–2026</span></div>
+        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="t-c">&nbsp;cat missions.txt</span></div>
+        <div class="t-row"><span class="t-k">support-N1/N2</span><span class="t-o"> · </span><span class="t-k">gestion-incidents</span><span class="t-o"> · </span><span class="t-k">tickets &lt;25min</span></div>
+        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="t-c">&nbsp;ls projets/</span></div>
+        <div class="t-row"><span class="t-v">active-directory/</span><span class="t-o">&nbsp;</span><span class="t-v">metasploitable/</span><span class="t-o">&nbsp;</span><span class="t-v">vlan/</span><span class="t-o">&nbsp;</span><span class="t-v">dmz-proxmox/</span></div>
+        <div class="t-row"><span class="t-v">glpi-kanboard/</span><span class="t-o">&nbsp;</span><span class="t-v">audit-kali/</span></div>
+        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="t-c">&nbsp;./pentest --target wifi --method pixie-dust</span></div>
+        <div class="t-row"><span style="color:#ff6b6b">⚡</span><span class="t-v">&nbsp;[SUCCESS]</span><span class="t-o">&nbsp;Réseau compromis — démonstration officielle validée</span></div>
+        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="cursor-dot"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="background:var(--color-surface)">
+    <div class="section-inner">
+      <div class="stats reveal">
+        <div class="stat-item"><span class="stat-val">6</span><span class="stat-label">Projets réalisés</span></div>
+        <div class="stat-item"><span class="stat-val">oct.25</span><span class="stat-label">Début alternance</span></div>
+        <div class="stat-item"><span class="stat-val">&lt;25min</span><span class="stat-label">Résolution tickets</span></div>
+        <div class="stat-item"><span class="stat-val">SISR</span><span class="stat-label">Spécialité réseaux</span></div>
+      </div>
+
+      <p class="section-label reveal">Explorer le portfolio</p>
+      <h2 class="section-title reveal" style="margin-bottom:var(--space-8);">Par où commencer ?</h2>
+
+      <div class="nav-cards">
+        <a href="pages/competences.html" class="nav-card reveal" data-transition>
+          <span class="nav-card-num">01</span>
+          <span class="nav-card-icon">🔒</span>
+          <h3 class="nav-card-title">Compétences</h3>
+          <p class="nav-card-desc">Cybersécurité, AD, réseaux, virtualisation — radar 3D interactif.</p>
+          <span class="nav-card-arrow">Explorer →</span>
+        </a>
+        <a href="pages/projets.html" class="nav-card reveal" data-transition>
+          <span class="nav-card-num">02</span>
+          <span class="nav-card-icon">⚡</span>
+          <h3 class="nav-card-title">Projets & TP</h3>
+          <p class="nav-card-desc">AD, Metasploitable, VLAN, DMZ Proxmox, GLPI, Audit Kali.</p>
+          <span class="nav-card-arrow">Explorer →</span>
+        </a>
+        <a href="pages/profil.html" class="nav-card reveal" data-transition>
+          <span class="nav-card-num">03</span>
+          <span class="nav-card-icon">💻</span>
+          <h3 class="nav-card-title">Profil technique</h3>
+          <p class="nav-card-desc">Mon stack complet, outils et environnements de travail.</p>
+          <span class="nav-card-arrow">Explorer →</span>
+        </a>
+        <a href="pages/apropos.html" class="nav-card reveal" data-transition>
+          <span class="nav-card-num">04</span>
+          <span class="nav-card-icon">🎯</span>
+          <h3 class="nav-card-title">À propos</h3>
+          <p class="nav-card-desc">Mon parcours, bac 2024, ESUP, Econocom × Engie.</p>
+          <span class="nav-card-arrow">Explorer →</span>
+        </a>
+        <a href="pages/contact.html" class="nav-card reveal" data-transition>
+          <span class="nav-card-num">05</span>
+          <span class="nav-card-icon">✉️</span>
+          <h3 class="nav-card-title">Contact</h3>
+          <p class="nav-card-desc">LinkedIn, GitHub ou email direct — reyeswensel@gmail.com</p>
+          <span class="nav-card-arrow">Écrire →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.registerPlugin(ScrollTrigger);
+  const tl = gsap.timeline({ delay:.2 });
+  tl.to('#eyebrow',       { opacity:1, y:0, duration:.6, ease:'power3.out' })
+    .to('#hero-title',    { opacity:1, y:0, duration:.7, ease:'power3.out' }, '-=.3')
+    .to('#hero-sub',      { opacity:1, y:0, duration:.6, ease:'power3.out' }, '-=.4')
+    .to('#hero-cta',      { opacity:1, y:0, duration:.5, ease:'power3.out' }, '-=.3')
+    .to('#hero-terminal', { opacity:1, y:0, duration:.7, ease:'power3.out' }, '-=.2');
+  initReveal(); initSkillBars();
+});
+</script>
+</body>
+</html>
