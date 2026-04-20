@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>DMZ Proxmox — Wensel Reyes</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .projet-hero { padding:120px var(--space-8) var(--space-12);max-width:860px;margin:0 auto; }
+    .projet-body { max-width:860px;margin:0 auto;padding:0 var(--space-8) var(--space-16); }
+    .projet-section { margin-bottom:var(--space-10); }
+    .projet-section-title { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);letter-spacing:.12em;text-transform:uppercase;margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3); }
+    .projet-section-title::after { content:'';flex:1;height:1px;background:var(--color-border-soft); }
+    .projet-section p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.9;margin-bottom:var(--space-4); }
+    .projet-section p strong { color:var(--color-primary); }
+    .item-list { display:flex;flex-direction:column;gap:var(--space-3); }
+    .item { display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) var(--space-5);background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-lg);font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7; }
+    .item .dot { width:7px;height:7px;border-radius:50%;background:var(--color-primary);flex-shrink:0;margin-top:5px; }
+    .apport-grid { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4); }
+    .apport-card { background:var(--color-primary-dim);border:1px solid rgba(0,255,170,.15);border-radius:var(--radius-xl);padding:var(--space-6); }
+    .apport-card strong { color:var(--color-primary);display:block;font-size:var(--text-xs);font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--space-2); }
+    .apport-card p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;margin:0; }
+    @media(max-width:600px){ .apport-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo" data-transition>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    wenselreyes.tech
+  </a>
+  <ul class="nav-links">
+    <li><a href="competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="projets.html" class="active" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="profil.html" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<div class="projet-hero">
+  <a href="projets.html" class="btn btn-ghost reveal" style="margin-bottom:var(--space-6);display:inline-flex;" data-transition>← Retour aux projets</a>
+  <div style="display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-4);" class="reveal">
+    <span style="font-size:48px;">🛡️</span>
+    <span class="tag tag-green">Terminé</span>
+  </div>
+  <p class="section-label reveal">TP Réseau & Sécurité · BTS SIO SISR · ESUP</p>
+  <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
+    DMZ <span style="background:linear-gradient(135deg,#00ffaa,#00b4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Proxmox VE</span>
+  </h1>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-6);" class="reveal">
+    <span class="tag tag-purple">Proxmox VE</span>
+    <span class="tag tag-blue">DMZ</span>
+    <span class="tag tag-blue">Pare-feu</span>
+    <span class="tag tag-green">Linux</span>
+    <span class="tag tag-green">Apache</span>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="projet-body">
+  <div class="projet-section reveal">
+    <div class="projet-section-title">🎯 Contexte</div>
+    <p>Mise en place d'une <strong>zone démilitarisée (DMZ)</strong> complète sur Proxmox VE. Objectif : exposer un service web de façon sécurisée tout en isolant la zone publique du réseau interne de l'entreprise.</p>
+    <p>Ce projet reproduit une architecture réseau professionnelle avec <strong>3 zones distinctes</strong> — WAN, DMZ et LAN — chacune avec ses règles de filtrage strictes.</p>
+  </div>
+
+  <div class="projet-section reveal">
+    <div class="projet-section-title">⚡ Ce que j'ai réalisé</div>
+    <div class="item-list">
+      <div class="item"><span class="dot"></span>Architecture <strong>3 zones : WAN / DMZ / LAN</strong> avec VMs Proxmox dédiées à chaque zone</div>
+      <div class="item"><span class="dot"></span>Configuration du <strong>pare-feu</strong> avec règles de filtrage strictes — seuls les flux nécessaires sont autorisés</div>
+      <div class="item"><span class="dot"></span>Déploiement d'un <strong>serveur web Apache</strong> en DMZ — accessible depuis l'extérieur (WAN) uniquement sur les ports 80/443</div>
+      <div class="item"><span class="dot"></span><strong>Isolation complète</strong> : le LAN ne peut pas être atteint depuis la DMZ ni depuis le WAN directement</div>
+      <div class="item"><span class="dot"></span>Configuration des <strong>interfaces réseau virtuelles</strong> Proxmox (bridges) pour chaque zone</div>
+      <div class="item"><span class="dot"></span>Tests de connectivité et validation complète des règles de sécurité entre toutes les zones</div>
+    </div>
+  </div>
+
+  <div class="projet-section reveal">
+    <div class="projet-section-title">📈 Ce que ça m'a apporté</div>
+    <div class="apport-grid">
+      <div class="apport-card">
+        <strong>🏗️ Architecture sécurisée</strong>
+        <p>Concevoir une infrastructure multi-zones adaptée à l'exposition de services en production</p>
+      </div>
+      <div class="apport-card">
+        <strong>🔥 Pare-feu</strong>
+        <p>Maîtriser la logique des règles de filtrage et leur ordre d'application</p>
+      </div>
+      <div class="apport-card">
+        <strong>📦 Proxmox VE</strong>
+        <p>Gestion avancée des VMs, réseaux virtuels et bridges sous Proxmox</p>
+      </div>
+      <div class="apport-card">
+        <strong>🌐 Vision production</strong>
+        <p>Simuler un déploiement réel de service exposé — applicable directement en entreprise</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="display:flex;gap:var(--space-4);flex-wrap:wrap;padding-top:var(--space-4);">
+    <a href="projets.html" class="btn btn-ghost" data-transition>← Tous les projets</a>
+    <a href="projet-glpi.html" class="btn btn-primary" data-transition>Projet suivant →</a>
+  </div>
+</div>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
+</footer>
+<script src="../nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.fromTo('.projet-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.1,delay:.3 });
+  initReveal();
+});
+</script>
+</body>
+</html>

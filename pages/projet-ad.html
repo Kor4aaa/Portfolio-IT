@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Active Directory — Wensel Reyes</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .projet-hero { padding:120px var(--space-8) var(--space-12);max-width:860px;margin:0 auto; }
+    .projet-body { max-width:860px;margin:0 auto;padding:0 var(--space-8) var(--space-16); }
+    .projet-section { margin-bottom:var(--space-10); }
+    .projet-section-title { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);letter-spacing:.12em;text-transform:uppercase;margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3); }
+    .projet-section-title::after { content:'';flex:1;height:1px;background:var(--color-border-soft); }
+    .projet-section p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.9;margin-bottom:var(--space-4); }
+    .projet-section p strong { color:var(--color-primary); }
+    .item-list { display:flex;flex-direction:column;gap:var(--space-3); }
+    .item { display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) var(--space-5);background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-lg);font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7; }
+    .item .dot { width:7px;height:7px;border-radius:50%;background:var(--color-primary);flex-shrink:0;margin-top:5px; }
+    .apport-grid { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4); }
+    .apport-card { background:var(--color-primary-dim);border:1px solid rgba(0,255,170,.15);border-radius:var(--radius-xl);padding:var(--space-6); }
+    .apport-card strong { color:var(--color-primary);display:block;font-size:var(--text-xs);font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--space-2); }
+    .apport-card p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;margin:0; }
+    @media(max-width:600px){ .apport-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo" data-transition>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    wenselreyes.tech
+  </a>
+  <ul class="nav-links">
+    <li><a href="competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="projets.html" class="active" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="profil.html" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<div class="projet-hero">
+  <a href="projets.html" class="btn btn-ghost reveal" style="margin-bottom:var(--space-6);display:inline-flex;" data-transition>← Retour aux projets</a>
+  <div style="display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-4);" class="reveal">
+    <span style="font-size:48px;">🏢</span>
+    <span class="tag tag-green">Terminé</span>
+  </div>
+  <p class="section-label reveal">TP Système · BTS SIO SISR · ESUP</p>
+  <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
+    Active <span style="background:linear-gradient(135deg,#00ffaa,#00b4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Directory</span>
+  </h1>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-6);" class="reveal">
+    <span class="tag tag-blue">Windows Server 2022</span>
+    <span class="tag tag-blue">AD DS</span>
+    <span class="tag tag-blue">GPO</span>
+    <span class="tag tag-blue">DHCP/DNS</span>
+    <span class="tag tag-green">PowerShell</span>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="projet-body">
+  <div class="projet-section reveal">
+    <div class="projet-section-title">🎯 Contexte</div>
+    <p>Déploiement d'une infrastructure <strong>Active Directory complète</strong> sous Windows Server 2022 en environnement virtualisé VMware. Objectif : simuler un environnement d'entreprise réel avec gestion centralisée des utilisateurs, des ressources et des politiques de sécurité.</p>
+    <p>Ce projet m'a permis de comprendre la structure d'un SI d'entreprise de A à Z — de l'installation du rôle AD DS jusqu'à l'automatisation via PowerShell.</p>
+  </div>
+
+  <div class="projet-section reveal">
+    <div class="projet-section-title">⚡ Ce que j'ai réalisé</div>
+    <div class="item-list">
+      <div class="item"><span class="dot"></span>Installation et configuration du rôle <strong>AD DS</strong> sous Windows Server 2022 — promotion en contrôleur de domaine</div>
+      <div class="item"><span class="dot"></span>Création de l'arborescence complète : <strong>domaine, unités d'organisation (UO), utilisateurs et groupes</strong> de sécurité</div>
+      <div class="item"><span class="dot"></span>Déploiement de <strong>GPO</strong> : fond d'écran imposé, restrictions logicielles, mappage de lecteurs réseau, politique de mots de passe</div>
+      <div class="item"><span class="dot"></span>Configuration intégrée <strong>DHCP et DNS</strong> pour la résolution de noms interne et l'attribution automatique d'adresses IP</div>
+      <div class="item"><span class="dot"></span>Scripts <strong>PowerShell</strong> pour la création d'utilisateurs en masse depuis un fichier CSV</div>
+      <div class="item"><span class="dot"></span>Jonction de postes clients Windows au domaine et vérification de l'application des stratégies</div>
+    </div>
+  </div>
+
+  <div class="projet-section reveal">
+    <div class="projet-section-title">📈 Ce que ça m'a apporté</div>
+    <div class="apport-grid">
+      <div class="apport-card">
+        <strong>🏗️ Architecture SI</strong>
+        <p>Comprendre la structure d'un système d'information d'entreprise et la gestion centralisée des accès</p>
+      </div>
+      <div class="apport-card">
+        <strong>⚙️ Automatisation</strong>
+        <p>PowerShell pour industrialiser des tâches répétitives — gain de temps et fiabilité</p>
+      </div>
+      <div class="apport-card">
+        <strong>🔒 Sécurité</strong>
+        <p>Appliquer des politiques de sécurité via GPO à l'échelle d'un domaine entier</p>
+      </div>
+      <div class="apport-card">
+        <strong>💼 Terrain</strong>
+        <p>Compétence directement applicable en entreprise — utilisée au quotidien chez Engie</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="display:flex;gap:var(--space-4);flex-wrap:wrap;padding-top:var(--space-4);">
+    <a href="projets.html" class="btn btn-ghost" data-transition>← Tous les projets</a>
+    <a href="projet-vlan.html" class="btn btn-primary" data-transition>Projet suivant →</a>
+  </div>
+</div>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
+</footer>
+<script src="../nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.fromTo('.projet-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.1,delay:.3 });
+  initReveal();
+});
+</script>
+</body>
+</html>

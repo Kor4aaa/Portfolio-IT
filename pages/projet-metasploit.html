@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Metasploitable — Wensel Reyes</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .projet-hero { padding:120px var(--space-8) var(--space-12);max-width:860px;margin:0 auto; }
+    .projet-body { max-width:860px;margin:0 auto;padding:0 var(--space-8) var(--space-16); }
+    .projet-section { margin-bottom:var(--space-10); }
+    .projet-section-title { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);letter-spacing:.12em;text-transform:uppercase;margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3); }
+    .projet-section-title::after { content:'';flex:1;height:1px;background:var(--color-border-soft); }
+    .projet-section p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.9;margin-bottom:var(--space-4); }
+    .projet-section p strong { color:var(--color-primary); }
+    .item-list { display:flex;flex-direction:column;gap:var(--space-3); }
+    .item { display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) var(--space-5);background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-lg);font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7; }
+    .item .dot { width:7px;height:7px;border-radius:50%;background:var(--color-primary);flex-shrink:0;margin-top:5px; }
+    .apport-grid { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4); }
+    .apport-card { background:var(--color-primary-dim);border:1px solid rgba(0,255,170,.15);border-radius:var(--radius-xl);padding:var(--space-6); }
+    .apport-card strong { color:var(--color-primary);display:block;font-size:var(--text-xs);font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--space-2); }
+    .apport-card p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;margin:0; }
+    @media(max-width:600px){ .apport-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+<div id="progress-bar"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo" data-transition>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
+      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
+    </svg>
+    wenselreyes.tech
+  </a>
+  <ul class="nav-links">
+    <li><a href="competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
+    <li><a href="projets.html" class="active" data-transition><span class="num">02.</span>Projets</a></li>
+    <li><a href="profil.html" data-transition><span class="num">03.</span>Profil</a></li>
+    <li><a href="apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
+    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+      <span id="theme-label">Mode clair</span>
+    </button>
+  </div>
+</nav>
+
+<div class="projet-hero">
+  <a href="projets.html" class="btn btn-ghost reveal" style="margin-bottom:var(--space-6);display:inline-flex;" data-transition>← Retour aux projets</a>
+  <div style="display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-4);" class="reveal">
+    <span style="font-size:48px;">💣</span>
+    <span class="tag tag-green">Terminé</span>
+  </div>
+  <p class="section-label reveal">TP Cybersécurité · BTS SIO SISR · ESUP</p>
+  <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
+    Lab <span style="background:linear-gradient(135deg,#00ffaa,#00b4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Metasploitable</span>
+  </h1>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-6);" class="reveal">
+    <span class="tag tag-green">Kali Linux</span>
+    <span class="tag tag-blue">Metasploit</span>
+    <span class="tag tag-blue">Nmap</span>
+    <span class="tag tag-purple">VMware</span>
+    <span class="tag tag-purple">PHP</span>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="projet-body">
+  <div class="projet-section reveal">
+    <div class="projet-section-title">🎯 Contexte</div>
+    <p>Lab de pentest en environnement <strong>100% isolé sous VMware</strong>. Cible : la VM Metasploitable 2, intentionnellement vulnérable. Objectif : parcourir les étapes complètes d'une intrusion réelle de façon éthique et documentée.</p>
+    <p>Ce TP m'a permis d'appliquer une <strong>méthodologie d'attaque structurée</strong> : reconnaissance → scan → exploitation → post-exploitation, exactement comme lors d'un vrai pentest professionnel.</p>
+  </div>
+
+  <div class="projet-section reveal">
+    <div class="projet-section-title">⚡ Ce que j'ai réalisé</div>
+    <div class="item-list">
+      <div class="item"><span class="dot"></span><strong>Scan Nmap</strong> complet — découverte de tous les ports ouverts et identification des services exposés (FTP, SSH, HTTP, Samba, MySQL...)</div>
+      <div class="item"><span class="dot"></span>Énumération détaillée des services et <strong>identification des versions vulnérables</strong></div>
+      <div class="item"><span class="dot"></span>Exploitation via <strong>Metasploit Framework</strong> — recherche, sélection et lancement d'exploits adaptés</div>
+      <div class="item"><span class="dot"></span>Génération et déploiement de <strong>reverse shells</strong> pour obtenir un accès distant à la machine cible</div>
+      <div class="item"><span class="dot"></span>Création de <strong>web shells PHP</strong> pour persistance et exécution de commandes à distance via HTTP</div>
+      <div class="item"><span class="dot"></span>Documentation complète de chaque étape — rapport de pentest structuré</div>
+    </div>
+  </div>
+
+  <div class="projet-section reveal">
+    <div class="projet-section-title">📈 Ce que ça m'a apporté</div>
+    <div class="apport-grid">
+      <div class="apport-card">
+        <strong>🔍 Méthodologie</strong>
+        <p>Maîtrise complète du cycle d'un pentest : recon → scan → exploit → post-exploit</p>
+      </div>
+      <div class="apport-card">
+        <strong>🛠️ Metasploit</strong>
+        <p>Utilisation avancée du framework — modules, payloads, sessions Meterpreter</p>
+      </div>
+      <div class="apport-card">
+        <strong>🧩 Logique offensive</strong>
+        <p>Comprendre comment chaîner des vulnérabilités pour progresser dans un système</p>
+      </div>
+      <div class="apport-card">
+        <strong>📝 Documentation</strong>
+        <p>Rédiger un rapport de pentest clair et exploitable — compétence clé en audit</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="display:flex;gap:var(--space-4);flex-wrap:wrap;padding-top:var(--space-4);">
+    <a href="projets.html" class="btn btn-ghost" data-transition>← Tous les projets</a>
+    <a href="projet-vlan.html" class="btn btn-primary" data-transition>Projet suivant →</a>
+  </div>
+</div>
+
+<footer>
+  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
+</footer>
+<script src="../nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
+  gsap.fromTo('.projet-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.1,delay:.3 });
+  initReveal();
+});
+</script>
+</body>
+</html>
