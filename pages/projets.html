@@ -13,7 +13,7 @@
     .filter-btn { padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:1px solid var(--color-border-soft);font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted);transition:all var(--transition);cursor:pointer; }
     .filter-btn:hover,.filter-btn.active { border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-dim); }
     .projects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:var(--space-6); }
-    .project-card { background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-xl);padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-4);transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;cursor:pointer; }
+    .project-card { background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-xl);padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-4);transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit; }
     .project-card::after { content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(0,255,170,.05),transparent 60%);opacity:0;transition:opacity .3s; }
     .project-card:hover::after { opacity:1; }
     .project-card:hover { border-color:var(--color-border);transform:translateY(-6px);box-shadow:var(--shadow-card),var(--shadow-glow); }
@@ -29,110 +29,12 @@
     .project-card.featured .project-body { flex:1; }
     .project-card.featured .project-visual { width:180px;flex-shrink:0;background:var(--color-primary-dim);border:1px solid rgba(0,255,170,.15);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:60px;height:130px; }
     @media(max-width:900px){ .project-card.featured{grid-column:span 1;flex-direction:column;} .project-card.featured .project-visual{width:100%;} }
-
-    /* ── MODALE ── */
-    .modal-overlay {
-  position:fixed;inset:0;z-index:9999;
-  background:rgba(0,0,0,.85);
-  backdrop-filter:blur(12px);
-  display:flex;align-items:center;justify-content:center;
-  padding:var(--space-6);
-  opacity:0;pointer-events:none;
-  transition:opacity .3s ease;
-}
-    .modal-overlay.open { opacity:1;pointer-events:all; }
-    .modal {
-      background:var(--color-surface);
-      border:1px solid var(--color-border-soft);
-      border-radius:var(--radius-xl);
-      max-width:680px;width:100%;
-      max-height:88vh;overflow-y:auto;
-      position:relative;
-      transform:translateY(24px) scale(.97);
-      transition:transform .35s cubic-bezier(.16,1,.3,1);
-      scrollbar-width:thin;
-      scrollbar-color:var(--color-border-soft) transparent;
-    }
-    .modal-overlay.open .modal { transform:translateY(0) scale(1); }
-    .modal-header {
-      padding:var(--space-8) var(--space-8) var(--space-6);
-      border-bottom:1px solid var(--color-border-soft);
-      position:sticky;top:0;
-      background:var(--color-surface);
-      z-index:2;
-    }
-    .modal-header-top { display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-4); }
-    .modal-icon { font-size:36px; }
-    .modal-close {
-      width:36px;height:36px;border-radius:50%;
-      border:1px solid var(--color-border-soft);
-      display:flex;align-items:center;justify-content:center;
-      font-size:18px;cursor:pointer;flex-shrink:0;
-      color:var(--color-text-muted);
-      transition:all var(--transition);
-    }
-    .modal-close:hover { border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-dim); }
-    .modal-title { font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-2); }
-    .modal-role { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);letter-spacing:.08em; }
-    .modal-tags { display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-3); }
-    .modal-body { padding:var(--space-8); }
-    .modal-section { margin-bottom:var(--space-8); }
-    .modal-section:last-child { margin-bottom:0; }
-    .modal-section-title {
-      font-family:var(--font-mono);font-size:var(--text-xs);
-      color:var(--color-primary);letter-spacing:.1em;text-transform:uppercase;
-      margin-bottom:var(--space-4);
-      display:flex;align-items:center;gap:var(--space-3);
-    }
-    .modal-section-title::after { content:'';flex:1;height:1px;background:var(--color-border-soft); }
-    .modal-section p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.85;margin-bottom:var(--space-3); }
-    .modal-section p strong { color:var(--color-primary); }
-    .modal-list { display:flex;flex-direction:column;gap:var(--space-2); }
-    .modal-list-item {
-      display:flex;align-items:flex-start;gap:var(--space-3);
-      padding:var(--space-3) var(--space-4);
-      background:var(--card-bg);
-      border:1px solid var(--color-border-soft);
-      border-radius:var(--radius-md);
-      font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;
-    }
-    .modal-list-item .dot { width:6px;height:6px;border-radius:50%;background:var(--color-primary);flex-shrink:0;margin-top:6px; }
-    .modal-apport {
-      display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);
-      margin-top:var(--space-4);
-    }
-    .apport-item {
-      background:var(--color-primary-dim);
-      border:1px solid rgba(0,255,170,.15);
-      border-radius:var(--radius-lg);
-      padding:var(--space-4);
-      font-size:var(--text-xs);
-      line-height:1.6;
-    }
-    .apport-item strong { color:var(--color-primary);display:block;margin-bottom:4px;font-size:var(--text-xs); }
-    @media(max-width:600px){ .modal-apport{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
 <div class="page-transition"></div>
 <div id="progress-bar"></div>
 <canvas id="bg-canvas"></canvas>
-
-<!-- MODALE -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <div class="modal-header-top">
-        <span class="modal-icon" id="modal-icon"></span>
-        <button class="modal-close" onclick="closeModal()">✕</button>
-      </div>
-      <h2 class="modal-title" id="modal-title"></h2>
-      <div class="modal-role" id="modal-role"></div>
-      <div class="modal-tags" id="modal-tags"></div>
-    </div>
-    <div class="modal-body" id="modal-body"></div>
-  </div>
-</div>
 
 <nav>
   <a href="../index.html" class="nav-logo" data-transition>
@@ -185,7 +87,7 @@
 
     <div class="projects-grid" id="projects-grid">
 
-      <div class="project-card featured reveal" data-cat="secu" data-project="audit">
+      <a href="projet-audit.html" class="project-card featured reveal" data-cat="secu">
         <div class="project-visual">🔍</div>
         <div class="project-body">
           <div class="project-header">
@@ -203,9 +105,9 @@
           </div>
           <span class="project-arrow">Voir le détail →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="project-card reveal" data-cat="systeme" data-project="ad">
+      <a href="projet-ad.html" class="project-card reveal" data-cat="systeme">
         <div class="project-header"><div class="project-icon">🏢</div><span class="tag tag-green">Terminé</span></div>
         <h3 class="project-name">Active Directory — Windows Server</h3>
         <p class="project-desc">Déploiement d'un domaine AD complet sous Windows Server 2022. UO, comptes, GPO, DHCP, DNS et scripts PowerShell.</p>
@@ -216,9 +118,9 @@
           <span class="tag tag-green">PowerShell</span>
         </div>
         <span class="project-arrow">Voir le détail →</span>
-      </div>
+      </a>
 
-      <div class="project-card reveal" data-cat="secu" data-project="metasploit">
+      <a href="projet-metasploit.html" class="project-card reveal" data-cat="secu">
         <div class="project-header"><div class="project-icon">💣</div><span class="tag tag-green">Terminé</span></div>
         <h3 class="project-name">Lab Metasploitable — Pentest</h3>
         <p class="project-desc">Exploitation de la VM Metasploitable 2 en environnement VMware isolé. Scan, énumération, exploitation, reverse shells et web shells.</p>
@@ -229,9 +131,9 @@
           <span class="tag tag-purple">VMware</span>
         </div>
         <span class="project-arrow">Voir le détail →</span>
-      </div>
+      </a>
 
-      <div class="project-card reveal" data-cat="reseau" data-project="vlan">
+      <a href="projet-vlan.html" class="project-card reveal" data-cat="reseau">
         <div class="project-header"><div class="project-icon">📡</div><span class="tag tag-green">Terminé</span></div>
         <h3 class="project-name">Infrastructure VLAN — Cisco</h3>
         <p class="project-desc">Conception et déploiement d'une architecture réseau segmentée sous Cisco Packet Tracer. VLANs, routage inter-VLAN et ACLs.</p>
@@ -242,9 +144,9 @@
           <span class="tag tag-blue">ACL</span>
         </div>
         <span class="project-arrow">Voir le détail →</span>
-      </div>
+      </a>
 
-      <div class="project-card reveal" data-cat="reseau" data-project="dmz">
+      <a href="projet-dmz.html" class="project-card reveal" data-cat="reseau">
         <div class="project-header"><div class="project-icon">🛡️</div><span class="tag tag-green">Terminé</span></div>
         <h3 class="project-name">DMZ — Proxmox VE</h3>
         <p class="project-desc">Mise en place d'une zone démilitarisée sur Proxmox VE. Segmentation LAN/DMZ/WAN, pare-feu et règles de filtrage strictes.</p>
@@ -255,9 +157,9 @@
           <span class="tag tag-green">Linux</span>
         </div>
         <span class="project-arrow">Voir le détail →</span>
-      </div>
+      </a>
 
-      <div class="project-card reveal" data-cat="support" data-project="glpi">
+      <a href="projet-glpi.html" class="project-card reveal" data-cat="support">
         <div class="project-header"><div class="project-icon">🎫</div><span class="tag tag-green">Terminé</span></div>
         <h3 class="project-name">Système d'info — GLPI & Kanboard</h3>
         <p class="project-desc">Déploiement et configuration d'un système de gestion des incidents avec GLPI et Kanboard sur serveur Debian.</p>
@@ -268,7 +170,7 @@
           <span class="tag tag-purple">MySQL</span>
         </div>
         <span class="project-arrow">Voir le détail →</span>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -280,235 +182,12 @@
 
 <script src="../nav.js"></script>
 <script>
-// ── DATA PROJETS ──
-const projects = {
-  audit: {
-    icon: '🔍',
-    title: 'Audit de Sécurité — Kali Linux',
-    role: 'TP Cybersécurité · BTS SIO SISR · ESUP',
-    tags: ['<span class="tag tag-green">Kali Linux</span>','<span class="tag tag-green">Aircrack-ng</span>','<span class="tag tag-blue">Nmap</span>','<span class="tag tag-blue">Wireshark</span>','<span class="tag tag-red">MITM</span>','<span class="tag tag-blue">Bruteforce</span>'],
-    body: `
-      <div class="modal-section">
-        <div class="modal-section-title">🎯 Contexte</div>
-        <p>Dans le cadre d'un TP de sécurité sans fil, j'ai réalisé un <strong>audit complet d'infrastructure Wi-Fi</strong> avec l'accord explicite de mon professeur. L'objectif : démontrer concrètement les vulnérabilités présentes sur le réseau de l'école et sensibiliser les étudiants.</p>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">⚡ Ce que j'ai réalisé</div>
-        <div class="modal-list">
-          <div class="modal-list-item"><span class="dot"></span>Exploitation de la faille <strong>Pixie Dust WPS</strong> via Aircrack-ng — compromission du réseau Wi-Fi des 2ème année</div>
-          <div class="modal-list-item"><span class="dot"></span>Attaque <strong>MITM (Man-in-the-Middle)</strong> pour intercepter le trafic réseau</div>
-          <div class="modal-list-item"><span class="dot"></span>Scan <strong>Nmap</strong> pour la découverte des hôtes et services exposés</div>
-          <div class="modal-list-item"><span class="dot"></span>Analyse de trames avec <strong>Wireshark</strong> pour visualiser les données interceptées</div>
-          <div class="modal-list-item"><span class="dot"></span>Attaques <strong>brute force</strong> sur services exposés</div>
-          <div class="modal-list-item"><span class="dot"></span>Rédaction d'un rapport de vulnérabilités + présentation des contre-mesures en classe</div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">📈 Ce que ça m'a apporté</div>
-        <div class="modal-apport">
-          <div class="apport-item"><strong>🧠 Technique</strong>Maîtrise concrète des outils offensifs Kali Linux en situation réelle</div>
-          <div class="apport-item"><strong>🎤 Communication</strong>Présentation live devant la classe — pédagogie et vulgarisation</div>
-          <div class="apport-item"><strong>🔐 Défensif</strong>Comprendre l'attaque pour mieux défendre — recommandations WPA3 et désactivation WPS</div>
-          <div class="apport-item"><strong>⚖️ Éthique</strong>Démonstration encadrée avec autorisation — sensibilisation au hacking éthique</div>
-        </div>
-      </div>
-    `
-  },
-  ad: {
-    icon: '🏢',
-    title: 'Active Directory — Windows Server 2022',
-    role: 'TP Système · BTS SIO SISR · ESUP',
-    tags: ['<span class="tag tag-blue">Windows Server 2022</span>','<span class="tag tag-blue">AD DS</span>','<span class="tag tag-blue">GPO</span>','<span class="tag tag-blue">DHCP/DNS</span>','<span class="tag tag-green">PowerShell</span>'],
-    body: `
-      <div class="modal-section">
-        <div class="modal-section-title">🎯 Contexte</div>
-        <p>Déploiement d'une infrastructure <strong>Active Directory complète</strong> sous Windows Server 2022 en environnement virtualisé VMware. Objectif : simuler un environnement d'entreprise réel avec gestion centralisée des utilisateurs et des politiques de sécurité.</p>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">⚡ Ce que j'ai réalisé</div>
-        <div class="modal-list">
-          <div class="modal-list-item"><span class="dot"></span>Installation et configuration du rôle <strong>AD DS</strong> sous Windows Server 2022</div>
-          <div class="modal-list-item"><span class="dot"></span>Création de l'arborescence : <strong>domaine, UO, utilisateurs et groupes</strong> de sécurité</div>
-          <div class="modal-list-item"><span class="dot"></span>Déploiement de <strong>GPO</strong> : fond d'écran imposé, restrictions logicielles, mappage de lecteurs réseau</div>
-          <div class="modal-list-item"><span class="dot"></span>Configuration intégrée <strong>DHCP et DNS</strong> pour la résolution de noms interne</div>
-          <div class="modal-list-item"><span class="dot"></span>Scripts <strong>PowerShell</strong> pour la création d'utilisateurs en masse depuis un fichier CSV</div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">📈 Ce que ça m'a apporté</div>
-        <div class="modal-apport">
-          <div class="apport-item"><strong>🏗️ Architecture</strong>Comprendre la structure d'un SI d'entreprise et la gestion centralisée</div>
-          <div class="apport-item"><strong>⚙️ Automatisation</strong>PowerShell pour industrialiser des tâches répétitives</div>
-          <div class="apport-item"><strong>🔒 Sécurité</strong>Appliquer des politiques de sécurité via GPO à l'échelle d'un domaine</div>
-          <div class="apport-item"><strong>💼 Pro</strong>Compétence directement applicable en entreprise — utilisée chez Engie</div>
-        </div>
-      </div>
-    `
-  },
-  metasploit: {
-    icon: '💣',
-    title: 'Lab Metasploitable — Pentest',
-    role: 'TP Cybersécurité · BTS SIO SISR · ESUP',
-    tags: ['<span class="tag tag-green">Kali Linux</span>','<span class="tag tag-blue">Metasploit</span>','<span class="tag tag-blue">Nmap</span>','<span class="tag tag-purple">VMware</span>','<span class="tag tag-purple">PHP</span>'],
-    body: `
-      <div class="modal-section">
-        <div class="modal-section-title">🎯 Contexte</div>
-        <p>Lab de pentest en environnement <strong>100% isolé sous VMware</strong>. Cible : la VM Metasploitable 2, intentionnellement vulnérable. Objectif : parcourir les étapes d'une intrusion réelle de façon éthique et documentée.</p>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">⚡ Ce que j'ai réalisé</div>
-        <div class="modal-list">
-          <div class="modal-list-item"><span class="dot"></span><strong>Scan Nmap</strong> complet — découverte des ports ouverts et services exposés</div>
-          <div class="modal-list-item"><span class="dot"></span>Énumération des services : FTP, SSH, HTTP, Samba, MySQL</div>
-          <div class="modal-list-item"><span class="dot"></span>Exploitation via <strong>Metasploit Framework</strong> — sélection et lancement d'exploits</div>
-          <div class="modal-list-item"><span class="dot"></span>Génération et déploiement de <strong>reverse shells</strong> pour prise de contrôle à distance</div>
-          <div class="modal-list-item"><span class="dot"></span>Création de <strong>web shells PHP</strong> pour persistance et exécution de commandes</div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">📈 Ce que ça m'a apporté</div>
-        <div class="modal-apport">
-          <div class="apport-item"><strong>🔍 Reconnaissance</strong>Méthodologie complète d'un pentest : scan → enum → exploit → post-exploit</div>
-          <div class="apport-item"><strong>🛠️ Outils</strong>Maîtrise de Metasploit Framework et de ses modules</div>
-          <div class="apport-item"><strong>🧩 Logique</strong>Comprendre comment chaîner des vulnérabilités pour progresser dans un système</div>
-          <div class="apport-item"><strong>📝 Rigueur</strong>Documentation de chaque étape — essentiel pour un audit professionnel</div>
-        </div>
-      </div>
-    `
-  },
-  vlan: {
-    icon: '📡',
-    title: 'Infrastructure VLAN — Cisco',
-    role: 'TP Réseau · BTS SIO SISR · ESUP',
-    tags: ['<span class="tag tag-blue">Cisco Packet Tracer</span>','<span class="tag tag-blue">VLAN</span>','<span class="tag tag-green">Routage inter-VLAN</span>','<span class="tag tag-blue">ACL</span>','<span class="tag tag-blue">TCP/IP</span>'],
-    body: `
-      <div class="modal-section">
-        <div class="modal-section-title">🎯 Contexte</div>
-        <p>Conception et déploiement d'une <strong>architecture réseau d'entreprise segmentée</strong> sous Cisco Packet Tracer. Objectif : isoler les flux par département tout en assurant le routage inter-VLAN et la sécurité des accès.</p>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">⚡ Ce que j'ai réalisé</div>
-        <div class="modal-list">
-          <div class="modal-list-item"><span class="dot"></span>Création et attribution des <strong>VLANs par département</strong> (RH, IT, Direction, Invités)</div>
-          <div class="modal-list-item"><span class="dot"></span>Configuration du <strong>routage inter-VLAN</strong> via router-on-a-stick</div>
-          <div class="modal-list-item"><span class="dot"></span>Mise en place d'<strong>ACLs</strong> pour contrôler les flux entre VLANs</div>
-          <div class="modal-list-item"><span class="dot"></span>Configuration des ports trunk et access sur les switches Cisco</div>
-          <div class="modal-list-item"><span class="dot"></span>Schéma réseau complet documenté avec adressage IP</div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">📈 Ce que ça m'a apporté</div>
-        <div class="modal-apport">
-          <div class="apport-item"><strong>🌐 Architecture</strong>Concevoir une infrastructure réseau sécurisée et scalable</div>
-          <div class="apport-item"><strong>🔐 Sécurité</strong>Segmentation réseau comme première ligne de défense</div>
-          <div class="apport-item"><strong>⚙️ Cisco IOS</strong>Maîtrise des commandes de configuration switches et routeurs</div>
-          <div class="apport-item"><strong>📊 Documentation</strong>Schémas réseau et plans d'adressage professionnels</div>
-        </div>
-      </div>
-    `
-  },
-  dmz: {
-    icon: '🛡️',
-    title: 'DMZ — Proxmox VE',
-    role: 'TP Réseau & Sécurité · BTS SIO SISR · ESUP',
-    tags: ['<span class="tag tag-purple">Proxmox VE</span>','<span class="tag tag-blue">DMZ</span>','<span class="tag tag-blue">Pare-feu</span>','<span class="tag tag-green">Linux</span>','<span class="tag tag-blue">Réseau</span>'],
-    body: `
-      <div class="modal-section">
-        <div class="modal-section-title">🎯 Contexte</div>
-        <p>Mise en place d'une <strong>zone démilitarisée (DMZ)</strong> complète sur Proxmox VE. Objectif : exposer un service web de façon sécurisée en isolant la zone publique du réseau interne de l'entreprise.</p>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">⚡ Ce que j'ai réalisé</div>
-        <div class="modal-list">
-          <div class="modal-list-item"><span class="dot"></span>Architecture 3 zones : <strong>WAN / DMZ / LAN</strong> avec VMs Proxmox dédiées</div>
-          <div class="modal-list-item"><span class="dot"></span>Configuration du <strong>pare-feu</strong> avec règles de filtrage strictes entre les zones</div>
-          <div class="modal-list-item"><span class="dot"></span>Déploiement d'un <strong>serveur web Apache</strong> en DMZ — accessible depuis l'extérieur</div>
-          <div class="modal-list-item"><span class="dot"></span>Isolation complète : le LAN ne peut pas être atteint depuis la DMZ</div>
-          <div class="modal-list-item"><span class="dot"></span>Tests de connectivité et validation des règles de sécurité</div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">📈 Ce que ça m'a apporté</div>
-        <div class="modal-apport">
-          <div class="apport-item"><strong>🏗️ Architecture</strong>Comprendre la conception d'une infrastructure sécurisée multi-zones</div>
-          <div class="apport-item"><strong>🔥 Pare-feu</strong>Maîtriser les règles de filtrage et leur logique</div>
-          <div class="apport-item"><strong>📦 Proxmox</strong>Gestion avancée des VMs et réseaux virtuels</div>
-          <div class="apport-item"><strong>🌐 Production</strong>Simuler un déploiement réel de service exposé sur internet</div>
-        </div>
-      </div>
-    `
-  },
-  glpi: {
-    icon: '🎫',
-    title: 'Système d\'information — GLPI & Kanboard',
-    role: 'TP Système d\'information · BTS SIO SISR · ESUP',
-    tags: ['<span class="tag tag-blue">GLPI</span>','<span class="tag tag-blue">Kanboard</span>','<span class="tag tag-green">Apache</span>','<span class="tag tag-purple">MySQL</span>','<span class="tag tag-green">Debian</span>'],
-    body: `
-      <div class="modal-section">
-        <div class="modal-section-title">🎯 Contexte</div>
-        <p>Déploiement d'un <strong>système de gestion des services informatiques (ITSM)</strong> complet avec GLPI pour le helpdesk et Kanboard pour la gestion de projet agile. Infrastructure hébergée sur serveur Debian.</p>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">⚡ Ce que j'ai réalisé</div>
-        <div class="modal-list">
-          <div class="modal-list-item"><span class="dot"></span>Installation et configuration de <strong>GLPI</strong> sur serveur Apache + MySQL sous Debian</div>
-          <div class="modal-list-item"><span class="dot"></span>Paramétrage du <strong>helpdesk</strong> : catégories de tickets, SLA, niveaux de priorité</div>
-          <div class="modal-list-item"><span class="dot"></span>Gestion de l'<strong>inventaire matériel et logiciel</strong> dans GLPI</div>
-          <div class="modal-list-item"><span class="dot"></span>Déploiement de <strong>Kanboard</strong> pour la gestion de projet en méthode agile</div>
-          <div class="modal-list-item"><span class="dot"></span>Création des tableaux, colonnes et workflows de traitement des tâches</div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">📈 Ce que ça m'a apporté</div>
-        <div class="modal-apport">
-          <div class="apport-item"><strong>🎫 ITSM</strong>Comprendre les processus ITIL de gestion des incidents et des services</div>
-          <div class="apport-item"><strong>🖥️ Serveur</strong>Déploiement d'une stack web complète Apache/MySQL/PHP</div>
-          <div class="apport-item"><strong>📋 Agile</strong>Méthode Kanban appliquée à la gestion de projet IT</div>
-          <div class="apport-item"><strong>💼 Terrain</strong>Outils directement utilisés en alternance chez Econocom × Engie</div>
-        </div>
-      </div>
-    `
-  }
-};
-
-function openModal(projectKey) {
-  const p = projects[projectKey];
-  if (!p) return;
-  document.getElementById('modal-icon').textContent = p.icon;
-  document.getElementById('modal-title').textContent = p.title;
-  document.getElementById('modal-role').textContent = p.role;
-  document.getElementById('modal-tags').innerHTML = p.tags.join('');
-  document.getElementById('modal-body').innerHTML = p.body;
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeModalOutside(e) {
-  if (e.target === document.getElementById('modal-overlay')) closeModal();
-}
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
 document.addEventListener('DOMContentLoaded', () => {
   initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
   gsap.registerPlugin(ScrollTrigger);
   gsap.fromTo('.page-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.1,delay:.3 });
   initReveal();
 
-  // Clic sur les cards
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const key = card.getAttribute('data-project');
-      if (key) openModal(key);
-    });
-  });
-
-  // Filtres
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
