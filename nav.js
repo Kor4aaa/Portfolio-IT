@@ -27,7 +27,7 @@ function initTheme() {
   });
 }
 
-<button id="lang-toggle" aria-label="Switch language">
+<button id="lang-toggle" aria-label="Switch language"
   🇫🇷 FR
 </button>
 
