@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mise en Œuvre Active Directory – Livrables</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #222; }
+  header { background: #1a3a5c; color: white; padding: 40px; text-align: center; }
+  header h1 { font-size: 2rem; }
+  header p { margin-top: 8px; font-size: 1rem; color: #a8c4e0; }
+  nav { background: #14304f; display: flex; justify-content: center; gap: 10px; padding: 12px; flex-wrap: wrap; }
+  nav a { color: #a8c4e0; text-decoration: none; padding: 6px 16px; border-radius: 4px; font-size: 0.9rem; }
+  nav a:hover { background: #1a3a5c; color: white; }
+  .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+  .seance { background: white; border-radius: 8px; margin-bottom: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; }
+  .seance-header { background: #1a3a5c; color: white; padding: 20px 30px; display: flex; align-items: center; gap: 16px; }
+  .num { background: #2e7dc9; color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: bold; flex-shrink: 0; }
+  .seance-header h2 { font-size: 1.3rem; }
+  .seance-header p { font-size: 0.85rem; color: #a8c4e0; margin-top: 4px; }
+  .seance-body { padding: 30px; }
+  .livrable { margin-bottom: 30px; border-left: 4px solid #2e7dc9; padding-left: 20px; }
+  .livrable h3 { font-size: 1rem; color: #1a3a5c; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .info-box { background: #f0f4f8; border-radius: 6px; padding: 14px; }
+  .info-box .label { font-size: 0.75rem; color: #666; text-transform: uppercase; margin-bottom: 4px; }
+  .info-box .value { font-size: 0.95rem; font-weight: 600; color: #1a3a5c; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 16px; }
+  th { background: #1a3a5c; color: white; padding: 10px 14px; text-align: left; }
+  td { padding: 9px 14px; border-bottom: 1px solid #e8ecf0; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f7f9fc; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+  .badge-ok { background: #d4edda; color: #155724; }
+  .screenshots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+  .shot { border: 1px solid #dde3ea; border-radius: 6px; overflow: hidden; }
+  .shot img { width: 100%; display: block; }
+  .shot .cap { background: #f0f4f8; padding: 8px 12px; font-size: 0.8rem; color: #444; text-align: center; border-top: 1px solid #dde3ea; }
+  .ou-tree { background: #f7f9fc; border: 1px solid #dde3ea; border-radius: 6px; padding: 16px 20px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; margin-bottom: 16px; }
+  .csv-block { background: #1e1e1e; color: #d4d4d4; border-radius: 6px; padding: 16px 20px; font-family: monospace; font-size: 0.85rem; line-height: 1.7; margin-bottom: 16px; }
+  .csv-block .h { color: #4ec9b0; font-weight: bold; }
+  .ata-block { background: #f7f9fc; border: 1px solid #dde3ea; border-radius: 6px; padding: 20px; font-size: 0.9rem; line-height: 1.8; }
+  .ata-block strong { color: #1a3a5c; }
+  footer { text-align: center; padding: 30px; font-size: 0.8rem; color: #888; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mise en Œuvre Active Directory</h1>
+  <p>Projet BTS SIO SISR &nbsp;|&nbsp; Domaine : btssio.local &nbsp;|&nbsp; Serveur : SRV-AD01</p>
+</header>
+<nav>
+  <a href="#s1">Séance 1</a>
+  <a href="#s2">Séance 2</a>
+  <a href="#s3">Séance 3</a>
+  <a href="#s4">Séance 4</a>
+</nav>
+<div class="container">
+
+  <!-- SÉANCE 1 -->
+  <div class="seance" id="s1">
+    <div class="seance-header">
+      <div class="num">1</div>
+      <div>
+        <h2>Préparation et installation de Windows Server</h2>
+        <p>Configuration VM · Installation OS · Configuration initiale</p>
+      </div>
+    </div>
+    <div class="seance-body">
+      <div class="livrable">
+        <h3>Document de spécifications de la VM</h3>
+        <div class="info-grid">
+          <div class="info-box"><div class="label">Nom de la VM</div><div class="value">SRV-AD01</div></div>
+          <div class="info-box"><div class="label">Système d'exploitation</div><div class="value">Windows Server 2019 Standard (64-bit)</div></div>
+          <div class="info-box"><div class="label">RAM</div><div class="value">5 875 Mo (~6 Go)</div></div>
+          <div class="info-box"><div class="label">Processeurs</div><div class="value">3 vCPU</div></div>
+          <div class="info-box"><div class="label">Disque dur</div><div class="value">59,83 Gio (SATA)</div></div>
+          <div class="info-box"><div class="label">Hyperviseur</div><div class="value">Oracle VirtualBox</div></div>
+          <div class="info-box"><div class="label">Réseau</div><div class="value">Interface pont – Intel PRO/1000 MT Desktop</div></div>
+          <div class="info-box"><div class="label">Contrôleur graphique</div><div class="value">VBoxSVGA – 128 Mo</div></div>
+        </div>
+        <div class="screenshots">
+          <div class="shot"><img src="vm.jpg" alt="Config VM"><div class="cap">Configuration VirtualBox – SRV-AD01</div></div>
+          <div class="shot"><img src="login.jpg" alt="Login"><div class="cap">Windows Server installé – Écran de connexion</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Rapport de configuration initiale du serveur</h3>
+        <div class="info-grid">
+          <div class="info-box"><div class="label">Nom de l'ordinateur</div><div class="value">SRV-AD01</div></div>
+          <div class="info-box"><div class="label">Domaine</div><div class="value">btssio.local</div></div>
+          <div class="info-box"><div class="label">Adresse IP</div><div class="value">192.168.10.10</div></div>
+          <div class="info-box"><div class="label">Masque de sous-réseau</div><div class="value">255.255.255.0</div></div>
+          <div class="info-box"><div class="label">Passerelle par défaut</div><div class="value">192.168.10.1</div></div>
+          <div class="info-box"><div class="label">DNS préféré</div><div class="value">127.0.0.1 (lui-même)</div></div>
+          <div class="info-box"><div class="label">Pare-feu</div><div class="value">Domaine : Actif</div></div>
+          <div class="info-box"><div class="label">Version OS</div><div class="value">Windows Server 2019 Standard Evaluation</div></div>
+        </div>
+        <div class="screenshots">
+          <div class="shot"><img src="ip.jpg" alt="IP statique"><div class="cap">Configuration IPv4 statique</div></div>
+          <div class="shot"><img src="serveur.jpg" alt="Propriétés serveur"><div class="cap">Propriétés du serveur SRV-AD01</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SÉANCE 2 -->
+  <div class="seance" id="s2">
+    <div class="seance-header">
+      <div class="num">2</div>
+      <div>
+        <h2>Installation et configuration d'Active Directory</h2>
+        <p>Installation AD DS · Promotion en contrôleur de domaine · Vérification des services</p>
+      </div>
+    </div>
+    <div class="seance-body">
+      <div class="livrable">
+        <h3>Rapport d'installation du rôle AD DS</h3>
+        <div class="screenshots">
+          <div class="shot"><img src="adds.jpg" alt="AD DS"><div class="cap">Gestionnaire de serveur – Rôles AD DS et DNS actifs</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Document de configuration du domaine</h3>
+        <div class="info-grid">
+          <div class="info-box"><div class="label">Nom de domaine (FQDN)</div><div class="value">btssio.local</div></div>
+          <div class="info-box"><div class="label">Nom NetBIOS</div><div class="value">BTS-SIO</div></div>
+          <div class="info-box"><div class="label">Contrôleur de domaine</div><div class="value">SRV-AD01.btssio.local</div></div>
+          <div class="info-box"><div class="label">Rôles activés</div><div class="value">DC · DNS · Catalogue Global</div></div>
+          <div class="info-box"><div class="label">Niveau fonctionnel forêt</div><div class="value">Windows Server 2016</div></div>
+          <div class="info-box"><div class="label">Niveau fonctionnel domaine</div><div class="value">Windows Server 2016</div></div>
+        </div>
+        <div class="screenshots">
+          <div class="shot"><img src="dns.jpg" alt="DNS"><div class="cap">Console DNS – Zone btssio.local</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Liste de vérification des services Active Directory</h3>
+        <table>
+          <thead><tr><th>Élément vérifié</th><th>Résultat</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td>Rôle AD DS installé</td><td>Visible dans le Gestionnaire de serveur</td><td><span class="badge badge-ok">OK</span></td></tr>
+            <tr><td>Rôle DNS installé</td><td>Visible dans le Gestionnaire de serveur</td><td><span class="badge badge-ok">OK</span></td></tr>
+            <tr><td>Domaine btssio.local créé</td><td>Visible dans ADUC</td><td><span class="badge badge-ok">OK</span></td></tr>
+            <tr><td>Zone DNS btssio.local</td><td>Présente dans la console DNS</td><td><span class="badge badge-ok">OK</span></td></tr>
+            <tr><td>Connexion domaine</td><td>BTS-SIO\Administrateur</td><td><span class="badge badge-ok">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- SÉANCE 3 -->
+  <div class="seance" id="s3">
+    <div class="seance-header">
+      <div class="num">3</div>
+      <div>
+        <h2>Gestion des utilisateurs et des groupes</h2>
+        <p>OU · Utilisateurs · Groupes · Import CSV · GPO</p>
+      </div>
+    </div>
+    <div class="seance-body">
+      <div class="livrable">
+        <h3>Schéma de la structure des OU</h3>
+        <div class="ou-tree">
+          btssio.local<br>
+          ├── OU=Groupes<br>
+          ├── OU=Ordinateurs<br>
+          ├── OU=Services<br>
+          └── OU=Utilisateurs
+        </div>
+        <div class="screenshots">
+          <div class="shot"><img src="ou.jpg" alt="OU"><div class="cap">Structure des OU dans ADUC</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Fichier CSV des utilisateurs importés</h3>
+        <div class="csv-block">
+          <span class="h">Prenom,Nom,Login,Description</span><br>
+          Marie,Dupont,mdupont,Chef de projet Informatique<br>
+          Paul,Martin,pmartin,Technicien support<br>
+          Anne,Leroy,aleroy,Assistante RH<br>
+          Luc,Durand,ldurand,Comptable<br>
+          Sophie,Bernard,sbernard,Stagiaire Compta
+        </div>
+        <div class="screenshots">
+          <div class="shot"><img src="csv.jpg" alt="CSV"><div class="cap">Fichier utilisateurs.csv</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Capture d'écran ADUC – Utilisateurs et groupes créés</h3>
+        <div class="screenshots">
+          <div class="shot"><img src="users.jpg" alt="Utilisateurs"><div class="cap">Utilisateurs créés dans OU=Utilisateurs</div></div>
+          <div class="shot"><img src="groupe.jpg" alt="Groupe IT"><div class="cap">Groupe IT – Membres : Administrateur, Wensel Reyes</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Rapport des GPO créées et appliquées</h3>
+        <table>
+          <thead><tr><th>Nom de la GPO</th><th>Lien</th><th>Paramètre configuré</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td>Default Domain Policy</td><td>btssio.local</td><td>Stratégie de mot de passe</td><td><span class="badge badge-ok">Activé</span></td></tr>
+            <tr><td>GPO_Restrictions_Logicielles</td><td>btssio.local</td><td>Blocage de notepad.exe</td><td><span class="badge badge-ok">Activé</span></td></tr>
+          </tbody>
+        </table>
+        <div class="screenshots">
+          <div class="shot"><img src="gpo.jpg" alt="GPO"><div class="cap">Console Gestion de la stratégie de groupe</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SÉANCE 4 -->
+  <div class="seance" id="s4">
+    <div class="seance-header">
+      <div class="num">4</div>
+      <div>
+        <h2>Sécurisation de l'infrastructure Active Directory</h2>
+        <p>Mots de passe · Verrouillage · 2FA · Audit · ATA</p>
+      </div>
+    </div>
+    <div class="seance-body">
+      <div class="livrable">
+        <h3>Document de politique de sécurité des mots de passe</h3>
+        <table>
+          <thead><tr><th>Paramètre</th><th>Valeur configurée</th></tr></thead>
+          <tbody>
+            <tr><td>Longueur minimale du mot de passe</td><td>8 caractères</td></tr>
+            <tr><td>Complexité requise</td><td>Activé</td></tr>
+            <tr><td>Durée de vie maximale</td><td>60 jours</td></tr>
+            <tr><td>Durée de vie minimale</td><td>30 jours</td></tr>
+            <tr><td>Chiffrement réversible</td><td>Activé</td></tr>
+            <tr><td>Seuil de verrouillage</td><td>3 tentatives</td></tr>
+            <tr><td>Durée de verrouillage</td><td>15 minutes</td></tr>
+            <tr><td>Réinitialisation du compteur</td><td>15 minutes</td></tr>
+            <tr><td>Verrouillage compte Administrateur</td><td>Activé</td></tr>
+          </tbody>
+        </table>
+        <div class="screenshots">
+          <div class="shot"><img src="mdp.jpg" alt="Mot de passe"><div class="cap">Stratégie de mot de passe – Default Domain Policy</div></div>
+          <div class="shot"><img src="verrou.jpg" alt="Verrouillage"><div class="cap">Stratégie de verrouillage de compte</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Rapport de configuration de l'authentification deux facteurs (2FA)</h3>
+        <div class="ata-block">
+          <strong>Contexte :</strong> La 2FA renforce la sécurité des comptes administrateurs en ajoutant une seconde vérification au-delà du mot de passe.<br><br>
+          <strong>Solution recommandée :</strong> Microsoft Authenticator / Azure AD MFA<br><br>
+          <strong>Politique appliquée :</strong><br>
+          – 2FA obligatoire pour tous les membres du groupe Admins du domaine<br>
+          – Délai d'expiration de session : 15 minutes d'inactivité<br>
+          – Verrouillage après 3 tentatives échouées (configuré via GPO)
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Plan d'audit des événements de sécurité</h3>
+        <table>
+          <thead><tr><th>Stratégie d'audit</th><th>Paramètre</th></tr></thead>
+          <tbody>
+            <tr><td>Auditer les événements de connexion aux comptes</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer les événements de connexion</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer la gestion des comptes</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer l'accès aux objets</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer l'utilisation des privilèges</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer le suivi des processus</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer les événements système</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer les modifications de stratégie</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+            <tr><td>Auditer l'accès au service d'annuaire</td><td><span class="badge badge-ok">Réussite, Échec</span></td></tr>
+          </tbody>
+        </table>
+        <div class="screenshots">
+          <div class="shot"><img src="audit.jpg" alt="Audit"><div class="cap">Stratégie d'audit – Default Domain Controllers Policy</div></div>
+          <div class="shot"><img src="secu.jpg" alt="Sécurité"><div class="cap">Observateur d'événements – Journal Sécurité</div></div>
+        </div>
+      </div>
+      <div class="livrable">
+        <h3>Rapport d'installation et de configuration de Microsoft ATA</h3>
+        <div class="ata-block">
+          <strong>Qu'est-ce que Microsoft ATA ?</strong><br>
+          Microsoft Advanced Threat Analytics est une solution de détection des menaces sur site. Elle analyse le trafic réseau Active Directory pour détecter les comportements suspects (Pass-the-Hash, Golden Ticket, reconnaissance LDAP, etc.).<br><br>
+          <strong>Statut :</strong> Microsoft ATA 1.9 n'est plus disponible au téléchargement. Il a été remplacé par Microsoft Defender for Identity (solution cloud).<br><br>
+          <strong>Prérequis techniques :</strong><br>
+          – Windows Server 2012 R2 / 2016 / 2019<br>
+          – Minimum 6 Go de RAM<br>
+          – Minimum 100 Go d'espace disque<br>
+          – .NET Framework 4.6.1<br><br>
+          <strong>Architecture recommandée :</strong><br>
+          – 1 serveur ATA Center (collecte et analyse)<br>
+          – 1 ATA Gateway installée sur le DC<br>
+          – Tableau de bord web : https://NomServeurATA
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Projet BTS SIO SISR – Mise en Œuvre Active Directory &nbsp;|&nbsp; SRV-AD01.btssio.local &nbsp;|&nbsp; 2026
+</footer>
+
+</body>
+</html>
