@@ -27,6 +27,10 @@ function initTheme() {
   });
 }
 
+<button id="lang-toggle" aria-label="Switch language">
+  🇫🇷 FR
+</button>
+
 /* ── BARRE DE PROGRESSION ── */
 function initProgressBar() {
   const bar = document.getElementById('progress-bar');

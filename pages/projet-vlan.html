@@ -34,6 +34,14 @@
     .apport-card strong { color:var(--color-primary);display:block;font-size:var(--text-xs);font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--space-2); }
     .apport-card p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;margin:0; }
     @media(max-width:600px){ .apport-grid{grid-template-columns:1fr;} }
+
+    .livrable-box { display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);background:var(--card-bg);border:1px solid rgba(0,255,170,.2);border-radius:var(--radius-xl);padding:var(--space-6) var(--space-8);flex-wrap:wrap; }
+    .livrable-info { display:flex;align-items:center;gap:var(--space-4); }
+    .livrable-icon { width:48px;height:48px;background:rgba(0,255,170,.1);border:1px solid rgba(0,255,170,.25);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0; }
+    .livrable-meta strong { display:block;color:var(--color-text);font-size:var(--text-sm);margin-bottom:4px; }
+    .livrable-meta span { font-size:var(--text-xs);color:var(--color-text-muted);font-family:var(--font-mono); }
+    .btn-download { display:inline-flex;align-items:center;gap:var(--space-2);background:rgba(0,255,170,.12);border:1px solid rgba(0,255,170,.3);color:var(--color-primary);font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;padding:var(--space-3) var(--space-6);border-radius:var(--radius-full);text-decoration:none;transition:background .2s,border-color .2s;white-space:nowrap; }
+    .btn-download:hover { background:rgba(0,255,170,.22);border-color:rgba(0,255,170,.6); }
   </style>
 </head>
 <body>
@@ -123,6 +131,27 @@
         <strong>📊 Documentation</strong>
         <p>Rédiger des schémas réseau et plans d'adressage professionnels et exploitables</p>
       </div>
+    </div>
+  </div>
+
+  <div class="projet-section reveal">
+    <div class="projet-section-title">📎 Livrable</div>
+    <div class="livrable-box">
+      <div class="livrable-info">
+        <div class="livrable-icon">📄</div>
+        <div class="livrable-meta">
+          <strong>Documentation — Infrastructure VLAN</strong>
+          <span>livrable-vlan.html · Rapport complet du projet</span>
+        </div>
+      </div>
+      <a href="../livrables/VLAN/livrable-vlan.html" download="Livrable-VLAN-Wensel-Reyes.html" class="btn-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Télécharger
+      </a>
     </div>
   </div>
 

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Projet VLAN - Cabinet Comptafinance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --primary: #1e88e5;
+            --secondary: #1565c0;
+            --light: #f5f7fb;
+            --text: #222;
+            --muted: #666;
+            --border: #d0d4e4;
+            --table-header: #e3e8f5;
+            --code-bg: #0f172a;
+            --code-border: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 3rem 1.5rem;
+            background: radial-gradient(circle at top, #eef3ff 0, #f7f8fc 40%, #ffffff 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+            padding: 2.75rem 3rem 3rem;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+        }
+
+        header {
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 1.9rem;
+            margin: 0 0 0.4rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--secondary);
+        }
+
+        .header-left h2 {
+            font-size: 1.05rem;
+            margin: 0;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .header-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            padding: 0.6rem 1.1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.8rem;
+            margin-bottom: 2rem;
+            padding: 0.9rem 1.1rem;
+            background: rgba(226, 232, 240, 0.45);
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        .meta-item {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .meta-label {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.72rem;
+            color: var(--secondary);
+            margin-right: 0.35rem;
+        }
+
+        .toc {
+            margin-bottom: 2.5rem;
+            padding: 1.4rem 1.6rem;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #f4f6ff, #eef2ff);
+            border: 1px solid rgba(129, 140, 248, 0.4);
+        }
+
+        .toc-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .toc ol {
+            margin: 0;
+            padding-left: 1.2rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin: 2.2rem 0 0.8rem;
+            color: var(--secondary);
+            border-left: 3px solid var(--primary);
+            padding-left: 0.7rem;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            margin: 1.5rem 0 0.5rem;
+            color: var(--text);
+        }
+
+        p {
+            margin: 0.3rem 0 0.8rem;
+            color: var(--text);
+        }
+
+        ul, ol {
+            margin: 0.3rem 0 0.8rem 1.2rem;
+        }
+
+        .callout {
+            margin: 1.3rem 0;
+            padding: 1rem 1.1rem;
+            border-radius: 10px;
+            background: #fefce8;
+            border: 1px solid #facc15;
+            font-size: 0.92rem;
+        }
+
+        .callout strong {
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-bottom: 0.25rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 1.1rem;
+            align-items: flex-start;
+        }
+
+        .card {
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: #f9fafb;
+            padding: 1.1rem 1.2rem;
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .network-diagram {
+            border-radius: 12px;
+            padding: 1.1rem 1.2rem;
+            background: radial-gradient(circle at top, #e0f2fe 0, #eff6ff 40%, #ffffff 100%);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.78rem;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.4;
+            color: #0f172a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.4rem 0 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.45rem 0.55rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--table-header);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) td {
+            background: #f9fafb;
+        }
+
+        .code-block {
+            margin: 0.6rem 0 1rem;
+            padding: 0.75rem 0.9rem;
+            border-radius: 10px;
+            background: var(--code-bg);
+            border: 1px solid var(--code-border);
+            color: #e5e7eb;
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.82rem;
+            overflow-x: auto;
+        }
+
+        .code-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #9ca3af;
+            margin-bottom: 0.15rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li::before {
+            content: "✔";
+            margin-right: 0.45rem;
+            color: #16a34a;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            margin-top: 2.5rem;
+            padding-top: 1.3rem;
+            border-top: 1px dashed var(--border);
+            font-size: 0.82rem;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .container {
+                padding: 1.6rem 1.4rem 2rem;
+                border-radius: 14px;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .grid-2 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <div class="header-left">
+            <h1>Projet VLAN - Cabinet Comptafinance</h1>
+            <h2>Guide de configuration réseau et segmentation VLAN</h2>
+        </div>
+        <div class="header-badge">
+            Niveau débutant • Cisco Packet Tracer
+        </div>
+    </header>
+
+    <section class="meta">
+        <div class="meta-item">
+            <span class="meta-label">Auteur</span>
+            Wensel
+        </div>
+        <div class="meta-item">
+            <span class="meta-label">Durée estimée</span>
+            6 à 7 heures
+        </div>
+        <div class="meta-item">
+            <span class="meta-label">Contexte</span>
+            Cabinet Comptafinance – mise en place de l’infrastructure
+        </div>
+        <div class="meta-item">
+            <span class="meta-label">Outil</span>
+            Cisco Packet Tracer
+        </div>
+    </section>
+
+    <section class="toc">
+        <div class="toc-title">Sommaire</div>
+        <ol>
+            <li>Introduction et contexte</li>
+            <li>Architecture réseau</li>
+            <li>Plan d’adressage IP</li>
+            <li>Configuration du switch</li>
+            <li>Configuration du routeur</li>
+            <li>Configuration du serveur DHCP</li>
+            <li>Tests et validation</li>
+            <li>Dépannage</li>
+            <li>Conclusion</li>
+            <li>Annexes</li>
+        </ol>
+    </section>
+
+    <section id="introduction">
+        <h2>1. Introduction</h2>
+
+        <h3>1.1 Contexte du projet</h3>
+        <p>
+            Le cabinet Comptafinance démarre son infrastructure informatique et souhaite segmenter ses deux services principaux, Accueil et Gestion, en utilisant la technologie VLAN pour améliorer la sécurité et l’organisation du réseau. [file:1]
+        </p>
+
+        <h3>1.2 Objectifs</h3>
+        <ul>
+            <li>Mettre en place deux VLANs distincts pour séparer les services Accueil et Gestion. [file:1]</li>
+            <li>Configurer un serveur DHCP centralisé pour l’attribution automatique des adresses IP. [file:1]</li>
+            <li>Établir la communication inter-VLAN via un routeur (router-on-a-stick). [file:1]</li>
+            <li>Partager une imprimante réseau entre les deux VLANs. [file:1]</li>
+            <li>Simuler un accès Internet via le routeur. [file:1]</li>
+        </ul>
+
+        <h3>1.3 Équipements utilisés</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Équipement</th>
+                <th>Modèle / Type</th>
+                <th>Quantité</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Routeur</td>
+                <td>Cisco (avec sous-interfaces 802.1Q)</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Switch</td>
+                <td>Cisco 2960 (compatible 802.1Q)</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Serveur DHCP</td>
+                <td>Windows / Linux Server</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>PC Accueil</td>
+                <td>Postes clients VLAN 10</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>PC Gestion</td>
+                <td>Postes clients VLAN 20</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Imprimante réseau</td>
+                <td>Partagée entre VLANs</td>
+                <td>1</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="architecture">
+        <h2>2. Architecture réseau</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>2.1 Description générale</h3>
+                <p>
+                    L’architecture est construite autour d’un switch central qui segmente le réseau en deux VLANs et d’un routeur qui assure le routage inter-VLAN et la sortie vers Internet. [file:1]
+                </p>
+                <ul>
+                    <li>Routeur : point d’accès vers Internet et routage inter-VLAN via sous-interfaces 802.1Q. [file:1]</li>
+                    <li>Switch central : séparation logique des VLANs et distribution des ports utilisateurs. [file:1]</li>
+                    <li>VLAN 10 (Accueil) : 2 PC + serveur DHCP + imprimante réseau. [file:1]</li>
+                    <li>VLAN 20 (Gestion) : 3 PC utilisateurs. [file:1]</li>
+                    <li>Imprimante : située dans le VLAN 10, accessible depuis les deux VLANs via le routeur. [file:1]</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>2.2 Schéma logique du réseau</h3>
+                <div class="network-diagram">
+                          Internet (simulation)
+                                 │
+                             [ Routeur ]
+                        Gi0/0.10 │    │ Gi0/0.20
+                         VLAN 10 │    │ VLAN 20
+                                 │
+                              [Trunk]
+                                 │
+                            [ Switch ]
+                    ┌────────────┴─────────────┐
+                    │                          │
+               VLAN 10 (Accueil)          VLAN 20 (Gestion)
+             ┌───────────────┐          ┌─────────────────┐
+             │   PC1 (DHCP)  │          │  PC4 (DHCP)     │
+             │   PC2 (DHCP)  │          │  PC5 (DHCP)     │
+             │ Serveur DHCP  │          │  PC6 (DHCP)     │
+             │ Imprimante    │          └─────────────────┘
+             └───────────────┘
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="adressage">
+        <h2>3. Plan d’adressage IP</h2>
+
+        <h3>3.1 VLANs</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>VLAN</th>
+                <th>Nom</th>
+                <th>ID VLAN</th>
+                <th>Réseau</th>
+                <th>Masque</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>VLAN 10</td>
+                <td>Accueil</td>
+                <td>10</td>
+                <td>192.168.10.0</td>
+                <td>255.255.255.0 (/24)</td>
+            </tr>
+            <tr>
+                <td>VLAN 20</td>
+                <td>Gestion</td>
+                <td>20</td>
+                <td>192.168.20.0</td>
+                <td>255.255.255.0 (/24)</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>3.2 Adressage VLAN 10 (Accueil)</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Équipement</th>
+                <th>Adresse IP</th>
+                <th>Rôle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Passerelle (Routeur)</td>
+                <td>192.168.10.1</td>
+                <td>Gateway VLAN 10</td>
+            </tr>
+            <tr>
+                <td>Serveur DHCP</td>
+                <td>192.168.10.10</td>
+                <td>Serveur d’attribution IP</td>
+            </tr>
+            <tr>
+                <td>Imprimante</td>
+                <td>192.168.10.15</td>
+                <td>Imprimante réseau</td>
+            </tr>
+            <tr>
+                <td>PC1 Accueil</td>
+                <td>192.168.10.20 (DHCP)</td>
+                <td>Poste utilisateur</td>
+            </tr>
+            <tr>
+                <td>PC2 Accueil</td>
+                <td>192.168.10.21 (DHCP)</td>
+                <td>Poste utilisateur</td>
+            </tr>
+            </tbody>
+        </table>
+        <p><strong>Pool DHCP VLAN 10 :</strong> 192.168.10.20 à 192.168.10.50 (31 adresses disponibles). [file:1]</p>
+
+        <h3>3.3 Adressage VLAN 20 (Gestion)</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Équipement</th>
+                <th>Adresse IP</th>
+                <th>Rôle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Passerelle (Routeur)</td>
+                <td>192.168.20.1</td>
+                <td>Gateway VLAN 20</td>
+            </tr>
+            <tr>
+                <td>PC4 Gestion</td>
+                <td>192.168.20.20 (DHCP)</td>
+                <td>Poste utilisateur</td>
+            </tr>
+            <tr>
+                <td>PC5 Gestion</td>
+                <td>192.168.20.21 (DHCP)</td>
+                <td>Poste utilisateur</td>
+            </tr>
+            <tr>
+                <td>PC6 Gestion</td>
+                <td>192.168.20.22 (DHCP)</td>
+                <td>Poste utilisateur</td>
+            </tr>
+            </tbody>
+        </table>
+        <p><strong>Pool DHCP VLAN 20 :</strong> 192.168.20.20 à 192.168.20.50 (31 adresses disponibles). [file:1]</p>
+    </section>
+
+    <section id="switch">
+        <h2>4. Configuration du switch</h2>
+
+        <h3>4.1 Création des VLANs</h3>
+        <div class="code-block">
+            <div class="code-title">Création VLAN 10 (Accueil)</div>
+            <code>
+Switch&gt; enable
+Switch# configure terminal
+Switch(config)# vlan 10
+Switch(config-vlan)# name ACCUEIL
+Switch(config-vlan)# exit
+            </code>
+        </div>
+
+        <div class="code-block">
+            <div class="code-title">Création VLAN 20 (Gestion)</div>
+            <code>
+Switch(config)# vlan 20
+Switch(config-vlan)# name GESTION
+Switch(config-vlan)# exit
+            </code>
+        </div>
+
+        <h3>4.2 Configuration du port trunk vers le routeur</h3>
+        <p>
+            Le port trunk transporte les VLAN 10 et 20 entre le switch et le routeur via 802.1Q. [file:1]
+        </p>
+        <div class="code-block">
+            <div class="code-title">Port trunk (exemple Gi0/1)</div>
+            <code>
+Switch(config)# interface GigabitEthernet 0/1
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk allowed vlan 10,20
+Switch(config-if)# description LIAISON_TRUNK_VERS_ROUTEUR
+Switch(config-if)# exit
+            </code>
+        </div>
+
+        <h3>4.3 Assignation des ports en mode access</h3>
+        <p>Les numéros de ports sont à adapter selon le câblage réel. [file:1]</p>
+
+        <div class="code-block">
+            <div class="code-title">Ports VLAN 10 (Accueil)</div>
+            <code>
+Switch(config)# interface range FastEthernet 0/2-5
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 10
+Switch(config-if-range)# description VLAN_ACCUEIL
+Switch(config-if-range)# exit
+            </code>
+        </div>
+
+        <div class="code-block">
+            <div class="code-title">Ports VLAN 20 (Gestion)</div>
+            <code>
+Switch(config)# interface range FastEthernet 0/6-10
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 20
+Switch(config-if-range)# description VLAN_GESTION
+Switch(config-if-range)# exit
+            </code>
+        </div>
+
+        <h3>4.4 Sauvegarde & vérifications</h3>
+        <div class="code-block">
+            <div class="code-title">Sauvegarde configuration</div>
+            <code>
+Switch(config)# end
+Switch# write memory
+! ou
+Switch# copy running-config startup-config
+            </code>
+        </div>
+
+        <div class="code-block">
+            <div class="code-title">Commandes de vérification</div>
+            <code>
+show vlan brief
+show interfaces trunk
+show interfaces fa0/2 switchport
+            </code>
+        </div>
+    </section>
+
+    <section id="routeur">
+        <h2>5. Configuration du routeur</h2>
+
+        <h3>5.1 Activation de l’interface physique</h3>
+        <div class="code-block">
+            <div class="code-title">Interface principale</div>
+            <code>
+Router&gt; enable
+Router# configure terminal
+Router(config)# interface GigabitEthernet 0/0
+Router(config-if)# no shutdown
+Router(config-if)# description INTERFACE_TRUNK
+Router(config-if)# exit
+            </code>
+        </div>
+
+        <h3>5.2 Sous-interface VLAN 10 (Accueil)</h3>
+        <div class="code-block">
+            <div class="code-title">Gi0/0.10</div>
+            <code>
+Router(config)# interface GigabitEthernet 0/0.10
+Router(config-subif)# encapsulation dot1Q 10
+Router(config-subif)# ip address 192.168.10.1 255.255.255.0
+Router(config-subif)# description GATEWAY_VLAN_ACCUEIL
+Router(config-subif)# exit
+            </code>
+        </div>
+
+        <h3>5.3 Sous-interface VLAN 20 (Gestion) + relais DHCP</h3>
+        <div class="code-block">
+            <div class="code-title">Gi0/0.20 + ip helper-address</div>
+            <code>
+Router(config)# interface GigabitEthernet 0/0.20
+Router(config-subif)# encapsulation dot1Q 20
+Router(config-subif)# ip address 192.168.20.1 255.255.255.0
+Router(config-subif)# description GATEWAY_VLAN_GESTION
+Router(config-subif)# ip helper-address 192.168.10.10
+Router(config-subif)# exit
+            </code>
+        </div>
+        <p>
+            La commande ip helper-address redirige les requêtes DHCP broadcast du VLAN 20 vers le serveur DHCP du VLAN 10 (192.168.10.10). [file:1]
+        </p>
+
+        <h3>5.4 Sauvegarde & vérifications</h3>
+        <div class="code-block">
+            <div class="code-title">Sauvegarde configuration</div>
+            <code>
+Router(config)# end
+Router# write memory
+            </code>
+        </div>
+
+        <div class="code-block">
+            <div class="code-title">Commandes de vérification</div>
+            <code>
+show ip interface brief
+show ip route
+ping 192.168.10.1
+ping 192.168.20.1
+            </code>
+        </div>
+    </section>
+
+    <section id="dhcp">
+        <h2>6. Configuration du serveur DHCP</h2>
+
+        <h3>6.1 Adresse IP statique du serveur</h3>
+        <ul>
+            <li>Adresse IP : 192.168.10.10</li>
+            <li>Masque : 255.255.255.0</li>
+            <li>Passerelle : 192.168.10.1</li>
+            <li>DNS : 8.8.8.8 (ou DNS local)</li>
+        </ul>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">Pool DHCP VLAN 10 (Accueil)</div>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>Nom du pool</td>
+                        <td>POOL_ACCUEIL</td>
+                    </tr>
+                    <tr>
+                        <td>Réseau</td>
+                        <td>192.168.10.0</td>
+                    </tr>
+                    <tr>
+                        <td>Masque</td>
+                        <td>255.255.255.0</td>
+                    </tr>
+                    <tr>
+                        <td>Plage IP</td>
+                        <td>192.168.10.20 – 192.168.10.50</td>
+                    </tr>
+                    <tr>
+                        <td>Passerelle</td>
+                        <td>192.168.10.1</td>
+                    </tr>
+                    <tr>
+                        <td>DNS</td>
+                        <td>8.8.8.8</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Pool DHCP VLAN 20 (Gestion)</div>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>Nom du pool</td>
+                        <td>POOL_GESTION</td>
+                    </tr>
+                    <tr>
+                        <td>Réseau</td>
+                        <td>192.168.20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Masque</td>
+                        <td>255.255.255.0</td>
+                    </tr>
+                    <tr>
+                        <td>Plage IP</td>
+                        <td>192.168.20.20 – 192.168.20.50</td>
+                    </tr>
+                    <tr>
+                        <td>Passerelle</td>
+                        <td>192.168.20.1</td>
+                    </tr>
+                    <tr>
+                        <td>DNS</td>
+                        <td>8.8.8.8</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Note importante</strong><br>
+            Le serveur DHCP distribue des adresses aux deux VLANs grâce au relais DHCP configuré sur le routeur. [file:1]
+        </div>
+    </section>
+
+    <section id="tests">
+        <h2>7. Tests et validation</h2>
+
+        <h3>7.1 Connectivité intra-VLAN</h3>
+        <ul>
+            <li>Depuis PC1 (VLAN 10) : ping 192.168.10.10 (serveur DHCP), ping 192.168.10.15 (imprimante). [file:1]</li>
+            <li>Depuis PC4 (VLAN 20) : ping 192.168.20.21 (PC5). [file:1]</li>
+        </ul>
+
+        <h3>7.2 Routage inter-VLAN</h3>
+        <ul>
+            <li>Depuis PC1 (VLAN 10) : ping 192.168.20.1 (gateway VLAN 20). [file:1]</li>
+            <li>Depuis PC4 (VLAN 20) : ping 192.168.10.1 (gateway VLAN 10), ping 192.168.10.15 (imprimante). [file:1]</li>
+        </ul>
+
+        <h3>7.3 Vérification DHCP</h3>
+        <ul>
+            <li>Configurer les PC en DHCP puis ipconfig /renew (Windows) ou dhclient (Linux). [file:1]</li>
+            <li>Vérifier IP, masque, passerelle et serveur DHCP (192.168.10.10). [file:1]</li>
+        </ul>
+
+        <h3>7.4 Accès à l’imprimante</h3>
+        <ul>
+            <li>Depuis PC4 (VLAN 20) : ping 192.168.10.15 puis ouverture de http://192.168.10.15 si l’imprimante a une interface web. [file:1]</li>
+            <li>Ajout de l’imprimante en réseau via son adresse IP. [file:1]</li>
+        </ul>
+
+        <h3>7.5 Checklist finale</h3>
+        <ul class="checklist">
+            <li>VLANs 10 et 20 créés sur le switch. [file:1]</li>
+            <li>Trunk fonctionnel entre switch et routeur. [file:1]</li>
+            <li>Sous-interfaces du routeur actives. [file:1]</li>
+            <li>Serveur DHCP distribue des IP aux deux VLANs. [file:1]</li>
+            <li>Communication intra-VLAN opérationnelle. [file:1]</li>
+            <li>Communication inter-VLAN opérationnelle. [file:1]</li>
+            <li>Imprimante accessible depuis les deux VLANs. [file:1]</li>
+            <li>Configuration sauvegardée sur switch et routeur. [file:1]</li>
+        </ul>
+    </section>
+
+    <section id="depannage">
+        <h2>8. Dépannage</h2>
+
+        <h3>8.1 Les PC ne reçoivent pas d’adresse IP</h3>
+        <ul>
+            <li>Vérifier que le serveur DHCP est démarré. [file:1]</li>
+            <li>Contrôler ip helper-address sur Gi0/0.20. [file:1]</li>
+            <li>Vérifier les pools DHCP. [file:1]</li>
+            <li>S’assurer que les ports sont dans le bon VLAN. [file:1]</li>
+        </ul>
+
+        <h3>8.2 Pas de communication inter-VLAN</h3>
+        <ul>
+            <li>Vérifier que Gi0/0 est up (no shutdown). [file:1]</li>
+            <li>Contrôler la configuration des sous-interfaces. [file:1]</li>
+            <li>Vérifier l’encapsulation dot1Q. [file:1]</li>
+            <li>Tester les passerelles en ping. [file:1]</li>
+        </ul>
+
+        <h3>8.3 Le trunk ne fonctionne pas</h3>
+        <ul>
+            <li>Vérifier le câblage entre switch et routeur. [file:1]</li>
+            <li>S’assurer que le port est bien en mode trunk. [file:1]</li>
+            <li>Vérifier que les VLANs 10 et 20 sont autorisés. [file:1]</li>
+        </ul>
+    </section>
+
+    <section id="conclusion">
+        <h2>9. Conclusion</h2>
+        <p>
+            Ce projet met en œuvre une infrastructure réseau segmentée en VLAN pour le cabinet Comptafinance, avec un routage inter-VLAN fonctionnel et un serveur DHCP centralisé. [file:1]
+        </p>
+        <p>
+            Les objectifs de séparation des services, d’automatisation de l’adressage IP et de partage de ressources (imprimante) ont été atteints, tout en fournissant une documentation claire pour la maintenance future. [file:1]
+        </p>
+
+        <h3>Compétences développées</h3>
+        <ul>
+            <li>Configuration de VLANs sur switch Cisco. [file:1]</li>
+            <li>Mise en place du router-on-a-stick pour le routage inter-VLAN. [file:1]</li>
+            <li>Configuration d’un serveur DHCP avec relais. [file:1]</li>
+            <li>Diagnostic et test de connectivité réseau. [file:1]</li>
+            <li>Rédaction de documentation technique d’infrastructure. [file:1]</li>
+        </ul>
+    </section>
+
+    <section id="annexes">
+        <h2>10. Annexes</h2>
+
+        <h3>Annexe A : Récapitulatif des commandes Cisco</h3>
+        <div class="code-block">
+            <div class="code-title">Switch</div>
+            <code>
+show vlan brief          ! Afficher les VLANs
+show interfaces trunk    ! Vérifier le trunk
+show running-config      ! Configuration actuelle
+write memory             ! Sauvegarde
+            </code>
+        </div>
+
+        <div class="code-block">
+            <div class="code-title">Routeur</div>
+            <code>
+show ip interface brief  ! État des interfaces
+show ip route            ! Table de routage
+show running-config      ! Configuration actuelle
+write memory             ! Sauvegarde
+            </code>
+        </div>
+
+        <h3>Annexe B : Schéma d’adressage complet</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Équipement</th>
+                <th>Interface / Port</th>
+                <th>VLAN</th>
+                <th>Adresse IP</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Routeur</td>
+                <td>Gig0/0.10</td>
+                <td>10</td>
+                <td>192.168.10.1</td>
+            </tr>
+            <tr>
+                <td>Routeur</td>
+                <td>Gig0/0.20</td>
+                <td>20</td>
+                <td>192.168.20.1</td>
+            </tr>
+            <tr>
+                <td>Serveur DHCP</td>
+                <td>eth0</td>
+                <td>10</td>
+                <td>192.168.10.10</td>
+            </tr>
+            <tr>
+                <td>Imprimante</td>
+                <td>-</td>
+                <td>10</td>
+                <td>192.168.10.15</td>
+            </tr>
+            <tr>
+                <td>PC1</td>
+                <td>-</td>
+                <td>10</td>
+                <td>192.168.10.20 (DHCP)</td>
+            </tr>
+            <tr>
+                <td>PC2</td>
+                <td>-</td>
+                <td>10</td>
+                <td>192.168.10.21 (DHCP)</td>
+            </tr>
+            <tr>
+                <td>PC4</td>
+                <td>-</td>
+                <td>20</td>
+                <td>192.168.20.20 (DHCP)</td>
+            </tr>
+            <tr>
+                <td>PC5</td>
+                <td>-</td>
+                <td>20</td>
+                <td>192.168.20.21 (DHCP)</td>
+            </tr>
+            <tr>
+                <td>PC6</td>
+                <td>-</td>
+                <td>20</td>
+                <td>192.168.20.22 (DHCP)</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Annexe C : Glossaire</h3>
+        <ul>
+            <li>VLAN (Virtual LAN) : réseau local virtuel permettant de segmenter un réseau physique. [file:1]</li>
+            <li>Trunk : liaison transportant plusieurs VLANs simultanément. [file:1]</li>
+            <li>802.1Q : protocole standard de marquage des trames VLAN. [file:1]</li>
+            <li>Router-on-a-stick : routage inter-VLAN via sous-interfaces sur un routeur. [file:1]</li>
+            <li>DHCP Relay (ip helper-address) : redirection des requêtes DHCP entre VLANs. [file:1]</li>
+            <li>Access Port : port switch assigné à un seul VLAN. [file:1]</li>
+            <li>Gateway : passerelle par défaut pour sortir du réseau local. [file:1]</li>
+        </ul>
+    </section>
+
+    <footer>
+        <div>Projet VLAN – Cabinet Comptafinance</div>
+        <div>Document généré au format HTML</div>
+    </footer>
+
+</div>
+</body>
+</html>
