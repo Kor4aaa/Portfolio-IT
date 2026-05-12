@@ -1,248 +1,750 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
-  <!-- Favicon standard (tous navigateurs) -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-  <!-- Navigateurs modernes (PNG) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
-  <!-- iPhone / iPad (quand on ajoute le site à l'écran d'accueil) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-  <!-- Android / PWA -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Wensel Reyes — Portfolio BTS SIO</title>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wensel Reyes — Portfolio</title>
+  <meta name="description" content="Portfolio de Wensel Reyes, étudiant en BTS SIO SISR, orienté cybersécurité, systèmes et réseaux." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
   <style>
+    main { position: relative; z-index: 1; }
+
     .hero {
       min-height: 100dvh;
-      display: flex; flex-direction: column;
-      justify-content: center;
-      padding: 0 var(--space-8);
-      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      align-items: center;
+      padding-top: calc(var(--nav-h) + var(--s12));
+      padding-bottom: var(--s12);
     }
-    .hero-eyebrow {
-      font-family: var(--font-mono); font-size: var(--text-sm);
-      color: var(--color-primary); margin-bottom: var(--space-6); opacity: 0;
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: var(--s12);
+      align-items: center;
     }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s3);
+      margin-bottom: var(--s5);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--accent);
+    }
+
+    .hero-kicker::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
     .hero-title {
       font-family: var(--font-display);
       font-size: var(--text-hero);
-      font-weight: 800; line-height: 1.0;
-      margin-bottom: var(--space-6); opacity: 0;
+      line-height: .96;
+      font-weight: 400;
+      margin-bottom: var(--s6);
+      max-width: 10ch;
     }
-    .hero-title .accent {
-      background: linear-gradient(135deg, #00ffaa 0%, #00b4ff 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: var(--text-lg); color: var(--color-text-muted);
-      max-width: 54ch; line-height: 1.75;
-      margin-bottom: var(--space-10); opacity: 0;
-    }
-    .hero-sub strong { color: var(--color-primary); font-weight: 600; }
-    .hero-cta { display: flex; gap: var(--space-4); flex-wrap: wrap; opacity: 0; }
-    .hero-terminal {
-      margin-top: var(--space-16);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-soft);
-      border-radius: var(--radius-xl);
-      overflow: hidden; max-width: 660px; opacity: 0;
-    }
-    .t-bar {
-      display: flex; align-items: center; gap: var(--space-2);
-      padding: var(--space-3) var(--space-6);
-      background: rgba(0,0,0,.3);
-      border-bottom: 1px solid var(--color-border-soft);
-    }
-    .t-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .t-dot.r{background:#ff5f57;} .t-dot.y{background:#febc2e;} .t-dot.g{background:#28c840;}
-    .t-name { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted);margin:0 auto; }
-    .t-body { padding:var(--space-6);font-family:var(--font-mono);font-size:var(--text-sm);line-height:2; }
-    .t-row { display:flex;gap:var(--space-2);flex-wrap:wrap; }
-    .t-p{color:#00ffaa;} .t-c{color:#e2e8f0;} .t-o{color:var(--color-text-muted);} .t-k{color:#00b4ff;} .t-v{color:#a78bfa;}
 
-    .nav-cards {
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      max-width: 58ch;
+      color: var(--text-muted);
+      font-size: var(--text-base);
+      margin-bottom: var(--s8);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s4);
+      margin-bottom: var(--s8);
+    }
+
+    .hero-meta {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(220px,100%), 1fr));
-      gap: var(--space-4);
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: var(--s4);
     }
-    .nav-card {
-      background: var(--card-bg);
-      border: 1px solid var(--color-border-soft);
-      border-radius: var(--radius-xl);
-      padding: var(--space-6);
-      display: flex; flex-direction: column; gap: var(--space-3);
-      transition: all .35s cubic-bezier(.16,1,.3,1);
-      text-decoration: none; color: inherit;
-      position: relative; overflow: hidden;
-    }
-    .nav-card::before {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .4s cubic-bezier(.16,1,.3,1);
-    }
-    .nav-card:hover::before { transform: scaleX(1); }
-    .nav-card:hover { border-color:var(--color-border);transform:translateY(-6px);box-shadow:var(--shadow-card),var(--shadow-glow); }
-    .nav-card-num { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);opacity:.6; }
-    .nav-card-icon { font-size:28px; }
-    .nav-card-title { font-size:var(--text-base);font-weight:600; }
-    .nav-card-desc { font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6; }
-    .nav-card-arrow { margin-top:auto;font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);opacity:0;transform:translateX(-6px);transition:all var(--transition); }
-    .nav-card:hover .nav-card-arrow { opacity:1;transform:translateX(0); }
 
-    .stats { display:flex;gap:var(--space-8);flex-wrap:wrap;padding:var(--space-8) 0;border-top:1px solid var(--color-border-soft);border-bottom:1px solid var(--color-border-soft);margin-bottom:var(--space-12); }
-    .stat-item { display:flex;flex-direction:column;gap:2px; }
-    .stat-val { font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;color:var(--color-primary); }
-    .stat-label { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted); }
+    .meta-card {
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--s5);
+    }
+
+    .meta-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: var(--s2);
+    }
+
+    .meta-value {
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .terminal-card {
+      position: relative;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--surface-2) 90%, black 10%), var(--surface));
+      border: 1px solid var(--accent-border);
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg), var(--shadow-accent);
+    }
+
+    .terminal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--s4) var(--s5);
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in oklab, var(--surface-3) 85%, transparent);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .terminal-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--text-faint);
+      opacity: .7;
+    }
+
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: var(--s6);
+      font-family: var(--font-mono);
+      font-size: .95rem;
+      display: grid;
+      gap: var(--s4);
+    }
+
+    .line { color: var(--text-muted); }
+    .prompt { color: var(--accent); }
+    .value { color: var(--text); }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--s6);
+    }
+
+    .tech-main {
+      grid-column: span 7;
+      display: grid;
+      gap: var(--s6);
+    }
+
+    .tech-side {
+      grid-column: span 5;
+      display: grid;
+      gap: var(--s6);
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: var(--s5);
+    }
+
+    .pillar h3,
+    .project-card h3,
+    .path-card h3,
+    .contact-card h3 {
+      font-size: var(--text-lg);
+      margin-bottom: var(--s3);
+      line-height: 1.2;
+    }
+
+    .pillar p,
+    .project-card p,
+    .path-card p,
+    .contact-card p,
+    .focus-list li {
+      color: var(--text-muted);
+    }
+
+    .focus-list {
+      display: grid;
+      gap: var(--s4);
+    }
+
+    .focus-item {
+      padding: var(--s5);
+      border-radius: var(--r-xl);
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+      border: 1px solid var(--border);
+    }
+
+    .focus-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s4);
+      margin-bottom: var(--s3);
+    }
+
+    .focus-top strong { font-size: 1rem; }
+
+    .focus-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: var(--r-full);
+      background: var(--surface-4);
+      overflow: hidden;
+      margin-top: var(--s3);
+    }
+
+    .focus-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--s6);
+    }
+
+    .project-card {
+      grid-column: span 4;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--s5);
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    }
+
+    .project-visual {
+      aspect-ratio: 16 / 10;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at top right, var(--accent-dim), transparent 42%),
+        linear-gradient(135deg, var(--surface-3), var(--surface));
+      position: relative;
+      overflow: hidden;
+      padding: var(--s4);
+      display: grid;
+      align-items: end;
+    }
+
+    .project-visual::before,
+    .project-visual::after {
+      content: '';
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: var(--r-lg);
+    }
+
+    .project-visual::before {
+      inset: 14px 18px auto auto;
+      width: 38%;
+      height: 38%;
+    }
+
+    .project-visual::after {
+      inset: auto auto 14px 18px;
+      width: 50%;
+      height: 24%;
+    }
+
+    .project-code {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      line-height: 1.7;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s2);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s2);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .project-link:hover { color: var(--accent-hover); }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: var(--s6);
+    }
+
+    .path-card {
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+      display: grid;
+      gap: var(--s5);
+    }
+
+    .timeline {
+      display: grid;
+      gap: var(--s5);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: var(--s6);
+      border-left: 1px solid var(--border);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px var(--accent-dim);
+    }
+
+    .timeline-time {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: var(--s2);
+    }
+
+    .timeline-item p { color: var(--text-muted); }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: var(--s6);
+      align-items: stretch;
+    }
+
+    .cta-panel {
+      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 88%, var(--accent-dim)), var(--surface-2));
+      border: 1px solid var(--accent-border);
+      border-radius: var(--r-2xl);
+      padding: clamp(var(--s6), 5vw, var(--s12));
+      box-shadow: var(--shadow-accent);
+    }
+
+    .cta-panel h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      margin-bottom: var(--s4);
+      line-height: 1.08;
+    }
+
+    .cta-panel p {
+      max-width: 54ch;
+      color: var(--text-muted);
+      margin-bottom: var(--s6);
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s4);
+    }
+
+    .contact-card {
+      display: grid;
+      gap: var(--s5);
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    }
+
+    .contact-list {
+      display: grid;
+      gap: var(--s4);
+    }
+
+    .contact-item {
+      padding: var(--s4);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      background: color-mix(in oklab, var(--surface-2) 88%, transparent);
+    }
+
+    .contact-item span {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 6px;
+    }
+
+    .signature-note {
+      color: var(--text-faint);
+      font-size: var(--text-sm);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .cta-grid,
+      .tech-grid,
+      .path-grid { grid-template-columns: 1fr; }
+      .tech-main, .tech-side, .project-card { grid-column: auto; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 780px) {
+      .hero { min-height: auto; }
+      .hero-meta,
+      .pillars,
+      .projects-grid,
+      .path-grid,
+      .cta-grid { grid-template-columns: 1fr; }
+      .hero-title { max-width: none; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
-<div class="page-transition"></div>
-<div id="progress-bar"></div>
-<canvas id="bg-canvas"></canvas>
+  <div id="progress-bar"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div id="page-transition" class="page-transition"></div>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
-      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
-    </svg>
-    wenselreyes.tech
-  </a>
-  <ul class="nav-links">
-    <li><a href="pages/competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
-    <li><a href="pages/projets.html" data-transition><span class="num">02.</span>Projets</a></li>
-    <li><a href="pages/profil.html" data-transition><span class="num">03.</span>Profil</a></li>
-    <li><a href="pages/apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
-    <li><a href="pages/contact.html" data-transition><span class="num">05.</span>Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="theme-toggle" id="theme-toggle" aria-label="Thème">
-      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
-      <span id="theme-label">Mode clair</span>
-    </button>
-  </div>
-</nav>
+  <nav>
+    <a href="index.html" class="nav-logo" aria-label="Accueil Wensel Reyes">
+      <span class="logo-mark">WR</span>
+      <span>Wensel Reyes</span>
+    </a>
 
-<main>
-  <div class="hero">
-    <p class="hero-eyebrow" id="eyebrow">// BTS SIO SISR · ESUP · Technicien Support @ Econocom × Engie</p>
-    <h1 class="hero-title" id="hero-title">
-      <span style="display:block">Wensel Reyes,</span>
-      <span style="display:block"><span class="accent">Technicien IT</span></span>
-      <span style="display:block">& Passionné Cyber.</span>
-    </h1>
-    <p class="hero-sub" id="hero-sub">
-      En 1ère année de BTS SIO SISR à l'<strong>ESUP</strong>, alternant chez
-      <strong>Econocom pour le client Engie</strong>. Je construis des infrastructures
-      robustes, je gère des incidents sous pression — et dans les labs, je cherche
-      activement leurs failles.
-    </p>
-    <div class="hero-cta" id="hero-cta">
-      <a href="pages/projets.html" class="btn btn-primary" data-transition>Voir mes projets →</a>
-      <a href="pages/contact.html" class="btn btn-ghost" data-transition>Me contacter</a>
+    <div class="nav-links" id="nav-links"></div>
+
+    <div class="nav-right">
+      <button id="btn-lang" class="btn-lang" aria-label="Changer de langue">EN</button>
+      <button id="btn-theme" class="btn-theme" aria-label="Changer de thème"></button>
+      <button id="nav-burger" class="nav-burger" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <div class="hero-terminal" id="hero-terminal">
-      <div class="t-bar">
-        <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
-        <span class="t-name">wensel@kali ~ zsh</span>
+  <div id="mobile-menu" class="mobile-menu"></div>
+
+  <main>
+    <section class="hero">
+      <div class="container-wide hero-grid">
+        <div class="reveal">
+          <div class="hero-kicker" data-fr="BTS SIO · SISR · Cybersécurité" data-en="BTS SIO · SISR · Cybersecurity">BTS SIO · SISR · Cybersécurité</div>
+          <h1 class="hero-title" data-fr="Je conçois des environnements <em>réseau</em>, <em>système</em> et sécurité." data-en="I design <em>network</em>, <em>system</em> and security environments.">Je conçois des environnements <em>réseau</em>, <em>système</em> et sécurité.</h1>
+          <p class="hero-desc" data-fr="Je m'appelle Wensel Reyes, étudiant en BTS SIO option SISR. Mon portfolio présente mes projets, mes compétences et ma manière de traduire des besoins techniques en solutions claires, robustes et compréhensibles, y compris pour un jury non spécialiste." data-en="I'm Wensel Reyes, a BTS SIO student in the SISR track. This portfolio presents my projects, skills and the way I turn technical needs into clear, robust and understandable solutions, including for a non-specialist jury.">Je m'appelle Wensel Reyes, étudiant en BTS SIO option SISR. Mon portfolio présente mes projets, mes compétences et ma manière de traduire des besoins techniques en solutions claires, robustes et compréhensibles, y compris pour un jury non spécialiste.</p>
+
+          <div class="hero-actions">
+            <a href="pages/projets.html" class="btn-primary" data-page-link data-fr="Voir les projets" data-en="View projects">Voir les projets</a>
+            <a href="pages/competences.html" class="btn-ghost" data-page-link data-fr="Explorer les compétences" data-en="Explore skills">Explorer les compétences</a>
+          </div>
+
+          <div class="hero-meta reveal" data-delay="120">
+            <div class="meta-card">
+              <div class="meta-label" data-fr="Spécialité" data-en="Specialty">Spécialité</div>
+              <div class="meta-value" data-fr="SISR · Administration réseau et sécurité" data-en="SISR · Network administration and security">SISR · Administration réseau et sécurité</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label" data-fr="Approche" data-en="Approach">Approche</div>
+              <div class="meta-value" data-fr="Technique, structurée et orientée terrain" data-en="Technical, structured and field-oriented">Technique, structurée et orientée terrain</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label" data-fr="Objectif" data-en="Goal">Objectif</div>
+              <div class="meta-value" data-fr="Construire un portfolio clair, professionnel et crédible" data-en="Build a clear, professional and credible portfolio">Construire un portfolio clair, professionnel et crédible</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="terminal-card reveal-right" data-delay="160" aria-label="Présentation technique rapide">
+          <div class="terminal-top">
+            <div class="terminal-dots"><span></span><span></span><span></span></div>
+            <div class="terminal-title">/portfolio/overview</div>
+          </div>
+          <div class="terminal-body">
+            <div class="line"><span class="prompt">$</span> whoami</div>
+            <div class="value" data-fr="Étudiant BTS SIO SISR, orienté systèmes, réseaux et cybersécurité" data-en="BTS SIO SISR student, focused on systems, networks and cybersecurity">Étudiant BTS SIO SISR, orienté systèmes, réseaux et cybersécurité</div>
+
+            <div class="line"><span class="prompt">$</span> current_focus</div>
+            <div class="value" data-fr="Active Directory, VLAN, audit sécurité, virtualisation, support utilisateur" data-en="Active Directory, VLAN, security audit, virtualization, user support">Active Directory, VLAN, audit sécurité, virtualisation, support utilisateur</div>
+
+            <div class="line"><span class="prompt">$</span> method</div>
+            <div class="value" data-fr="Observer, documenter, tester, sécuriser, expliquer" data-en="Observe, document, test, secure, explain">Observer, documenter, tester, sécuriser, expliquer</div>
+
+            <div class="line"><span class="prompt">$</span> output</div>
+            <div class="value" data-fr="Des projets visuels, détaillés et directement exploitables" data-en="Visual, detailed and directly usable projects">Des projets visuels, détaillés et directement exploitables</div>
+          </div>
+        </aside>
       </div>
-      <div class="t-body">
-        <div class="t-row"><span class="t-p">❯</span><span class="t-c">&nbsp;whoami</span></div>
-        <div class="t-row"><span class="t-o">wensel-reyes — BTS SIO SISR · Econocom × Engie · ESUP 2024–2026</span></div>
-        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="t-c">&nbsp;cat missions.txt</span></div>
-        <div class="t-row"><span class="t-k">support-N1/N2</span><span class="t-o"> · </span><span class="t-k">gestion-incidents</span><span class="t-o"> · </span><span class="t-k">tickets &lt;25min</span></div>
-        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="t-c">&nbsp;ls projets/</span></div>
-        <div class="t-row"><span class="t-v">active-directory/</span><span class="t-o">&nbsp;</span><span class="t-v">metasploitable/</span><span class="t-o">&nbsp;</span><span class="t-v">vlan/</span><span class="t-o">&nbsp;</span><span class="t-v">dmz-proxmox/</span></div>
-        <div class="t-row"><span class="t-v">glpi-kanboard/</span><span class="t-o">&nbsp;</span><span class="t-v">audit-kali/</span></div>
-        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="t-c">&nbsp;./pentest --target wifi --method pixie-dust</span></div>
-        <div class="t-row"><span style="color:#ff6b6b">⚡</span><span class="t-v">&nbsp;[SUCCESS]</span><span class="t-o">&nbsp;Réseau compromis — démonstration officielle validée</span></div>
-        <div class="t-row" style="margin-top:.4rem"><span class="t-p">❯</span><span class="cursor-dot"></span></div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section>
+      <div class="container-wide">
+        <div class="section-header reveal">
+          <div class="section-eyebrow" data-fr="Positionnement" data-en="Positioning">Positionnement</div>
+          <h2 class="section-title" data-fr="Un profil <em>technique</em>, mais pensé pour être lisible." data-en="A <em>technical</em> profile designed to stay readable.">Un profil <em>technique</em>, mais pensé pour être lisible.</h2>
+          <p class="section-subtitle" data-fr="Je veux montrer des réalisations concrètes, mais aussi ma capacité à expliquer un <span class='def' data-fr-def='Ensemble de règles ou d’organisation qui structure un réseau.' data-en-def='A set of rules or an architecture used to structure a network.' data-def='Ensemble de règles ou d’organisation qui structure un réseau.'>protocole</span>, une <span class='def' data-fr-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.' data-en-def='Logical separation of a network into several zones for easier administration and security.' data-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.'>segmentation</span> réseau ou un environnement virtualisé avec des mots simples quand c’est nécessaire." data-en="I want to show concrete work, but also my ability to explain a <span class='def' data-fr-def='Ensemble de règles ou d’organisation qui structure un réseau.' data-en-def='A set of rules or an architecture used to structure a network.' data-def='A set of rules or an architecture used to structure a network.'>protocol</span>, a network <span class='def' data-fr-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.' data-en-def='Logical separation of a network into several zones for easier administration and security.' data-def='Logical separation of a network into several zones for easier administration and security.'>segmentation</span> or a virtualized environment in simple words when needed.">Je veux montrer des réalisations concrètes, mais aussi ma capacité à expliquer un <span class='def' data-fr-def='Ensemble de règles ou d’organisation qui structure un réseau.' data-en-def='A set of rules or an architecture used to structure a network.' data-def='Ensemble de règles ou d’organisation qui structure un réseau.'>protocole</span>, une <span class='def' data-fr-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.' data-en-def='Logical separation of a network into several zones for easier administration and security.' data-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.'>segmentation</span> réseau ou un environnement virtualisé avec des mots simples quand c’est nécessaire.</p>
+        </div>
+
+        <div class="tech-grid">
+          <div class="tech-main">
+            <div class="pillars">
+              <article class="card card-lift pillar reveal-left">
+                <span class="tag">01 · Infrastructure</span>
+                <h3 data-fr="Construire" data-en="Build">Construire</h3>
+                <p data-fr="Mettre en place des services réseau et système cohérents, documentés et maintenables." data-en="Deploy coherent, documented and maintainable network and system services.">Mettre en place des services réseau et système cohérents, documentés et maintenables.</p>
+              </article>
+              <article class="card card-lift pillar reveal-left" data-delay="90">
+                <span class="tag">02 · Sécurité</span>
+                <h3 data-fr="Sécuriser" data-en="Secure">Sécuriser</h3>
+                <p data-fr="Identifier les risques, limiter l’exposition et améliorer la fiabilité d’un environnement technique." data-en="Identify risks, limit exposure and improve the reliability of a technical environment.">Identifier les risques, limiter l’exposition et améliorer la fiabilité d’un environnement technique.</p>
+              </article>
+              <article class="card card-lift pillar reveal-left" data-delay="180">
+                <span class="tag">03 · Méthode</span>
+                <h3 data-fr="Expliquer" data-en="Explain">Expliquer</h3>
+                <p data-fr="Rendre un sujet technique compréhensible avec une structure claire, des visuels et du contexte." data-en="Make a technical topic understandable with a clear structure, visuals and context.">Rendre un sujet technique compréhensible avec une structure claire, des visuels et du contexte.</p>
+              </article>
+            </div>
+
+            <div class="card reveal">
+              <div class="section-eyebrow" data-fr="Ce que montre ce site" data-en="What this site shows">Ce que montre ce site</div>
+              <p data-fr="Chaque page a été pensée pour détailler un projet ou une compétence sans surcharger la lecture. L’objectif n’est pas seulement d’aligner des technologies, mais de montrer le problème de départ, la solution choisie, les outils utilisés et le résultat obtenu." data-en="Each page is designed to detail a project or a skill without overloading the reading experience. The goal is not just to list technologies, but to show the initial problem, the chosen solution, the tools used and the final result.">Chaque page a été pensée pour détailler un projet ou une compétence sans surcharger la lecture. L’objectif n’est pas seulement d’aligner des technologies, mais de montrer le problème de départ, la solution choisie, les outils utilisés et le résultat obtenu.</p>
+            </div>
+          </div>
+
+          <aside class="tech-side reveal-right">
+            <div class="card">
+              <div class="section-eyebrow" data-fr="Axes de travail" data-en="Work focus">Axes de travail</div>
+              <div class="focus-list">
+                <div class="focus-item">
+                  <div class="focus-top"><strong>Réseaux</strong><span class="tag tag-muted">VLAN · Routage</span></div>
+                  <p data-fr="Structuration logique, interconnexion et contrôle des flux." data-en="Logical structuring, interconnection and traffic control.">Structuration logique, interconnexion et contrôle des flux.</p>
+                  <div class="focus-bar"><span style="width: 88%"></span></div>
+                </div>
+                <div class="focus-item">
+                  <div class="focus-top"><strong>Systèmes</strong><span class="tag tag-muted">Windows · Linux</span></div>
+                  <p data-fr="Services, comptes, administration et environnement de travail." data-en="Services, accounts, administration and working environment.">Services, comptes, administration et environnement de travail.</p>
+                  <div class="focus-bar"><span style="width: 81%"></span></div>
+                </div>
+                <div class="focus-item">
+                  <div class="focus-top"><strong>Sécurité</strong><span class="tag tag-muted">Audit · Durcissement</span></div>
+                  <p data-fr="Analyse de surface d’attaque, tests et réduction des risques." data-en="Attack surface analysis, testing and risk reduction.">Analyse de surface d’attaque, tests et réduction des risques.</p>
+                  <div class="focus-bar"><span style="width: 84%"></span></div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <section class="section" style="background:var(--color-surface)">
-    <div class="section-inner">
-      <div class="stats reveal">
-        <div class="stat-item"><span class="stat-val">6</span><span class="stat-label">Projets réalisés</span></div>
-        <div class="stat-item"><span class="stat-val">oct.25</span><span class="stat-label">Début alternance</span></div>
-        <div class="stat-item"><span class="stat-val">&lt;25min</span><span class="stat-label">Résolution tickets</span></div>
-        <div class="stat-item"><span class="stat-val">SISR</span><span class="stat-label">Spécialité réseaux</span></div>
+    <div class="section-divider"></div>
+
+    <section>
+      <div class="container-wide">
+        <div class="section-header reveal">
+          <div class="section-eyebrow" data-fr="Sélection" data-en="Selection">Sélection</div>
+          <h2 class="section-title" data-fr="Des projets <em>parlants</em>, pas juste des lignes sur un CV." data-en="Projects that <em>speak</em>, not just lines on a résumé.">Des projets <em>parlants</em>, pas juste des lignes sur un CV.</h2>
+          <p class="section-subtitle" data-fr="J’ai choisi des réalisations qui montrent différentes facettes de mon profil : administration, architecture réseau, sécurité et présentation claire d’un livrable." data-en="I selected projects that show different sides of my profile: administration, network architecture, security and clear delivery presentation.">J’ai choisi des réalisations qui montrent différentes facettes de mon profil : administration, architecture réseau, sécurité et présentation claire d’un livrable.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="card card-lift project-card reveal">
+            <div>
+              <div class="project-visual">
+                <div class="project-code">dc01.local
+users → groups → gpo
+backup policy enabled</div>
+              </div>
+              <div style="margin-top: var(--s5);" class="project-tags">
+                <span class="tag">AD</span>
+                <span class="tag">GPO</span>
+                <span class="tag">Windows Server</span>
+              </div>
+            </div>
+            <div>
+              <h3 data-fr="Active Directory" data-en="Active Directory">Active Directory</h3>
+              <p data-fr="Création d’un environnement d’administration centralisée avec comptes, groupes et politiques de sécurité." data-en="Deployment of a centralized administration environment with accounts, groups and security policies.">Création d’un environnement d’administration centralisée avec comptes, groupes et politiques de sécurité.</p>
+            </div>
+            <a class="project-link" href="projets/projet-ad.html" data-page-link data-fr="Voir le détail →" data-en="See details →">Voir le détail →</a>
+          </article>
+
+          <article class="card card-lift project-card reveal" data-delay="120">
+            <div>
+              <div class="project-visual">
+                <div class="project-code">vlan10 : admin
+vlan20 : users
+trunk uplink ok</div>
+              </div>
+              <div style="margin-top: var(--s5);" class="project-tags">
+                <span class="tag">Cisco</span>
+                <span class="tag">VLAN</span>
+                <span class="tag">Switching</span>
+              </div>
+            </div>
+            <div>
+              <h3 data-fr="Infrastructure VLAN" data-en="VLAN Infrastructure">Infrastructure VLAN</h3>
+              <p data-fr="Segmentation d’un réseau pour isoler les usages, améliorer l’organisation et renforcer la sécurité." data-en="Network segmentation to isolate usages, improve organization and reinforce security.">Segmentation d’un réseau pour isoler les usages, améliorer l’organisation et renforcer la sécurité.</p>
+            </div>
+            <a class="project-link" href="projets/projet-vlan.html" data-page-link data-fr="Voir le détail →" data-en="See details →">Voir le détail →</a>
+          </article>
+
+          <article class="card card-lift project-card reveal" data-delay="240">
+            <div>
+              <div class="project-visual">
+                <div class="project-code">nmap -sV target
+ports → services → risks
+report.md generated</div>
+              </div>
+              <div style="margin-top: var(--s5);" class="project-tags">
+                <span class="tag">Kali</span>
+                <span class="tag">Audit</span>
+                <span class="tag">Hardening</span>
+              </div>
+            </div>
+            <div>
+              <h3 data-fr="Audit sécurité" data-en="Security audit">Audit sécurité</h3>
+              <p data-fr="Observation, tests contrôlés et restitution structurée pour identifier les points faibles d’un système." data-en="Observation, controlled testing and structured reporting to identify weak points in a system.">Observation, tests contrôlés et restitution structurée pour identifier les points faibles d’un système.</p>
+            </div>
+            <a class="project-link" href="pages/projets.html" data-page-link data-fr="Voir les autres projets →" data-en="See other projects →">Voir les autres projets →</a>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <p class="section-label reveal">Explorer le portfolio</p>
-      <h2 class="section-title reveal" style="margin-bottom:var(--space-8);">Par où commencer ?</h2>
+    <div class="section-divider"></div>
 
-      <div class="nav-cards">
-        <a href="pages/competences.html" class="nav-card reveal" data-transition>
-          <span class="nav-card-num">01</span>
-          <span class="nav-card-icon">🔒</span>
-          <h3 class="nav-card-title">Compétences</h3>
-          <p class="nav-card-desc">Cybersécurité, AD, réseaux, virtualisation — radar 3D interactif.</p>
-          <span class="nav-card-arrow">Explorer →</span>
-        </a>
-        <a href="pages/projets.html" class="nav-card reveal" data-transition>
-          <span class="nav-card-num">02</span>
-          <span class="nav-card-icon">⚡</span>
-          <h3 class="nav-card-title">Projets & TP</h3>
-          <p class="nav-card-desc">AD, Metasploitable, VLAN, DMZ Proxmox, GLPI, Audit Kali.</p>
-          <span class="nav-card-arrow">Explorer →</span>
-        </a>
-        <a href="pages/profil.html" class="nav-card reveal" data-transition>
-          <span class="nav-card-num">03</span>
-          <span class="nav-card-icon">💻</span>
-          <h3 class="nav-card-title">Profil technique</h3>
-          <p class="nav-card-desc">Mon stack complet, outils et environnements de travail.</p>
-          <span class="nav-card-arrow">Explorer →</span>
-        </a>
-        <a href="pages/apropos.html" class="nav-card reveal" data-transition>
-          <span class="nav-card-num">04</span>
-          <span class="nav-card-icon">🎯</span>
-          <h3 class="nav-card-title">À propos</h3>
-          <p class="nav-card-desc">Mon parcours, bac 2024, ESUP, Econocom × Engie.</p>
-          <span class="nav-card-arrow">Explorer →</span>
-        </a>
-        <a href="pages/contact.html" class="nav-card reveal" data-transition>
-          <span class="nav-card-num">05</span>
-          <span class="nav-card-icon">✉️</span>
-          <h3 class="nav-card-title">Contact</h3>
-          <p class="nav-card-desc">LinkedIn, GitHub ou email direct — reyeswensel@gmail.com</p>
-          <span class="nav-card-arrow">Écrire →</span>
-        </a>
+    <section>
+      <div class="container-wide">
+        <div class="section-header reveal">
+          <div class="section-eyebrow" data-fr="Parcours" data-en="Journey">Parcours</div>
+          <h2 class="section-title" data-fr="Une progression <em>terrain + formation</em>." data-en="A journey combining <em>practice and training</em>.">Une progression <em>terrain + formation</em>.</h2>
+          <p class="section-subtitle" data-fr="Mon parcours mélange apprentissage académique, environnement professionnel et pratique personnelle. C’est ce mélange qui donne du sens aux projets présentés dans ce portfolio." data-en="My path combines academic learning, professional environments and personal practice. This mix gives meaning to the projects presented in this portfolio.">Mon parcours mélange apprentissage académique, environnement professionnel et pratique personnelle. C’est ce mélange qui donne du sens aux projets présentés dans ce portfolio.</p>
+        </div>
+
+        <div class="path-grid">
+          <article class="card path-card reveal-left">
+            <div>
+              <span class="tag">Formation</span>
+              <h3 data-fr="BTS SIO · option SISR" data-en="BTS SIO · SISR track">BTS SIO · option SISR</h3>
+              <p data-fr="Une formation orientée vers l’administration des systèmes, l’infrastructure réseau, la cybersécurité et la gestion des services informatiques." data-en="A course focused on systems administration, network infrastructure, cybersecurity and IT service management.">Une formation orientée vers l’administration des systèmes, l’infrastructure réseau, la cybersécurité et la gestion des services informatiques.</p>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-time">2025 · 2026</div>
+                <p data-fr="Mise en pratique de projets techniques, documentation et préparation de l’épreuve E5." data-en="Hands-on technical projects, documentation and E5 oral exam preparation.">Mise en pratique de projets techniques, documentation et préparation de l’épreuve E5.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Lab personnel</div>
+                <p data-fr="Machines virtuelles, tests réseau, audit de sécurité, scripts et environnements de démonstration." data-en="Virtual machines, network testing, security auditing, scripts and demo environments.">Machines virtuelles, tests réseau, audit de sécurité, scripts et environnements de démonstration.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card path-card reveal-right">
+            <div>
+              <span class="tag">Expérience</span>
+              <h3 data-fr="Alternance et missions" data-en="Apprenticeship and assignments">Alternance et missions</h3>
+              <p data-fr="Des expériences qui permettent de confronter la théorie au réel : support, déploiement, procédures, infrastructure et organisation." data-en="Experiences that connect theory with real situations: support, deployment, procedures, infrastructure and organization.">Des expériences qui permettent de confronter la théorie au réel : support, déploiement, procédures, infrastructure et organisation.</p>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-time">Econocom × Engie</div>
+                <p data-fr="Interventions et environnement professionnel autour des postes, des usages et de la qualité de service." data-en="Professional environment involving workstations, usage support and service quality.">Interventions et environnement professionnel autour des postes, des usages et de la qualité de service.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Projets portfolio</div>
+                <p data-fr="Travail sur la présentation, l’organisation visuelle et la valorisation de projets techniques pour un public mixte." data-en="Work on presentation, visual organization and showcasing technical projects for a mixed audience.">Travail sur la présentation, l’organisation visuelle et la valorisation de projets techniques pour un public mixte.</p>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
 
-<footer>
-  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
-</footer>
+    <div class="section-divider"></div>
 
-<script src="nav.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
-  gsap.registerPlugin(ScrollTrigger);
-  const tl = gsap.timeline({ delay:.2 });
-  tl.to('#eyebrow',       { opacity:1, y:0, duration:.6, ease:'power3.out' })
-    .to('#hero-title',    { opacity:1, y:0, duration:.7, ease:'power3.out' }, '-=.3')
-    .to('#hero-sub',      { opacity:1, y:0, duration:.6, ease:'power3.out' }, '-=.4')
-    .to('#hero-cta',      { opacity:1, y:0, duration:.5, ease:'power3.out' }, '-=.3')
-    .to('#hero-terminal', { opacity:1, y:0, duration:.7, ease:'power3.out' }, '-=.2');
-  initReveal(); initSkillBars();
-});
-</script>
+    <section>
+      <div class="container-wide cta-grid">
+        <div class="cta-panel reveal-left">
+          <div class="section-eyebrow" data-fr="Suite" data-en="Next">Suite</div>
+          <h2 data-fr="Parcourir les pages détaillées du portfolio." data-en="Browse the detailed portfolio pages.">Parcourir les pages détaillées du portfolio.</h2>
+          <p data-fr="La page d’accueil donne une vue d’ensemble. Les autres pages détaillent les compétences, les projets, le parcours et les contacts avec davantage d’espace, de structure et de contexte." data-en="The home page gives an overview. The other pages detail skills, projects, background and contact information with more space, structure and context.">La page d’accueil donne une vue d’ensemble. Les autres pages détaillent les compétences, les projets, le parcours et les contacts avec davantage d’espace, de structure et de contexte.</p>
+          <div class="cta-actions">
+            <a href="pages/projets.html" class="btn-primary" data-page-link data-fr="Entrer dans les projets" data-en="Enter the projects">Entrer dans les projets</a>
+            <a href="pages/parcours.html" class="btn-accent-ghost" data-page-link data-fr="Voir le parcours" data-en="See the journey">Voir le parcours</a>
+          </div>
+        </div>
+
+        <aside class="card contact-card reveal-right">
+          <div>
+            <span class="tag">Contact</span>
+            <h3 data-fr="Informations rapides" data-en="Quick contact">Informations rapides</h3>
+            <p data-fr="Une base propre pour terminer le portfolio avec tes vrais liens, ton mail et tes pages détaillées." data-en="A clean base to finish the portfolio with your real links, email and detailed pages.">Une base propre pour terminer le portfolio avec tes vrais liens, ton mail et tes pages détaillées.</p>
+          </div>
+          <div class="contact-list">
+            <div class="contact-item">
+              <span>Site</span>
+              <strong>wenselreyes.tech</strong>
+            </div>
+            <div class="contact-item">
+              <span data-fr="Statut" data-en="Status">Statut</span>
+              <strong data-fr="Étudiant BTS SIO SISR" data-en="BTS SIO SISR student">Étudiant BTS SIO SISR</strong>
+            </div>
+            <div class="contact-item">
+              <span data-fr="Suite logique" data-en="Next step">Suite logique</span>
+              <strong data-fr="Créer les pages compétences, projets, parcours et contact" data-en="Create the skills, projects, journey and contact pages">Créer les pages compétences, projets, parcours et contact</strong>
+            </div>
+          </div>
+          <p class="signature-note" data-fr="Base d’accueil prête pour servir de point d’entrée principal du portfolio." data-en="Home page base ready to serve as the portfolio main entry point.">Base d’accueil prête pour servir de point d’entrée principal du portfolio.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>WR</span> · <span data-fr="Portfolio BTS SIO SISR" data-en="BTS SIO SISR portfolio">Portfolio BTS SIO SISR</span> · wenselreyes.tech
+  </footer>
+
+  <script src="nav.js"></script>
 </body>
 </html>

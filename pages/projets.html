@@ -1,221 +1,552 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
-  <!-- Favicon standard (tous navigateurs) -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-  <!-- Navigateurs modernes (PNG) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
-  <!-- iPhone / iPad (quand on ajoute le site à l'écran d'accueil) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-  <!-- Android / PWA -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projets — Wensel Reyes</title>
-  <link rel="stylesheet" href="../style.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <meta name="description" content="Tous les projets techniques de Wensel Reyes : Active Directory, VLAN, audit sécurité, virtualisation et plus." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
   <style>
-    .page-hero { padding:120px var(--space-8) var(--space-12);max-width:1100px;margin:0 auto; }
-    .filters { display:flex;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-8); }
-    .filter-btn { padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:1px solid var(--color-border-soft);font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-muted);transition:all var(--transition);cursor:pointer; }
-    .filter-btn:hover,.filter-btn.active { border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-dim); }
-    .projects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:var(--space-6); }
-    .project-card { background:var(--card-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-xl);padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-4);transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit; }
-    .project-card::after { content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(0,255,170,.05),transparent 60%);opacity:0;transition:opacity .3s; }
-    .project-card:hover::after { opacity:1; }
-    .project-card:hover { border-color:var(--color-border);transform:translateY(-6px);box-shadow:var(--shadow-card),var(--shadow-glow); }
-    .project-card.hidden { display:none; }
-    .project-header { display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4); }
-    .project-icon { font-size:30px; }
-    .project-name { font-size:var(--text-lg);font-weight:600; }
-    .project-desc { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.75;flex:1; }
-    .project-stack { display:flex;flex-wrap:wrap;gap:var(--space-2); }
-    .project-arrow { font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-primary);opacity:0;transform:translateX(-6px);transition:all var(--transition);margin-top:auto; }
-    .project-card:hover .project-arrow { opacity:1;transform:translateX(0); }
-    .project-card.featured { grid-column:span 2;flex-direction:row;gap:var(--space-8);align-items:center; }
-    .project-card.featured .project-body { flex:1; }
-    .project-card.featured .project-visual { width:180px;flex-shrink:0;background:var(--color-primary-dim);border:1px solid rgba(0,255,170,.15);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:60px;height:130px; }
-    @media(max-width:900px){ .project-card.featured{grid-column:span 1;flex-direction:column;} .project-card.featured .project-visual{width:100%;} }
+    main { position: relative; z-index: 1; }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: calc(var(--nav-h) + var(--s16)) 0 var(--s12);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--s8);
+      align-items: end;
+    }
+    .hero-stats {
+      display: flex;
+      gap: var(--s5);
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: right;
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-style: italic;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    /* ═══ FILTRES ═══ */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s2);
+      margin-bottom: var(--s10);
+      padding: var(--s4);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+    }
+    .filter-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: .06em;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--r-full);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: color .2s, background .2s, border-color .2s;
+    }
+    .filter-btn:hover { color: var(--text); background: var(--surface-2); }
+    .filter-btn.active {
+      color: var(--accent);
+      background: var(--accent-dim);
+      border-color: var(--accent-border);
+    }
+
+    /* ═══ GRILLE PROJETS ═══ */
+    .projects-layout {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: auto;
+      gap: var(--s5);
+    }
+
+    /* Cartes larges : col 7 */
+    .p-wide { grid-column: span 7; }
+    /* Cartes moyennes : col 5 */
+    .p-mid  { grid-column: span 5; }
+    /* Cartes standard : col 4 */
+    .p-std  { grid-column: span 4; }
+    /* Pleine largeur : col 12 */
+    .p-full { grid-column: span 12; }
+
+    .proj-card {
+      background: linear-gradient(160deg, var(--surface) 70%, var(--surface-2));
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+      position: relative;
+    }
+    .proj-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-accent), var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    /* Visual header */
+    .proj-visual {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 70% 30%, var(--accent-dim), transparent 55%),
+        linear-gradient(145deg, var(--surface-3), var(--surface-2));
+      display: flex;
+      align-items: flex-end;
+      padding: var(--s6);
+      min-height: 180px;
+    }
+    .p-wide .proj-visual  { min-height: 240px; }
+    .p-full .proj-visual  { min-height: 200px; }
+
+    .proj-visual-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border-soft) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: .55;
+    }
+
+    .proj-code-block {
+      position: relative;
+      z-index: 1;
+      background: color-mix(in oklab, var(--bg) 80%, transparent);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--r-lg);
+      padding: var(--s4) var(--s5);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    .proj-code-block .acc { color: var(--accent); }
+    .proj-code-block .hi  { color: var(--text); font-weight: 600; }
+
+    /* Badge status */
+    .proj-badge {
+      position: absolute;
+      top: var(--s4);
+      right: var(--s4);
+      z-index: 2;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      color: var(--accent);
+    }
+    .proj-badge.pro {
+      background: color-mix(in oklab, var(--surface-3) 85%, transparent);
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+
+    /* Body de carte */
+    .proj-body {
+      padding: var(--s6);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s4);
+    }
+
+    .proj-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+    .proj-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .proj-title em { font-style: italic; color: var(--accent); }
+
+    .p-std .proj-title { font-size: var(--text-lg); }
+
+    .proj-desc {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      flex: 1;
+      line-height: 1.75;
+    }
+
+    .proj-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s3);
+      padding-top: var(--s4);
+      border-top: 1px solid var(--border-soft);
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .proj-context {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .06em;
+      color: var(--text-faint);
+    }
+
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: gap .2s, color .2s;
+    }
+    .proj-link:hover { color: var(--accent-hover); gap: 10px; }
+
+    /* Carte pleine largeur — layout horizontal */
+    .p-full .proj-body {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: var(--s8);
+      align-items: start;
+    }
+    .p-full .proj-left { display: flex; flex-direction: column; gap: var(--s4); }
+    .p-full .proj-right { display: flex; flex-direction: column; gap: var(--s5); }
+
+    .skills-list {
+      display: grid;
+      gap: var(--s3);
+    }
+    .skill-item {
+      padding: var(--s3) var(--s4);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
+    .skill-item strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+    /* Légende de contexte */
+    .legend {
+      display: flex;
+      gap: var(--s5);
+      flex-wrap: wrap;
+      margin-top: var(--s6);
+      padding: var(--s4) var(--s5);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--s2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .legend-dot.muted { background: var(--text-faint); }
+
+    /* Responsive */
+    @media (max-width: 1080px) {
+      .p-wide, .p-mid { grid-column: span 12; }
+      .p-std { grid-column: span 6; }
+      .p-full .proj-body { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .p-std { grid-column: span 12; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-stats { justify-content: flex-start; }
+      .stat { text-align: left; }
+    }
   </style>
 </head>
 <body>
-<div class="page-transition"></div>
-<div id="progress-bar"></div>
-<canvas id="bg-canvas"></canvas>
+  <div id="progress-bar"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div id="page-transition" class="page-transition"></div>
 
-<nav>
-  <a href="../index.html" class="nav-logo" data-transition>
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-      <rect width="26" height="26" rx="5" fill="rgba(0,255,170,0.1)" stroke="rgba(0,255,170,0.3)" stroke-width="1"/>
-      <text x="3" y="19" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#00ffaa">W</text>
-    </svg>
-    wenselreyes.tech
-  </a>
-  <ul class="nav-links">
-    <li><a href="competences.html" data-transition><span class="num">01.</span>Compétences</a></li>
-    <li><a href="projets.html" class="active" data-transition><span class="num">02.</span>Projets</a></li>
-    <li><a href="profil.html" data-transition><span class="num">03.</span>Profil</a></li>
-    <li><a href="apropos.html" data-transition><span class="num">04.</span>À propos</a></li>
-    <li><a href="contact.html" data-transition><span class="num">05.</span>Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="theme-toggle" id="theme-toggle">
-      <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
-      <span id="theme-label">Mode clair</span>
-    </button>
-  </div>
-</nav>
-
-<div class="page-hero">
-  <p class="section-label reveal">02. Réalisations</p>
-  <h1 class="reveal" style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:800;line-height:1.05;margin-bottom:var(--space-4);">
-    Projets <span style="background:linear-gradient(135deg,#00ffaa,#00b4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">&amp; TP</span>
-  </h1>
-  <p class="reveal" style="color:var(--color-text-muted);max-width:55ch;line-height:1.8;margin-bottom:var(--space-8);">
-    6 projets réalisés en BTS SIO SISR à l'ESUP — clique sur un projet pour voir le détail complet.
-  </p>
-  <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;" class="reveal">
-    <a href="competences.html" class="btn btn-ghost" data-transition>← Compétences</a>
-    <a href="profil.html" class="btn btn-outline" data-transition>Profil technique →</a>
-  </div>
-</div>
-
-<div class="section-divider"></div>
-
-<section class="section" style="background:var(--color-surface)">
-  <div class="section-inner">
-    <div class="filters reveal">
-      <button class="filter-btn active" data-filter="all">Tout voir</button>
-      <button class="filter-btn" data-filter="secu">🔒 Sécurité</button>
-      <button class="filter-btn" data-filter="reseau">🌐 Réseau</button>
-      <button class="filter-btn" data-filter="systeme">🖥️ Système</button>
-      <button class="filter-btn" data-filter="support">🎫 Support</button>
+  <nav>
+    <a href="../index.html" class="nav-logo" aria-label="Retour accueil">
+      <span class="logo-mark">WR</span>
+      <span>Wensel Reyes</span>
+    </a>
+    <div class="nav-links" id="nav-links"></div>
+    <div class="nav-right">
+      <button id="btn-lang" class="btn-lang">EN</button>
+      <button id="btn-theme" class="btn-theme" aria-label="Changer de thème"></button>
+      <button id="nav-burger" class="nav-burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
+  <div id="mobile-menu" class="mobile-menu"></div>
 
-    <div class="projects-grid" id="projects-grid">
-
-      <a href="projet-audit.html" class="project-card featured reveal" data-cat="secu">
-        <div class="project-visual">🔍</div>
-        <div class="project-body">
-          <div class="project-header">
-            <h3 class="project-name">Audit de Sécurité — Kali Linux</h3>
-            <span class="tag tag-red">⚡ Exploit réel</span>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container-wide hero-inner">
+        <div class="reveal">
+          <div class="page-hero-eyebrow" data-fr="Réalisations" data-en="Projects">Réalisations</div>
+          <h1 class="page-hero-title" data-fr="Des projets <em>techniques</em>, pensés pour être expliqués." data-en="<em>Technical</em> projects designed to be explained.">Des projets <em>techniques</em>, pensés pour être expliqués.</h1>
+          <p class="page-hero-desc" data-fr="Chaque projet présenté ici couvre un besoin réel : infrastructure, sécurité, administration ou service. Il est documenté pour que les choix techniques soient compréhensibles même pour un jury non spécialiste." data-en="Each project here covers a real need: infrastructure, security, administration or services. It is documented so that technical choices are understandable even for a non-specialist jury.">Chaque projet présenté ici couvre un besoin réel : infrastructure, sécurité, administration ou service. Il est documenté pour que les choix techniques soient compréhensibles même pour un jury non spécialiste.</p>
+        </div>
+        <div class="hero-stats reveal-right">
+          <div class="stat">
+            <div class="stat-number">6</div>
+            <div class="stat-label" data-fr="Projets" data-en="Projects">Projets</div>
           </div>
-          <p class="project-desc">Audit complet en environnement contrôlé : MITM, Aircrack-ng (Pixie Dust WPS), Nmap, Wireshark et brute force. Démonstration live de compromission Wi-Fi avec accord professeur.</p>
-          <div class="project-stack">
-            <span class="tag tag-green">Kali Linux</span>
-            <span class="tag tag-green">Aircrack-ng</span>
-            <span class="tag tag-blue">Nmap</span>
-            <span class="tag tag-blue">Wireshark</span>
-            <span class="tag tag-green">MITM</span>
-            <span class="tag tag-blue">Bruteforce</span>
+          <div class="stat">
+            <div class="stat-number">3</div>
+            <div class="stat-label" data-fr="Contextes" data-en="Contexts">Contextes</div>
           </div>
-          <span class="project-arrow">Voir le détail →</span>
         </div>
-      </a>
+      </div>
+    </section>
 
-      <a href="projet-ad.html" class="project-card reveal" data-cat="systeme">
-        <div class="project-header"><div class="project-icon">🏢</div><span class="tag tag-green">Terminé</span></div>
-        <h3 class="project-name">Active Directory — Windows Server</h3>
-        <p class="project-desc">Déploiement d'un domaine AD complet sous Windows Server 2022. UO, comptes, GPO, DHCP, DNS et scripts PowerShell.</p>
-        <div class="project-stack">
-          <span class="tag tag-blue">Win Server 2022</span>
-          <span class="tag tag-blue">AD DS</span>
-          <span class="tag tag-blue">GPO</span>
-          <span class="tag tag-green">PowerShell</span>
-        </div>
-        <span class="project-arrow">Voir le détail →</span>
-      </a>
+    <!-- FILTRES -->
+    <div class="container-wide">
+      <div class="filter-bar reveal">
+        <button class="filter-btn active" data-filter="all" data-fr="Tous" data-en="All">Tous</button>
+        <button class="filter-btn" data-filter="reseau" data-fr="Réseaux" data-en="Networks">Réseaux</button>
+        <button class="filter-btn" data-filter="systeme" data-fr="Systèmes" data-en="Systems">Systèmes</button>
+        <button class="filter-btn" data-filter="securite" data-fr="Sécurité" data-en="Security">Sécurité</button>
+        <button class="filter-btn" data-filter="pro" data-fr="Stage / Alternance" data-en="Internship / Work">Stage / Alternance</button>
+      </div>
 
-      <a href="projet-metasploit.html" class="project-card reveal" data-cat="secu">
-        <div class="project-header"><div class="project-icon">💣</div><span class="tag tag-green">Terminé</span></div>
-        <h3 class="project-name">Lab Metasploitable — Pentest</h3>
-        <p class="project-desc">Exploitation de la VM Metasploitable 2 en environnement VMware isolé. Scan, énumération, exploitation, reverse shells et web shells.</p>
-        <div class="project-stack">
-          <span class="tag tag-green">Kali Linux</span>
-          <span class="tag tag-blue">Metasploit</span>
-          <span class="tag tag-blue">Nmap</span>
-          <span class="tag tag-purple">VMware</span>
-        </div>
-        <span class="project-arrow">Voir le détail →</span>
-      </a>
+      <!-- GRILLE -->
+      <div class="projects-layout" id="proj-grid">
 
-      <a href="projet-vlan.html" class="project-card reveal" data-cat="reseau">
-        <div class="project-header"><div class="project-icon">📡</div><span class="tag tag-green">Terminé</span></div>
-        <h3 class="project-name">Infrastructure VLAN — Cisco</h3>
-        <p class="project-desc">Conception et déploiement d'une architecture réseau segmentée sous Cisco Packet Tracer. VLANs, routage inter-VLAN et ACLs.</p>
-        <div class="project-stack">
-          <span class="tag tag-blue">Cisco PT</span>
-          <span class="tag tag-blue">VLAN</span>
-          <span class="tag tag-green">Routage</span>
-          <span class="tag tag-blue">ACL</span>
-        </div>
-        <span class="project-arrow">Voir le détail →</span>
-      </a>
+        <!-- CARTE LARGE — Active Directory -->
+        <article class="proj-card p-wide reveal" data-cat="systeme">
+          <div class="proj-visual">
+            <div class="proj-visual-grid"></div>
+            <div class="proj-badge">Formation</div>
+            <div class="proj-code-block">
+              <span class="acc">$</span> New-ADUser -Name <span class="hi">"j.dupont"</span> -OU "OU=RH,DC=corp,DC=local"<br>
+              <span class="acc">$</span> Add-ADGroupMember <span class="hi">"GRP_RH"</span> -Members "j.dupont"<br>
+              <span class="acc">$</span> Set-GPO -Name <span class="hi">"Politique_Securite"</span> -Domain corp.local
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags">
+              <span class="tag">Active Directory</span>
+              <span class="tag">GPO</span>
+              <span class="tag">Windows Server 2022</span>
+              <span class="tag">PowerShell</span>
+            </div>
+            <h2 class="proj-title" data-fr="Active Directory — <em>Domaine complet</em>" data-en="Active Directory — <em>Full domain</em>">Active Directory — <em>Domaine complet</em></h2>
+            <p class="proj-desc" data-fr="Mise en place d'un <span class='def' data-fr-def='Système de Microsoft qui centralise la gestion des utilisateurs, ordinateurs et ressources d'un réseau d'entreprise.' data-en-def='Microsoft system that centralizes management of users, computers and resources on a corporate network.' data-def='Système de Microsoft qui centralise la gestion des utilisateurs, ordinateurs et ressources d'un réseau d'entreprise.'>Active Directory</span> depuis l'installation d'un serveur Windows jusqu'à la configuration des <span class='def' data-fr-def='Stratégies de groupe : règles appliquées automatiquement aux utilisateurs et machines du domaine (mot de passe obligatoire, accès bureau limité, etc.).' data-en-def='Group Policies: rules automatically applied to users and machines in the domain (mandatory password, limited desktop access, etc.).' data-def='Stratégies de groupe : règles appliquées automatiquement aux utilisateurs et machines du domaine.'>GPO</span>. Objectif : centraliser l'administration, appliquer des politiques de sécurité et gérer les accès par groupe." data-en="Deployment of an <span class='def' data-fr-def='Système de Microsoft qui centralise la gestion des utilisateurs, ordinateurs et ressources d'un réseau d'entreprise.' data-en-def='Microsoft system that centralizes management of users, computers and resources on a corporate network.' data-def='Microsoft system that centralizes management of users, computers and resources on a corporate network.'>Active Directory</span> from server installation to <span class='def' data-fr-def='Stratégies de groupe : règles appliquées automatiquement aux utilisateurs et machines du domaine.' data-en-def='Group Policies: rules automatically applied to users and machines in the domain (mandatory password, limited desktop access, etc.).' data-def='Group Policies: rules automatically applied to users and machines in the domain.'>GPO</span> configuration. Goal: centralize administration, apply security policies and manage group access.">Mise en place d'un <span class="def" data-fr-def="Système de Microsoft qui centralise la gestion des utilisateurs, ordinateurs et ressources d'un réseau d'entreprise." data-en-def="Microsoft system that centralizes management of users, computers and resources on a corporate network." data-def="Système de Microsoft qui centralise la gestion des utilisateurs, ordinateurs et ressources d'un réseau d'entreprise.">Active Directory</span> depuis l'installation d'un serveur Windows jusqu'à la configuration des <span class="def" data-fr-def="Stratégies de groupe : règles appliquées automatiquement aux utilisateurs et machines du domaine (mot de passe obligatoire, accès bureau limité, etc.)." data-en-def="Group Policies: rules automatically applied to users and machines in the domain." data-def="Stratégies de groupe : règles appliquées automatiquement aux utilisateurs et machines du domaine.">GPO</span>. Objectif : centraliser l'administration, appliquer des politiques de sécurité et gérer les accès par groupe.</p>
+            <div class="proj-meta">
+              <span class="proj-context" data-fr="TP BTS SIO · VMware · 2025" data-en="BTS SIO lab · VMware · 2025">TP BTS SIO · VMware · 2025</span>
+              <a class="proj-link" href="../projets/projet-ad.html" data-page-link data-fr="Voir le projet détaillé →" data-en="See full project →">Voir le projet détaillé →</a>
+            </div>
+          </div>
+        </article>
 
-      <a href="projet-dmz.html" class="project-card reveal" data-cat="reseau">
-        <div class="project-header"><div class="project-icon">🛡️</div><span class="tag tag-green">Terminé</span></div>
-        <h3 class="project-name">DMZ — Proxmox VE</h3>
-        <p class="project-desc">Mise en place d'une zone démilitarisée sur Proxmox VE. Segmentation LAN/DMZ/WAN, pare-feu et règles de filtrage strictes.</p>
-        <div class="project-stack">
-          <span class="tag tag-purple">Proxmox VE</span>
-          <span class="tag tag-blue">DMZ</span>
-          <span class="tag tag-blue">Pare-feu</span>
-          <span class="tag tag-green">Linux</span>
-        </div>
-        <span class="project-arrow">Voir le détail →</span>
-      </a>
+        <!-- CARTE MOYENNE — VLAN -->
+        <article class="proj-card p-mid reveal-right" data-cat="reseau">
+          <div class="proj-visual">
+            <div class="proj-visual-grid"></div>
+            <div class="proj-badge">Formation</div>
+            <div class="proj-code-block">
+              <span class="acc">SW(config)#</span> vlan <span class="hi">10</span><br>
+              <span class="acc">SW(config-vlan)#</span> name ADMIN<br>
+              <span class="acc">SW(config-if)#</span> switchport mode trunk
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags">
+              <span class="tag">Cisco</span>
+              <span class="tag">VLAN</span>
+              <span class="tag">Switching</span>
+              <span class="tag">Trunk</span>
+            </div>
+            <h2 class="proj-title" data-fr="Infrastructure <em>VLAN</em>" data-en="<em>VLAN</em> Infrastructure">Infrastructure <em>VLAN</em></h2>
+            <p class="proj-desc" data-fr="Segmentation d'un réseau en <span class='def' data-fr-def='Virtual Local Area Network : séparation logique d'un réseau physique en plusieurs réseaux virtuels indépendants.' data-en-def='Virtual Local Area Network: logical separation of a physical network into several independent virtual networks.' data-def='Virtual LAN : séparation logique d'un réseau physique en plusieurs réseaux virtuels indépendants.'>VLANs</span> pour isoler les zones (administration, utilisateurs, serveurs). Configuration des liens <span class='def' data-fr-def='Lien réseau qui transporte le trafic de plusieurs VLANs simultanément entre deux équipements.' data-en-def='Network link that carries traffic from multiple VLANs simultaneously between two devices.' data-def='Lien qui transporte le trafic de plusieurs VLANs entre deux équipements.'>trunk</span> entre switches." data-en="Network segmentation into <span class='def' data-fr-def='Virtual Local Area Network : séparation logique d'un réseau physique en plusieurs réseaux virtuels indépendants.' data-en-def='Virtual Local Area Network: logical separation of a physical network into several independent virtual networks.' data-def='Virtual Local Area Network: logical separation of a physical network into several independent virtual networks.'>VLANs</span> to isolate zones (admin, users, servers). Configuration of <span class='def' data-fr-def='Lien réseau qui transporte le trafic de plusieurs VLANs simultanément entre deux équipements.' data-en-def='Network link that carries traffic from multiple VLANs simultaneously between two devices.' data-def='Network link that carries traffic from multiple VLANs between two devices.'>trunk</span> links between switches.">Segmentation d'un réseau en <span class="def" data-fr-def="Virtual Local Area Network : séparation logique d'un réseau physique en plusieurs réseaux virtuels indépendants." data-en-def="Virtual Local Area Network: logical separation of a physical network into several independent virtual networks." data-def="Virtual LAN : séparation logique d'un réseau physique en plusieurs réseaux virtuels indépendants.">VLANs</span> pour isoler les zones (administration, utilisateurs, serveurs). Configuration des liens <span class="def" data-fr-def="Lien réseau qui transporte le trafic de plusieurs VLANs simultanément entre deux équipements." data-en-def="Network link that carries traffic from multiple VLANs between two devices." data-def="Lien qui transporte le trafic de plusieurs VLANs entre deux équipements.">trunk</span> entre switches.</p>
+            <div class="proj-meta">
+              <span class="proj-context" data-fr="TP BTS SIO · Cisco Packet Tracer · 2025" data-en="BTS SIO lab · Cisco Packet Tracer · 2025">TP BTS SIO · Cisco Packet Tracer · 2025</span>
+              <a class="proj-link" href="../projets/projet-vlan.html" data-page-link data-fr="Voir le projet →" data-en="See project →">Voir le projet →</a>
+            </div>
+          </div>
+        </article>
 
-      <a href="projet-glpi.html" class="project-card reveal" data-cat="support">
-        <div class="project-header"><div class="project-icon">🎫</div><span class="tag tag-green">Terminé</span></div>
-        <h3 class="project-name">Système d'info — GLPI & Kanboard</h3>
-        <p class="project-desc">Déploiement et configuration d'un système de gestion des incidents avec GLPI et Kanboard sur serveur Debian.</p>
-        <div class="project-stack">
-          <span class="tag tag-blue">GLPI</span>
-          <span class="tag tag-blue">Kanboard</span>
-          <span class="tag tag-green">Apache</span>
-          <span class="tag tag-purple">MySQL</span>
-        </div>
-        <span class="project-arrow">Voir le détail →</span>
-      </a>
+        <!-- CARTE STANDARD — Audit sécurité -->
+        <article class="proj-card p-std reveal" data-delay="60" data-cat="securite">
+          <div class="proj-visual">
+            <div class="proj-visual-grid"></div>
+            <div class="proj-badge">Formation</div>
+            <div class="proj-code-block">
+              <span class="acc">$</span> nmap -sV -sC target<br>
+              <span class="acc">→</span> <span class="hi">22/tcp open</span> ssh OpenSSH 8.4<br>
+              <span class="acc">→</span> 3 vulns identifiées
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags">
+              <span class="tag">Kali Linux</span>
+              <span class="tag">Nmap</span>
+              <span class="tag">Audit</span>
+            </div>
+            <h2 class="proj-title" data-fr="Audit <em>sécurité</em>" data-en="<em>Security</em> audit">Audit <em>sécurité</em></h2>
+            <p class="proj-desc" data-fr="Analyse d'un système en environnement de lab : découverte de ports, identification de services et rapport de préconisations." data-en="System analysis in a lab environment: port discovery, service identification and recommendation report.">Analyse d'un système en environnement de lab : découverte de ports, identification de services et rapport de préconisations.</p>
+            <div class="proj-meta">
+              <span class="proj-context" data-fr="Kali + Metasploitable · 2025" data-en="Kali + Metasploitable · 2025">Kali + Metasploitable · 2025</span>
+              <a class="proj-link" href="../projets/projet-audit.html" data-page-link data-fr="Voir →" data-en="See →">Voir →</a>
+            </div>
+          </div>
+        </article>
 
+        <!-- CARTE STANDARD — DMZ Proxmox -->
+        <article class="proj-card p-std reveal" data-delay="120" data-cat="reseau">
+          <div class="proj-visual">
+            <div class="proj-visual-grid"></div>
+            <div class="proj-badge">Formation</div>
+            <div class="proj-code-block">
+              <span class="acc">LAN</span> → Firewall → <span class="hi">DMZ</span><br>
+              <span class="acc">→</span> Web : 192.168.10.2<br>
+              <span class="acc">→</span> DNS : 192.168.10.3
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags">
+              <span class="tag">Proxmox VE</span>
+              <span class="tag">DMZ</span>
+              <span class="tag">Firewall</span>
+            </div>
+            <h2 class="proj-title" data-fr="<em>DMZ</em> Proxmox VE" data-en="Proxmox VE <em>DMZ</em>"><em>DMZ</em> Proxmox VE</h2>
+            <p class="proj-desc" data-fr="Mise en place d'une <span class='def' data-fr-def='Zone démilitarisée : zone réseau isolée qui héberge les services accessibles depuis Internet sans exposer le réseau interne.' data-en-def='Demilitarized zone: isolated network zone hosting services accessible from the Internet without exposing the internal network.' data-def='Zone réseau isolée qui héberge les services exposés sur Internet, séparée du réseau interne.'>DMZ</span> virtualisant plusieurs serveurs avec gestion du trafic entrant/sortant." data-en="Deployment of a <span class='def' data-fr-def='Zone démilitarisée : zone réseau isolée qui héberge les services accessibles depuis Internet sans exposer le réseau interne.' data-en-def='Demilitarized zone: isolated network zone hosting Internet-facing services, separated from the internal network.' data-def='Isolated network zone hosting Internet-facing services, separated from the internal network.'>DMZ</span> virtualizing several servers with inbound/outbound traffic control.">Mise en place d'une <span class="def" data-fr-def="Zone démilitarisée : zone réseau isolée qui héberge les services accessibles depuis Internet sans exposer le réseau interne." data-en-def="Demilitarized zone: isolated network zone hosting Internet-facing services." data-def="Zone réseau isolée qui héberge les services exposés sur Internet, séparée du réseau interne.">DMZ</span> virtualisant plusieurs serveurs avec gestion du trafic entrant/sortant.</p>
+            <div class="proj-meta">
+              <span class="proj-context" data-fr="Proxmox VE · Lab ESUP · 2025" data-en="Proxmox VE · ESUP lab · 2025">Proxmox VE · Lab ESUP · 2025</span>
+              <a class="proj-link" href="#" data-fr="Bientôt →" data-en="Soon →">Bientôt →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARTE STANDARD — Portfolio -->
+        <article class="proj-card p-std reveal" data-delay="180" data-cat="systeme">
+          <div class="proj-visual">
+            <div class="proj-visual-grid"></div>
+            <div class="proj-code-block">
+              <span class="acc">$</span> git push origin main<br>
+              <span class="acc">→</span> <span class="hi">wenselreyes.tech</span><br>
+              <span class="acc">→</span> deployed ✓
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags">
+              <span class="tag">HTML / CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Design</span>
+            </div>
+            <h2 class="proj-title" data-fr="Ce <em>portfolio</em>" data-en="This <em>portfolio</em>">Ce <em>portfolio</em></h2>
+            <p class="proj-desc" data-fr="Conception et développement du site portfolio : architecture multi-pages, design system, traduit FR/EN, optimisé pour une lecture technique et accessible." data-en="Design and development of the portfolio site: multi-page architecture, design system, FR/EN translated, optimized for technical and accessible reading.">Conception et développement du site portfolio : architecture multi-pages, design system, traduit FR/EN, optimisé pour une lecture technique et accessible.</p>
+            <div class="proj-meta">
+              <span class="proj-context" data-fr="Projet perso · 2025–2026" data-en="Personal project · 2025–2026">Projet perso · 2025–2026</span>
+              <a class="proj-link" href="../index.html" data-page-link data-fr="Voir l'accueil →" data-en="See homepage →">Voir l'accueil →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARTE PLEINE LARGEUR — Econocom × Engie (Alternance) -->
+        <article class="proj-card p-full reveal" data-delay="60" data-cat="pro">
+          <div class="proj-visual" style="min-height: 160px;">
+            <div class="proj-visual-grid"></div>
+            <div class="proj-badge pro">Alternance</div>
+            <div class="proj-code-block" style="max-width: 480px;">
+              <span class="acc">Mission :</span> <span class="hi">support N1 / N2 · Econocom × Engie</span><br>
+              <span class="acc">Périmètre :</span> postes, utilisateurs, procédures, tickets<br>
+              <span class="acc">Résultat :</span> résolution d'incidents, docs internes
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-left">
+              <div class="proj-tags">
+                <span class="tag">Support N1/N2</span>
+                <span class="tag">ITSM</span>
+                <span class="tag">Windows 10/11</span>
+                <span class="tag">Procédures</span>
+              </div>
+              <h2 class="proj-title" data-fr="Alternance — <em>Econocom × Engie</em>" data-en="Apprenticeship — <em>Econocom × Engie</em>">Alternance — <em>Econocom × Engie</em></h2>
+              <p class="proj-desc" data-fr="Missions de <span class='def' data-fr-def='Support informatique de premier et deuxième niveau : résolution d'incidents courants et intervention sur des cas plus complexes.' data-en-def='First and second level IT support: resolution of common incidents and handling of more complex cases.' data-def='Support informatique de premier et deuxième niveau : résolution d'incidents courants et cas plus complexes.'>support N1/N2</span> dans un environnement professionnel exigeant. Gestion des postes, des demandes utilisateurs, rédaction de documentations et application des procédures internes." data-en="<span class='def' data-fr-def='Support informatique de premier et deuxième niveau : résolution d'incidents courants et intervention sur des cas plus complexes.' data-en-def='First and second level IT support: resolution of common incidents and handling of more complex cases.' data-def='First and second level IT support.'>N1/N2 support</span> missions in a demanding professional environment. Workstation management, user requests, documentation writing and internal procedure application.">Missions de <span class="def" data-fr-def="Support informatique de premier et deuxième niveau : résolution d'incidents courants et intervention sur des cas plus complexes." data-en-def="First and second level IT support: resolution of common incidents and handling of more complex cases." data-def="Support informatique de premier et deuxième niveau : résolution d'incidents courants et cas plus complexes.">support N1/N2</span> dans un environnement professionnel exigeant. Gestion des postes, des demandes utilisateurs, rédaction de documentations et application des procédures internes.</p>
+              <div class="proj-meta" style="border-top: 1px solid var(--border-soft); padding-top: var(--s4);">
+                <span class="proj-context" data-fr="Econocom × Engie · 2025–2026" data-en="Econocom × Engie · 2025–2026">Econocom × Engie · 2025–2026</span>
+                <a class="proj-link" href="#" data-fr="Voir le bilan →" data-en="See report →">Voir le bilan →</a>
+              </div>
+            </div>
+            <div class="proj-right">
+              <div class="section-eyebrow" style="font-size: 11px; margin-bottom: var(--s3);" data-fr="Ce que ça implique" data-en="What it involves">Ce que ça implique</div>
+              <div class="skills-list">
+                <div class="skill-item"><strong data-fr="Gestion des incidents" data-en="Incident management">Gestion des incidents</strong><span data-fr="Diagnostic, priorisation et résolution de pannes ou demandes en environnement réel." data-en="Diagnosis, prioritization and resolution of issues in a real environment.">Diagnostic, priorisation et résolution de pannes ou demandes en environnement réel.</span></div>
+                <div class="skill-item"><strong data-fr="Documentation technique" data-en="Technical documentation">Documentation technique</strong><span data-fr="Rédaction de procédures claires, réutilisables et adaptées aux équipes techniques comme aux utilisateurs." data-en="Writing clear, reusable procedures for both technical teams and end users.">Rédaction de procédures claires, réutilisables et adaptées aux équipes techniques comme aux utilisateurs.</span></div>
+                <div class="skill-item"><strong data-fr="Relation utilisateur" data-en="User relations">Relation utilisateur</strong><span data-fr="Communication claire, prise en charge professionnelle et suivi de ticket." data-en="Clear communication, professional handling and ticket follow-up.">Communication claire, prise en charge professionnelle et suivi de ticket.</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- fin #proj-grid -->
+
+      <!-- LÉGENDE -->
+      <div class="legend reveal">
+        <div class="legend-item"><span class="legend-dot"></span> <span data-fr="Projet de formation (BTS SIO)" data-en="Training project (BTS SIO)">Projet de formation (BTS SIO)</span></div>
+        <div class="legend-item"><span class="legend-dot muted"></span> <span data-fr="Projet professionnel (alternance / stage)" data-en="Professional project (apprenticeship / internship)">Projet professionnel (alternance / stage)</span></div>
+      </div>
     </div>
-  </div>
-</section>
+  </main>
 
-<footer>
-  <p>Conçu &amp; développé par <span>Wensel Reyes</span> · BTS SIO SISR · ESUP 2024–2026</p>
-</footer>
+  <footer>
+    <span>WR</span> · <a href="../index.html" data-page-link data-fr="Accueil" data-en="Home">Accueil</a> · <span data-fr="Projets" data-en="Projects">Projets</span> · wenselreyes.tech
+  </footer>
 
-<script src="../nav.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme(); initBgCanvas(); initProgressBar(); initNavTransitions(); initPageTransitionIn();
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.fromTo('.page-hero .reveal', { opacity:0,y:28 }, { opacity:1,y:0,duration:.75,ease:'power3.out',stagger:.1,delay:.3 });
-  initReveal();
+  <script src="../nav.js"></script>
+  <script>
+    // Filtres
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('#proj-grid .proj-card');
 
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.getAttribute('data-filter');
-      document.querySelectorAll('.project-card').forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-cat') === filter) {
-          card.classList.remove('hidden');
-          gsap.fromTo(card, { opacity:0,y:16 }, { opacity:1,y:0,duration:.4,ease:'power2.out' });
-        } else {
-          card.classList.add('hidden');
-        }
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(c => {
+          const match = f === 'all' || c.dataset.cat === f;
+          c.style.display = match ? '' : 'none';
+        });
       });
     });
-  });
-});
-</script>
+  </script>
 </body>
 </html>
