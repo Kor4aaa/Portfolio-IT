@@ -1,750 +1,753 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wensel Reyes — Portfolio</title>
-  <meta name="description" content="Portfolio de Wensel Reyes, étudiant en BTS SIO SISR, orienté cybersécurité, systèmes et réseaux." />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wensel Reyes — Portfolio BTS SIO SISR</title>
+  <meta name="description" content="Portfolio de Wensel Reyes, étudiant BTS SIO SISR — réseaux, systèmes, cybersécurité."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    main { position: relative; z-index: 1; }
+  /* ═══════════════════════════════
+     TOKENS
+  ═══════════════════════════════ */
+  :root {
+    --bg:        #160810;
+    --s1:#1f0d14;--s2:#271018;--s3:#30131d;--s4:#3a1622;
+    --bd:  rgba(255,190,205,.09);
+    --bds: rgba(255,190,205,.05);
+    --bdh: rgba(143,191,168,.28);
+    --tx:  #f4ebe6;
+    --txm: #b89e96;
+    --txf: #6b4a44;
+    --ac:  #8fbfa8;
+    --ach: #a8d4bc;
+    --acd: rgba(143,191,168,.10);
+    --acg: rgba(143,191,168,.20);
+    --acb: rgba(143,191,168,.22);
+    --fd:  'DM Serif Display',Georgia,serif;
+    --fb:  'DM Sans','Helvetica Neue',sans-serif;
+    --fm:  'JetBrains Mono','Courier New',monospace;
+    --nav-h: 64px;
+    --ease: cubic-bezier(.16,1,.3,1);
+  }
+  [data-theme="light"] {
+    --bg:#faf5f0;--s1:#f3ece5;--s2:#ede3da;--s3:#e5d8cd;--s4:#dccfc2;
+    --bd:rgba(80,30,45,.09);--bds:rgba(80,30,45,.05);--bdh:rgba(74,140,110,.3);
+    --tx:#1a0810;--txm:#6b3d44;--txf:#b08878;
+    --ac:#3d8c6a;--ach:#2d7358;--acd:rgba(61,140,106,.10);--acg:rgba(61,140,106,.18);--acb:rgba(61,140,106,.22);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h)+12px)}
+  body{font-family:var(--fb);font-size:clamp(1rem,.95rem + .25vw,1.125rem);color:var(--tx);background:var(--bg);line-height:1.7;min-height:100dvh}
+  img,svg{display:block;max-width:100%}
+  ul{list-style:none}
+  a{color:inherit;text-decoration:none}
+  button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+  h1,h2,h3,h4{text-wrap:balance;line-height:1.1}
+  p,li{text-wrap:pretty}
+  ::selection{background:var(--acg);color:var(--tx)}
+  :focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:4px}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-    .hero {
-      min-height: 100dvh;
-      display: grid;
-      align-items: center;
-      padding-top: calc(var(--nav-h) + var(--s12));
-      padding-bottom: var(--s12);
-    }
+  /* ═══ PROGRESS BAR ═══ */
+  #pbar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--ac),var(--ach));z-index:400;border-radius:0 99px 99px 0;transition:width .1s linear}
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: var(--s12);
-      align-items: center;
-    }
+  /* ═══ NAV ═══ */
+  nav{
+    position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 clamp(1rem,4vw,2.5rem);
+    background:color-mix(in oklab,var(--bg) 82%,transparent);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--bds);
+    z-index:200;transition:border-color .3s
+  }
+  .nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--fd);font-size:1.15rem}
+  .logo-mark{width:32px;height:32px;border-radius:8px;background:var(--acd);border:1px solid var(--acb);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:12px;font-weight:700;color:var(--ac);flex-shrink:0}
+  .nav-links{display:flex;align-items:center;gap:2px}
+  .nav-links a{font-size:.875rem;color:var(--txm);padding:6px 14px;border-radius:99px;transition:color .2s,background .2s;white-space:nowrap}
+  .nav-links a:hover{color:var(--tx);background:var(--bd)}
+  .nav-links a.active{color:var(--ac);background:var(--acd)}
+  .nav-r{display:flex;align-items:center;gap:.6rem}
+  .btn-lang{font-family:var(--fm);font-size:11px;letter-spacing:.1em;font-weight:600;color:var(--txm);background:var(--s1);border:1px solid var(--bd);border-radius:99px;padding:5px 12px;transition:color .2s,border-color .2s,background .2s}
+  .btn-lang:hover{color:var(--ac);border-color:var(--acb);background:var(--acd)}
+  .btn-theme{width:34px;height:34px;border-radius:99px;background:var(--s1);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;color:var(--txm);transition:color .2s,border-color .2s}
+  .btn-theme:hover{color:var(--ac);border-color:var(--acb)}
+  .btn-theme svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+  .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;border-radius:8px;background:var(--s1);border:1px solid var(--bd)}
+  .burger span{display:block;width:16px;height:1.5px;background:var(--txm);border-radius:2px;margin:0 auto;transition:transform .3s var(--ease),opacity .3s}
+  .burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .mob-menu{position:fixed;top:var(--nav-h);left:0;right:0;background:color-mix(in oklab,var(--bg) 96%,transparent);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);padding:1rem 1.5rem;display:flex;flex-direction:column;gap:.4rem;z-index:190;transform:translateY(-110%);transition:transform .35s var(--ease)}
+  .mob-menu.open{transform:translateY(0)}
+  .mob-menu a{font-size:.875rem;color:var(--txm);padding:.6rem 1rem;border-radius:.75rem;transition:color .2s,background .2s}
+  .mob-menu a:hover,.mob-menu a.active{color:var(--ac);background:var(--acd)}
 
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s3);
-      margin-bottom: var(--s5);
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      color: var(--accent);
-    }
+  /* ═══ LAYOUT ═══ */
+  main{position:relative;z-index:1}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+  section{padding:clamp(4rem,8vw,6rem) 0}
+  .sep{height:1px;background:linear-gradient(90deg,transparent,var(--bd),transparent)}
 
-    .hero-kicker::before {
-      content: '';
-      width: 28px;
-      height: 1px;
-      background: var(--accent);
-    }
+  /* ═══ SECTION HEADER ═══ */
+  .sh{margin-bottom:3rem}
+  .eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
+  .eyebrow::before{content:'';width:20px;height:1px;background:var(--ac);flex-shrink:0}
+  .stitle{font-family:var(--fd);font-size:clamp(2rem,1.2rem + 2.5vw,3.5rem);font-weight:400;color:var(--tx);margin-bottom:.9rem}
+  .stitle em{font-style:italic;color:var(--ac)}
+  .sdesc{font-size:clamp(1rem,.95rem + .25vw,1.1rem);color:var(--txm);max-width:56ch;line-height:1.8}
 
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: var(--text-hero);
-      line-height: .96;
-      font-weight: 400;
-      margin-bottom: var(--s6);
-      max-width: 10ch;
-    }
+  /* ═══ CARDS ═══ */
+  .card{background:linear-gradient(160deg,var(--s1) 70%,var(--s2));border:1px solid var(--bd);border-radius:1.25rem;transition:border-color .25s,box-shadow .25s,transform .25s}
+  .card:hover{border-color:var(--bdh);box-shadow:0 0 32px var(--acg),0 8px 32px rgba(0,0,0,.4)}
+  .card-lift:hover{transform:translateY(-3px)}
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
+  /* ═══ BOUTONS ═══ */
+  .btn-p{display:inline-flex;align-items:center;gap:.5rem;background:var(--ac);color:var(--bg);font-size:.875rem;font-weight:700;padding:.6rem 1.4rem;border-radius:99px;transition:background .2s,transform .2s,box-shadow .2s}
+  .btn-p:hover{background:var(--ach);transform:translateY(-1px);box-shadow:0 6px 20px var(--acg)}
+  .btn-g{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--txm);font-size:.875rem;padding:.6rem 1.4rem;border-radius:99px;border:1px solid var(--bd);transition:color .2s,border-color .2s,background .2s}
+  .btn-g:hover{color:var(--tx);border-color:rgba(255,190,205,.22);background:var(--bd)}
+  .btn-ag{display:inline-flex;align-items:center;gap:.5rem;background:var(--acd);color:var(--ac);font-size:.875rem;font-weight:600;padding:.6rem 1.4rem;border-radius:99px;border:1px solid var(--acb);transition:background .2s,transform .2s}
+  .btn-ag:hover{background:var(--acg);transform:translateY(-1px)}
 
-    .hero-desc {
-      max-width: 58ch;
-      color: var(--text-muted);
-      font-size: var(--text-base);
-      margin-bottom: var(--s8);
-    }
+  /* ═══ TAGS ═══ */
+  .tag{display:inline-block;font-family:var(--fm);font-size:11px;letter-spacing:.04em;color:var(--ac);background:var(--acd);border:1px solid rgba(143,191,168,.15);border-radius:99px;padding:2px 10px;white-space:nowrap}
+  .tag-m{color:var(--txm);background:var(--s2);border-color:var(--bd)}
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--s4);
-      margin-bottom: var(--s8);
-    }
+  /* ═══ TOOLTIP DÉFINITIONS ═══ */
+  .def{border-bottom:1px dashed var(--txf);cursor:help;position:relative}
+  .def::after{content:attr(data-def);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--s3);border:1px solid var(--bd);border-radius:.5rem;padding:.35rem .6rem;font-size:11px;color:var(--txm);width:max-content;max-width:240px;white-space:normal;pointer-events:none;opacity:0;transition:opacity .2s;z-index:50;text-align:center;font-family:var(--fb);line-height:1.5;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+  .def:hover::after{opacity:1}
 
-    .hero-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: var(--s4);
-    }
+  /* ═══ REVEAL ═══ */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .rl{opacity:0;transform:translateX(-20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .rr{opacity:0;transform:translateX(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .rv.on,.rl.on,.rr.on{opacity:1;transform:translate(0)}
 
-    .meta-card {
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: var(--s5);
-    }
+  /* ══════════════════════════════════════════
+     HERO
+  ══════════════════════════════════════════ */
+  #home{
+    min-height:100dvh;
+    display:grid;align-items:center;
+    padding-top:calc(var(--nav-h) + 2rem);
+    padding-bottom:3rem;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+  .hero-kicker{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem}
+  .hero-kicker::before{content:'';width:24px;height:1px;background:var(--ac)}
+  .hero-h1{font-family:var(--fd);font-size:clamp(2.8rem,1rem + 5.5vw,6.2rem);line-height:.96;font-weight:400;margin-bottom:1.5rem;max-width:12ch}
+  .hero-h1 em{font-style:italic;color:var(--ac)}
+  .hero-desc{color:var(--txm);max-width:52ch;margin-bottom:2rem;line-height:1.8}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+  .hero-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+  .mc{background:linear-gradient(180deg,var(--s1),var(--s2));border:1px solid var(--bd);border-radius:1rem;padding:1.1rem}
+  .mc-lbl{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--txf);margin-bottom:.4rem}
+  .mc-val{font-size:.9rem;font-weight:600;line-height:1.35}
 
-    .meta-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      margin-bottom: var(--s2);
-    }
+  /* Terminal */
+  .term{background:linear-gradient(180deg,color-mix(in oklab,var(--s2) 90%,black),var(--s1));border:1px solid var(--acb);border-radius:1.5rem;overflow:hidden;box-shadow:0 0 48px var(--acg),0 20px 60px rgba(0,0,0,.6)}
+  .term-top{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.2rem;border-bottom:1px solid var(--bd);background:color-mix(in oklab,var(--s3) 85%,transparent)}
+  .tdots{display:flex;gap:7px}
+  .tdots span{width:9px;height:9px;border-radius:50%;background:var(--txf);opacity:.7}
+  .tname{font-family:var(--fm);font-size:12px;color:var(--txm)}
+  .term-body{padding:1.4rem 1.5rem;font-family:var(--fm);font-size:.9rem;display:grid;gap:1rem}
+  .tline{color:var(--txm)}
+  .tprompt{color:var(--ac);margin-right:.4rem}
+  .tval{color:var(--tx)}
+  .tcursor{display:inline-block;width:8px;height:1em;background:var(--ac);vertical-align:middle;animation:blink 1.1s step-end infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-    .meta-value {
-      color: var(--text);
-      font-weight: 600;
-      line-height: 1.4;
-    }
+  /* ══════════════════════════════════════════
+     COMPETENCES
+  ══════════════════════════════════════════ */
+  #competences .comp-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem}
+  .comp-main{grid-column:span 8}
+  .comp-side{grid-column:span 4}
 
-    .terminal-card {
-      position: relative;
-      background: linear-gradient(180deg, color-mix(in oklab, var(--surface-2) 90%, black 10%), var(--surface));
-      border: 1px solid var(--accent-border);
-      border-radius: var(--r-2xl);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg), var(--shadow-accent);
-    }
+  .bloc-c{display:grid;gap:.75rem;margin-bottom:1.5rem}
+  .comp-item{background:linear-gradient(180deg,var(--s1),var(--s2));border:1px solid var(--bd);border-radius:1rem;padding:1.1rem 1.3rem;display:grid;grid-template-columns:1fr auto;gap:.5rem;align-items:start}
+  .comp-item h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
+  .comp-item p{font-size:.82rem;color:var(--txm);line-height:1.6;grid-column:1}
+  .comp-pct{font-family:var(--fm);font-size:12px;color:var(--ac);font-weight:700}
+  .comp-bar{height:3px;border-radius:99px;background:var(--s4);overflow:hidden;margin-top:.5rem;grid-column:1/-1}
+  .comp-bar span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--ac),var(--ach))}
 
-    .terminal-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--s4) var(--s5);
-      border-bottom: 1px solid var(--border);
-      background: color-mix(in oklab, var(--surface-3) 85%, transparent);
-    }
+  .ref-bloc{background:linear-gradient(180deg,var(--s1),var(--s2));border:1px solid var(--bd);border-radius:1.25rem;padding:1.5rem;margin-bottom:1rem}
+  .ref-bloc h3{font-size:1rem;font-weight:600;margin-bottom:.8rem;color:var(--ac)}
+  .ref-list{display:grid;gap:.5rem}
+  .ref-item{font-size:.82rem;color:var(--txm);padding:.45rem .7rem;background:var(--s2);border-radius:.5rem;border:1px solid var(--bd)}
+  .ref-item strong{color:var(--tx);display:block;font-size:.82rem}
 
-    .terminal-dots {
-      display: flex;
-      gap: 8px;
-    }
+  /* ══════════════════════════════════════════
+     PROJETS
+  ══════════════════════════════════════════ */
+  #projets .filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;padding:.8rem 1rem;background:var(--s1);border:1px solid var(--bd);border-radius:1.5rem}
+  .fb{font-family:var(--fm);font-size:12px;letter-spacing:.05em;color:var(--txm);background:transparent;border:1px solid transparent;border-radius:99px;padding:5px 14px;cursor:pointer;transition:color .2s,background .2s,border-color .2s}
+  .fb:hover{color:var(--tx);background:var(--s2)}
+  .fb.on{color:var(--ac);background:var(--acd);border-color:var(--acb)}
 
-    .terminal-dots span {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--text-faint);
-      opacity: .7;
-    }
+  .pg{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem}
+  .pw{grid-column:span 7}
+  .pm{grid-column:span 5}
+  .ps{grid-column:span 4}
+  .pf{grid-column:span 12}
 
-    .terminal-title {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+  .pc{background:linear-gradient(160deg,var(--s1) 70%,var(--s2));border:1px solid var(--bd);border-radius:1.5rem;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,box-shadow .25s,transform .25s}
+  .pc:hover{border-color:var(--bdh);box-shadow:0 0 32px var(--acg),0 8px 32px rgba(0,0,0,.4);transform:translateY(-3px)}
+  .pv{position:relative;overflow:hidden;background:radial-gradient(ellipse at 70% 30%,var(--acd),transparent 55%),linear-gradient(145deg,var(--s3),var(--s2));display:flex;align-items:flex-end;padding:1.2rem;min-height:160px}
+  .pw .pv{min-height:200px}
+  .pgrid{position:absolute;inset:0;background-image:linear-gradient(var(--bds) 1px,transparent 1px),linear-gradient(90deg,var(--bds) 1px,transparent 1px);background-size:28px 28px;opacity:.6}
+  .pbadge{position:absolute;top:.75rem;right:.75rem;z-index:2;font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 10px;border-radius:99px;background:var(--acd);border:1px solid var(--acb);color:var(--ac)}
+  .pbadge.pro{background:color-mix(in oklab,var(--s3) 85%,transparent);border-color:var(--bd);color:var(--txm)}
+  .pcb{position:relative;z-index:1;background:color-mix(in oklab,var(--bg) 80%,transparent);border:1px solid var(--acb);border-radius:.6rem;padding:.75rem 1rem;font-family:var(--fm);font-size:12px;line-height:1.7;color:var(--txm)}
+  .pcb .acc{color:var(--ac)}
+  .pcb .hi{color:var(--tx);font-weight:600}
+  .pb{padding:1.2rem;flex:1;display:flex;flex-direction:column;gap:.75rem}
+  .ptags{display:flex;flex-wrap:wrap;gap:.35rem}
+  .ptitle{font-family:var(--fd);font-size:clamp(1.125rem,1rem + .75vw,1.5rem);font-weight:400;line-height:1.15}
+  .ptitle em{font-style:italic;color:var(--ac)}
+  .ps .ptitle{font-size:1.05rem}
+  .pdesc{color:var(--txm);font-size:.85rem;flex:1;line-height:1.75}
+  .pmeta{display:flex;flex-wrap:wrap;gap:.6rem;padding-top:.8rem;border-top:1px solid var(--bds);align-items:center;justify-content:space-between}
+  .pctx{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--txf)}
+  .plink{display:inline-flex;align-items:center;gap:5px;color:var(--ac);font-size:.85rem;font-weight:600;transition:gap .2s,color .2s}
+  .plink:hover{gap:9px;color:var(--ach)}
 
-    .terminal-body {
-      padding: var(--s6);
-      font-family: var(--font-mono);
-      font-size: .95rem;
-      display: grid;
-      gap: var(--s4);
-    }
+  /* Carte full horizontal */
+  .pf .pb{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:start}
+  .pleft{display:flex;flex-direction:column;gap:.75rem}
+  .pright{display:flex;flex-direction:column;gap:.75rem}
+  .sklist{display:grid;gap:.5rem}
+  .ski{padding:.55rem .8rem;background:var(--s2);border:1px solid var(--bd);border-radius:.6rem;font-size:.82rem;color:var(--txm)}
+  .ski strong{color:var(--tx);display:block;margin-bottom:2px;font-size:.82rem}
 
-    .line { color: var(--text-muted); }
-    .prompt { color: var(--accent); }
-    .value { color: var(--text); }
+  /* ══════════════════════════════════════════
+     PARCOURS
+  ══════════════════════════════════════════ */
+  #parcours .par-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  .par-bloc{background:linear-gradient(180deg,var(--s1),var(--s2));border:1px solid var(--bd);border-radius:1.25rem;padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem}
+  .par-bloc h3{font-size:1.05rem;font-weight:600;color:var(--tx)}
+  .tl{display:grid;gap:1rem}
+  .tli{position:relative;padding-left:1.25rem;border-left:1px solid var(--bd)}
+  .tli::before{content:'';position:absolute;left:-5px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 5px var(--acd)}
+  .tlt{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);margin-bottom:.25rem}
+  .tli p{font-size:.85rem;color:var(--txm);line-height:1.6}
 
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: var(--s6);
-    }
+  /* ══════════════════════════════════════════
+     CONTACT
+  ══════════════════════════════════════════ */
+  #contact .ct-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1.5rem;align-items:start}
+  .ct-panel{background:linear-gradient(180deg,color-mix(in oklab,var(--s1) 88%,var(--acd)),var(--s2));border:1px solid var(--acb);border-radius:1.75rem;padding:clamp(1.5rem,4vw,3rem);box-shadow:0 0 40px var(--acg)}
+  .ct-panel h2{font-family:var(--fd);font-size:clamp(1.8rem,1.2rem + 2vw,3rem);font-weight:400;margin-bottom:.8rem}
+  .ct-panel h2 em{font-style:italic;color:var(--ac)}
+  .ct-panel p{color:var(--txm);max-width:48ch;margin-bottom:1.5rem;font-size:.95rem}
+  .ct-btns{display:flex;flex-wrap:wrap;gap:.8rem}
+  .ct-card{background:linear-gradient(180deg,var(--s1),var(--s2));border:1px solid var(--bd);border-radius:1.25rem;padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+  .ct-list{display:grid;gap:.6rem}
+  .ct-item{padding:.75rem 1rem;background:color-mix(in oklab,var(--s2) 88%,transparent);border:1px solid var(--bd);border-radius:.75rem}
+  .ct-item span{display:block;font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--txf);margin-bottom:4px}
+  .ct-item strong{font-size:.9rem}
 
-    .tech-main {
-      grid-column: span 7;
-      display: grid;
-      gap: var(--s6);
-    }
+  /* ══════════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════════ */
+  footer{padding:1.5rem 2rem;border-top:1px solid var(--bds);text-align:center;font-size:12px;color:var(--txf);font-family:var(--fm);letter-spacing:.04em;position:relative;z-index:1}
+  footer a{color:var(--txf);transition:color .2s}
+  footer a:hover{color:var(--ac)}
+  footer span{color:var(--ac)}
 
-    .tech-side {
-      grid-column: span 5;
-      display: grid;
-      gap: var(--s6);
-    }
-
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: var(--s5);
-    }
-
-    .pillar h3,
-    .project-card h3,
-    .path-card h3,
-    .contact-card h3 {
-      font-size: var(--text-lg);
-      margin-bottom: var(--s3);
-      line-height: 1.2;
-    }
-
-    .pillar p,
-    .project-card p,
-    .path-card p,
-    .contact-card p,
-    .focus-list li {
-      color: var(--text-muted);
-    }
-
-    .focus-list {
-      display: grid;
-      gap: var(--s4);
-    }
-
-    .focus-item {
-      padding: var(--s5);
-      border-radius: var(--r-xl);
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-      border: 1px solid var(--border);
-    }
-
-    .focus-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--s4);
-      margin-bottom: var(--s3);
-    }
-
-    .focus-top strong { font-size: 1rem; }
-
-    .focus-bar {
-      width: 100%;
-      height: 8px;
-      border-radius: var(--r-full);
-      background: var(--surface-4);
-      overflow: hidden;
-      margin-top: var(--s3);
-    }
-
-    .focus-bar span {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: var(--s6);
-    }
-
-    .project-card {
-      grid-column: span 4;
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: var(--s5);
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-    }
-
-    .project-visual {
-      aspect-ratio: 16 / 10;
-      border-radius: var(--r-lg);
-      border: 1px solid var(--border);
-      background:
-        radial-gradient(circle at top right, var(--accent-dim), transparent 42%),
-        linear-gradient(135deg, var(--surface-3), var(--surface));
-      position: relative;
-      overflow: hidden;
-      padding: var(--s4);
-      display: grid;
-      align-items: end;
-    }
-
-    .project-visual::before,
-    .project-visual::after {
-      content: '';
-      position: absolute;
-      border: 1px solid rgba(255,255,255,.05);
-      border-radius: var(--r-lg);
-    }
-
-    .project-visual::before {
-      inset: 14px 18px auto auto;
-      width: 38%;
-      height: 38%;
-    }
-
-    .project-visual::after {
-      inset: auto auto 14px 18px;
-      width: 50%;
-      height: 24%;
-    }
-
-    .project-code {
-      position: relative;
-      z-index: 1;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      line-height: 1.7;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--s2);
-    }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s2);
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .project-link:hover { color: var(--accent-hover); }
-
-    .path-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: var(--s6);
-    }
-
-    .path-card {
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-      display: grid;
-      gap: var(--s5);
-    }
-
-    .timeline {
-      display: grid;
-      gap: var(--s5);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: var(--s6);
-      border-left: 1px solid var(--border);
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -5px;
-      top: 4px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px var(--accent-dim);
-    }
-
-    .timeline-time {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: var(--s2);
-    }
-
-    .timeline-item p { color: var(--text-muted); }
-
-    .cta-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: var(--s6);
-      align-items: stretch;
-    }
-
-    .cta-panel {
-      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 88%, var(--accent-dim)), var(--surface-2));
-      border: 1px solid var(--accent-border);
-      border-radius: var(--r-2xl);
-      padding: clamp(var(--s6), 5vw, var(--s12));
-      box-shadow: var(--shadow-accent);
-    }
-
-    .cta-panel h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-2xl);
-      font-weight: 400;
-      margin-bottom: var(--s4);
-      line-height: 1.08;
-    }
-
-    .cta-panel p {
-      max-width: 54ch;
-      color: var(--text-muted);
-      margin-bottom: var(--s6);
-    }
-
-    .cta-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--s4);
-    }
-
-    .contact-card {
-      display: grid;
-      gap: var(--s5);
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-    }
-
-    .contact-list {
-      display: grid;
-      gap: var(--s4);
-    }
-
-    .contact-item {
-      padding: var(--s4);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      background: color-mix(in oklab, var(--surface-2) 88%, transparent);
-    }
-
-    .contact-item span {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      margin-bottom: 6px;
-    }
-
-    .signature-note {
-      color: var(--text-faint);
-      font-size: var(--text-sm);
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .cta-grid,
-      .tech-grid,
-      .path-grid { grid-template-columns: 1fr; }
-      .tech-main, .tech-side, .project-card { grid-column: auto; }
-      .projects-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 780px) {
-      .hero { min-height: auto; }
-      .hero-meta,
-      .pillars,
-      .projects-grid,
-      .path-grid,
-      .cta-grid { grid-template-columns: 1fr; }
-      .hero-title { max-width: none; }
-      .hero-actions { flex-direction: column; align-items: flex-start; }
-    }
+  /* ══════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════ */
+  @media(max-width:1040px){
+    .hero-grid,.comp-grid,.par-grid,.ct-grid{grid-template-columns:1fr}
+    .comp-main,.comp-side{grid-column:auto}
+    .pw,.pm{grid-column:span 12}
+    .ps{grid-column:span 6}
+    .pf .pb{grid-template-columns:1fr}
+  }
+  @media(max-width:768px){
+    .nav-links{display:none}.burger{display:flex}
+    .hero-meta{grid-template-columns:1fr 1fr}
+    .ps{grid-column:span 12}
+    #home{min-height:auto;padding-top:calc(var(--nav-h) + 3rem)}
+  }
+  @media(max-width:500px){
+    .hero-meta{grid-template-columns:1fr}
+    .hero-btns{flex-direction:column;align-items:flex-start}
+    .ct-btns{flex-direction:column;align-items:flex-start}
+  }
   </style>
 </head>
 <body>
-  <div id="progress-bar"></div>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <div id="page-transition" class="page-transition"></div>
 
-  <nav>
-    <a href="index.html" class="nav-logo" aria-label="Accueil Wensel Reyes">
-      <span class="logo-mark">WR</span>
-      <span>Wensel Reyes</span>
-    </a>
+<div id="pbar"></div>
 
-    <div class="nav-links" id="nav-links"></div>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#home" class="nav-logo">
+    <span class="logo-mark">WR</span>
+    <span>Wensel Reyes</span>
+  </a>
+  <div class="nav-links">
+    <a href="#home"        class="nav-a" data-fr="Accueil"      data-en="Home">Accueil</a>
+    <a href="#competences" class="nav-a" data-fr="Compétences"  data-en="Skills">Compétences</a>
+    <a href="#projets"     class="nav-a" data-fr="Projets"      data-en="Projects">Projets</a>
+    <a href="#parcours"    class="nav-a" data-fr="Parcours"      data-en="Journey">Parcours</a>
+    <a href="#contact"     class="nav-a" data-fr="Contact"       data-en="Contact">Contact</a>
+  </div>
+  <div class="nav-r">
+    <button id="btnLang" class="btn-lang" aria-label="Changer de langue">EN</button>
+    <button id="btnTheme" class="btn-theme" aria-label="Thème"></button>
+    <button id="btnBurger" class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="mobMenu" class="mob-menu">
+  <a href="#home"        class="mob-a" data-fr="Accueil"     data-en="Home">Accueil</a>
+  <a href="#competences" class="mob-a" data-fr="Compétences" data-en="Skills">Compétences</a>
+  <a href="#projets"     class="mob-a" data-fr="Projets"     data-en="Projects">Projets</a>
+  <a href="#parcours"    class="mob-a" data-fr="Parcours"    data-en="Journey">Parcours</a>
+  <a href="#contact"     class="mob-a" data-fr="Contact"     data-en="Contact">Contact</a>
+</div>
 
-    <div class="nav-right">
-      <button id="btn-lang" class="btn-lang" aria-label="Changer de langue">EN</button>
-      <button id="btn-theme" class="btn-theme" aria-label="Changer de thème"></button>
-      <button id="nav-burger" class="nav-burger" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
+<main>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="home">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <div class="hero-kicker" data-fr="BTS SIO · SISR · Cybersécurité" data-en="BTS SIO · SISR · Cybersecurity">BTS SIO · SISR · Cybersécurité</div>
+      <h1 class="hero-h1">Je construis des environnements <em>réseau</em> et <em>système</em>.</h1>
+      <p class="hero-desc" data-fr="Étudiant en BTS SIO option SISR. J'administre, je sécurise, je documente — et j'explique chaque choix technique pour qu'il soit compréhensible." data-en="BTS SIO SISR student. I administrate, secure, document — and explain every technical choice so it can be understood.">Étudiant en BTS SIO option SISR. J'administre, je sécurise, je documente — et j'explique chaque choix technique pour qu'il soit compréhensible.</p>
+      <div class="hero-btns">
+        <a href="#projets" class="btn-p" data-fr="Voir les projets" data-en="See projects">Voir les projets</a>
+        <a href="#contact"  class="btn-g" data-fr="Me contacter" data-en="Contact me">Me contacter</a>
+      </div>
+      <div class="hero-meta">
+        <div class="mc"><div class="mc-lbl" data-fr="Option" data-en="Track">Option</div><div class="mc-val">SISR</div></div>
+        <div class="mc"><div class="mc-lbl" data-fr="Focus" data-en="Focus">Focus</div><div class="mc-val" data-fr="Réseaux · Sécu" data-en="Networks · Sec">Réseaux · Sécu</div></div>
+        <div class="mc"><div class="mc-lbl" data-fr="Site" data-en="Site">Site</div><div class="mc-val">wenselreyes.tech</div></div>
+      </div>
     </div>
-  </nav>
-
-  <div id="mobile-menu" class="mobile-menu"></div>
-
-  <main>
-    <section class="hero">
-      <div class="container-wide hero-grid">
-        <div class="reveal">
-          <div class="hero-kicker" data-fr="BTS SIO · SISR · Cybersécurité" data-en="BTS SIO · SISR · Cybersecurity">BTS SIO · SISR · Cybersécurité</div>
-          <h1 class="hero-title" data-fr="Je conçois des environnements <em>réseau</em>, <em>système</em> et sécurité." data-en="I design <em>network</em>, <em>system</em> and security environments.">Je conçois des environnements <em>réseau</em>, <em>système</em> et sécurité.</h1>
-          <p class="hero-desc" data-fr="Je m'appelle Wensel Reyes, étudiant en BTS SIO option SISR. Mon portfolio présente mes projets, mes compétences et ma manière de traduire des besoins techniques en solutions claires, robustes et compréhensibles, y compris pour un jury non spécialiste." data-en="I'm Wensel Reyes, a BTS SIO student in the SISR track. This portfolio presents my projects, skills and the way I turn technical needs into clear, robust and understandable solutions, including for a non-specialist jury.">Je m'appelle Wensel Reyes, étudiant en BTS SIO option SISR. Mon portfolio présente mes projets, mes compétences et ma manière de traduire des besoins techniques en solutions claires, robustes et compréhensibles, y compris pour un jury non spécialiste.</p>
-
-          <div class="hero-actions">
-            <a href="pages/projets.html" class="btn-primary" data-page-link data-fr="Voir les projets" data-en="View projects">Voir les projets</a>
-            <a href="pages/competences.html" class="btn-ghost" data-page-link data-fr="Explorer les compétences" data-en="Explore skills">Explorer les compétences</a>
-          </div>
-
-          <div class="hero-meta reveal" data-delay="120">
-            <div class="meta-card">
-              <div class="meta-label" data-fr="Spécialité" data-en="Specialty">Spécialité</div>
-              <div class="meta-value" data-fr="SISR · Administration réseau et sécurité" data-en="SISR · Network administration and security">SISR · Administration réseau et sécurité</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label" data-fr="Approche" data-en="Approach">Approche</div>
-              <div class="meta-value" data-fr="Technique, structurée et orientée terrain" data-en="Technical, structured and field-oriented">Technique, structurée et orientée terrain</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label" data-fr="Objectif" data-en="Goal">Objectif</div>
-              <div class="meta-value" data-fr="Construire un portfolio clair, professionnel et crédible" data-en="Build a clear, professional and credible portfolio">Construire un portfolio clair, professionnel et crédible</div>
-            </div>
-          </div>
-        </div>
-
-        <aside class="terminal-card reveal-right" data-delay="160" aria-label="Présentation technique rapide">
-          <div class="terminal-top">
-            <div class="terminal-dots"><span></span><span></span><span></span></div>
-            <div class="terminal-title">/portfolio/overview</div>
-          </div>
-          <div class="terminal-body">
-            <div class="line"><span class="prompt">$</span> whoami</div>
-            <div class="value" data-fr="Étudiant BTS SIO SISR, orienté systèmes, réseaux et cybersécurité" data-en="BTS SIO SISR student, focused on systems, networks and cybersecurity">Étudiant BTS SIO SISR, orienté systèmes, réseaux et cybersécurité</div>
-
-            <div class="line"><span class="prompt">$</span> current_focus</div>
-            <div class="value" data-fr="Active Directory, VLAN, audit sécurité, virtualisation, support utilisateur" data-en="Active Directory, VLAN, security audit, virtualization, user support">Active Directory, VLAN, audit sécurité, virtualisation, support utilisateur</div>
-
-            <div class="line"><span class="prompt">$</span> method</div>
-            <div class="value" data-fr="Observer, documenter, tester, sécuriser, expliquer" data-en="Observe, document, test, secure, explain">Observer, documenter, tester, sécuriser, expliquer</div>
-
-            <div class="line"><span class="prompt">$</span> output</div>
-            <div class="value" data-fr="Des projets visuels, détaillés et directement exploitables" data-en="Visual, detailed and directly usable projects">Des projets visuels, détaillés et directement exploitables</div>
-          </div>
-        </aside>
+    <aside class="term rr" aria-label="Terminal de présentation">
+      <div class="term-top">
+        <div class="tdots"><span></span><span></span><span></span></div>
+        <div class="tname">~/portfolio</div>
       </div>
-    </section>
+      <div class="term-body">
+        <div class="tline"><span class="tprompt">$</span><span data-fr="whoami" data-en="whoami">whoami</span></div>
+        <div class="tval" data-fr="Wensel Reyes — BTS SIO SISR" data-en="Wensel Reyes — BTS SIO SISR student">Wensel Reyes — BTS SIO SISR</div>
+        <div class="tline"><span class="tprompt">$</span><span>current_focus</span></div>
+        <div class="tval" data-fr="AD · VLAN · Audit sécurité · Virtualisation" data-en="AD · VLAN · Security audit · Virtualization">AD · VLAN · Audit sécurité · Virtualisation</div>
+        <div class="tline"><span class="tprompt">$</span><span>méthode</span></div>
+        <div class="tval" data-fr="Observer · Tester · Documenter · Expliquer" data-en="Observe · Test · Document · Explain">Observer · Tester · Documenter · Expliquer</div>
+        <div class="tline"><span class="tprompt">$</span> <span class="tcursor"></span></div>
+      </div>
+    </aside>
+  </div>
+</section>
 
-    <div class="section-divider"></div>
+<div class="sep"></div>
 
-    <section>
-      <div class="container-wide">
-        <div class="section-header reveal">
-          <div class="section-eyebrow" data-fr="Positionnement" data-en="Positioning">Positionnement</div>
-          <h2 class="section-title" data-fr="Un profil <em>technique</em>, mais pensé pour être lisible." data-en="A <em>technical</em> profile designed to stay readable.">Un profil <em>technique</em>, mais pensé pour être lisible.</h2>
-          <p class="section-subtitle" data-fr="Je veux montrer des réalisations concrètes, mais aussi ma capacité à expliquer un <span class='def' data-fr-def='Ensemble de règles ou d’organisation qui structure un réseau.' data-en-def='A set of rules or an architecture used to structure a network.' data-def='Ensemble de règles ou d’organisation qui structure un réseau.'>protocole</span>, une <span class='def' data-fr-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.' data-en-def='Logical separation of a network into several zones for easier administration and security.' data-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.'>segmentation</span> réseau ou un environnement virtualisé avec des mots simples quand c’est nécessaire." data-en="I want to show concrete work, but also my ability to explain a <span class='def' data-fr-def='Ensemble de règles ou d’organisation qui structure un réseau.' data-en-def='A set of rules or an architecture used to structure a network.' data-def='A set of rules or an architecture used to structure a network.'>protocol</span>, a network <span class='def' data-fr-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.' data-en-def='Logical separation of a network into several zones for easier administration and security.' data-def='Logical separation of a network into several zones for easier administration and security.'>segmentation</span> or a virtualized environment in simple words when needed.">Je veux montrer des réalisations concrètes, mais aussi ma capacité à expliquer un <span class='def' data-fr-def='Ensemble de règles ou d’organisation qui structure un réseau.' data-en-def='A set of rules or an architecture used to structure a network.' data-def='Ensemble de règles ou d’organisation qui structure un réseau.'>protocole</span>, une <span class='def' data-fr-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.' data-en-def='Logical separation of a network into several zones for easier administration and security.' data-def='Séparation logique d’un réseau en plusieurs zones pour mieux l’administrer et le sécuriser.'>segmentation</span> réseau ou un environnement virtualisé avec des mots simples quand c’est nécessaire.</p>
-        </div>
-
-        <div class="tech-grid">
-          <div class="tech-main">
-            <div class="pillars">
-              <article class="card card-lift pillar reveal-left">
-                <span class="tag">01 · Infrastructure</span>
-                <h3 data-fr="Construire" data-en="Build">Construire</h3>
-                <p data-fr="Mettre en place des services réseau et système cohérents, documentés et maintenables." data-en="Deploy coherent, documented and maintainable network and system services.">Mettre en place des services réseau et système cohérents, documentés et maintenables.</p>
-              </article>
-              <article class="card card-lift pillar reveal-left" data-delay="90">
-                <span class="tag">02 · Sécurité</span>
-                <h3 data-fr="Sécuriser" data-en="Secure">Sécuriser</h3>
-                <p data-fr="Identifier les risques, limiter l’exposition et améliorer la fiabilité d’un environnement technique." data-en="Identify risks, limit exposure and improve the reliability of a technical environment.">Identifier les risques, limiter l’exposition et améliorer la fiabilité d’un environnement technique.</p>
-              </article>
-              <article class="card card-lift pillar reveal-left" data-delay="180">
-                <span class="tag">03 · Méthode</span>
-                <h3 data-fr="Expliquer" data-en="Explain">Expliquer</h3>
-                <p data-fr="Rendre un sujet technique compréhensible avec une structure claire, des visuels et du contexte." data-en="Make a technical topic understandable with a clear structure, visuals and context.">Rendre un sujet technique compréhensible avec une structure claire, des visuels et du contexte.</p>
-              </article>
+<!-- ═══════════════ COMPÉTENCES ═══════════════ -->
+<section id="competences">
+  <div class="wrap">
+    <div class="sh rv">
+      <div class="eyebrow" data-fr="Compétences" data-en="Skills">Compétences</div>
+      <h2 class="stitle" data-fr="Ce que je <em>sais faire</em>." data-en="What I <em>can do</em>.">Ce que je <em>sais faire</em>.</h2>
+      <p class="sdesc" data-fr="Des compétences issues du référentiel BTS SIO SISR, approfondies en lab personnel et en alternance." data-en="Skills from the BTS SIO SISR curriculum, deepened in personal labs and apprenticeship.">Des compétences issues du référentiel BTS SIO SISR, approfondies en lab personnel et en alternance.</p>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-main">
+        <div class="eyebrow rv" style="margin-bottom:.8rem" data-fr="Réseaux & Infrastructure" data-en="Networks & Infrastructure">Réseaux & Infrastructure</div>
+        <div class="bloc-c rv">
+          <div class="comp-item">
+            <div>
+              <h4><span class="def" data-def="Virtual LAN : séparation logique d'un réseau physique en sous-réseaux indépendants." data-fr-def="Virtual LAN : séparation logique d'un réseau physique en sous-réseaux indépendants." data-en-def="Virtual LAN: logical separation of a physical network into independent sub-networks.">VLANs</span> & Switching Cisco</h4>
+              <p data-fr="Configuration de VLANs, liens trunk, inter-VLAN routing sur équipements Cisco." data-en="VLAN configuration, trunk links, inter-VLAN routing on Cisco equipment.">Configuration de VLANs, liens trunk, inter-VLAN routing sur équipements Cisco.</p>
+              <div class="comp-bar"><span style="width:88%"></span></div>
             </div>
-
-            <div class="card reveal">
-              <div class="section-eyebrow" data-fr="Ce que montre ce site" data-en="What this site shows">Ce que montre ce site</div>
-              <p data-fr="Chaque page a été pensée pour détailler un projet ou une compétence sans surcharger la lecture. L’objectif n’est pas seulement d’aligner des technologies, mais de montrer le problème de départ, la solution choisie, les outils utilisés et le résultat obtenu." data-en="Each page is designed to detail a project or a skill without overloading the reading experience. The goal is not just to list technologies, but to show the initial problem, the chosen solution, the tools used and the final result.">Chaque page a été pensée pour détailler un projet ou une compétence sans surcharger la lecture. L’objectif n’est pas seulement d’aligner des technologies, mais de montrer le problème de départ, la solution choisie, les outils utilisés et le résultat obtenu.</p>
-            </div>
+            <span class="comp-pct">88%</span>
           </div>
-
-          <aside class="tech-side reveal-right">
-            <div class="card">
-              <div class="section-eyebrow" data-fr="Axes de travail" data-en="Work focus">Axes de travail</div>
-              <div class="focus-list">
-                <div class="focus-item">
-                  <div class="focus-top"><strong>Réseaux</strong><span class="tag tag-muted">VLAN · Routage</span></div>
-                  <p data-fr="Structuration logique, interconnexion et contrôle des flux." data-en="Logical structuring, interconnection and traffic control.">Structuration logique, interconnexion et contrôle des flux.</p>
-                  <div class="focus-bar"><span style="width: 88%"></span></div>
-                </div>
-                <div class="focus-item">
-                  <div class="focus-top"><strong>Systèmes</strong><span class="tag tag-muted">Windows · Linux</span></div>
-                  <p data-fr="Services, comptes, administration et environnement de travail." data-en="Services, accounts, administration and working environment.">Services, comptes, administration et environnement de travail.</p>
-                  <div class="focus-bar"><span style="width: 81%"></span></div>
-                </div>
-                <div class="focus-item">
-                  <div class="focus-top"><strong>Sécurité</strong><span class="tag tag-muted">Audit · Durcissement</span></div>
-                  <p data-fr="Analyse de surface d’attaque, tests et réduction des risques." data-en="Attack surface analysis, testing and risk reduction.">Analyse de surface d’attaque, tests et réduction des risques.</p>
-                  <div class="focus-bar"><span style="width: 84%"></span></div>
-                </div>
-              </div>
+          <div class="comp-item">
+            <div>
+              <h4>Routage & Adressage IP</h4>
+              <p data-fr="Plan d'adressage, sous-réseaux, routage statique et dynamique." data-en="IP addressing plan, subnets, static and dynamic routing.">Plan d'adressage, sous-réseaux, routage statique et dynamique.</p>
+              <div class="comp-bar"><span style="width:82%"></span></div>
             </div>
-          </aside>
+            <span class="comp-pct">82%</span>
+          </div>
+          <div class="comp-item">
+            <div>
+              <h4><span class="def" data-def="Zone démilitarisée : zone réseau isolée pour exposer des services sans risquer le réseau interne." data-fr-def="Zone démilitarisée : zone réseau isolée pour exposer des services sans risquer le réseau interne." data-en-def="Demilitarized zone: isolated network zone to expose services without risking the internal network.">DMZ</span> & Firewall</h4>
+              <p data-fr="Architecture de zones réseau, règles de filtrage, isolation des services exposés." data-en="Network zone architecture, filtering rules, isolation of exposed services.">Architecture de zones réseau, règles de filtrage, isolation des services exposés.</p>
+              <div class="comp-bar"><span style="width:78%"></span></div>
+            </div>
+            <span class="comp-pct">78%</span>
+          </div>
+        </div>
+        <div class="eyebrow rv" style="margin-bottom:.8rem;margin-top:1rem" data-fr="Systèmes & Sécurité" data-en="Systems & Security">Systèmes & Sécurité</div>
+        <div class="bloc-c rv">
+          <div class="comp-item">
+            <div>
+              <h4><span class="def" data-def="Service Microsoft centralisant gestion des utilisateurs, ordinateurs et ressources d'un réseau d'entreprise." data-fr-def="Service Microsoft centralisant gestion des utilisateurs, ordinateurs et ressources d'un réseau d'entreprise." data-en-def="Microsoft service centralizing management of users, computers and resources on a corporate network.">Active Directory</span> & <span class="def" data-def="Stratégies de groupe : règles appliquées automatiquement aux machines et utilisateurs du domaine." data-fr-def="Stratégies de groupe : règles appliquées automatiquement aux machines et utilisateurs du domaine." data-en-def="Group Policies: rules automatically applied to machines and users in the domain.">GPO</span></h4>
+              <p data-fr="Déploiement complet : domaine, OU, comptes, groupes, politiques de sécurité." data-en="Full deployment: domain, OU, accounts, groups, security policies.">Déploiement complet : domaine, OU, comptes, groupes, politiques de sécurité.</p>
+              <div class="comp-bar"><span style="width:85%"></span></div>
+            </div>
+            <span class="comp-pct">85%</span>
+          </div>
+          <div class="comp-item">
+            <div>
+              <h4>Audit sécurité & <span class="def" data-def="Durcissement : réduction de la surface d'attaque d'un système en désactivant ce qui est inutile." data-fr-def="Durcissement : réduction de la surface d'attaque d'un système en désactivant ce qui est inutile." data-en-def="Hardening: reducing the attack surface of a system by disabling what is unnecessary.">Hardening</span></h4>
+              <p data-fr="Scan réseau, identification des vulnérabilités, rapport de préconisations." data-en="Network scan, vulnerability identification, recommendation report.">Scan réseau, identification des vulnérabilités, rapport de préconisations.</p>
+              <div class="comp-bar"><span style="width:80%"></span></div>
+            </div>
+            <span class="comp-pct">80%</span>
+          </div>
+          <div class="comp-item">
+            <div>
+              <h4>Virtualisation (VMware · Proxmox)</h4>
+              <p data-fr="Création et gestion de VMs, snapshots, réseaux virtuels, environnements de lab." data-en="VM creation and management, snapshots, virtual networks, lab environments.">Création et gestion de VMs, snapshots, réseaux virtuels, environnements de lab.</p>
+              <div class="comp-bar"><span style="width:84%"></span></div>
+            </div>
+            <span class="comp-pct">84%</span>
+          </div>
         </div>
       </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section>
-      <div class="container-wide">
-        <div class="section-header reveal">
-          <div class="section-eyebrow" data-fr="Sélection" data-en="Selection">Sélection</div>
-          <h2 class="section-title" data-fr="Des projets <em>parlants</em>, pas juste des lignes sur un CV." data-en="Projects that <em>speak</em>, not just lines on a résumé.">Des projets <em>parlants</em>, pas juste des lignes sur un CV.</h2>
-          <p class="section-subtitle" data-fr="J’ai choisi des réalisations qui montrent différentes facettes de mon profil : administration, architecture réseau, sécurité et présentation claire d’un livrable." data-en="I selected projects that show different sides of my profile: administration, network architecture, security and clear delivery presentation.">J’ai choisi des réalisations qui montrent différentes facettes de mon profil : administration, architecture réseau, sécurité et présentation claire d’un livrable.</p>
-        </div>
-
-        <div class="projects-grid">
-          <article class="card card-lift project-card reveal">
-            <div>
-              <div class="project-visual">
-                <div class="project-code">dc01.local
-users → groups → gpo
-backup policy enabled</div>
-              </div>
-              <div style="margin-top: var(--s5);" class="project-tags">
-                <span class="tag">AD</span>
-                <span class="tag">GPO</span>
-                <span class="tag">Windows Server</span>
-              </div>
-            </div>
-            <div>
-              <h3 data-fr="Active Directory" data-en="Active Directory">Active Directory</h3>
-              <p data-fr="Création d’un environnement d’administration centralisée avec comptes, groupes et politiques de sécurité." data-en="Deployment of a centralized administration environment with accounts, groups and security policies.">Création d’un environnement d’administration centralisée avec comptes, groupes et politiques de sécurité.</p>
-            </div>
-            <a class="project-link" href="projets/projet-ad.html" data-page-link data-fr="Voir le détail →" data-en="See details →">Voir le détail →</a>
-          </article>
-
-          <article class="card card-lift project-card reveal" data-delay="120">
-            <div>
-              <div class="project-visual">
-                <div class="project-code">vlan10 : admin
-vlan20 : users
-trunk uplink ok</div>
-              </div>
-              <div style="margin-top: var(--s5);" class="project-tags">
-                <span class="tag">Cisco</span>
-                <span class="tag">VLAN</span>
-                <span class="tag">Switching</span>
-              </div>
-            </div>
-            <div>
-              <h3 data-fr="Infrastructure VLAN" data-en="VLAN Infrastructure">Infrastructure VLAN</h3>
-              <p data-fr="Segmentation d’un réseau pour isoler les usages, améliorer l’organisation et renforcer la sécurité." data-en="Network segmentation to isolate usages, improve organization and reinforce security.">Segmentation d’un réseau pour isoler les usages, améliorer l’organisation et renforcer la sécurité.</p>
-            </div>
-            <a class="project-link" href="projets/projet-vlan.html" data-page-link data-fr="Voir le détail →" data-en="See details →">Voir le détail →</a>
-          </article>
-
-          <article class="card card-lift project-card reveal" data-delay="240">
-            <div>
-              <div class="project-visual">
-                <div class="project-code">nmap -sV target
-ports → services → risks
-report.md generated</div>
-              </div>
-              <div style="margin-top: var(--s5);" class="project-tags">
-                <span class="tag">Kali</span>
-                <span class="tag">Audit</span>
-                <span class="tag">Hardening</span>
-              </div>
-            </div>
-            <div>
-              <h3 data-fr="Audit sécurité" data-en="Security audit">Audit sécurité</h3>
-              <p data-fr="Observation, tests contrôlés et restitution structurée pour identifier les points faibles d’un système." data-en="Observation, controlled testing and structured reporting to identify weak points in a system.">Observation, tests contrôlés et restitution structurée pour identifier les points faibles d’un système.</p>
-            </div>
-            <a class="project-link" href="pages/projets.html" data-page-link data-fr="Voir les autres projets →" data-en="See other projects →">Voir les autres projets →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section>
-      <div class="container-wide">
-        <div class="section-header reveal">
-          <div class="section-eyebrow" data-fr="Parcours" data-en="Journey">Parcours</div>
-          <h2 class="section-title" data-fr="Une progression <em>terrain + formation</em>." data-en="A journey combining <em>practice and training</em>.">Une progression <em>terrain + formation</em>.</h2>
-          <p class="section-subtitle" data-fr="Mon parcours mélange apprentissage académique, environnement professionnel et pratique personnelle. C’est ce mélange qui donne du sens aux projets présentés dans ce portfolio." data-en="My path combines academic learning, professional environments and personal practice. This mix gives meaning to the projects presented in this portfolio.">Mon parcours mélange apprentissage académique, environnement professionnel et pratique personnelle. C’est ce mélange qui donne du sens aux projets présentés dans ce portfolio.</p>
-        </div>
-
-        <div class="path-grid">
-          <article class="card path-card reveal-left">
-            <div>
-              <span class="tag">Formation</span>
-              <h3 data-fr="BTS SIO · option SISR" data-en="BTS SIO · SISR track">BTS SIO · option SISR</h3>
-              <p data-fr="Une formation orientée vers l’administration des systèmes, l’infrastructure réseau, la cybersécurité et la gestion des services informatiques." data-en="A course focused on systems administration, network infrastructure, cybersecurity and IT service management.">Une formation orientée vers l’administration des systèmes, l’infrastructure réseau, la cybersécurité et la gestion des services informatiques.</p>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-time">2025 · 2026</div>
-                <p data-fr="Mise en pratique de projets techniques, documentation et préparation de l’épreuve E5." data-en="Hands-on technical projects, documentation and E5 oral exam preparation.">Mise en pratique de projets techniques, documentation et préparation de l’épreuve E5.</p>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-time">Lab personnel</div>
-                <p data-fr="Machines virtuelles, tests réseau, audit de sécurité, scripts et environnements de démonstration." data-en="Virtual machines, network testing, security auditing, scripts and demo environments.">Machines virtuelles, tests réseau, audit de sécurité, scripts et environnements de démonstration.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="card path-card reveal-right">
-            <div>
-              <span class="tag">Expérience</span>
-              <h3 data-fr="Alternance et missions" data-en="Apprenticeship and assignments">Alternance et missions</h3>
-              <p data-fr="Des expériences qui permettent de confronter la théorie au réel : support, déploiement, procédures, infrastructure et organisation." data-en="Experiences that connect theory with real situations: support, deployment, procedures, infrastructure and organization.">Des expériences qui permettent de confronter la théorie au réel : support, déploiement, procédures, infrastructure et organisation.</p>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-time">Econocom × Engie</div>
-                <p data-fr="Interventions et environnement professionnel autour des postes, des usages et de la qualité de service." data-en="Professional environment involving workstations, usage support and service quality.">Interventions et environnement professionnel autour des postes, des usages et de la qualité de service.</p>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-time">Projets portfolio</div>
-                <p data-fr="Travail sur la présentation, l’organisation visuelle et la valorisation de projets techniques pour un public mixte." data-en="Work on presentation, visual organization and showcasing technical projects for a mixed audience.">Travail sur la présentation, l’organisation visuelle et la valorisation de projets techniques pour un public mixte.</p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section>
-      <div class="container-wide cta-grid">
-        <div class="cta-panel reveal-left">
-          <div class="section-eyebrow" data-fr="Suite" data-en="Next">Suite</div>
-          <h2 data-fr="Parcourir les pages détaillées du portfolio." data-en="Browse the detailed portfolio pages.">Parcourir les pages détaillées du portfolio.</h2>
-          <p data-fr="La page d’accueil donne une vue d’ensemble. Les autres pages détaillent les compétences, les projets, le parcours et les contacts avec davantage d’espace, de structure et de contexte." data-en="The home page gives an overview. The other pages detail skills, projects, background and contact information with more space, structure and context.">La page d’accueil donne une vue d’ensemble. Les autres pages détaillent les compétences, les projets, le parcours et les contacts avec davantage d’espace, de structure et de contexte.</p>
-          <div class="cta-actions">
-            <a href="pages/projets.html" class="btn-primary" data-page-link data-fr="Entrer dans les projets" data-en="Enter the projects">Entrer dans les projets</a>
-            <a href="pages/parcours.html" class="btn-accent-ghost" data-page-link data-fr="Voir le parcours" data-en="See the journey">Voir le parcours</a>
+      <aside class="comp-side rv">
+        <div class="ref-bloc">
+          <h3 data-fr="Référentiel BTS SIO — SISR" data-en="BTS SIO SISR — Skills framework">Référentiel BTS SIO — SISR</h3>
+          <div class="ref-list">
+            <div class="ref-item"><strong data-fr="B1.1 — Gérer le patrimoine informatique" data-en="B1.1 — Manage IT assets">B1.1 — Gérer le patrimoine informatique</strong></div>
+            <div class="ref-item"><strong data-fr="B2.1 — Installer et configurer un poste" data-en="B2.1 — Install and configure a workstation">B2.1 — Installer et configurer un poste</strong></div>
+            <div class="ref-item"><strong data-fr="B2.2 — Maintenir les postes en condition opérationnelle" data-en="B2.2 — Maintain workstations">B2.2 — Maintenir les postes</strong></div>
+            <div class="ref-item"><strong data-fr="B3.1 — Déployer et exploiter les éléments d'infrastructure" data-en="B3.1 — Deploy and operate infrastructure">B3.1 — Déployer les infrastructures</strong></div>
+            <div class="ref-item"><strong data-fr="B3.2 — Exploiter des serveurs" data-en="B3.2 — Operate servers">B3.2 — Exploiter des serveurs</strong></div>
+            <div class="ref-item"><strong data-fr="B3.3 — Sécuriser les équipements et les usages" data-en="B3.3 — Secure equipment and usage">B3.3 — Sécuriser les équipements</strong></div>
           </div>
         </div>
+        <div class="ref-bloc">
+          <h3 data-fr="Outils maîtrisés" data-en="Mastered tools">Outils maîtrisés</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+            <span class="tag">Nmap</span><span class="tag">Metasploit</span><span class="tag">Wireshark</span><span class="tag">Kali Linux</span><span class="tag">VMware</span><span class="tag">Proxmox</span><span class="tag">Cisco IOS</span><span class="tag">PowerShell</span><span class="tag">Bash</span><span class="tag">Windows Server</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
 
-        <aside class="card contact-card reveal-right">
-          <div>
-            <span class="tag">Contact</span>
-            <h3 data-fr="Informations rapides" data-en="Quick contact">Informations rapides</h3>
-            <p data-fr="Une base propre pour terminer le portfolio avec tes vrais liens, ton mail et tes pages détaillées." data-en="A clean base to finish the portfolio with your real links, email and detailed pages.">Une base propre pour terminer le portfolio avec tes vrais liens, ton mail et tes pages détaillées.</p>
+<div class="sep"></div>
+
+<!-- ═══════════════ PROJETS ═══════════════ -->
+<section id="projets">
+  <div class="wrap">
+    <div class="sh rv">
+      <div class="eyebrow" data-fr="Projets" data-en="Projects">Projets</div>
+      <h2 class="stitle" data-fr="Des réalisations <em>concrètes</em>." data-en="<em>Concrete</em> achievements.">Des réalisations <em>concrètes</em>.</h2>
+      <p class="sdesc" data-fr="Infrastructure, sécurité, administration système — des projets documentés, avec le problème de départ, la solution choisie et le résultat." data-en="Infrastructure, security, system administration — documented projects, with the initial problem, the chosen solution and the result.">Infrastructure, sécurité, administration système — des projets documentés, avec le problème de départ, la solution choisie et le résultat.</p>
+    </div>
+    <div class="filter-bar rv">
+      <button class="fb on" data-f="all" data-fr="Tous" data-en="All">Tous</button>
+      <button class="fb" data-f="reseau" data-fr="Réseaux" data-en="Networks">Réseaux</button>
+      <button class="fb" data-f="systeme" data-fr="Systèmes" data-en="Systems">Systèmes</button>
+      <button class="fb" data-f="securite" data-fr="Sécurité" data-en="Security">Sécurité</button>
+      <button class="fb" data-f="pro" data-fr="Pro / Alternance" data-en="Pro / Work">Pro / Alternance</button>
+    </div>
+    <div class="pg" id="projGrid">
+
+      <!-- Active Directory — large -->
+      <article class="pc pw rv" data-cat="systeme">
+        <div class="pv">
+          <div class="pgrid"></div>
+          <div class="pbadge">Formation</div>
+          <div class="pcb"><span class="acc">$</span> New-ADUser -Name <span class="hi">"j.dupont"</span><br><span class="acc">$</span> Add-ADGroupMember <span class="hi">"GRP_RH"</span> -Members "j.dupont"<br><span class="acc">$</span> Set-GPO -Name <span class="hi">"Politique_Securite"</span></div>
+        </div>
+        <div class="pb">
+          <div class="ptags"><span class="tag">Active Directory</span><span class="tag">GPO</span><span class="tag">Windows Server</span><span class="tag">PowerShell</span></div>
+          <h3 class="ptitle" data-fr="Active Directory — <em>Domaine complet</em>" data-en="Active Directory — <em>Full domain</em>">Active Directory — <em>Domaine complet</em></h3>
+          <p class="pdesc" data-fr="Mise en place d'un <span class='def' data-def='Service Microsoft centralisant gestion des utilisateurs et ressources réseau d'une entreprise.'>Active Directory</span> depuis zéro : installation du serveur, création du domaine, des <span class='def' data-def='Unités organisationnelles : dossiers logiques pour organiser utilisateurs et machines dans AD.'>OU</span>, des comptes, des groupes et des <span class='def' data-def='Stratégies de groupe : règles de sécurité appliquées automatiquement aux utilisateurs et machines.'>GPO</span>." data-en="Full <span class='def' data-def='Microsoft service centralizing management of users and network resources in a company.'>Active Directory</span> deployment from scratch: server installation, domain creation, <span class='def' data-def='Organizational units: logical folders to organize users and machines in AD.'>OUs</span>, accounts, groups and <span class='def' data-def='Group Policies: security rules automatically applied to users and machines.'>GPOs</span>.">Mise en place d'un <span class="def" data-def="Service Microsoft centralisant gestion des utilisateurs et ressources réseau d'une entreprise.">Active Directory</span> depuis zéro : installation du serveur, création du domaine, des <span class="def" data-def="Unités organisationnelles : dossiers logiques pour organiser utilisateurs et machines dans AD.">OU</span>, des comptes, des groupes et des <span class="def" data-def="Stratégies de groupe : règles de sécurité appliquées automatiquement aux utilisateurs et machines.">GPO</span>.</p>
+          <div class="pmeta"><span class="pctx" data-fr="TP BTS SIO · VMware · 2025" data-en="BTS SIO lab · VMware · 2025">TP BTS SIO · VMware · 2025</span><a class="plink" href="#" data-fr="Voir le projet →" data-en="See project →">Voir le projet →</a></div>
+        </div>
+      </article>
+
+      <!-- VLAN — moyen -->
+      <article class="pc pm rv rr" data-cat="reseau">
+        <div class="pv">
+          <div class="pgrid"></div>
+          <div class="pbadge">Formation</div>
+          <div class="pcb"><span class="acc">SW(config)#</span> vlan <span class="hi">10</span><br><span class="acc">SW(config-vlan)#</span> name ADMIN<br><span class="acc">SW(config-if)#</span> switchport mode trunk</div>
+        </div>
+        <div class="pb">
+          <div class="ptags"><span class="tag">Cisco</span><span class="tag">VLAN</span><span class="tag">Switching</span></div>
+          <h3 class="ptitle" data-fr="Infrastructure <em>VLAN</em>" data-en="<em>VLAN</em> Infrastructure">Infrastructure <em>VLAN</em></h3>
+          <p class="pdesc" data-fr="Segmentation d'un réseau en <span class='def' data-def='VLANs : réseaux virtuels qui isolent logiquement des groupes de machines sur le même équipement physique.'>VLANs</span> pour isoler les zones et renforcer la sécurité. Configuration des liaisons <span class='def' data-def='Trunk : lien qui transporte le trafic de plusieurs VLANs entre deux switches.'>trunk</span>." data-en="Network segmentation into <span class='def' data-def='VLANs: virtual networks that logically isolate groups of machines on the same physical equipment.'>VLANs</span> to isolate zones and strengthen security. Configuration of <span class='def' data-def='Trunk: link that carries traffic from multiple VLANs between two switches.'>trunk</span> links.">Segmentation d'un réseau en <span class="def" data-def="VLANs : réseaux virtuels qui isolent logiquement des groupes de machines sur le même équipement physique.">VLANs</span> pour isoler les zones et renforcer la sécurité. Configuration des liaisons <span class="def" data-def="Trunk : lien qui transporte le trafic de plusieurs VLANs entre deux switches.">trunk</span>.</p>
+          <div class="pmeta"><span class="pctx" data-fr="TP BTS SIO · Packet Tracer · 2025" data-en="BTS SIO · Packet Tracer · 2025">TP BTS SIO · Packet Tracer · 2025</span><a class="plink" href="#" data-fr="Voir →" data-en="See →">Voir →</a></div>
+        </div>
+      </article>
+
+      <!-- Audit sécu -->
+      <article class="pc ps rv" data-cat="securite">
+        <div class="pv">
+          <div class="pgrid"></div>
+          <div class="pbadge">Formation</div>
+          <div class="pcb"><span class="acc">$</span> nmap -sV -sC target<br><span class="acc">→</span> <span class="hi">3 vulns</span> identifiées<br><span class="acc">→</span> rapport.md ✓</div>
+        </div>
+        <div class="pb">
+          <div class="ptags"><span class="tag">Kali Linux</span><span class="tag">Nmap</span><span class="tag">Audit</span></div>
+          <h3 class="ptitle" data-fr="Audit <em>sécurité</em>" data-en="<em>Security</em> audit">Audit <em>sécurité</em></h3>
+          <p class="pdesc" data-fr="Scan de ports, identification des services, analyse des <span class='def' data-def='Vulnérabilité : faille dans un système qui peut être exploitée par un attaquant.'>vulnérabilités</span> et rapport de recommandations." data-en="Port scanning, service identification, <span class='def' data-def='Vulnerability: flaw in a system that can be exploited by an attacker.'>vulnerability</span> analysis and recommendation report.">Scan de ports, identification des services, analyse des <span class="def" data-def="Vulnérabilité : faille dans un système qui peut être exploitée par un attaquant.">vulnérabilités</span> et rapport de recommandations.</p>
+          <div class="pmeta"><span class="pctx">Kali + Metasploitable · 2025</span><a class="plink" href="#">Voir →</a></div>
+        </div>
+      </article>
+
+      <!-- DMZ -->
+      <article class="pc ps rv" data-cat="reseau">
+        <div class="pv">
+          <div class="pgrid"></div>
+          <div class="pbadge">Formation</div>
+          <div class="pcb"><span class="acc">LAN</span> → FW → <span class="hi">DMZ</span><br><span class="acc">→</span> Web:10.2 / DNS:10.3<br><span class="acc">→</span> isolé ✓</div>
+        </div>
+        <div class="pb">
+          <div class="ptags"><span class="tag">Proxmox VE</span><span class="tag">DMZ</span><span class="tag">Firewall</span></div>
+          <h3 class="ptitle" data-fr="<em>DMZ</em> Proxmox VE" data-en="Proxmox VE <em>DMZ</em>"><em>DMZ</em> Proxmox VE</h3>
+          <p class="pdesc" data-fr="Mise en place d'une <span class='def' data-def='DMZ : zone réseau intermédiaire qui expose des services publics tout en protégeant le réseau interne.'>DMZ</span> sur Proxmox, avec gestion du trafic entrant/sortant et isolation des serveurs web." data-en="<span class='def' data-def='DMZ: intermediate network zone that exposes public services while protecting the internal network.'>DMZ</span> setup on Proxmox, with inbound/outbound traffic management and web server isolation.">Mise en place d'une <span class="def" data-def="DMZ : zone réseau intermédiaire qui expose des services publics tout en protégeant le réseau interne.">DMZ</span> sur Proxmox, avec gestion du trafic entrant/sortant et isolation des serveurs web.</p>
+          <div class="pmeta"><span class="pctx" data-fr="Proxmox VE · Lab · 2025" data-en="Proxmox VE · Lab · 2025">Proxmox VE · Lab · 2025</span><a class="plink" href="#">Voir →</a></div>
+        </div>
+      </article>
+
+      <!-- Portfolio -->
+      <article class="pc ps rv" data-cat="systeme">
+        <div class="pv">
+          <div class="pgrid"></div>
+          <div class="pcb"><span class="acc">$</span> git push origin main<br><span class="acc">→</span> <span class="hi">wenselreyes.tech</span><br><span class="acc">→</span> deployed ✓</div>
+        </div>
+        <div class="pb">
+          <div class="ptags"><span class="tag">HTML/CSS</span><span class="tag">JS</span><span class="tag">Design</span></div>
+          <h3 class="ptitle" data-fr="Ce <em>portfolio</em>" data-en="This <em>portfolio</em>">Ce <em>portfolio</em></h3>
+          <p class="pdesc" data-fr="Conception et développement one-page : design system custom, mode sombre/clair, traduction FR/EN, animations, tooltips définitions." data-en="One-page design and development: custom design system, dark/light mode, FR/EN translation, animations, definition tooltips.">Conception et développement one-page : design system custom, mode sombre/clair, traduction FR/EN, animations, tooltips définitions.</p>
+          <div class="pmeta"><span class="pctx" data-fr="Projet perso · 2025–2026" data-en="Personal project · 2025–2026">Projet perso · 2025–2026</span><a class="plink" href="#home" data-fr="↑ Haut" data-en="↑ Top">↑ Haut</a></div>
+        </div>
+      </article>
+
+      <!-- Alternance — full -->
+      <article class="pc pf rv" data-cat="pro">
+        <div class="pv" style="min-height:140px">
+          <div class="pgrid"></div>
+          <div class="pbadge pro">Alternance</div>
+          <div class="pcb" style="max-width:440px"><span class="acc">Mission :</span> <span class="hi">Support N1/N2 · Econocom × Engie</span><br><span class="acc">Périmètre :</span> postes, incidents, procédures<br><span class="acc">Résultat :</span> docs internes + résolution ✓</div>
+        </div>
+        <div class="pb">
+          <div class="pleft">
+            <div class="ptags"><span class="tag">Support N1/N2</span><span class="tag">ITSM</span><span class="tag">Windows 10/11</span><span class="tag">Documentation</span></div>
+            <h3 class="ptitle" data-fr="Alternance — <em>Econocom × Engie</em>" data-en="Apprenticeship — <em>Econocom × Engie</em>">Alternance — <em>Econocom × Engie</em></h3>
+            <p class="pdesc" data-fr="Missions de <span class='def' data-def='Support N1/N2 : assistance informatique de premier (incidents courants) et deuxième niveau (cas plus complexes).'>support N1/N2</span> dans un environnement professionnel exigeant. Gestion des postes, des demandes utilisateurs, rédaction de procédures et suivi de <span class='def' data-def='Ticket : demande enregistrée dans un outil ITSM pour tracer et suivre la résolution d'un incident.'>tickets</span>." data-en="<span class='def' data-def='N1/N2 support: IT assistance at first level (common incidents) and second level (more complex cases).'>N1/N2 support</span> missions in a demanding professional environment. Workstation management, user requests, procedure writing and <span class='def' data-def='Ticket: request recorded in an ITSM tool to track and follow incident resolution.'>ticket</span> tracking.">Missions de <span class="def" data-def="Support N1/N2 : assistance informatique de premier (incidents courants) et deuxième niveau (cas plus complexes).">support N1/N2</span> dans un environnement professionnel exigeant. Gestion des postes, des demandes utilisateurs, rédaction de procédures et suivi de <span class="def" data-def="Ticket : demande enregistrée dans un outil ITSM pour tracer et suivre la résolution d'un incident.">tickets</span>.</p>
+            <div class="pmeta" style="border-top:1px solid var(--bds);padding-top:.75rem"><span class="pctx">Econocom × Engie · 2025–2026</span><a class="plink" href="#">Voir le bilan →</a></div>
           </div>
-          <div class="contact-list">
-            <div class="contact-item">
-              <span>Site</span>
-              <strong>wenselreyes.tech</strong>
-            </div>
-            <div class="contact-item">
-              <span data-fr="Statut" data-en="Status">Statut</span>
-              <strong data-fr="Étudiant BTS SIO SISR" data-en="BTS SIO SISR student">Étudiant BTS SIO SISR</strong>
-            </div>
-            <div class="contact-item">
-              <span data-fr="Suite logique" data-en="Next step">Suite logique</span>
-              <strong data-fr="Créer les pages compétences, projets, parcours et contact" data-en="Create the skills, projects, journey and contact pages">Créer les pages compétences, projets, parcours et contact</strong>
+          <div class="pright">
+            <div class="eyebrow" style="font-size:10px" data-fr="Compétences mobilisées" data-en="Skills applied">Compétences mobilisées</div>
+            <div class="sklist">
+              <div class="ski"><strong data-fr="Gestion des incidents" data-en="Incident management">Gestion des incidents</strong><span data-fr="Diagnostic, priorisation, résolution et suivi en environnement réel." data-en="Diagnosis, prioritization, resolution and follow-up in a real environment.">Diagnostic, priorisation, résolution et suivi en environnement réel.</span></div>
+              <div class="ski"><strong data-fr="Documentation technique" data-en="Technical documentation">Documentation technique</strong><span data-fr="Rédaction de procédures adaptées aux équipes tech et aux utilisateurs." data-en="Writing procedures adapted to technical teams and end users.">Rédaction de procédures adaptées aux équipes tech et aux utilisateurs.</span></div>
+              <div class="ski"><strong data-fr="Relation utilisateur" data-en="User relations">Relation utilisateur</strong><span data-fr="Communication claire, prise en charge professionnelle et suivi." data-en="Clear communication, professional handling and follow-up.">Communication claire, prise en charge professionnelle et suivi.</span></div>
             </div>
           </div>
-          <p class="signature-note" data-fr="Base d’accueil prête pour servir de point d’entrée principal du portfolio." data-en="Home page base ready to serve as the portfolio main entry point.">Base d’accueil prête pour servir de point d’entrée principal du portfolio.</p>
-        </aside>
+        </div>
+      </article>
+
+    </div><!-- fin projGrid -->
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════ PARCOURS ═══════════════ -->
+<section id="parcours">
+  <div class="wrap">
+    <div class="sh rv">
+      <div class="eyebrow" data-fr="Parcours" data-en="Journey">Parcours</div>
+      <h2 class="stitle" data-fr="Formation <em>+</em> terrain." data-en="Training <em>+</em> real-world.">Formation <em>+</em> terrain.</h2>
+      <p class="sdesc" data-fr="Un mélange de cours, de lab personnel et d'expériences professionnelles qui donnent du concret à chaque compétence." data-en="A mix of coursework, personal labs and professional experience that makes every skill concrete.">Un mélange de cours, de lab personnel et d'expériences professionnelles qui donnent du concret à chaque compétence.</p>
+    </div>
+    <div class="par-grid">
+      <div class="par-bloc rl">
+        <div class="tag" style="width:fit-content" data-fr="Formation" data-en="Education">Formation</div>
+        <h3 data-fr="BTS SIO · option SISR" data-en="BTS SIO · SISR track">BTS SIO · option SISR</h3>
+        <div class="tl">
+          <div class="tli">
+            <div class="tlt" data-fr="2025 – 2026 · Année 1" data-en="2025 – 2026 · Year 1">2025 – 2026 · Année 1</div>
+            <p data-fr="Infrastructure réseau, administration système, virtualisation, cybersécurité. Préparation du dossier professionnel E5." data-en="Network infrastructure, system administration, virtualization, cybersecurity. E5 professional portfolio preparation.">Infrastructure réseau, administration système, virtualisation, cybersécurité. Préparation du dossier professionnel E5.</p>
+          </div>
+          <div class="tli">
+            <div class="tlt" data-fr="Lab personnel" data-en="Personal lab">Lab personnel</div>
+            <p data-fr="Machines virtuelles VMware/Proxmox, tests réseau, payloads HID, scripts Bash/PowerShell, environnements de démonstration." data-en="VMware/Proxmox virtual machines, network testing, HID payloads, Bash/PowerShell scripts, demo environments.">Machines virtuelles VMware/Proxmox, tests réseau, payloads HID, scripts Bash/PowerShell, environnements de démonstration.</p>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
+      <div class="par-bloc rr">
+        <div class="tag" style="width:fit-content" data-fr="Expérience" data-en="Experience">Expérience</div>
+        <h3 data-fr="Alternance & Stages" data-en="Apprenticeship & Internships">Alternance & Stages</h3>
+        <div class="tl">
+          <div class="tli">
+            <div class="tlt">Econocom × Engie</div>
+            <p data-fr="Support N1/N2 : gestion des postes, incidents utilisateurs, rédaction de procédures, suivi de tickets en environnement professionnel." data-en="N1/N2 support: workstation management, user incidents, procedure writing, ticket tracking in a professional environment.">Support N1/N2 : gestion des postes, incidents utilisateurs, rédaction de procédures, suivi de tickets en environnement professionnel.</p>
+          </div>
+          <div class="tli">
+            <div class="tlt" data-fr="Projets portfolio" data-en="Portfolio projects">Projets portfolio</div>
+            <p data-fr="Valorisation des réalisations techniques : documentation structurée, présentation visuelle, accessibilité pour un jury mixte." data-en="Showcasing technical achievements: structured documentation, visual presentation, accessibility for a mixed jury.">Valorisation des réalisations techniques : documentation structurée, présentation visuelle, accessibilité pour un jury mixte.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <span>WR</span> · <span data-fr="Portfolio BTS SIO SISR" data-en="BTS SIO SISR portfolio">Portfolio BTS SIO SISR</span> · wenselreyes.tech
-  </footer>
+<div class="sep"></div>
 
-  <script src="nav.js"></script>
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="wrap ct-grid">
+    <div class="ct-panel rv">
+      <div class="eyebrow" data-fr="Contact" data-en="Contact">Contact</div>
+      <h2 data-fr="Prêt à <em>échanger</em>." data-en="Ready to <em>connect</em>.">Prêt à <em>échanger</em>.</h2>
+      <p data-fr="Je suis disponible pour toute question sur mon parcours, mes projets ou mon portfolio. N'hésitez pas à me contacter directement." data-en="I'm available for any question about my background, projects or portfolio. Feel free to contact me directly.">Je suis disponible pour toute question sur mon parcours, mes projets ou mon portfolio. N'hésitez pas à me contacter directement.</p>
+      <div class="ct-btns">
+        <a href="mailto:contact@wenselreyes.tech" class="btn-p" data-fr="Envoyer un email" data-en="Send an email">Envoyer un email</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="btn-ag" data-fr="LinkedIn →" data-en="LinkedIn →">LinkedIn →</a>
+      </div>
+    </div>
+    <div class="ct-card rv">
+      <div class="tag" style="width:fit-content" data-fr="Infos rapides" data-en="Quick info">Infos rapides</div>
+      <div class="ct-list">
+        <div class="ct-item"><span data-fr="Site" data-en="Website">Site</span><strong>wenselreyes.tech</strong></div>
+        <div class="ct-item"><span data-fr="Statut" data-en="Status">Statut</span><strong data-fr="Étudiant BTS SIO SISR · 2025–2026" data-en="BTS SIO SISR Student · 2025–2026">Étudiant BTS SIO SISR · 2025–2026</strong></div>
+        <div class="ct-item"><span data-fr="Localisation" data-en="Location">Localisation</span><strong data-fr="Puteaux, Île-de-France" data-en="Puteaux, Île-de-France">Puteaux, Île-de-France</strong></div>
+        <div class="ct-item"><span>Email</span><strong>contact@wenselreyes.tech</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>WR</span> · Wensel Reyes · wenselreyes.tech · <span data-fr="Portfolio BTS SIO SISR" data-en="BTS SIO SISR Portfolio">Portfolio BTS SIO SISR</span>
+</footer>
+
+<script>
+(function(){
+  /* ── THÈME ── */
+  const root = document.documentElement;
+  const pref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  let theme = sessionStorage.getItem('th') || pref;
+  root.setAttribute('data-theme', theme);
+
+  function syncTheme(){
+    const b = document.getElementById('btnTheme');
+    if(!b) return;
+    b.innerHTML = theme === 'dark'
+      ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  }
+  syncTheme();
+  document.getElementById('btnTheme').addEventListener('click', ()=>{
+    theme = theme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', theme);
+    sessionStorage.setItem('th', theme);
+    syncTheme();
+  });
+
+  /* ── LANGUE ── */
+  let lang = sessionStorage.getItem('lg') || 'fr';
+  function applyLang(l){
+    lang = l;
+    sessionStorage.setItem('lg', l);
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      el.innerHTML = l === 'fr' ? el.dataset.fr : (el.dataset.en || el.dataset.fr);
+    });
+    document.querySelectorAll('[data-fr-def]').forEach(el => {
+      el.setAttribute('data-def', l === 'fr' ? el.dataset.frDef : (el.dataset.enDef || el.dataset.frDef));
+    });
+    document.getElementById('btnLang').textContent = l === 'fr' ? 'EN' : 'FR';
+    root.lang = l;
+  }
+  applyLang(lang);
+  document.getElementById('btnLang').addEventListener('click', ()=> applyLang(lang === 'fr' ? 'en' : 'fr'));
+
+  /* ── BURGER ── */
+  const burger = document.getElementById('btnBurger');
+  const mob = document.getElementById('mobMenu');
+  burger.addEventListener('click', ()=>{
+    burger.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+    burger.classList.remove('open'); mob.classList.remove('open');
+  }));
+  document.addEventListener('click', e => {
+    if(!mob.contains(e.target) && !burger.contains(e.target)){
+      burger.classList.remove('open'); mob.classList.remove('open');
+    }
+  });
+
+  /* ── PROGRESS BAR ── */
+  const bar = document.getElementById('pbar');
+  window.addEventListener('scroll', ()=>{
+    const h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - window.innerHeight) * 100) + '%';
+  }, {passive:true});
+
+  /* ── NAV ACTIVE + SCROLL SHADOW ── */
+  const navEl = document.getElementById('nav');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-a, .mob-a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, {threshold: .35});
+  sections.forEach(s => obs.observe(s));
+  window.addEventListener('scroll', ()=>{
+    navEl.style.borderBottomColor = window.scrollY > 10 ? 'var(--bd)' : 'var(--bds)';
+  }, {passive:true});
+
+  /* ── REVEAL ── */
+  const rvObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const d = +e.target.dataset.delay || 0;
+        setTimeout(()=> e.target.classList.add('on'), d);
+        rvObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:.10});
+  document.querySelectorAll('.rv,.rl,.rr').forEach(el => rvObs.observe(el));
+
+  /* ── FILTRES PROJETS ── */
+  document.querySelectorAll('.fb').forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const f = btn.dataset.f;
+      document.querySelectorAll('#projGrid .pc').forEach(c => {
+        c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+
+  /* ── CURSOR BLINK stop au blur ── */
+  // natif CSS animation
+
+})();
+</script>
 </body>
 </html>
