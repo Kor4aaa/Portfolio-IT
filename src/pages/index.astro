@@ -15,10 +15,10 @@ const [prenom, ...resteNom] = profil.nom.split(' ');
 const nom = resteNom.join(' ');
 
 const etapes = [
-  { t: 'Référentiel', d: 'Les épreuves E5, E6 et E7 et leurs compétences officielles.' },
-  { t: 'Compétence', d: 'Chaque sous-compétence, avec son statut de maîtrise.' },
-  { t: 'Réalisation', d: 'Les projets et expériences qui mobilisent la compétence.' },
-  { t: 'Preuve', d: 'Captures, schémas, configurations et documents à l\'appui.' },
+  { t: 'Référentiel', tEn: 'Framework', d: 'Les épreuves E5, E6 et E7 et leurs compétences officielles.', dEn: 'The E5, E6 and E7 units and their official skills.' },
+  { t: 'Compétence', tEn: 'Skill', d: 'Chaque sous-compétence, avec son statut de maîtrise.', dEn: 'Each sub-skill, with its mastery status.' },
+  { t: 'Réalisation', tEn: 'Project', d: 'Les projets et expériences qui mobilisent la compétence.', dEn: 'The projects and experiences that apply the skill.' },
+  { t: 'Preuve', tEn: 'Evidence', d: 'Captures, schémas, configurations et documents à l\'appui.', dEn: 'Screenshots, diagrams, configs and supporting documents.' },
 ];
 ---
 <Base path="/">
@@ -27,18 +27,18 @@ const etapes = [
     <div class="hero__bg" aria-hidden="true"></div>
     <div class="container hero__grid">
       <div class="hero__intro">
-        <p class="hero__eyebrow mono"><span class="hero__spark" aria-hidden="true"></span>Portfolio de preuves — BTS SIO SISR</p>
+        <p class="hero__eyebrow mono"><span class="hero__spark" aria-hidden="true"></span><span data-en="Evidence portfolio — BTS SIO SISR">Portfolio de preuves — BTS SIO SISR</span></p>
         <h1 class="hero__name"><span class="hero__fn">{prenom}</span><span class="hero__ln">{nom}</span></h1>
         <p class="hero__line">
-          BTS SIO SISR <span class="hero__axes">— Systèmes, Réseaux &amp; Cybersécurité</span>
+          BTS SIO SISR <span class="hero__axes" data-en="— Systems, Networks &amp; Cybersecurity">— Systèmes, Réseaux &amp; Cybersécurité</span>
         </p>
-        <p class="hero__pitch prose">{profil.pitch}</p>
+        <p class="hero__pitch prose" data-en="Second-year BTS SIO SISR student, on a work-study placement as an IT support technician. I want to move to the other side of the ticket: design, deploy, secure and monitor infrastructure — and I'm getting ready by building a real segmented platform on Proxmox and pfSense.">{profil.pitch}</p>
 
-        <blockquote class="hero__q">{profil.question}</blockquote>
+        <blockquote class="hero__q" data-en="Which BTS SIO SISR framework skills can I demonstrate, through which projects, and with what evidence?">{profil.question}</blockquote>
 
         <div class="hero__cta">
-          <a class="btn btn--primary" href="/referentiel">Explorer le référentiel</a>
-          <a class="btn btn--ghost" href="/realisations">Voir les réalisations</a>
+          <a class="btn btn--primary" href="/referentiel" data-en="Explore the framework">Explorer le référentiel</a>
+          <a class="btn btn--ghost" href="/realisations" data-en="See the projects">Voir les réalisations</a>
         </div>
       </div>
 
@@ -53,10 +53,10 @@ const etapes = [
     <div class="container">
       <div class="cov-band__head">
         <div>
-          <span class="section-head__index">État du référentiel</span>
-          <h2>Couverture des compétences</h2>
+          <span class="section-head__index" data-en="Framework status">État du référentiel</span>
+          <h2 data-en="Skills coverage">Couverture des compétences</h2>
         </div>
-        <span class="cov-band__count mono">{totaux.sousTravaillees}/{totaux.sousTotal} sous-compétences travaillées</span>
+        <span class="cov-band__count mono" data-en={`${totaux.sousTravaillees}/${totaux.sousTotal} sub-skills worked on`}>{totaux.sousTravaillees}/{totaux.sousTotal} sous-compétences travaillées</span>
       </div>
       <div class="cov-band__grid">
         {apercu.map((a) => (
@@ -67,11 +67,11 @@ const etapes = [
             </div>
             <span class="cov-card__name">{a.epreuve.titre}</span>
             <div class="cov-card__bar"><CoverageBar dist={a.dist} total={a.total} showLegend={true} /></div>
-            <span class="cov-card__foot mono">{a.nbRealisations} réalisation{a.nbRealisations > 1 ? 's' : ''} · {a.total} sous-compétences</span>
+            <span class="cov-card__foot mono" data-en={`${a.nbRealisations} project${a.nbRealisations > 1 ? 's' : ''} · ${a.total} sub-skills`}>{a.nbRealisations} réalisation{a.nbRealisations > 1 ? 's' : ''} · {a.total} sous-compétences</span>
           </a>
         ))}
       </div>
-      <a class="cov-band__more link" href="/synthese">Tableau de synthèse détaillé</a>
+      <a class="cov-band__more link" href="/synthese" data-en="Detailed summary table">Tableau de synthèse détaillé</a>
     </div>
   </section>
 
@@ -81,9 +81,9 @@ const etapes = [
   <section class="section concept">
     <div class="container">
       <div class="section-head">
-        <span class="section-head__index">Comment lire ce portfolio</span>
-        <h2>Du référentiel à la preuve</h2>
-        <p>Chaque compétence affichée renvoie aux réalisations qui la mobilisent et aux preuves qui la justifient. Rien n'est coché sans réalisation ni preuve associée.</p>
+        <span class="section-head__index" data-en="How to read this portfolio">Comment lire ce portfolio</span>
+        <h2 data-en="From framework to evidence">Du référentiel à la preuve</h2>
+        <p data-en="Every skill shown links to the projects that apply it and the evidence that backs it. Nothing is ticked without an associated project and proof.">Chaque compétence affichée renvoie aux réalisations qui la mobilisent et aux preuves qui la justifient. Rien n'est coché sans réalisation ni preuve associée.</p>
       </div>
       <ol class="steps">
         {etapes.map((e, i) => (
@@ -91,8 +91,8 @@ const etapes = [
             <span class="step__num mono">{String(i + 1).padStart(2, '0')}</span>
             <span class="step__arrow" aria-hidden="true"></span>
             <span class="step__body">
-              <span class="step__t">{e.t}</span>
-              <span class="step__d">{e.d}</span>
+              <span class="step__t" data-en={e.tEn}>{e.t}</span>
+              <span class="step__d" data-en={e.dEn}>{e.d}</span>
             </span>
           </li>
         ))}
@@ -107,10 +107,10 @@ const etapes = [
     <div class="container">
       <div class="section-head section-head--row">
         <div>
-          <span class="section-head__index">Réalisations principales</span>
-          <h2>Projets au cœur du portfolio</h2>
+          <span class="section-head__index" data-en="Key projects">Réalisations principales</span>
+          <h2 data-en="Projects at the core of the portfolio">Projets au cœur du portfolio</h2>
         </div>
-        <a class="link" href="/realisations">Toutes les réalisations</a>
+        <a class="link" href="/realisations" data-en="All projects">Toutes les réalisations</a>
       </div>
       <div class="feat-grid">
         {vedettes.map((r) => <RealisationCard r={r} />)}
@@ -124,16 +124,16 @@ const etapes = [
   <section class="section">
     <div class="container teaser">
       <div class="teaser__text">
-        <span class="section-head__index">En bref</span>
-        <h2>Formation, alternance et laboratoire personnel</h2>
-        <p class="prose">
+        <span class="section-head__index" data-en="In short">En bref</span>
+        <h2 data-en="Training, work-study and a personal lab">Formation, alternance et laboratoire personnel</h2>
+        <p class="prose" data-en={`${profil.alternance.poste} at ${profil.alternance.entreprise} (client ${profil.alternance.client}) since September 2025, alongside the BTS SIO SISR. Professional experience and the Home Lab directly feed the framework skills.`}>
           {profil.alternance.poste} chez {profil.alternance.entreprise} (client {profil.alternance.client})
           depuis {profil.alternance.depuis.toLowerCase()}, en parallèle du BTS SIO SISR.
           Les expériences professionnelles et le Home Lab alimentent directement les compétences du référentiel.
         </p>
         <div class="teaser__cta">
-          <a class="btn btn--ghost" href="/parcours">Mon parcours</a>
-          <a class="btn btn--ghost" href="/preuves">Mes preuves</a>
+          <a class="btn btn--ghost" href="/parcours" data-en="My background">Mon parcours</a>
+          <a class="btn btn--ghost" href="/preuves" data-en="My evidence">Mes preuves</a>
         </div>
       </div>
     </div>

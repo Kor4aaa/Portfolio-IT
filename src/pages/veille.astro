@@ -1,98 +1,122 @@
 ---
 import Base from '@layouts/Base.astro';
-import { veille, themesVeille } from '@data/veille';
+import { veille } from '@data/veille';
+import feed from '@data/veille-feed.json';
 
-const dateFmt = (iso: string) => {
+const dateFmt = (iso: string | null) => {
+  if (!iso) return '';
   const d = new Date(iso);
-  return isNaN(d.getTime()) ? iso : d.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+  return isNaN(d.getTime()) ? '' : d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
 };
+const updated = feed.updated ? dateFmt(feed.updated) : null;
+const items = (feed.items ?? []) as { title: string; link: string; date: string | null; source: string; theme?: string }[];
 ---
 <Base
   title="Veille technologique"
-  description="Veille technologique de Wensel Reyes — suivi des sujets systèmes, réseaux et sécurité (compétence E5.6 du référentiel BTS SIO SISR)."
+  description="Veille technologique automatisée (flux RSS sécurité & systèmes) et synthèses personnelles — compétence E5.6 du BTS SIO SISR."
   path="/veille"
 >
   <section class="section--tight">
     <div class="container">
       <div class="section-head">
-        <span class="section-head__index">Développement professionnel — E5.6</span>
-        <h1>Veille technologique</h1>
-        <p class="prose">
-          Suivi régulier de l'actualité systèmes, réseaux et sécurité. Chaque entrée indique le sujet,
-          les sources, une synthèse et l'impact sur mes pratiques — au service de la compétence
-          <span class="code-ref">E5.6.2</span> « mettre en œuvre des outils et stratégies de veille ».
+        <span class="section-head__index" data-en="Professional development — E5.6">Développement professionnel — E5.6</span>
+        <h1 data-en="Technology watch">Veille technologique</h1>
+        <p class="prose" data-en="Keeping up with security, systems and networks. The feed below is <strong>updated automatically every day</strong> from trusted RSS sources — automating a watch is itself a watch strategy (skill E5.6.2).">
+          Suivi de l'actualité sécurité, systèmes et réseaux. Le fil ci-dessous est
+          <strong>mis à jour automatiquement chaque jour</strong> à partir de sources RSS de référence —
+          automatiser une veille est en soi une stratégie de veille (compétence <span class="code-ref">E5.6.2</span>).
         </p>
       </div>
 
-      {veille.length === 0 ? (
-        <div class="empty">
-          <h2 class="empty__t">Section prête à être alimentée</h2>
-          <p class="empty__p">
-            Aucune entrée publiée pour le moment. La structure est en place : une nouvelle entrée s'ajoute
-            en complétant <code class="mono">src/data/veille.ts</code>, sans toucher à l'interface.
-          </p>
-          <div class="empty__themes">
-            <span class="empty__themes-lbl">Thèmes de veille envisagés</span>
-            <ul class="themes">
-              {themesVeille.map((t) => <li class="theme">{t}</li>)}
-            </ul>
-          </div>
-          <div class="empty__model">
-            <span class="empty__model-lbl mono">Structure d'une entrée</span>
-            <ul class="model">
-              <li><strong>Date</strong> — quand le sujet a été suivi</li>
-              <li><strong>Thème</strong> — domaine concerné</li>
-              <li><strong>Sources</strong> — d'où vient l'information</li>
-              <li><strong>Synthèse</strong> — ce qui a été retenu</li>
-              <li><strong>Apprentissages &amp; impact</strong> — effet sur mes pratiques</li>
-            </ul>
-          </div>
+      <!-- FIL AUTOMATISÉ -->
+      <section class="feed">
+        <div class="feed__head">
+          <h2 class="feed__title" data-en="Automated feed">Fil de veille automatisé</h2>
+          {updated
+            ? <span class="feed__upd mono" data-en={`updated ${updated}`}>mis à jour le {updated}</span>
+            : <span class="feed__upd mono" data-en="first refresh in progress">première actualisation en cours</span>}
         </div>
-      ) : (
-        <ol class="ventries">
-          {veille.map((v) => (
-            <li class="ventry">
-              <div class="ventry__meta">
-                <time class="ventry__date mono">{dateFmt(v.date)}</time>
-                <span class="ventry__theme">{v.theme}</span>
-              </div>
-              <div class="ventry__body">
-                <h2 class="ventry__title">{v.titre}</h2>
-                <p class="ventry__synth">{v.synthese}</p>
-                {v.apprentissages && <p class="ventry__sub"><strong>Apprentissages —</strong> {v.apprentissages}</p>}
-                {v.impact && <p class="ventry__sub"><strong>Impact —</strong> {v.impact}</p>}
-                {v.sources.length > 0 && (
-                  <div class="ventry__sources">
-                    <span class="ventry__sources-lbl mono">Sources</span>
-                    {v.sources.map((s) => s.href
-                      ? <a class="link" href={s.href} rel="noopener" target="_blank">{s.label}</a>
-                      : <span>{s.label}</span>)}
-                  </div>
-                )}
-              </div>
-            </li>
-          ))}
-        </ol>
-      )}
+
+        {items.length === 0 ? (
+          <p class="feed__empty" data-en="The feed fills in on the next daily run. Sources: CERT-FR (ANSSI), LeMagIT, Le Monde Informatique.">
+            Le fil se remplit à la prochaine actualisation quotidienne. Sources : CERT-FR (ANSSI),
+            LeMagIT, Le Monde Informatique.
+          </p>
+        ) : (
+          <ul class="feed__list">
+            {items.map((it) => (
+              <li class="feed__item">
+                <a class="feed__link" href={it.link} target="_blank" rel="noopener">
+                  <span class="feed__meta">
+                    <span class="feed__src">{it.source}</span>
+                    {it.date && <time class="feed__date mono">{dateFmt(it.date)}</time>}
+                  </span>
+                  <span class="feed__it-title">{it.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p class="feed__note" data-en="Automated aggregation (daily GitHub Actions). Links point to the original sources.">
+          Agrégation automatisée (GitHub Actions, quotidienne). Les liens renvoient aux sources d'origine.
+        </p>
+      </section>
+
+      <!-- SYNTHÈSES PERSONNELLES -->
+      <section class="synth">
+        <div class="feed__head">
+          <h2 class="feed__title" data-en="Personal notes">Synthèses personnelles</h2>
+        </div>
+        {veille.length === 0 ? (
+          <p class="feed__empty" data-en="Personal watch notes (what I read, learned and changed in my practice) will be added here, alongside the automated feed.">
+            Les synthèses personnelles (ce que j'ai lu, retenu et changé dans mes pratiques) viendront
+            s'ajouter ici, en complément du fil automatisé.
+          </p>
+        ) : (
+          <ol class="ventries">
+            {veille.map((v) => (
+              <li class="ventry">
+                <div class="ventry__meta">
+                  <time class="ventry__date mono">{dateFmt(v.date)}</time>
+                  <span class="ventry__theme">{v.theme}</span>
+                </div>
+                <div class="ventry__body">
+                  <h3 class="ventry__title">{v.titre}</h3>
+                  <p class="ventry__synth">{v.synthese}</p>
+                  {v.apprentissages && <p class="ventry__sub"><strong>Apprentissages —</strong> {v.apprentissages}</p>}
+                  {v.impact && <p class="ventry__sub"><strong>Impact —</strong> {v.impact}</p>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
     </div>
   </section>
 </Base>
 
 <style>
-  .empty { border: var(--line-w) dashed var(--line-strong); border-radius: var(--r-md); padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--surface); }
-  .empty__t { font-size: var(--t-md); }
-  .empty__p { color: var(--ink-2); margin-top: var(--sp-2); max-width: 70ch; font-size: var(--t-sm); }
-  .empty__p code { background: var(--surface-2); padding: 0.05rem 0.35rem; border-radius: var(--r-xs); border: var(--line-w) solid var(--line); }
-  .empty__themes { margin-top: var(--sp-5); }
-  .empty__themes-lbl, .empty__model-lbl { display: block; font-size: var(--t-xs); color: var(--ink-3); margin-bottom: var(--sp-2); }
-  .themes { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
-  .theme { font-size: var(--t-sm); border: var(--line-w) solid var(--line); border-radius: var(--r-sm); padding: 0.25rem 0.7rem; background: var(--surface-2); color: var(--ink-2); }
-  .empty__model { margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: var(--line-w) solid var(--line); }
-  .model { display: flex; flex-direction: column; gap: 0.3rem; font-size: var(--t-sm); color: var(--ink-2); }
-  .model strong { color: var(--ink); }
+  .feed { margin-bottom: var(--sp-8); }
+  .feed__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-3); padding-bottom: var(--sp-2); border-bottom: var(--line-w) solid var(--line); margin-bottom: var(--sp-4); }
+  .feed__title { font-size: var(--t-md); }
+  .feed__upd { font-size: var(--t-xs); color: var(--ink-3); }
+  .feed__empty { color: var(--ink-2); font-size: var(--t-sm); padding: var(--sp-4); border: var(--line-w) dashed var(--line-strong); border-radius: var(--r-sm); }
 
+  .feed__list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: var(--line-w) solid var(--line); border-radius: var(--r-sm); overflow: hidden; }
+  .feed__item { border-bottom: var(--line-w) solid var(--line); }
+  .feed__item:nth-child(odd) { border-right: var(--line-w) solid var(--line); }
+  .feed__link { display: flex; flex-direction: column; gap: 0.35rem; padding: var(--sp-4); height: 100%; transition: background 0.15s var(--ease); }
+  .feed__link:hover { background: var(--surface-2); }
+  .feed__meta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+  .feed__src { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--accent); }
+  .feed__date { font-size: var(--t-xs); color: var(--ink-3); }
+  .feed__it-title { font-size: var(--t-sm); color: var(--ink); line-height: 1.4; }
+  .feed__link:hover .feed__it-title { color: var(--accent); }
+  .feed__note { margin-top: var(--sp-3); font-size: var(--t-xs); color: var(--ink-3); }
+
+  .synth { margin-top: var(--sp-7); }
   .ventries { display: flex; flex-direction: column; }
-  .ventry { display: grid; grid-template-columns: 180px 1fr; gap: var(--sp-5); padding: var(--sp-5) 0; border-top: var(--line-w) solid var(--line); }
+  .ventry { display: grid; grid-template-columns: 170px 1fr; gap: var(--sp-5); padding: var(--sp-5) 0; border-top: var(--line-w) solid var(--line); }
   .ventry:first-child { border-top: 0; }
   .ventry__meta { display: flex; flex-direction: column; gap: 0.3rem; }
   .ventry__date { font-size: var(--t-sm); color: var(--ink); }
@@ -100,10 +124,10 @@ const dateFmt = (iso: string) => {
   .ventry__title { font-size: var(--t-md); }
   .ventry__synth { color: var(--ink-2); margin-top: var(--sp-2); font-size: var(--t-sm); }
   .ventry__sub { font-size: var(--t-sm); color: var(--ink-2); margin-top: var(--sp-2); }
-  .ventry__sources { margin-top: var(--sp-3); display: flex; flex-wrap: wrap; gap: 0.4rem var(--sp-3); align-items: baseline; font-size: var(--t-sm); }
-  .ventry__sources-lbl { font-size: var(--t-xs); color: var(--ink-3); }
 
-  @media (max-width: 640px) {
+  @media (max-width: 680px) {
+    .feed__list { grid-template-columns: 1fr; }
+    .feed__item:nth-child(odd) { border-right: 0; }
     .ventry { grid-template-columns: 1fr; gap: var(--sp-2); }
   }
 </style>

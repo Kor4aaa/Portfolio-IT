@@ -2,12 +2,12 @@
 import { profil } from '@data/profil';
 
 const nav = [
-  { href: '/referentiel', label: 'Référentiel' },
-  { href: '/realisations', label: 'Réalisations' },
-  { href: '/preuves', label: 'Preuves' },
-  { href: '/synthese', label: 'Synthèse' },
-  { href: '/parcours', label: 'Parcours' },
-  { href: '/veille', label: 'Veille' },
+  { href: '/referentiel', label: 'Référentiel', en: 'Framework' },
+  { href: '/realisations', label: 'Réalisations', en: 'Projects' },
+  { href: '/preuves', label: 'Preuves', en: 'Evidence' },
+  { href: '/synthese', label: 'Synthèse', en: 'Summary' },
+  { href: '/parcours', label: 'Parcours', en: 'Background' },
+  { href: '/veille', label: 'Veille', en: 'Tech watch' },
 ];
 
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -35,7 +35,7 @@ const isActive = (href: string) => here === href || here.startsWith(href + '/');
         {nav.map((item) => (
           <li>
             <a href={item.href} class:list={['site-nav__link', { 'is-active': isActive(item.href) }]}
-               aria-current={isActive(item.href) ? 'page' : undefined}>
+               aria-current={isActive(item.href) ? 'page' : undefined} data-en={item.en}>
               {item.label}
             </a>
           </li>
@@ -44,6 +44,7 @@ const isActive = (href: string) => here === href || here.startsWith(href + '/');
     </nav>
 
     <div class="site-header__actions">
+      <button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch to English">EN</button>
       <button id="theme-toggle" class="icon-btn" type="button" aria-label="Changer de thème">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
           <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
@@ -110,6 +111,15 @@ const isActive = (href: string) => here === href || here.startsWith(href + '/');
   .site-nav__link.is-active:hover { background: var(--accent-wash); }
 
   .site-header__actions { display: flex; align-items: center; gap: var(--sp-2); }
+  .lang-btn {
+    height: 38px; padding: 0 0.7rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.04em;
+    color: var(--ink-2);
+    border: var(--line-w) solid var(--line); border-radius: var(--r-sm);
+    transition: color 0.15s var(--ease), border-color 0.15s var(--ease), background 0.15s var(--ease);
+  }
+  .lang-btn:hover { color: var(--accent); border-color: var(--accent-line); background: var(--accent-wash); }
   .icon-btn {
     width: 38px; height: 38px;
     display: inline-flex; align-items: center; justify-content: center;

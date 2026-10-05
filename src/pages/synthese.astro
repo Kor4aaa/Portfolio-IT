@@ -1,144 +1,143 @@
 ---
 import Base from '@layouts/Base.astro';
-import StatusBadge from '@components/StatusBadge.astro';
-import { referentiel } from '@data/referentiel';
-import { matriceSynthese } from '@data/derive';
-import type { Niveau } from '@data/types';
-
-const niveauAbbr: Record<Niveau, string> = {
-  demontree: 'Dé', mobilisee: 'Mo', 'en-cours': 'EC', 'a-developper': 'AD',
-};
-const niveauLabel: Record<Niveau, string> = {
-  demontree: 'Démontrée', mobilisee: 'Mobilisée', 'en-cours': 'En cours', 'a-developper': 'À développer',
-};
+import { enteteE5, colonnesE5, sectionsE5 } from '@data/synthese-e5';
 ---
 <Base
-  title="Tableau de synthèse"
-  description="Tableau de synthèse des réalisations par compétence pour E5, E6 et E7 — vue de suivi du référentiel BTS SIO SISR, imprimable."
+  title="Tableau de synthèse E5"
+  description="Tableau de synthèse des réalisations professionnelles E5 (BTS SIO SISR, session 2026) de Wensel Reyes — imprimable."
   path="/synthese"
 >
   <section class="section--tight">
     <div class="container">
-      <div class="section-head">
-        <span class="section-head__index">Suivi du référentiel</span>
-        <h1>Tableau de synthèse</h1>
-        <p class="prose">
-          Vue de suivi : pour chaque épreuve, les réalisations en lignes et les compétences en colonnes.
-          Une case indique le niveau de mobilisation déclaré par la réalisation — jamais coché automatiquement
-          à partir d'une technologie.
+      <div class="section-head no-print">
+        <span class="section-head__index" data-en="Official E5 document">Document officiel E5</span>
+        <h1 data-en="Summary table">Tableau de synthèse</h1>
+        <p class="prose" data-en="The summary table of professional projects for unit E5, as it will be presented to the examination board. The ticked boxes match the official document exactly.">
+          Le tableau de synthèse des réalisations professionnelles de l'épreuve E5, tel qu'il sera
+          présenté au jury. Les cases cochées reprennent exactement le document officiel.
         </p>
       </div>
 
       <div class="toolbar no-print">
-        <div class="toolbar__legend">
-          {(['demontree','mobilisee','en-cours','a-developper'] as Niveau[]).map((n) => (
-            <span class="tlg"><StatusBadge statut={n} variant="dot" /> <strong>{niveauAbbr[n]}</strong> {niveauLabel[n]}</span>
-          ))}
-          <span class="tlg"><span class="tlg__dash">—</span> non mobilisée</span>
-        </div>
-        <button class="btn btn--ghost" type="button" id="print-btn">Imprimer / PDF</button>
+        <span class="toolbar__note" data-en="E6 and E7 are tracked on the Framework page.">E6 et E7 sont suivis sur la page Référentiel.</span>
+        <button class="btn btn--primary" type="button" id="print-btn" data-en="Print / PDF">Imprimer / PDF</button>
       </div>
 
-      {referentiel.map((ep) => {
-        const { colonnes, lignes } = matriceSynthese(ep);
-        return (
-          <section class="smatrix" id={`synthese-${ep.code.toLowerCase()}`}>
-            <h2 class="smatrix__title"><span class="code-ref">{ep.code}</span> {ep.titre}</h2>
-            {lignes.length === 0 ? (
-              <p class="muted">Aucune réalisation ne mobilise encore cette épreuve.</p>
-            ) : (
-              <div class="tbl-wrap">
-                <table class="tbl">
-                  <thead>
+      <div class="sheet" id="sheet-e5">
+        <!-- En-tête officiel -->
+        <header class="sheet__head">
+          <div class="sheet__row">
+            <span class="sheet__diplome">{enteteE5.diplome}</span>
+            <span class="sheet__session">{enteteE5.session}</span>
+          </div>
+          <h2 class="sheet__title">{enteteE5.titre}</h2>
+          <div class="sheet__meta">
+            <span><b>NOM et prénom :</b> {enteteE5.nom}</span>
+            <span><b>N° candidat :</b> {enteteE5.candidat || '—'}</span>
+            <span><b>Centre de formation :</b> {enteteE5.centre}</span>
+            <span><b>Option :</b> ☑ SISR&nbsp;&nbsp;▢ SLAM</span>
+            <span class="sheet__url"><b>Portfolio :</b> {enteteE5.url}</span>
+          </div>
+        </header>
+
+        <div class="tbl-wrap">
+          <table class="e5">
+            <thead>
+              <tr>
+                <th scope="col" class="e5__rh">
+                  <span class="e5__rh-top">Compétences mises en œuvre</span>
+                  <span class="e5__rh-bot">Réalisations professionnelles<br/><span>(intitulé et documents associés)</span></span>
+                </th>
+                <th scope="col" class="e5__per">Période</th>
+                {colonnesE5.map((c) => (
+                  <th scope="col" class="e5__ch">
+                    <span class="e5__code">{c.code}</span>
+                    <span class="e5__ctitle">{c.titre}</span>
+                    <ul class="e5__sous">
+                      {c.sous.map((s) => <li>{s}</li>)}
+                    </ul>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sectionsE5.map((sec) => (
+                <>
+                  <tr class="e5__section">
+                    <th scope="colgroup" colspan={8}>{sec.titre}</th>
+                  </tr>
+                  {sec.lignes.length === 0 ? (
+                    <tr class="e5__empty"><td colspan={8}>—</td></tr>
+                  ) : sec.lignes.map((l) => (
                     <tr>
-                      <th scope="col" class="tbl__rh">Réalisation</th>
-                      <th scope="col" class="tbl__pr">Période</th>
-                      {colonnes.map((c) => (
-                        <th scope="col" class="tbl__ch" title={c.titre}><span class="code-ref">{c.code}</span></th>
+                      <th scope="row" class="e5__real">
+                        <span class="e5__real-t">{l.titre}</span>
+                        <span class="e5__real-d">{l.description}</span>
+                        <span class="e5__real-doc"><b>Documents :</b> {l.documents}</span>
+                      </th>
+                      <td class="e5__per mono">{l.periode}</td>
+                      {l.croix.map((ok, i) => (
+                        <td class="e5__cell">
+                          {ok ? <span class="e5__check" title={colonnesE5[i].code}>✔<span class="visually-hidden">{colonnesE5[i].code} validée</span></span> : <span class="visually-hidden">non</span>}
+                        </td>
                       ))}
                     </tr>
-                  </thead>
-                  <tbody>
-                    {lignes.map((row) => (
-                      <tr>
-                        <th scope="row" class="tbl__rh">
-                          <a class="tbl__link" href={`/realisations/${row.realisation.slug}`}>{row.realisation.titre}</a>
-                        </th>
-                        <td class="tbl__pr mono">{row.realisation.periode}</td>
-                        {row.cellules.map((cell) => (
-                          <td class="tbl__cell">
-                            {cell.niveau ? (
-                              <span class={`cellbadge cellbadge--${cell.niveau}`} title={`${niveauLabel[cell.niveau]} — ${cell.sousCodes.join(', ')}`}>
-                                {niveauAbbr[cell.niveau]}
-                                <span class="visually-hidden">{niveauLabel[cell.niveau]} ({cell.sousCodes.join(', ')})</span>
-                              </span>
-                            ) : (
-                              <span class="tbl__dash" aria-label="non mobilisée">—</span>
-                            )}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </section>
-        );
-      })}
-
-      <p class="disclaimer">
-        Les abréviations de cases renvoient aux statuts de mobilisation documentés dans ce portfolio
-        (Dé = démontrée, Mo = mobilisée, EC = en cours, AD = à développer). Elles ne préjugent pas
-        d'une validation officielle par le jury.
-      </p>
+                  ))}
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-6); }
-  .toolbar__legend { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); font-size: var(--t-xs); color: var(--ink-2); }
-  .tlg { display: inline-flex; align-items: center; gap: 0.35rem; }
-  .tlg strong { color: var(--ink); font-family: var(--font-mono); }
-  .tlg__dash { color: var(--ink-3); font-family: var(--font-mono); }
+  .toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-5); }
+  .toolbar__note { font-size: var(--t-xs); color: var(--ink-3); }
 
-  .smatrix { margin-bottom: var(--sp-7); }
-  .smatrix__title { font-size: var(--t-md); margin-bottom: var(--sp-4); }
-  .muted { color: var(--ink-3); font-size: var(--t-sm); }
+  .sheet { border: var(--line-w) solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); overflow: hidden; }
+  .sheet__head { padding: var(--sp-4) var(--sp-5); border-bottom: 2px solid var(--line-strong); }
+  .sheet__row { display: flex; justify-content: space-between; gap: var(--sp-3); font-family: var(--font-mono); font-size: var(--t-xs); color: var(--ink-2); }
+  .sheet__session { color: var(--accent); }
+  .sheet__title { font-size: var(--t-md); margin: var(--sp-2) 0; }
+  .sheet__meta { display: flex; flex-wrap: wrap; gap: 0.3rem var(--sp-5); font-size: var(--t-sm); color: var(--ink-2); }
+  .sheet__meta b { color: var(--ink); font-weight: 600; }
 
-  .tbl-wrap { overflow-x: auto; border: var(--line-w) solid var(--line); border-radius: var(--r-sm); }
-  .tbl { width: 100%; border-collapse: collapse; font-size: var(--t-sm); min-width: 640px; }
-  .tbl th, .tbl td { padding: 0.6rem 0.7rem; text-align: left; border-bottom: var(--line-w) solid var(--line); }
-  .tbl thead th { background: var(--surface-2); font-weight: 600; font-size: var(--t-xs); color: var(--ink-2); position: sticky; top: 0; }
-  .tbl__ch { text-align: center; }
-  .tbl__rh { position: sticky; left: 0; background: var(--surface); z-index: 1; min-width: 210px; }
-  .tbl thead .tbl__rh { z-index: 2; background: var(--surface-2); }
-  .tbl__link { font-weight: 500; color: var(--ink); }
-  .tbl__link:hover { color: var(--accent); }
-  .tbl__pr { color: var(--ink-3); white-space: nowrap; font-size: var(--t-xs); }
-  .tbl__cell { text-align: center; }
-  .tbl__dash { color: var(--ink-3); }
-  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  .tbl-wrap { overflow-x: auto; }
+  .e5 { width: 100%; border-collapse: collapse; font-size: var(--t-xs); min-width: 900px; }
+  .e5 th, .e5 td { border: var(--line-w) solid var(--line); vertical-align: top; padding: 0.5rem 0.6rem; text-align: left; }
+  .e5__rh { width: 300px; background: var(--surface-2); }
+  .e5__rh-top { display: block; font-size: var(--t-xs); color: var(--ink-3); font-weight: 600; }
+  .e5__rh-bot { display: block; margin-top: 1.5rem; font-weight: 700; color: var(--ink); }
+  .e5__rh-bot span { font-weight: 400; color: var(--ink-3); font-size: 0.7rem; }
+  .e5__per { width: 90px; text-align: center; }
+  .e5__ch { width: 120px; background: var(--surface-2); }
+  .e5__code { display: block; font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
+  .e5__ctitle { display: block; font-weight: 600; color: var(--ink); margin: 0.2rem 0 0.4rem; line-height: 1.25; }
+  .e5__sous { display: flex; flex-direction: column; gap: 0.2rem; }
+  .e5__sous li { position: relative; padding-left: 0.7rem; color: var(--ink-3); font-size: 0.68rem; line-height: 1.3; }
+  .e5__sous li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
 
-  .cellbadge {
-    display: inline-flex; align-items: center; justify-content: center;
-    min-width: 26px; height: 22px; padding: 0 0.3rem;
-    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
-    border-radius: var(--r-xs); color: #fff;
-  }
-  .cellbadge--demontree    { background: var(--st-demontree); }
-  .cellbadge--mobilisee    { background: var(--st-mobilisee); }
-  .cellbadge--en-cours     { background: var(--st-encours); }
-  .cellbadge--a-developper { background: var(--st-adev); }
-
-  .disclaimer { margin-top: var(--sp-4); font-size: var(--t-xs); color: var(--ink-3); border-left: 2px solid var(--line-strong); padding-left: var(--sp-3); }
+  .e5__section th { background: color-mix(in srgb, var(--accent) 10%, var(--surface-2)); font-weight: 700; color: var(--ink); font-size: var(--t-sm); }
+  .e5__empty td { text-align: center; color: var(--ink-3); }
+  .e5__real-t { display: block; font-weight: 700; color: var(--ink); font-size: var(--t-sm); }
+  .e5__real-d { display: block; color: var(--ink-2); margin: 0.3rem 0; line-height: 1.45; }
+  .e5__real-doc { display: block; color: var(--ink-3); font-size: 0.7rem; }
+  .e5__real-doc b { color: var(--ink-2); }
+  td.e5__per { color: var(--ink-3); white-space: pre-line; }
+  .e5__cell { text-align: center; vertical-align: middle; }
+  .e5__check { color: var(--st-demontree); font-weight: 700; font-size: 1rem; }
 
   @media print {
-    .tbl-wrap { overflow: visible; }
-    .tbl { min-width: 0; font-size: 10px; }
-    .smatrix { break-inside: avoid; }
-    .cellbadge { border: 1px solid #999; }
+    @page { size: A4 landscape; margin: 8mm; }
+    .sheet { border-color: #000; }
+    .e5 { min-width: 0; font-size: 8.5px; }
+    .e5 th, .e5 td { border-color: #666; padding: 2px 3px; }
+    .e5__check { color: #000; }
+    .e5__sous li { font-size: 6.5px; }
+    .sheet__session, .e5__code { color: #000; }
   }
 </style>
 

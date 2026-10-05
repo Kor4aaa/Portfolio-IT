@@ -4,12 +4,12 @@ import RealisationCard from '@components/RealisationCard.astro';
 import { realisations } from '@data/realisations';
 
 const filtres = [
-  { f: 'all', label: 'Toutes' },
-  { f: 'reseau', label: 'Réseau' },
-  { f: 'systeme', label: 'Système' },
-  { f: 'securite', label: 'Sécurité' },
-  { f: 'service', label: 'Service' },
-  { f: 'pro', label: 'Professionnel' },
+  { f: 'all', label: 'Toutes', en: 'All' },
+  { f: 'reseau', label: 'Réseau', en: 'Network' },
+  { f: 'systeme', label: 'Système', en: 'Systems' },
+  { f: 'securite', label: 'Sécurité', en: 'Security' },
+  { f: 'service', label: 'Service', en: 'Service' },
+  { f: 'pro', label: 'Professionnel', en: 'Professional' },
 ];
 ---
 <Base
@@ -20,9 +20,9 @@ const filtres = [
   <section class="section--tight">
     <div class="container">
       <div class="section-head">
-        <span class="section-head__index">Catalogue</span>
-        <h1>Réalisations</h1>
-        <p class="prose">
+        <span class="section-head__index" data-en="Catalogue">Catalogue</span>
+        <h1 data-en="Projects">Réalisations</h1>
+        <p class="prose" data-en="Each project describes a need, an approach, technical choices and evidence, then links to the framework skills it applies. Filter by domain.">
           Chaque réalisation décrit un besoin, une démarche, des choix techniques et des preuves,
           puis renvoie aux compétences du référentiel qu'elle mobilise. Filtrez par domaine.
         </p>
@@ -30,7 +30,7 @@ const filtres = [
 
       <div class="filters" role="group" aria-label="Filtrer les réalisations">
         {filtres.map((f, i) => (
-          <button class:list={['filter', { 'is-on': i === 0 }]} data-filter={f.f} type="button" aria-pressed={i === 0 ? 'true' : 'false'}>
+          <button class:list={['filter', { 'is-on': i === 0 }]} data-filter={f.f} type="button" aria-pressed={i === 0 ? 'true' : 'false'} data-en={f.en}>
             {f.label}
           </button>
         ))}

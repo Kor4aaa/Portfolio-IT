@@ -28,11 +28,44 @@ const { title, description, path } = Astro.props;
     </script>
   </head>
   <body>
-    <a href="#main" class="skip-link">Aller au contenu</a>
+    <a href="#main" class="skip-link" data-en="Skip to content">Aller au contenu</a>
     <Header />
     <main id="main">
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      // Bascule FR / EN : remplace le contenu des éléments portant data-en
+      // et les attributs listés dans data-en-attr="aria-label|placeholder".
+      (function () {
+        function apply(lang) {
+          document.documentElement.lang = lang;
+          document.querySelectorAll('[data-en]').forEach(function (el) {
+            if (el.dataset.fr === undefined) el.dataset.fr = el.innerHTML;
+            el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.fr;
+          });
+          document.querySelectorAll('[data-en-aria]').forEach(function (el) {
+            if (el.dataset.frAria === undefined) el.dataset.frAria = el.getAttribute('aria-label') || '';
+            el.setAttribute('aria-label', lang === 'en' ? el.dataset.enAria : el.dataset.frAria);
+          });
+          var b = document.getElementById('lang-toggle');
+          if (b) { b.textContent = lang === 'en' ? 'FR' : 'EN'; b.setAttribute('aria-label', lang === 'en' ? 'Passer en français' : 'Switch to English'); }
+        }
+        var saved = 'fr';
+        try { saved = localStorage.getItem('lang') || 'fr'; } catch (e) {}
+        function init() {
+          apply(saved);
+          var b = document.getElementById('lang-toggle');
+          if (b) b.addEventListener('click', function () {
+            var cur = document.documentElement.lang === 'en' ? 'en' : 'fr';
+            var next = cur === 'en' ? 'fr' : 'en';
+            try { localStorage.setItem('lang', next); } catch (e) {}
+            apply(next);
+          });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+      })();
+    </script>
   </body>
 </html>

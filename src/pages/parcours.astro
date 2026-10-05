@@ -15,17 +15,21 @@ const typeLabel: Record<string, string> = { alternance: 'Alternance', stage: 'St
   <section class="section--tight">
     <div class="container">
       <div class="section-head">
-        <span class="section-head__index">Formation &amp; expérience</span>
-        <h1>Parcours</h1>
-        <p class="prose">
+        <span class="section-head__index" data-en="Training &amp; experience">Formation &amp; expérience</span>
+        <h1 data-en="Background">Parcours</h1>
+        <p class="prose" data-en="A path combining training, a work-study placement and internships. Where relevant, experiences link to the concrete projects they enabled.">
           Un parcours qui combine formation, alternance et stages. Les expériences renvoient, quand elles
           existent, aux réalisations concrètes qu'elles ont permises.
         </p>
+        <a class="btn btn--primary cv-btn" href={profil.cv} download data-en="Download CV (PDF)">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Télécharger le CV (PDF)
+        </a>
       </div>
 
       <div class="pcols">
         <section class="pcol">
-          <h2 class="pcol__h">Expérience professionnelle</h2>
+          <h2 class="pcol__h" data-en="Professional experience">Expérience professionnelle</h2>
           <ol class="tl">
             {experiences.map((e) => (
               <li class="tl__item">
@@ -53,7 +57,7 @@ const typeLabel: Record<string, string> = { alternance: 'Alternance', stage: 'St
         </section>
 
         <section class="pcol">
-          <h2 class="pcol__h">Formation</h2>
+          <h2 class="pcol__h" data-en="Education">Formation</h2>
           <ol class="tl">
             {formation.map((e) => (
               <li class="tl__item">
@@ -80,7 +84,7 @@ const typeLabel: Record<string, string> = { alternance: 'Alternance', stage: 'St
           </ol>
 
           <div class="contactbox">
-            <h2 class="contactbox__h">Contact</h2>
+            <h2 class="contactbox__h" data-en="Contact">Contact</h2>
             <ul class="contactbox__list">
               {profil.contacts.map((c) => (
                 <li><span class="contactbox__lbl mono">{c.label}</span><a class="link" href={c.href} rel="noopener">{c.valeur}</a></li>
@@ -97,6 +101,7 @@ const typeLabel: Record<string, string> = { alternance: 'Alternance', stage: 'St
 <style>
   .pcols { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(1.5rem, 4vw, 3.5rem); }
   .pcol__h { font-size: var(--t-md); margin-bottom: var(--sp-5); padding-bottom: var(--sp-2); border-bottom: var(--line-w) solid var(--line); }
+  .cv-btn { margin-top: var(--sp-4); }
 
   .tl { position: relative; display: flex; flex-direction: column; gap: var(--sp-5); }
   .tl__item { position: relative; padding-left: var(--sp-6); }
