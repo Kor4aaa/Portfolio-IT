@@ -20,6 +20,26 @@ const FEEDS = [
 
 const MAX_ITEMS = 24;
 const MAX_PER_FEED = 8;
+const MAX_AGE_DAYS = 540; // on ignore les entrées trop anciennes
+
+function decodeBuffer(buf, contentType) {
+  // Détecte l'encodage (Content-Type, puis déclaration XML) ; défaut UTF-8.
+  const head = Buffer.from(buf).subarray(0, 512).toString('latin1');
+  let charset = '';
+  const ct = /charset=["']?([\w-]+)/i.exec(contentType || '');
+  if (ct) charset = ct[1].toLowerCase();
+  if (!charset) {
+    const xd = /<\?xml[^>]*encoding=["']([\w-]+)["']/i.exec(head);
+    if (xd) charset = xd[1].toLowerCase();
+  }
+  if (!charset) charset = 'utf-8';
+  if (charset === 'iso-8859-1' || charset === 'latin1' || charset === 'latin-1') charset = 'windows-1252';
+  try {
+    return new TextDecoder(charset).decode(buf);
+  } catch {
+    return new TextDecoder('utf-8').decode(buf);
+  }
+}
 
 function decode(s = '') {
   return s
@@ -69,7 +89,8 @@ async function fetchFeed(feed) {
     });
     clearTimeout(t);
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const xml = await res.text();
+    const buf = await res.arrayBuffer();
+    const xml = decodeBuffer(buf, res.headers.get('content-type'));
     return parseItems(xml, feed);
   } catch (e) {
     console.warn(`[veille] échec ${feed.source} : ${e.message}`);
@@ -80,9 +101,11 @@ async function fetchFeed(feed) {
 const all = [];
 for (const feed of FEEDS) all.push(...(await fetchFeed(feed)));
 
-// Dédoublonnage par lien, tri par date décroissante, plafonnement.
+// Filtre de fraîcheur, dédoublonnage par lien, tri par date décroissante, plafonnement.
+const minDate = Date.now() - MAX_AGE_DAYS * 86400000;
 const seen = new Set();
 const items = all
+  .filter((it) => !it.date || new Date(it.date).getTime() >= minDate)
   .filter((it) => (seen.has(it.link) ? false : (seen.add(it.link), true)))
   .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
   .slice(0, MAX_ITEMS);
