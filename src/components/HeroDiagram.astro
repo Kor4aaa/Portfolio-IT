@@ -1,0 +1,172 @@
+---
+// Schéma d'architecture conceptuel du Home Lab (SISR).
+// Composé des briques réelles du CV (pfSense HA/CARP, cœur VLAN 802.1Q, DMZ,
+// 7 zones, services). Animation d'apparition CSS, désactivée en reduced-motion.
+const zones = [
+  { x: 40,  label: 'ADMIN' },
+  { x: 126, label: 'LAN' },
+  { x: 212, label: 'DMZ' },
+  { x: 298, label: 'SERVICES' },
+  { x: 384, label: 'SUPERV.' },
+  { x: 470, label: 'LAB' },
+  { x: 556, label: 'SAUVEG.' },
+];
+---
+<figure class="diagram" aria-labelledby="diagram-cap">
+  <div class="diagram__bar">
+    <span class="diagram__id">home-lab · architecture</span>
+    <span class="diagram__meta">Proxmox VE 9 · pfSense · 802.1Q</span>
+  </div>
+
+  <div class="diagram__canvas">
+    <span class="tick tick--tl" aria-hidden="true"></span>
+    <span class="tick tick--tr" aria-hidden="true"></span>
+    <span class="tick tick--bl" aria-hidden="true"></span>
+    <span class="tick tick--br" aria-hidden="true"></span>
+
+    <svg viewBox="0 0 600 380" role="img" aria-describedby="diagram-cap" class="diagram__svg">
+      <defs>
+        <pattern id="bp" width="24" height="24" patternUnits="userSpaceOnUse">
+          <path d="M24 0H0V24" fill="none" stroke="var(--dg-grid)" stroke-width="0.5" />
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width="600" height="380" fill="url(#bp)" opacity="0.5" />
+
+      <!-- Liens (tracés animés) -->
+      <g class="links" fill="none" stroke="var(--dg-link)" stroke-width="1.4">
+        <path class="link" style="--i:0" pathLength="1" d="M300 56 V74" />
+        <path class="link" style="--i:1" pathLength="1" d="M300 74 H222 V92" />
+        <path class="link" style="--i:1" pathLength="1" d="M300 74 H378 V92" />
+        <path class="link spine" style="--i:2" pathLength="1" d="M300 74 V172" />
+        <path class="link" style="--i:3" pathLength="1" d="M222 132 V152 H378 V132" />
+        {zones.map((z, i) => (
+          <path class="link" style={`--i:${4 + i * 0.4}`} pathLength="1" d={`M300 212 V240 H${z.x} V272`} />
+        ))}
+      </g>
+
+      <!-- Flux subtil sur l'épine dorsale -->
+      <path class="flow" d="M300 74 V172" pathLength="1" fill="none" stroke="var(--dg-accent)" stroke-width="1.6" />
+
+      <!-- WAN -->
+      <g class="node" style="--d:0.05s">
+        <rect x="248" y="24" width="104" height="32" rx="5" />
+        <text x="300" y="44" class="t-mid">Internet / WAN</text>
+      </g>
+      <circle class="node dot" style="--d:0.15s" cx="300" cy="74" r="3.2" fill="var(--dg-accent)" />
+
+      <!-- pfSense HA -->
+      <g class="node hl" style="--d:0.3s">
+        <rect x="166" y="92" width="112" height="40" rx="6" />
+        <text x="222" y="110" class="t-mid t-strong">pfSense</text>
+        <text x="222" y="123" class="t-mid t-sub">nœud A · CARP</text>
+      </g>
+      <g class="node hl" style="--d:0.38s">
+        <rect x="322" y="92" width="112" height="40" rx="6" />
+        <text x="378" y="110" class="t-mid t-strong">pfSense</text>
+        <text x="378" y="123" class="t-mid t-sub">nœud B · CARP</text>
+      </g>
+      <text x="300" y="148" class="t-mid t-note node" style="--d:0.44s">pfsync</text>
+
+      <!-- Cœur VLAN -->
+      <g class="node core" style="--d:0.55s">
+        <rect x="150" y="172" width="300" height="40" rx="6" />
+        <text x="300" y="190" class="t-mid t-strong">Cœur VLAN — bridge 802.1Q</text>
+        <text x="300" y="203" class="t-mid t-sub">segmentation · routage inter-zones</text>
+      </g>
+
+      <!-- Zones -->
+      {zones.map((z, i) => (
+        <g class="node zone" style={`--d:${0.7 + i * 0.07}s`}>
+          <rect x={z.x - 33} y="272" width="66" height="40" rx="5" />
+          <circle cx={z.x - 21} cy="286" r="2.4" fill="var(--dg-accent)" />
+          <text x={z.x} y="298" class="t-mid t-zone">{z.label}</text>
+        </g>
+      ))}
+
+      <!-- Chips services (sous certaines zones) -->
+      <g class="node chips" style="--d:1.25s">
+        <text x="212" y="332" class="t-chip">HAProxy</text>
+        <text x="212" y="344" class="t-chip">Let's Encrypt</text>
+
+        <text x="298" y="332" class="t-chip">BIND9 · Kea</text>
+        <text x="298" y="344" class="t-chip">step-ca · LDAPS</text>
+        <text x="298" y="356" class="t-chip">FreeRADIUS</text>
+
+        <text x="384" y="332" class="t-chip">Wazuh · Zeek</text>
+        <text x="384" y="344" class="t-chip">Zabbix · Cowrie</text>
+
+        <text x="556" y="332" class="t-chip">PBS · ZFS</text>
+      </g>
+    </svg>
+  </div>
+
+  <figcaption id="diagram-cap" class="diagram__cap">
+    Schéma conceptuel du Home Lab — virtualisation Proxmox, pare-feu pfSense en
+    haute disponibilité, segmentation en 7 zones et services d'infrastructure.
+  </figcaption>
+</figure>
+
+<style>
+  .diagram {
+    --dg-grid: color-mix(in srgb, var(--ink) 9%, transparent);
+    --dg-link: color-mix(in srgb, var(--ink) 34%, transparent);
+    --dg-accent: var(--accent);
+    --dg-node-bg: var(--surface);
+    --dg-node-line: var(--line-strong);
+    border: var(--line-w) solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  :root[data-theme='dark'] .diagram { --dg-link: color-mix(in srgb, var(--ink) 26%, transparent); }
+
+  .diagram__bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.6rem 0.9rem;
+    border-bottom: var(--line-w) solid var(--line);
+    background: var(--surface-2);
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3);
+  }
+  .diagram__id { color: var(--accent); }
+
+  .diagram__canvas { position: relative; padding: 0.5rem; }
+  .diagram__svg { width: 100%; height: auto; display: block; }
+
+  /* repères de cote (corner ticks) */
+  .tick { position: absolute; width: 12px; height: 12px; z-index: 1; }
+  .tick--tl { top: 10px; left: 10px; border-top: 1px solid var(--dg-accent); border-left: 1px solid var(--dg-accent); }
+  .tick--tr { top: 10px; right: 10px; border-top: 1px solid var(--dg-accent); border-right: 1px solid var(--dg-accent); }
+  .tick--bl { bottom: 10px; left: 10px; border-bottom: 1px solid var(--dg-accent); border-left: 1px solid var(--dg-accent); }
+  .tick--br { bottom: 10px; right: 10px; border-bottom: 1px solid var(--dg-accent); border-right: 1px solid var(--dg-accent); }
+
+  /* noeuds */
+  .node rect { fill: var(--dg-node-bg); stroke: var(--dg-node-line); stroke-width: 1; }
+  .node.hl rect { stroke: color-mix(in srgb, var(--accent) 55%, var(--line-strong)); }
+  .node.core rect { fill: color-mix(in srgb, var(--accent) 7%, var(--surface)); stroke: color-mix(in srgb, var(--accent) 50%, var(--line-strong)); }
+  .node.zone rect { fill: var(--surface-2); }
+  .t-mid { text-anchor: middle; font-family: var(--font-mono); fill: var(--ink-2); font-size: 9px; }
+  .t-strong { fill: var(--ink); font-size: 11px; font-weight: 600; }
+  .t-sub { fill: var(--ink-3); font-size: 7.5px; }
+  .t-note { fill: var(--ink-3); font-size: 7.5px; }
+  .t-zone { fill: var(--ink); font-size: 9px; font-weight: 600; letter-spacing: 0.02em; }
+  .t-chip { text-anchor: middle; font-family: var(--font-mono); fill: var(--ink-3); font-size: 7.6px; }
+
+  .diagram__cap { padding: 0.7rem 0.9rem; border-top: var(--line-w) solid var(--line); font-size: var(--t-xs); color: var(--ink-3); line-height: 1.5; }
+
+  /* ── Animation d'apparition (orchestrée) ── */
+  .link { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.7s var(--ease) forwards; animation-delay: calc(var(--i) * 0.12s); }
+  .node { opacity: 0; transform: translateY(6px); transform-box: fill-box; transform-origin: center; animation: pop 0.5s var(--ease) forwards; animation-delay: var(--d); }
+  .flow { stroke-dasharray: 0.12 0.88; stroke-dashoffset: 1; opacity: 0; animation: flowin 0.4s ease 1.1s forwards, flow 2.6s linear 1.5s infinite; }
+
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { to { opacity: 1; transform: translateY(0); } }
+  @keyframes flowin { to { opacity: 0.9; } }
+  @keyframes flow { to { stroke-dashoffset: -1; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link { stroke-dashoffset: 0; animation: none; }
+    .node { opacity: 1; transform: none; animation: none; }
+    .flow { display: none; }
+  }
+</style>
