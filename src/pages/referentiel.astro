@@ -4,7 +4,7 @@ import CoverageBar from '@components/CoverageBar.astro';
 import SousRow from '@components/SousRow.astro';
 import StatusBadge from '@components/StatusBadge.astro';
 import { referentiel, sources, STATUTS, ORDRE_STATUTS } from '@data/referentiel';
-import { distributionEpreuve, distributionCompetence, statutCompetence, validerDonnees } from '@data/derive';
+import { distributionEpreuve, statutCompetence, validerDonnees } from '@data/derive';
 
 // Contrôle d'intégrité des données au build (liens compétences/preuves).
 const erreursDonnees = validerDonnees();

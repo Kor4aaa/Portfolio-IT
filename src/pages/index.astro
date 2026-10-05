@@ -2,6 +2,7 @@
 import Base from '@layouts/Base.astro';
 import CoverageBar from '@components/CoverageBar.astro';
 import RealisationCard from '@components/RealisationCard.astro';
+import HeroDiagram from '@components/HeroDiagram.astro';
 import { profil } from '@data/profil';
 import { realisations } from '@data/realisations';
 import { apercuReferentiel, compteursGlobaux } from '@data/derive';
@@ -9,6 +10,9 @@ import { apercuReferentiel, compteursGlobaux } from '@data/derive';
 const apercu = apercuReferentiel();
 const totaux = compteursGlobaux();
 const vedettes = realisations.filter((r) => r.vedette);
+
+const [prenom, ...resteNom] = profil.nom.split(' ');
+const nom = resteNom.join(' ');
 
 const etapes = [
   { t: 'Référentiel', d: 'Les épreuves E5, E6 et E7 et leurs compétences officielles.' },
@@ -20,19 +24,17 @@ const etapes = [
 <Base path="/">
   <!-- ============== HERO ============== -->
   <section class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
     <div class="container hero__grid">
       <div class="hero__intro">
-        <p class="hero__eyebrow mono">Portfolio de preuves — BTS SIO SISR</p>
-        <h1 class="hero__name">{profil.nom}</h1>
+        <p class="hero__eyebrow mono"><span class="hero__spark" aria-hidden="true"></span>Portfolio de preuves — BTS SIO SISR</p>
+        <h1 class="hero__name"><span class="hero__fn">{prenom}</span><span class="hero__ln">{nom}</span></h1>
         <p class="hero__line">
-          BTS SIO SISR · <span class="hero__axes">Systèmes · Réseaux · Cybersécurité</span>
+          BTS SIO SISR <span class="hero__axes">— Systèmes, Réseaux &amp; Cybersécurité</span>
         </p>
         <p class="hero__pitch prose">{profil.pitch}</p>
 
-        <blockquote class="hero__q">
-          <span class="hero__q-mark" aria-hidden="true"></span>
-          {profil.question}
-        </blockquote>
+        <blockquote class="hero__q">{profil.question}</blockquote>
 
         <div class="hero__cta">
           <a class="btn btn--primary" href="/referentiel">Explorer le référentiel</a>
@@ -40,28 +42,36 @@ const etapes = [
         </div>
       </div>
 
-      <aside class="hero__panel" aria-label="Couverture du référentiel">
-        <div class="panel__head">
-          <span class="panel__title">Couverture du référentiel</span>
-          <span class="panel__count mono">{totaux.sousTravaillees}/{totaux.sousTotal} sous-compétences travaillées</span>
+      <div class="hero__media">
+        <HeroDiagram />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== COUVERTURE DU RÉFÉRENTIEL ============== -->
+  <section class="section--tight cov-band">
+    <div class="container">
+      <div class="cov-band__head">
+        <div>
+          <span class="section-head__index">État du référentiel</span>
+          <h2>Couverture des compétences</h2>
         </div>
-        <ul class="panel__list">
-          {apercu.map((a) => (
-            <li class="panel__row">
-              <a class="panel__epreuve" href={`/referentiel#${a.epreuve.code.toLowerCase()}`}>
-                <span class="panel__code mono">{a.epreuve.code}</span>
-                <span class="panel__name">{a.epreuve.titre}</span>
-              </a>
-              <CoverageBar dist={a.dist} total={a.total} />
-              <div class="panel__meta mono">
-                <span>{a.taux}% travaillé</span>
-                <span>{a.nbRealisations} réalisation{a.nbRealisations > 1 ? 's' : ''}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <a class="panel__foot link" href="/synthese">Tableau de synthèse détaillé</a>
-      </aside>
+        <span class="cov-band__count mono">{totaux.sousTravaillees}/{totaux.sousTotal} sous-compétences travaillées</span>
+      </div>
+      <div class="cov-band__grid">
+        {apercu.map((a) => (
+          <a class="cov-card" href={`/referentiel#${a.epreuve.code.toLowerCase()}`}>
+            <div class="cov-card__top">
+              <span class="cov-card__code">{a.epreuve.code}</span>
+              <span class="cov-card__pct mono">{a.taux}<span class="cov-card__pct-u">%</span></span>
+            </div>
+            <span class="cov-card__name">{a.epreuve.titre}</span>
+            <div class="cov-card__bar"><CoverageBar dist={a.dist} total={a.total} showLegend={true} /></div>
+            <span class="cov-card__foot mono">{a.nbRealisations} réalisation{a.nbRealisations > 1 ? 's' : ''} · {a.total} sous-compétences</span>
+          </a>
+        ))}
+      </div>
+      <a class="cov-band__more link" href="/synthese">Tableau de synthèse détaillé</a>
     </div>
   </section>
 
@@ -132,22 +142,46 @@ const etapes = [
 
 <style>
   /* HERO */
-  .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+  .hero { position: relative; padding-block: clamp(2.75rem, 6vw, 5rem); overflow: hidden; }
+  .hero__bg {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(130% 90% at 72% 18%, #000 25%, transparent 72%);
+    mask-image: radial-gradient(130% 90% at 72% 18%, #000 25%, transparent 72%);
+    opacity: 0.8;
+  }
+  :root[data-theme='dark'] .hero__bg::after {
+    content: ''; position: absolute; top: -10%; right: -5%; width: 60%; height: 80%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 14%, transparent), transparent);
+    filter: blur(10px);
+  }
   .hero__grid {
+    position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: 1.02fr 0.98fr;
     gap: clamp(2rem, 5vw, 4rem);
     align-items: center;
   }
-  .hero__eyebrow { color: var(--accent); font-size: var(--t-sm); margin-bottom: var(--sp-4); }
-  .hero__name { font-size: var(--t-3xl); line-height: 0.98; }
-  .hero__line { font-family: var(--font-display); font-size: var(--t-md); color: var(--ink); margin-top: var(--sp-3); }
+  .hero__eyebrow { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--accent); font-size: var(--t-sm); margin-bottom: var(--sp-5); }
+  .hero__spark { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+  .hero__name {
+    font-size: clamp(3.2rem, 1.6rem + 6.4vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  .hero__name .hero__fn { display: block; }
+  .hero__name .hero__ln { display: block; color: var(--ink-3); }
+  .hero__line { font-family: var(--font-display); font-size: var(--t-md); color: var(--ink); margin-top: var(--sp-4); }
   .hero__axes { color: var(--ink-3); }
-  .hero__pitch { color: var(--ink-2); margin-top: var(--sp-4); font-size: var(--t-md); line-height: 1.6; }
+  .hero__pitch { color: var(--ink-2); margin-top: var(--sp-4); font-size: var(--t-md); line-height: 1.6; max-width: 48ch; }
   .hero__q {
     margin-top: var(--sp-5);
     padding: var(--sp-4) var(--sp-5);
-    background: var(--surface);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
     border: var(--line-w) solid var(--line);
     border-left: 3px solid var(--accent);
     border-radius: var(--r-sm);
@@ -158,25 +192,42 @@ const etapes = [
   }
   .hero__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
 
-  /* HERO PANEL — l'élément mémorable */
-  .hero__panel {
-    background: var(--surface);
-    border: var(--line-w) solid var(--line);
-    border-radius: var(--r-md);
-    padding: var(--sp-5);
-    box-shadow: var(--shadow);
+  /* Révélation orchestrée du hero (texte) */
+  .hero__intro > * { opacity: 0; transform: translateY(10px); animation: heroIn 0.6s var(--ease) forwards; }
+  .hero__intro > :nth-child(1) { animation-delay: 0.02s; }
+  .hero__intro > :nth-child(2) { animation-delay: 0.10s; }
+  .hero__intro > :nth-child(3) { animation-delay: 0.18s; }
+  .hero__intro > :nth-child(4) { animation-delay: 0.26s; }
+  .hero__intro > :nth-child(5) { animation-delay: 0.34s; }
+  .hero__intro > :nth-child(6) { animation-delay: 0.42s; }
+  @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__intro > * { opacity: 1; transform: none; animation: none; }
   }
-  .panel__head { display: flex; flex-direction: column; gap: 0.2rem; padding-bottom: var(--sp-4); border-bottom: var(--line-w) solid var(--line); }
-  .panel__title { font-family: var(--font-display); font-weight: 600; font-size: var(--t-base); }
-  .panel__count { font-size: var(--t-xs); color: var(--ink-3); }
-  .panel__list { display: flex; flex-direction: column; gap: var(--sp-5); padding-block: var(--sp-5); }
-  .panel__row { display: flex; flex-direction: column; gap: var(--sp-2); }
-  .panel__epreuve { display: flex; align-items: baseline; gap: var(--sp-2); }
-  .panel__code { color: var(--accent); font-weight: 600; font-size: var(--t-sm); }
-  .panel__name { font-size: var(--t-sm); color: var(--ink); }
-  .panel__epreuve:hover .panel__name { color: var(--accent); }
-  .panel__meta { display: flex; justify-content: space-between; font-size: var(--t-xs); color: var(--ink-3); }
-  .panel__foot { display: inline-block; font-size: var(--t-sm); padding-top: var(--sp-4); border-top: var(--line-w) solid var(--line); width: 100%; }
+
+  /* BANDE COUVERTURE */
+  .cov-band__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-4); margin-bottom: var(--sp-5); flex-wrap: wrap; }
+  .cov-band__head h2 { font-size: var(--t-xl); margin-top: var(--sp-2); }
+  .cov-band__count { font-size: var(--t-xs); color: var(--ink-3); }
+  .cov-band__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+  .cov-card {
+    display: flex; flex-direction: column; gap: var(--sp-3);
+    padding: var(--sp-5);
+    border: var(--line-w) solid var(--line);
+    border-top: 2px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    transition: border-color 0.18s var(--ease), transform 0.18s var(--ease);
+  }
+  .cov-card:hover { border-top-color: var(--accent); }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) { .cov-card:hover { transform: translateY(-2px); } }
+  .cov-card__top { display: flex; align-items: baseline; justify-content: space-between; }
+  .cov-card__code { font-family: var(--font-display); font-weight: 700; font-size: var(--t-lg); color: var(--accent); }
+  .cov-card__pct { font-size: var(--t-xl); font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .cov-card__pct-u { font-size: var(--t-sm); color: var(--ink-3); }
+  .cov-card__name { font-size: var(--t-sm); color: var(--ink); line-height: 1.35; min-height: 2.6em; }
+  .cov-card__foot { font-size: var(--t-xs); color: var(--ink-3); margin-top: auto; }
+  .cov-band__more { display: inline-block; font-size: var(--t-sm); margin-top: var(--sp-5); }
 
   /* CONCEPT STEPS */
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: var(--line-w) solid var(--line); border-radius: var(--r-md); overflow: hidden; }
@@ -198,8 +249,13 @@ const etapes = [
   .teaser__text p { color: var(--ink-2); }
   .teaser__cta { display: flex; gap: var(--sp-3); margin-top: var(--sp-5); flex-wrap: wrap; }
 
+  @media (max-width: 980px) {
+    .cov-band__grid { grid-template-columns: 1fr; }
+    .cov-card__name { min-height: 0; }
+  }
   @media (max-width: 920px) {
     .hero__grid { grid-template-columns: 1fr; }
+    .hero__media { max-width: 560px; }
     .steps { grid-template-columns: 1fr 1fr; }
     .step:nth-child(3) { border-left: 0; }
     .step:nth-child(odd) { border-left: 0; }
