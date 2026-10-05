@@ -24,17 +24,17 @@ export const realisations: Realisation[] = [
     organisation: 'Personnel',
     periode: 'En cours',
     environnement: [
-      'Infrastructure physique dédiée',
-      '32 Go de RAM',
-      'Proxmox VE 9',
-      'Bridge VLAN-aware',
-      '7 zones réseau',
+      'Infrastructure physique dédiée · 32 Go de RAM',
+      'Proxmox VE 9 · bridge VLAN-aware (vmbr1, 802.1Q)',
+      'Pare-feux pfSense en série (CARP)',
+      '8 VLAN : 7 zones internes + DMZ (VLAN 70)',
     ],
     technologies: [
-      'Proxmox VE 9', 'pfSense', 'VLAN 802.1Q', 'DMZ', 'Tailscale', "Let's Encrypt",
-      'CARP', 'pfsync', 'HAProxy', 'LDAPS', 'BIND9', 'DHCP Kea', 'step-ca (PKI)',
-      'FreeRADIUS', 'FreeBSD', 'ZFS', 'PostgreSQL', 'NFS', 'GLPI', 'Wazuh', 'Zeek',
-      'Zabbix', 'Cowrie', 'Proxmox Backup Server',
+      'Proxmox VE 9', 'pfSense (CARP/pfsync)', 'VLAN 802.1Q', 'DMZ', 'Tailscale',
+      'Guacamole', 'reverse proxy', 'Postfix · Dovecot', 'BIND9 / DNS', 'DHCP',
+      'LDAP', 'step-ca (PKI)', 'FreeRADIUS', "Let's Encrypt", 'FreeBSD · ZFS',
+      'PostgreSQL', 'MariaDB', 'Docker', 'GLPI', 'Graylog', 'Zeek', 'Cowrie',
+      'Proxmox Backup Server', 'Wi-Fi 802.1X',
     ],
     probleme:
       "Disposer d'un environnement réaliste et maîtrisé pour concevoir, administrer et " +
@@ -46,52 +46,69 @@ export const realisations: Realisation[] = [
       'Superviser et détecter : métrologie, collecte de logs, détection réseau.',
     ],
     demarche: [
-      'Virtualisation des machines sur Proxmox VE 9 avec un bridge VLAN-aware.',
-      'Segmentation du réseau en 7 zones via VLAN 802.1Q, pare-feu et routage sous pfSense.',
-      "Exposition contrôlée de services en DMZ et accès distant chiffré via Tailscale.",
-      "Mise en place de services d'infrastructure : BIND9 (DNS), DHCP Kea, PKI interne " +
-        'step-ca, annuaire LDAPS, authentification FreeRADIUS.',
-      'Répartition de charge et terminaison TLS avec HAProxy et certificats Let\'s Encrypt.',
-      "Stockage FreeBSD/ZFS, partages NFS, base PostgreSQL, gestion de parc GLPI.",
-      'Supervision Zabbix, détection et analyse avec Wazuh et Zeek, leurre Cowrie.',
-      'Sauvegardes centralisées avec Proxmox Backup Server.',
+      'Virtualisation sur Proxmox VE 9 avec un bridge VLAN-aware (trunk 802.1Q, vmbr1).',
+      "Architecture « sandwich » : deux étages de pare-feux pfSense (CARP) encadrant une " +
+        'DMZ de relais (VLAN 70 : reverse proxy SRV-RP01, relais SMTP SRV-SMTP01).',
+      'Segmentation en 7 zones internes routées par fw-int01 (routage pur, sans NAT) : ' +
+        'administration (90), socle (10), supervision (30), applicatif (50), formation (20), ' +
+        'champ de tir (40), terminaux mobiles (60).',
+      'Administration unique par le VLAN 90 : accès distant Tailscale limité aux ports ' +
+        '22/80/443/8006, bastion Guacamole.',
+      "Services d'infrastructure (VLAN 10) : annuaire LDAP, DNS et DHCP (SRV-CORE01), PKI " +
+        'interne step-ca + FreeRADIUS (SRV-PKI01), base PostgreSQL sur FreeBSD/ZFS (SRV-BSD01).',
+      'Zone applicative (VLAN 50) : SRV-APP01 sous Debian/Docker (GLPI + MariaDB, inventaire ' +
+        'natif), messagerie Postfix/Dovecot, backends web.',
+      'Supervision et détection : Graylog et Zeek (SRV-SOC01), pot de miel Cowrie (VLAN 40).',
+      "Sauvegardes centralisées (Proxmox Backup Server) et terminaison TLS (Let's Encrypt).",
     ],
     miseEnOeuvre: [
-      'Architecture multi-zones pensée autour de la séparation des rôles et des flux.',
-      'Services déployés sur des machines dédiées par fonction.',
+      'Plan d\'adressage par zone (192.168.<vlan>.0/24) et flux inter-zones maîtrisés au pare-feu.',
+      'Pare-feux fw-ext01 et fw-int01 en service ; jeux de règles VLAN 10 et VLAN 50 écrits et testés.',
+      'SRV-APP01 (VLAN 50) et pve01 (VLAN 90) en service ; reste des services en cours de déploiement.',
     ],
-    tests: [],
-    resultats: [],
+    tests: [
+      'Règles des VLAN 10 et 50 testées : le trafic autorisé passe, le reste est jeté et journalisé.',
+    ],
+    resultats: [
+      'Socle réseau opérationnel : virtualisation, segmentation VLAN et pare-feux en service.',
+      'Zone applicative active (GLPI/MariaDB en conteneurs, inventaire natif).',
+    ],
     difficultes: [],
     solutions: [],
     bilan:
-      "Le Home Lab est le fil conducteur de ma montée en compétences SISR. Les détails de " +
-      "mise en œuvre, les tests et les résultats restent à documenter précisément, preuves à " +
-      "l'appui, avant de considérer les compétences associées comme démontrées.",
+      "Le Home Lab est le fil conducteur de ma montée en compétences SISR : la conception " +
+      "d'ensemble est posée, le socle réseau et une première zone applicative sont en service. " +
+      'Le déploiement des zones restantes et la collecte des preuves (captures, configurations, ' +
+      'supervision) se poursuivent avant de considérer les compétences comme pleinement démontrées.',
     aCompleter: true,
     vedette: true,
     preuves: [
-      { id: 'hl-schema', type: 'schema', titre: 'Schéma de l\'architecture réseau (7 zones)', pourquoi: "Un schéma d'architecture montrerait la segmentation, la DMZ et les flux inter-zones (conception E6.1).", etat: 'a-produire' },
-      { id: 'hl-pfsense', type: 'configuration', titre: 'Export de configuration pfSense (VLAN, règles)', pourquoi: "La configuration du pare-feu et des VLAN prouverait l'installation et le filtrage (E6.2).", etat: 'a-produire' },
+      { id: 'hl-schema', type: 'schema', titre: "Schéma d'architecture du Home Lab", pourquoi: "Conception de l'infrastructure : sandwich de pare-feux, DMZ et 7 zones segmentées (volet conception E6.1).", href: '/', etat: 'disponible' },
+      { id: 'hl-pfsense', type: 'configuration', titre: 'Export de configuration pfSense (VLAN, règles)', pourquoi: "La configuration des pare-feux et des VLAN prouverait l'installation et le filtrage (E6.2).", etat: 'a-produire' },
       { id: 'hl-ha', type: 'capture', titre: 'État CARP/pfsync (bascule testée)', pourquoi: "Une capture d'une bascule CARP démontrerait la continuité de service (E6.2.2 / E5.1.4).", etat: 'a-produire' },
-      { id: 'hl-zabbix', type: 'capture', titre: 'Tableau de bord Zabbix', pourquoi: 'La métrologie prouverait la gestion d\'indicateurs et la supervision (E6.3.3).', etat: 'a-produire' },
-      { id: 'hl-wazuh', type: 'capture', titre: 'Alertes Wazuh / détection Zeek / logs Cowrie', pourquoi: 'La détection d\'événements illustrerait la cybersécurité de l\'infrastructure (E7.5.5).', etat: 'a-produire' },
+      { id: 'hl-superv', type: 'capture', titre: 'Supervision Graylog / détection Zeek', pourquoi: 'La métrologie et les journaux prouveraient la gestion d\'indicateurs et la supervision (E6.3.3).', etat: 'a-produire' },
+      { id: 'hl-detect', type: 'log', titre: 'Détection Zeek / journaux Cowrie', pourquoi: 'La détection d\'actions malveillantes illustrerait la cybersécurité de l\'infrastructure (E7.5.5).', etat: 'a-produire' },
       { id: 'hl-pbs', type: 'capture', titre: 'Jobs de sauvegarde Proxmox Backup Server', pourquoi: 'Les sauvegardes prouveraient la gestion de la continuité (E5.1.5).', etat: 'a-produire' },
-      { id: 'hl-pki', type: 'configuration', titre: 'PKI step-ca + annuaire LDAPS + FreeRADIUS', pourquoi: 'La PKI interne et l\'authentification centralisée relèvent de la sécurisation des accès (E7.2 / E7.5.3).', etat: 'a-produire' },
+      { id: 'hl-pki', type: 'configuration', titre: 'PKI step-ca + annuaire LDAP + FreeRADIUS', pourquoi: 'La PKI interne et l\'authentification centralisée relèvent de la sécurisation des accès (E7.2 / E7.5.3).', etat: 'a-produire' },
+      { id: 'hl-app', type: 'capture', titre: 'SRV-APP01 — GLPI/MariaDB en conteneurs', pourquoi: "Le service applicatif déployé (Debian/Docker) illustrerait la mise à disposition d'un service (E5.5).", etat: 'a-produire' },
     ],
     competences: [
-      { sous: 'E6.1.1', niveau: 'en-cours', justification: "Analyse du besoin d'un laboratoire SISR réaliste et de ses contraintes.", preuves: ['hl-schema'] },
-      { sous: 'E6.1.4', niveau: 'en-cours', justification: 'Choix d\'éléments de disponibilité : CARP/pfsync, HAProxy, sauvegardes PBS.', preuves: ['hl-ha', 'hl-pbs'] },
+      { sous: 'E6.1.1', niveau: 'mobilisee', justification: "Analyse du besoin d'un laboratoire SISR réaliste et de ses contraintes, traduite en architecture.", preuves: ['hl-schema'] },
+      { sous: 'E6.1.3', niveau: 'mobilisee', justification: "Dossier de conception : choix d'une architecture segmentée et spécifications par zone.", preuves: ['hl-schema'] },
+      { sous: 'E6.1.5', niveau: 'mobilisee', justification: "Maquette de la solution d'infrastructure (schéma d'architecture détaillé).", preuves: ['hl-schema'] },
+      { sous: 'E6.1.4', niveau: 'en-cours', justification: 'Choix d\'éléments de disponibilité : pare-feux CARP/pfsync, sauvegardes PBS.', preuves: ['hl-ha', 'hl-pbs'] },
       { sous: 'E6.2.1', niveau: 'en-cours', justification: 'Installation et configuration de Proxmox, pfSense et des services d\'infrastructure.', preuves: ['hl-pfsense'] },
       { sous: 'E6.2.2', niveau: 'en-cours', justification: 'Continuité assurée par CARP/pfsync et par Proxmox Backup Server.', preuves: ['hl-ha', 'hl-pbs'] },
-      { sous: 'E6.3.1', niveau: 'en-cours', justification: 'Administration à distance sécurisée via Tailscale.', preuves: ['hl-pfsense'] },
-      { sous: 'E6.3.3', niveau: 'en-cours', justification: 'Indicateurs et journaux : Zabbix (métrologie), Wazuh et Zeek (journaux/détection).', preuves: ['hl-zabbix', 'hl-wazuh'] },
+      { sous: 'E6.3.1', niveau: 'en-cours', justification: 'Administration à distance sécurisée via Tailscale (VLAN 90).', preuves: ['hl-pfsense'] },
+      { sous: 'E6.3.3', niveau: 'en-cours', justification: 'Indicateurs et journaux : Graylog (métrologie/logs), Zeek (analyse réseau).', preuves: ['hl-superv'] },
       { sous: 'E5.1.4', niveau: 'en-cours', justification: 'Dispositifs de continuité de service (haute disponibilité, sauvegardes).', preuves: ['hl-ha'] },
       { sous: 'E5.1.5', niveau: 'en-cours', justification: 'Sauvegardes centralisées avec Proxmox Backup Server.', preuves: ['hl-pbs'] },
-      { sous: 'E7.2.1', niveau: 'en-cours', justification: 'Identité et confiance internes : PKI step-ca, annuaire LDAPS.', preuves: ['hl-pki'] },
-      { sous: 'E7.5.1', niveau: 'en-cours', justification: 'Vérification de la sûreté des éléments déployés (segmentation, DMZ, durcissement).', preuves: ['hl-schema', 'hl-pfsense'] },
-      { sous: 'E7.5.3', niveau: 'en-cours', justification: 'Conformité des accès : PKI interne, LDAPS, FreeRADIUS.', preuves: ['hl-pki'] },
-      { sous: 'E7.5.5', niveau: 'en-cours', justification: 'Détection des actions malveillantes : Wazuh, Zeek, leurre Cowrie.', preuves: ['hl-wazuh'] },
+      { sous: 'E5.5.2', niveau: 'en-cours', justification: 'Déploiement d\'un service applicatif conteneurisé (SRV-APP01 : GLPI/MariaDB).', preuves: ['hl-app'] },
+      { sous: 'E7.2.1', niveau: 'en-cours', justification: 'Identité et confiance internes : PKI step-ca, annuaire LDAP.', preuves: ['hl-pki'] },
+      { sous: 'E7.5.1', niveau: 'en-cours', justification: 'Vérification de la sûreté des éléments conçus (segmentation, DMZ, durcissement).', preuves: ['hl-schema', 'hl-pfsense'] },
+      { sous: 'E7.5.2', niveau: 'mobilisee', justification: 'Sécurité prise en compte dès la conception : segmentation 7 zones, DMZ, double pare-feu.', preuves: ['hl-schema'] },
+      { sous: 'E7.5.3', niveau: 'en-cours', justification: 'Conformité des accès : PKI interne, LDAP, FreeRADIUS, 802.1X.', preuves: ['hl-pki'] },
+      { sous: 'E7.5.5', niveau: 'en-cours', justification: 'Détection des actions malveillantes : Zeek, pot de miel Cowrie.', preuves: ['hl-detect'] },
     ],
   },
 
