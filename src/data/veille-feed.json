@@ -1,5 +1,174 @@
 {
-  "updated": "2026-10-05T12:13:32.248Z",
-  "count": 0,
-  "items": []
+  "updated": "2026-10-05T12:17:52.699Z",
+  "count": 24,
+  "items": [
+    {
+      "title": "ANSSI : Le gendarme de la cybers�curit� fran�ais pirat�",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-anssi-le-gendarme-de-la-cybersecurite-francais-pirate-100833.html",
+      "date": "2026-10-05T12:13:30.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Microsoft pointe la mont�e en puissance des attaques assist�es par l'IA",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-microsoft-pointe-la-montee-en-puissance-des-attaques-assistees-par-l-ia-100829.html",
+      "date": "2026-10-05T09:36:09.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Les g�ants de la tech et Trump signent un accord sur la s�curit� de l'IA",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-les-geants-de-la-tech-et-trump-signent-un-accord-sur-la-securite-de-l-ia-100826.html",
+      "date": "2026-10-02T15:57:09.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Bercy resserre les garde-fous autour des technologies strat�giques",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-bercy-resserre-les-garde-fous-autour-des-technologies-strategiques-100819.html",
+      "date": "2026-09-30T17:55:10.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Carrefour alerte ses clients apr�s une fuite de donn�es chez le prestataire Shipup",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-carrefour-alerte-ses-clients-apres-une-fuite-de-donnees-chez-le-prestataire-shipup-100822.html",
+      "date": "2026-09-30T11:57:19.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "OpenAI renonce � lancer son mod�le GPT-6.1 Astra",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-openai-renonce-a-lancer-son-modele-gpt-61-astra-100821.html",
+      "date": "2026-09-30T09:36:48.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Anthropic d�voile Claude Sonnet 5.5",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-anthropic-devoile-claude-sonnet-55-100820.html",
+      "date": "2026-09-29T12:08:26.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Un agent d'OpenAI s'introduit dans Medicare en Australie",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-un-agent-d-openai-s-introduit-dans-medicare-en-australie-100810.html",
+      "date": "2026-09-28T10:32:30.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Wireshark (24 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1221/",
+      "date": "2026-09-24T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans LibreNMS (24 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1222/",
+      "date": "2026-09-24T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Papercut (24 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1223/",
+      "date": "2026-09-24T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans Microsoft Office (24 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1224/",
+      "date": "2026-09-24T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans GitLab (24 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1225/",
+      "date": "2026-09-24T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans F5 BIG-IP (23 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1220/",
+      "date": "2026-09-23T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Roundcube (26 mai 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-0644/",
+      "date": "2026-05-26T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "[MàJ] Vulnérabilité dans les produits Check Point (30 mai 2024)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-008/",
+      "date": "2024-05-30T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Cisco (25 avril 2024)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-007/",
+      "date": "2024-04-25T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    },
+    {
+      "title": "[MàJ] Vulnérabilité dans Palo Alto Networks GlobalProtect (12 avril 2024)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-006/",
+      "date": "2024-04-12T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    },
+    {
+      "title": "[MàJ] Vulnérabilité dans Microsoft Outlook (15 février 2024)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-005/",
+      "date": "2024-02-15T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    },
+    {
+      "title": "[MàJ] Vulnérabilité dans Fortinet FortiOS (09 février 2024)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-004/",
+      "date": "2024-02-09T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    },
+    {
+      "title": "[MàJ] Incident affectant les solutions AnyDesk (05 février 2024)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-003/",
+      "date": "2024-02-05T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    },
+    {
+      "title": "[MàJ] Multiples vulnérabilités dans Ivanti Connect Secure et Policy Secure Gateways (11 janvier 2024)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2024-ALE-001/",
+      "date": "2024-01-11T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Siemens (10 septembre 2019)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2019-AVI-429/",
+      "date": "2019-09-10T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans Apple Mac OS X (24 juillet 2015)",
+      "link": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2015-ALE-009/",
+      "date": "2015-07-24T00:00:00.000Z",
+      "source": "CERT-FR · Alertes",
+      "theme": "Alertes"
+    }
+  ]
 }
