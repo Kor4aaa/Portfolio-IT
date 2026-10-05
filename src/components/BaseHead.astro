@@ -1,0 +1,55 @@
+---
+import { profil } from '@data/profil';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Chemin relatif de la page pour le canonical (ex. "/referentiel"). */
+  path?: string;
+}
+
+const { title, description, path } = Astro.props;
+const fullTitle = title ? `${title} — ${profil.nom}` : profil.seo.titre;
+const desc = description ?? profil.seo.description;
+const canonical = new URL(path ?? Astro.url.pathname, Astro.site ?? profil.seo.url).href;
+const ogImage = new URL('/og.png', Astro.site ?? profil.seo.url).href;
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={desc} />
+<link rel="canonical" href={canonical} />
+<meta name="author" content={profil.nom} />
+<meta name="theme-color" content="#0f151b" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f3f5f8" media="(prefers-color-scheme: light)" />
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={profil.seo.titre} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={desc} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={profil.seo.locale} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={desc} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Polices : chargées côté visiteur (preconnect + display swap) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+/>
+
+<link rel="sitemap" href="/sitemap.xml" />
+<meta name="generator" content={Astro.generator} />

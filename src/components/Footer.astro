@@ -1,0 +1,54 @@
+---
+import { profil } from '@data/profil';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <hr class="rule" />
+  <div class="container site-footer__inner">
+    <div class="site-footer__col">
+      <p class="site-footer__name">{profil.nom}</p>
+      <p class="site-footer__sub">BTS SIO — option SISR · Portfolio de preuves</p>
+    </div>
+    <nav class="site-footer__col" aria-label="Pied de page">
+      <ul class="site-footer__links">
+        <li><a class="link" href="/referentiel">Référentiel</a></li>
+        <li><a class="link" href="/realisations">Réalisations</a></li>
+        <li><a class="link" href="/synthese">Synthèse</a></li>
+        <li><a class="link" href="/parcours">Parcours</a></li>
+      </ul>
+    </nav>
+    <div class="site-footer__col">
+      <ul class="site-footer__links">
+        {profil.contacts.map((c) => (
+          <li><a class="link" href={c.href} rel={c.type === 'linkedin' || c.type === 'github' ? 'me noopener' : undefined}>{c.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__meta">
+    <span>© {year} {profil.nom}</span>
+    <span>Construit avec Astro · hébergé sur GitHub Pages</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer { margin-top: var(--sp-9); }
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: var(--sp-6);
+    padding-block: var(--sp-6) var(--sp-4);
+  }
+  .site-footer__name { font-family: var(--font-display); font-weight: 600; }
+  .site-footer__sub { color: var(--ink-3); font-size: var(--t-sm); margin-top: var(--sp-1); }
+  .site-footer__links { display: flex; flex-direction: column; gap: var(--sp-2); font-size: var(--t-sm); }
+  .site-footer__meta {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-2);
+    padding-block: var(--sp-4) var(--sp-6);
+    font-family: var(--font-mono); font-size: var(--t-xs); color: var(--ink-3);
+  }
+  @media (max-width: 680px) {
+    .site-footer__inner { grid-template-columns: 1fr 1fr; }
+    .site-footer__col:first-child { grid-column: 1 / -1; }
+  }
+</style>

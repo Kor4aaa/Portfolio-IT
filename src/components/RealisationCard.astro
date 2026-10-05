@@ -1,0 +1,86 @@
+---
+import type { Realisation, Statut } from '@data/types';
+import StatusBadge from '@components/StatusBadge.astro';
+
+interface Props { r: Realisation; }
+const { r } = Astro.props;
+
+// Meilleur statut déclaré par la réalisation (pour un repère visuel).
+const rang: Record<string, number> = { demontree: 4, mobilisee: 3, 'en-cours': 2, 'a-developper': 1 };
+let best: Statut = 'a-developper';
+for (const l of r.competences) if (rang[l.niveau] > rang[best]) best = l.niveau;
+
+const nbPreuves = r.preuves.filter((p) => p.etat === 'disponible').length;
+const nbComp = new Set(r.competences.map((c) => c.sous)).size;
+const catLabels: Record<string, string> = {
+  reseau: 'Réseau', systeme: 'Système', securite: 'Sécurité', service: 'Service', pro: 'Professionnel',
+};
+---
+<article class="rcard">
+  <a class="rcard__link" href={`/realisations/${r.slug}`} aria-label={`Ouvrir la réalisation : ${r.titre}`}></a>
+  <div class="rcard__head">
+    <div class="rcard__cats">
+      {r.categories.map((c) => <span class="rcard__cat">{catLabels[c]}</span>)}
+    </div>
+    <span class="rcard__period mono">{r.periode}</span>
+  </div>
+  <h3 class="rcard__title">{r.titre}</h3>
+  <p class="rcard__resume">{r.resume}</p>
+
+  <div class="rcard__tags tags">
+    {r.technologies.slice(0, 5).map((t) => <span class="tag">{t}</span>)}
+    {r.technologies.length > 5 && <span class="tag">+{r.technologies.length - 5}</span>}
+  </div>
+
+  <div class="rcard__foot">
+    <span class="rcard__metric"><strong>{nbComp}</strong> compétence{nbComp > 1 ? 's' : ''}</span>
+    <span class="rcard__sep" aria-hidden="true"></span>
+    <span class="rcard__metric">
+      <strong>{nbPreuves}</strong> preuve{nbPreuves > 1 ? 's' : ''}
+      {r.aCompleter && <span class="rcard__todo" title="Des preuves restent à produire">· à compléter</span>}
+    </span>
+    <span class="rcard__status"><StatusBadge statut={best} /></span>
+  </div>
+</article>
+
+<style>
+  .rcard {
+    position: relative;
+    background: var(--surface);
+    border: var(--line-w) solid var(--line);
+    border-left: 3px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    padding: var(--sp-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    transition: border-color 0.18s var(--ease), transform 0.18s var(--ease);
+  }
+  .rcard:hover { border-left-color: var(--accent); }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .rcard:hover { transform: translateY(-2px); }
+  }
+  .rcard__link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+  .rcard__link:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .rcard :where(a:not(.rcard__link)) { position: relative; z-index: 2; }
+
+  .rcard__head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+  .rcard__cats { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+  .rcard__cat {
+    font-family: var(--font-mono); font-size: var(--t-xs);
+    color: var(--accent); letter-spacing: 0.01em;
+  }
+  .rcard__period { font-size: var(--t-xs); color: var(--ink-3); }
+  .rcard__title { font-size: var(--t-lg); }
+  .rcard__resume { color: var(--ink-2); font-size: var(--t-sm); line-height: 1.55; }
+  .rcard__foot {
+    display: flex; align-items: center; gap: var(--sp-3);
+    margin-top: auto; padding-top: var(--sp-3);
+    border-top: var(--line-w) solid var(--line);
+    font-size: var(--t-xs); color: var(--ink-3); flex-wrap: wrap;
+  }
+  .rcard__metric strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .rcard__todo { color: var(--st-encours); }
+  .rcard__sep { width: 1px; height: 12px; background: var(--line); }
+  .rcard__status { margin-left: auto; }
+</style>

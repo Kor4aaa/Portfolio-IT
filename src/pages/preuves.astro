@@ -1,0 +1,142 @@
+---
+import Base from '@layouts/Base.astro';
+import { realisations } from '@data/realisations';
+import type { TypePreuve } from '@data/types';
+
+const typeLabels: Record<TypePreuve, string> = {
+  capture: 'Capture', schema: 'Schéma', configuration: 'Configuration', script: 'Script',
+  documentation: 'Documentation', test: 'Test', log: 'Journal', video: 'Vidéo', photo: 'Photo',
+  depot: 'Dépôt', document: 'Document',
+};
+
+// Aplatissement : chaque preuve + sa réalisation + les sous-compétences qu'elle justifie.
+interface Row {
+  preuveId: string; type: TypePreuve; titre: string; pourquoi: string; href?: string; alt?: string;
+  etat: string; realSlug: string; realTitre: string; comps: string[];
+}
+const rows: Row[] = [];
+for (const r of realisations) {
+  for (const p of r.preuves) {
+    const comps = r.competences.filter((l) => (l.preuves ?? []).includes(p.id)).map((l) => l.sous);
+    rows.push({
+      preuveId: p.id, type: p.type, titre: p.titre, pourquoi: p.pourquoi, href: p.href, alt: p.alt,
+      etat: p.etat, realSlug: r.slug, realTitre: r.titre, comps,
+    });
+  }
+}
+const dispo = rows.filter((r) => r.etat === 'disponible');
+const todo = rows.filter((r) => r.etat === 'a-produire');
+const isImg = (h?: string) => !!h && /\.(jpg|jpeg|png|webp|gif)$/i.test(h);
+---
+<Base
+  title="Preuves"
+  description="Toutes les preuves du portfolio : captures, schémas, configurations et documents, reliés aux réalisations et aux compétences qu'ils justifient."
+  path="/preuves"
+>
+  <section class="section--tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head__index">Faisceau de preuves</span>
+        <h1>Preuves</h1>
+        <p class="prose">
+          Les preuves qui justifient les compétences : chaque élément précise <em>pourquoi</em> il démontre
+          une compétence, et renvoie à la réalisation et aux sous-compétences concernées.
+        </p>
+      </div>
+
+      <div class="pstats">
+        <span class="pstat"><strong>{dispo.length}</strong> preuve{dispo.length > 1 ? 's' : ''} disponible{dispo.length > 1 ? 's' : ''}</span>
+        <span class="pstat pstat--todo"><strong>{todo.length}</strong> à produire</span>
+      </div>
+
+      <div class="pgrid">
+        {dispo.map((p) => (
+          <article class="pcard">
+            {isImg(p.href) ? (
+              <a class="pcard__media" href={p.href}>
+                <img src={p.href} alt={p.alt ?? p.titre} loading="lazy" decoding="async" />
+              </a>
+            ) : (
+              <a class="pcard__doc" href={p.href} rel="noopener">
+                <span class="pcard__doc-type mono">{typeLabels[p.type]}</span>
+                <span class="pcard__doc-open">Ouvrir →</span>
+              </a>
+            )}
+            <div class="pcard__body">
+              <span class="pcard__type mono">{typeLabels[p.type]}</span>
+              <h2 class="pcard__title">{p.titre}</h2>
+              <p class="pcard__why">{p.pourquoi}</p>
+              <div class="pcard__foot">
+                <a class="pcard__real link" href={`/realisations/${p.realSlug}`}>{p.realTitre}</a>
+                {p.comps.length > 0 && (
+                  <div class="pcard__comps">
+                    {p.comps.map((c) => <a class="code-ref pcard__comp" href={`/referentiel#${c.slice(0,2).toLowerCase()}`}>{c}</a>)}
+                  </div>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {todo.length > 0 && (
+        <section class="todo-sec">
+          <h2 class="todo-sec__t">Preuves à produire</h2>
+          <p class="todo-sec__d">Éléments identifiés mais pas encore documentés. Ils structurent le travail à venir, sans rien affirmer tant qu'ils n'existent pas.</p>
+          <ul class="todo-list">
+            {todo.map((p) => (
+              <li class="todo-row">
+                <span class="pcard__type mono">{typeLabels[p.type]}</span>
+                <div>
+                  <p class="todo-row__t"><strong>{p.titre}</strong> — <a class="link" href={`/realisations/${p.realSlug}`}>{p.realTitre}</a></p>
+                  <p class="todo-row__why">{p.pourquoi}</p>
+                </div>
+                {p.comps.length > 0 && (
+                  <div class="pcard__comps">{p.comps.map((c) => <span class="code-ref">{c}</span>)}</div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pstats { display: flex; gap: var(--sp-4); margin-bottom: var(--sp-5); font-size: var(--t-sm); color: var(--ink-2); }
+  .pstat strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .pstat--todo strong { color: var(--st-encours); }
+
+  .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--sp-4); }
+  .pcard { border: var(--line-w) solid var(--line); border-radius: var(--r-sm); overflow: hidden; background: var(--surface); display: flex; flex-direction: column; }
+  .pcard__media { background: var(--surface-2); }
+  .pcard__media img { width: 100%; height: 180px; object-fit: cover; object-position: top; }
+  .pcard__doc { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-5) var(--sp-4); background: var(--surface-2); border-bottom: var(--line-w) solid var(--line); }
+  .pcard__doc-type { color: var(--accent); }
+  .pcard__doc-open { color: var(--ink-2); font-size: var(--t-sm); }
+  .pcard__doc:hover .pcard__doc-open { color: var(--accent); }
+  .pcard__body { padding: var(--sp-4); display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
+  .pcard__type { font-size: var(--t-xs); color: var(--accent); }
+  .pcard__title { font-size: var(--t-base); }
+  .pcard__why { font-size: var(--t-xs); color: var(--ink-2); line-height: 1.5; flex: 1; }
+  .pcard__foot { display: flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: var(--line-w) solid var(--line); }
+  .pcard__real { font-size: var(--t-sm); }
+  .pcard__comps { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .pcard__comp { background: var(--surface-2); border: var(--line-w) solid var(--line); border-radius: var(--r-xs); padding: 0.05rem 0.4rem; }
+  a.pcard__comp:hover { border-color: var(--accent-line); background: var(--accent-wash); }
+
+  .todo-sec { margin-top: var(--sp-7); padding-top: var(--sp-6); border-top: var(--line-w) solid var(--line); }
+  .todo-sec__t { font-size: var(--t-md); }
+  .todo-sec__d { font-size: var(--t-sm); color: var(--ink-2); margin: var(--sp-2) 0 var(--sp-4); max-width: 70ch; }
+  .todo-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .todo-row { display: grid; grid-template-columns: auto 1fr auto; gap: var(--sp-3); align-items: start; padding: var(--sp-3) var(--sp-4); border: var(--line-w) dashed var(--line-strong); border-radius: var(--r-sm); }
+  .todo-row__t { font-size: var(--t-sm); }
+  .todo-row__why { font-size: var(--t-xs); color: var(--ink-3); margin-top: 0.15rem; }
+  .todo-row .pcard__comps { justify-content: flex-end; }
+
+  @media (max-width: 560px) {
+    .todo-row { grid-template-columns: 1fr; }
+    .todo-row .pcard__comps { justify-content: flex-start; }
+  }
+</style>

@@ -1,0 +1,218 @@
+---
+import Base from '@layouts/Base.astro';
+import CoverageBar from '@components/CoverageBar.astro';
+import SousRow from '@components/SousRow.astro';
+import StatusBadge from '@components/StatusBadge.astro';
+import { referentiel, sources, STATUTS, ORDRE_STATUTS } from '@data/referentiel';
+import { distributionEpreuve, distributionCompetence, statutCompetence, validerDonnees } from '@data/derive';
+
+// Contrôle d'intégrité des données au build (liens compétences/preuves).
+const erreursDonnees = validerDonnees();
+if (erreursDonnees.length > 0) {
+  // eslint-disable-next-line no-console
+  console.error('[données] Incohérences détectées :\n' + erreursDonnees.map((e) => '  - ' + e).join('\n'));
+  throw new Error(`Données du référentiel incohérentes (${erreursDonnees.length}). Voir le journal.`);
+}
+---
+<Base
+  title="Référentiel & compétences"
+  description="Les compétences E5, E6 et E7 du référentiel BTS SIO SISR, leur statut de maîtrise, et les réalisations et preuves qui les justifient."
+  path="/referentiel"
+>
+  <section class="section--tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head__index">Référentiel BTS SIO — option SISR</span>
+        <h1>Référentiel &amp; compétences</h1>
+        <p class="prose">
+          Les trois épreuves professionnelles, leurs compétences et sous-compétences officielles.
+          Chaque statut est <strong>calculé à partir des réalisations</strong> rattachées : une compétence
+          n'est jamais marquée à partir d'une simple technologie. Dépliez une compétence pour voir
+          les réalisations et les preuves qui la justifient.
+        </p>
+      </div>
+
+      <!-- Légende des statuts -->
+      <div class="legend" aria-label="Signification des statuts">
+        {ORDRE_STATUTS.map((s) => (
+          <div class="legend__item">
+            <StatusBadge statut={s} />
+            <span class="legend__desc">{STATUTS[s].desc}</span>
+          </div>
+        ))}
+      </div>
+      <p class="disclaimer">
+        Ces statuts décrivent le niveau de mobilisation documenté dans ce portfolio.
+        Ils ne constituent pas une validation officielle des compétences par l'établissement ou le jury.
+      </p>
+
+      <nav class="jump" aria-label="Accès rapide aux épreuves">
+        {referentiel.map((ep) => (
+          <a class="jump__link" href={`#${ep.code.toLowerCase()}`}>
+            <span class="code-ref">{ep.code}</span>
+            <span class="jump__name">{ep.titre}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  {referentiel.map((ep) => {
+    const { dist, total } = distributionEpreuve(ep);
+    return (
+      <section class="section--tight epreuve" id={ep.code.toLowerCase()}>
+        <div class="container">
+          <header class="epreuve__head">
+            <div class="epreuve__title">
+              <span class="epreuve__code">{ep.code}</span>
+              <div>
+                <p class="epreuve__bloc mono">{ep.bloc}</p>
+                <h2>{ep.titre}</h2>
+              </div>
+            </div>
+            <p class="epreuve__resume prose">{ep.resume}</p>
+            <div class="epreuve__cov">
+              <CoverageBar dist={dist} total={total} showLegend={true} />
+            </div>
+          </header>
+
+          <div class="comps">
+            {ep.competences.map((comp) => {
+              const cst = statutCompetence(comp);
+              const nbSous = comp.sous.length;
+              return (
+                <details class="comp">
+                  <summary class="comp__summary">
+                    <span class="comp__left">
+                      <span class="code-ref comp__code">{comp.code}</span>
+                      <span class="comp__title">{comp.titre}</span>
+                    </span>
+                    <span class="comp__right">
+                      <span class="comp__counts mono">{nbSous} sous-comp.</span>
+                      <StatusBadge statut={cst} />
+                      <svg class="comp__chevron" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </summary>
+                  <div class="comp__body">
+                    {comp.sous.map((s) => <SousRow sous={s} />)}
+                  </div>
+                </details>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="section--tight">
+    <div class="container">
+      <details class="sources">
+        <summary>Sources du référentiel</summary>
+        <ul class="sources__list">
+          {sources.map((s) => (
+            <li>
+              <a class="link" href={s.href} rel="noopener" target="_blank">{s.nom}</a>
+              <span class="sources__detail">{s.detail}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="sources__note">
+          Référentiel applicable à la session 2025 et suivantes (réforme). Les intitulés sont à vérifier
+          sur les textes officiels pour le mot-à-mot définitif.
+        </p>
+      </details>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--sp-3) var(--sp-5);
+    padding: var(--sp-4);
+    border: var(--line-w) solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+  }
+  .legend__item { display: flex; align-items: center; gap: var(--sp-3); }
+  .legend__desc { font-size: var(--t-xs); color: var(--ink-2); line-height: 1.4; }
+  .disclaimer {
+    margin-top: var(--sp-3);
+    font-size: var(--t-xs);
+    color: var(--ink-3);
+    border-left: 2px solid var(--line-strong);
+    padding-left: var(--sp-3);
+  }
+
+  .jump { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); margin-top: var(--sp-5); }
+  .jump__link {
+    display: flex; flex-direction: column; gap: 0.2rem;
+    padding: var(--sp-3) var(--sp-4);
+    border: var(--line-w) solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    transition: border-color 0.15s var(--ease);
+  }
+  .jump__link:hover { border-color: var(--accent-line); }
+  .jump__link .code-ref { font-size: var(--t-md); font-weight: 600; }
+  .jump__name { font-size: var(--t-xs); color: var(--ink-2); line-height: 1.3; }
+  @media (max-width: 620px) { .jump { grid-template-columns: 1fr; } }
+
+  .epreuve { scroll-margin-top: calc(var(--nav-h) + 1rem); }
+  .epreuve + .epreuve { border-top: var(--line-w) solid var(--line); }
+  .epreuve__head { margin-bottom: var(--sp-5); }
+  .epreuve__title { display: flex; gap: var(--sp-4); align-items: baseline; }
+  .epreuve__code {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .epreuve__bloc { font-size: var(--t-xs); color: var(--ink-3); }
+  .epreuve__head h2 { font-size: var(--t-xl); margin-top: 0.15rem; }
+  .epreuve__resume { color: var(--ink-2); margin-top: var(--sp-4); font-size: var(--t-sm); }
+  .epreuve__cov { margin-top: var(--sp-4); max-width: 640px; }
+
+  .comps { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .comp {
+    border: var(--line-w) solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .comp[open] { border-color: var(--line-strong); }
+  .comp__summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: var(--sp-4);
+  }
+  .comp__summary::-webkit-details-marker { display: none; }
+  .comp__summary:hover { background: var(--surface-2); }
+  .comp__left { display: flex; align-items: baseline; gap: var(--sp-3); min-width: 0; }
+  .comp__code { color: var(--accent); font-weight: 600; flex-shrink: 0; }
+  .comp__title { font-family: var(--font-display); font-weight: 600; font-size: var(--t-md); line-height: 1.25; }
+  .comp__right { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+  .comp__counts { font-size: var(--t-xs); color: var(--ink-3); }
+  .comp__chevron { color: var(--ink-3); transition: transform 0.2s var(--ease); }
+  .comp[open] .comp__chevron { transform: rotate(180deg); }
+  .comp__body { padding: 0 var(--sp-4) var(--sp-3); border-top: var(--line-w) solid var(--line); }
+
+  .sources { border: var(--line-w) solid var(--line); border-radius: var(--r-sm); padding: var(--sp-4); background: var(--surface); }
+  .sources summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; }
+  .sources__list { display: flex; flex-direction: column; gap: var(--sp-3); margin-top: var(--sp-4); }
+  .sources__detail { display: block; font-size: var(--t-xs); color: var(--ink-3); margin-top: 0.15rem; }
+  .sources__note { margin-top: var(--sp-4); font-size: var(--t-xs); color: var(--ink-3); }
+
+  @media (max-width: 620px) {
+    .comp__counts { display: none; }
+    .comp__title { font-size: var(--t-sm); }
+    .comp__right { gap: var(--sp-2); }
+  }
+</style>

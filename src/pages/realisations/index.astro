@@ -1,0 +1,87 @@
+---
+import Base from '@layouts/Base.astro';
+import RealisationCard from '@components/RealisationCard.astro';
+import { realisations } from '@data/realisations';
+
+const filtres = [
+  { f: 'all', label: 'Toutes' },
+  { f: 'reseau', label: 'Réseau' },
+  { f: 'systeme', label: 'Système' },
+  { f: 'securite', label: 'Sécurité' },
+  { f: 'service', label: 'Service' },
+  { f: 'pro', label: 'Professionnel' },
+];
+---
+<Base
+  title="Réalisations"
+  description="Catalogue des réalisations : Home Lab, Active Directory, VLAN, support en alternance et plus — avec compétences et preuves associées."
+  path="/realisations"
+>
+  <section class="section--tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head__index">Catalogue</span>
+        <h1>Réalisations</h1>
+        <p class="prose">
+          Chaque réalisation décrit un besoin, une démarche, des choix techniques et des preuves,
+          puis renvoie aux compétences du référentiel qu'elle mobilise. Filtrez par domaine.
+        </p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filtrer les réalisations">
+        {filtres.map((f, i) => (
+          <button class:list={['filter', { 'is-on': i === 0 }]} data-filter={f.f} type="button" aria-pressed={i === 0 ? 'true' : 'false'}>
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="r-grid" id="r-grid">
+        {realisations.map((r) => (
+          <div class="r-item" data-cats={r.categories.join(' ')}>
+            <RealisationCard r={r} />
+          </div>
+        ))}
+      </div>
+      <p class="r-empty" id="r-empty" hidden>Aucune réalisation dans ce domaine pour le moment.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+  .filter {
+    font-size: var(--t-sm);
+    color: var(--ink-2);
+    border: var(--line-w) solid var(--line);
+    border-radius: var(--r-sm);
+    padding: 0.35rem 0.8rem;
+    transition: color 0.15s var(--ease), border-color 0.15s var(--ease), background 0.15s var(--ease);
+  }
+  .filter:hover { color: var(--ink); border-color: var(--line-strong); }
+  .filter.is-on { color: var(--accent); border-color: var(--accent-line); background: var(--accent-wash); }
+  .r-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--sp-4); align-items: stretch; }
+  .r-item { display: flex; }
+  .r-item > :global(*) { width: 100%; }
+  .r-empty { color: var(--ink-3); margin-top: var(--sp-5); }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const items = document.querySelectorAll<HTMLElement>('.r-item');
+  const empty = document.getElementById('r-empty');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter!;
+      buttons.forEach((b) => { b.classList.toggle('is-on', b === btn); b.setAttribute('aria-pressed', String(b === btn)); });
+      let shown = 0;
+      items.forEach((it) => {
+        const cats = (it.dataset.cats || '').split(' ');
+        const show = f === 'all' || cats.includes(f);
+        it.hidden = !show;
+        if (show) shown++;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    });
+  });
+</script>
