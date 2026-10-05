@@ -22,9 +22,9 @@ if (erreursDonnees.length > 0) {
   <section class="section--tight">
     <div class="container">
       <div class="section-head">
-        <span class="section-head__index">Référentiel BTS SIO — option SISR</span>
-        <h1>Référentiel &amp; compétences</h1>
-        <p class="prose">
+        <span class="section-head__index" data-en="BTS SIO framework — SISR option">Référentiel BTS SIO — option SISR</span>
+        <h1 data-en="Framework &amp; skills">Référentiel &amp; compétences</h1>
+        <p class="prose" data-en="The three professional units, their official skills and sub-skills. Each status is <strong>computed from the attached projects</strong>: a skill is never marked from a technology alone. Expand a skill to see the projects and evidence that back it.">
           Les trois épreuves professionnelles, leurs compétences et sous-compétences officielles.
           Chaque statut est <strong>calculé à partir des réalisations</strong> rattachées : une compétence
           n'est jamais marquée à partir d'une simple technologie. Dépliez une compétence pour voir
@@ -37,11 +37,11 @@ if (erreursDonnees.length > 0) {
         {ORDRE_STATUTS.map((s) => (
           <div class="legend__item">
             <StatusBadge statut={s} />
-            <span class="legend__desc">{STATUTS[s].desc}</span>
+            <span class="legend__desc" data-en={STATUTS[s].descEn}>{STATUTS[s].desc}</span>
           </div>
         ))}
       </div>
-      <p class="disclaimer">
+      <p class="disclaimer" data-en="These statuses describe the level of mastery documented in this portfolio. They are not an official validation of the skills by the school or the examination board.">
         Ces statuts décrivent le niveau de mobilisation documenté dans ce portfolio.
         Ils ne constituent pas une validation officielle des compétences par l'établissement ou le jury.
       </p>

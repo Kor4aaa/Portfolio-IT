@@ -19,8 +19,10 @@ import type { Epreuve, Statut } from './types';
 export interface InfoStatut {
   code: Statut;
   label: string;
+  labelEn: string;
   rang: number;
   desc: string;
+  descEn: string;
 }
 
 /** Vocabulaire des statuts — distinct d'une validation officielle par l'école. */
@@ -28,32 +30,42 @@ export const STATUTS: Record<Statut, InfoStatut> = {
   demontree: {
     code: 'demontree',
     label: 'Démontrée',
+    labelEn: 'Demonstrated',
     rang: 4,
     desc: "Réalisation aboutie et preuves documentées à l'appui.",
+    descEn: 'Completed project with documented evidence.',
   },
   mobilisee: {
     code: 'mobilisee',
     label: 'Mobilisée',
+    labelEn: 'Applied',
     rang: 3,
     desc: 'Compétence mise en œuvre dans une réalisation ; preuves à consolider.',
+    descEn: 'Applied in a project; evidence to be consolidated.',
   },
   'en-cours': {
     code: 'en-cours',
     label: 'En cours',
+    labelEn: 'In progress',
     rang: 2,
     desc: 'Travaillée dans une réalisation en cours ou partiellement aboutie.',
+    descEn: 'Worked on in an ongoing or partial project.',
   },
   'a-developper': {
     code: 'a-developper',
     label: 'À développer',
+    labelEn: 'To develop',
     rang: 1,
     desc: 'Identifiée et prévue ; pas encore de réalisation associée.',
+    descEn: 'Identified and planned; no project yet.',
   },
   'non-documentee': {
     code: 'non-documentee',
     label: 'Non documentée',
+    labelEn: 'Not documented',
     rang: 0,
     desc: 'Aucune réalisation ni preuve rattachée pour le moment.',
+    descEn: 'No project or evidence attached yet.',
   },
 };
 

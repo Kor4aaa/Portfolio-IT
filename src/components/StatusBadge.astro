@@ -17,8 +17,8 @@ const info = STATUTS[statut];
 >
   <span class="status__mark" aria-hidden="true"></span>
   {variant === 'full'
-    ? <span class="status__label">{info.label}</span>
-    : <span class="visually-hidden">{info.label}</span>}
+    ? <span class="status__label" data-en={info.labelEn}>{info.label}</span>
+    : <span class="visually-hidden" data-en={info.labelEn}>{info.label}</span>}
 </span>
 
 <style>

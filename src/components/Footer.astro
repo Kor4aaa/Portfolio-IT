@@ -7,14 +7,14 @@ const year = new Date().getFullYear();
   <div class="container site-footer__inner">
     <div class="site-footer__col">
       <p class="site-footer__name">{profil.nom}</p>
-      <p class="site-footer__sub">BTS SIO — option SISR · Portfolio de preuves</p>
+      <p class="site-footer__sub" data-en="BTS SIO — SISR option · Evidence portfolio">BTS SIO — option SISR · Portfolio de preuves</p>
     </div>
     <nav class="site-footer__col" aria-label="Pied de page">
       <ul class="site-footer__links">
-        <li><a class="link" href="/referentiel">Référentiel</a></li>
-        <li><a class="link" href="/realisations">Réalisations</a></li>
-        <li><a class="link" href="/synthese">Synthèse</a></li>
-        <li><a class="link" href="/parcours">Parcours</a></li>
+        <li><a class="link" href="/referentiel" data-en="Framework">Référentiel</a></li>
+        <li><a class="link" href="/realisations" data-en="Projects">Réalisations</a></li>
+        <li><a class="link" href="/synthese" data-en="Summary">Synthèse</a></li>
+        <li><a class="link" href="/parcours" data-en="Background">Parcours</a></li>
       </ul>
     </nav>
     <div class="site-footer__col">
@@ -27,7 +27,7 @@ const year = new Date().getFullYear();
   </div>
   <div class="container site-footer__meta">
     <span>© {year} {profil.nom}</span>
-    <span>Construit avec Astro · hébergé sur GitHub Pages</span>
+    <span data-en="Built with Astro · hosted on GitHub Pages">Construit avec Astro · hébergé sur GitHub Pages</span>
   </div>
 </footer>
 

@@ -89,12 +89,13 @@ export const formation: Experience[] = [
     poste: 'BTS SIO — option SISR (2ᵉ année)',
     organisation: 'ESUP',
     type: 'formation',
-    periode: '2025 – 2026',
+    periode: '2025 – 2027',
     missions: [
-      'Administration systèmes et réseaux, virtualisation, cybersécurité.',
+      'Réseaux : Active Directory sécurisé, VLAN Cisco, routage / switching.',
+      'Virtualisation (Proxmox, VMware, VirtualBox) ; cybersécurité (RGPD, audits Kali, pentesting).',
       'Préparation des épreuves professionnelles E5, E6 et E7.',
     ],
-    realisations: ['active-directory', 'vlan-comptafinance', 'glpi-kanboard', 'lab-securite'],
+    realisations: ['active-directory', 'vlan-cisco', 'cybersecurite-kali', 'portfolio-web'],
     enCours: true,
   },
   {

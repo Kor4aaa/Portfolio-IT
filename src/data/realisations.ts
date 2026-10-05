@@ -1,462 +1,400 @@
 // ============================================================================
 //  RÉALISATIONS
 // ----------------------------------------------------------------------------
-//  Règle : aucun fait inventé. Les descriptions reformulent des éléments réels
-//  (livrables du dépôt, CV, TP documentés). Quand une preuve ou un résultat
-//  n'existe pas encore, il est marqué `etat: 'a-produire'` ou le champ reste
-//  volontairement vide — jamais rempli au hasard.
+//  Sources réelles : CV 2026 + Tableau de synthèse officiel E5 (session 2026).
+//  Les compétences E5 reprennent exactement les croix du tableau de synthèse ;
+//  E6/E7 sont déduites du contenu technique réel des réalisations.
+//  Les documents listés dans la synthèse officielle existent (à joindre au
+//  portfolio) : les preuves non encore téléversées sont marquées « à produire ».
+//  Le Home Lab respecte le découpage du CV : « déjà en production » = démontré,
+//  « en cours de déploiement » = en cours.
 // ============================================================================
 import type { Realisation } from './types';
 
 export const realisations: Realisation[] = [
   // ──────────────────────────────────────────────────────────────────────
-  //  HOME LAB — réalisation majeure (infrastructure physique personnelle)
+  //  HOME LAB — cyber range (réalisation majeure, E6/E7)
   // ──────────────────────────────────────────────────────────────────────
   {
     slug: 'home-lab',
-    titre: 'Home Lab / Cyber Range sur infrastructure physique',
+    titre: 'Home Lab — cyber range sur infrastructure physique',
     resume:
-      "Laboratoire personnel d'administration et de sécurité sur matériel physique : " +
-      'virtualisation Proxmox, segmentation VLAN multi-zones, pare-feu pfSense, services ' +
-      "d'annuaire et supervision.",
+      "Conception et déploiement complets, réalisés seul, d'une plateforme segmentée sous " +
+      'Proxmox et pfSense : 7 zones cloisonnées, cloisonnement inter-VLAN testé et prouvé, ' +
+      'accès distant sécurisé.',
     categories: ['reseau', 'systeme', 'securite'],
-    contexte: 'Projet personnel — apprentissage et expérimentation en continu',
+    contexte: 'Projet personnel',
     organisation: 'Personnel',
-    periode: 'En cours',
+    periode: '2026 · en cours',
     environnement: [
-      'Infrastructure physique dédiée · 32 Go de RAM',
-      'Proxmox VE 9 · bridge VLAN-aware (vmbr1, 802.1Q)',
-      'Pare-feux pfSense en série (CARP)',
-      '8 VLAN : 7 zones internes + DMZ (VLAN 70)',
+      'Mini PC dédié · Proxmox VE 9 · 32 Go',
+      'Bridge VLAN-aware 802.1Q (pas une maquette logicielle)',
+      'Pare-feu pfSense · 7 zones cloisonnées',
     ],
     technologies: [
-      'Proxmox VE 9', 'pfSense (CARP/pfsync)', 'VLAN 802.1Q', 'DMZ', 'Tailscale',
-      'Guacamole', 'reverse proxy', 'Postfix · Dovecot', 'BIND9 / DNS', 'DHCP',
-      'LDAP', 'step-ca (PKI)', 'FreeRADIUS', "Let's Encrypt", 'FreeBSD · ZFS',
-      'PostgreSQL', 'MariaDB', 'Docker', 'GLPI', 'Graylog', 'Zeek', 'Cowrie',
-      'Proxmox Backup Server', 'Wi-Fi 802.1X',
+      'Proxmox VE 9', 'pfSense', 'VLAN 802.1Q', 'DMZ', 'Tailscale', "Let's Encrypt",
+      'cron', 'CARP · pfsync', 'HAProxy', 'LDAPS', 'BIND9', 'DHCP Kea', 'step-ca (PKI)',
+      'FreeRADIUS', 'FreeBSD 14 · ZFS', 'PostgreSQL', 'NFS', 'GLPI', 'Wazuh', 'Zeek',
+      'Zabbix', 'Cowrie', 'Proxmox Backup Server',
     ],
     probleme:
-      "Disposer d'un environnement réaliste et maîtrisé pour concevoir, administrer et " +
-      "sécuriser une infrastructure complète — au-delà de ce qu'un TP ponctuel permet.",
+      "Disposer d'un environnement réaliste et maîtrisé pour concevoir, déployer et " +
+      "sécuriser une infrastructure complète — « ce que je fais le soir sur mon lab, je veux " +
+      "le faire en entreprise ».",
     objectifs: [
-      "Construire une infrastructure segmentée en plusieurs zones (dont une DMZ).",
-      'Mettre en place des services réseau et système : annuaire, DNS, DHCP, PKI, RADIUS.',
-      'Expérimenter la haute disponibilité et la continuité (CARP/pfsync, sauvegardes).',
-      'Superviser et détecter : métrologie, collecte de logs, détection réseau.',
+      "Virtualiser et segmenter une infrastructure sur matériel physique.",
+      'Cloisonner les zones au pare-feu et prouver l\'isolation inter-VLAN.',
+      'Sécuriser les accès distants et préparer la haute disponibilité et la supervision.',
     ],
     demarche: [
-      'Virtualisation sur Proxmox VE 9 avec un bridge VLAN-aware (trunk 802.1Q, vmbr1).',
-      "Architecture « sandwich » : deux étages de pare-feux pfSense (CARP) encadrant une " +
-        'DMZ de relais (VLAN 70 : reverse proxy SRV-RP01, relais SMTP SRV-SMTP01).',
-      'Segmentation en 7 zones internes routées par fw-int01 (routage pur, sans NAT) : ' +
-        'administration (90), socle (10), supervision (30), applicatif (50), formation (20), ' +
-        'champ de tir (40), terminaux mobiles (60).',
-      'Administration unique par le VLAN 90 : accès distant Tailscale limité aux ports ' +
-        '22/80/443/8006, bastion Guacamole.',
-      "Services d'infrastructure (VLAN 10) : annuaire LDAP, DNS et DHCP (SRV-CORE01), PKI " +
-        'interne step-ca + FreeRADIUS (SRV-PKI01), base PostgreSQL sur FreeBSD/ZFS (SRV-BSD01).',
-      'Zone applicative (VLAN 50) : SRV-APP01 sous Debian/Docker (GLPI + MariaDB, inventaire ' +
-        'natif), messagerie Postfix/Dovecot, backends web.',
-      'Supervision et détection : Graylog et Zeek (SRV-SOC01), pot de miel Cowrie (VLAN 40).',
-      "Sauvegardes centralisées (Proxmox Backup Server) et terminaison TLS (Let's Encrypt).",
+      'Hyperviseur Proxmox VE 9 sur matériel physique, bridge VLAN-aware 802.1Q.',
+      'Pare-feu pfSense : 7 zones cloisonnées (socle, postes, SOC, champ de tir, applicatif, ' +
+        'DMZ, WAN), règles par alias.',
+      'Cloisonnement inter-VLAN testé et prouvé (le trafic autorisé passe, le reste est bloqué).',
+      'Accès distant sécurisé par Tailscale (subnet router).',
+      "Certificat Let's Encrypt renouvelé automatiquement par tâche cron.",
     ],
     miseEnOeuvre: [
-      'Plan d\'adressage par zone (192.168.<vlan>.0/24) et flux inter-zones maîtrisés au pare-feu.',
-      'Pare-feux fw-ext01 et fw-int01 en service ; jeux de règles VLAN 10 et VLAN 50 écrits et testés.',
-      'SRV-APP01 (VLAN 50) et pve01 (VLAN 90) en service ; reste des services en cours de déploiement.',
+      'Déjà en production : virtualisation, segmentation 7 zones, cloisonnement prouvé, accès distant.',
+      'En cours de déploiement : haute disponibilité (CARP/pfsync + HAProxy), services d\'annuaire/PKI, supervision.',
     ],
     tests: [
-      'Règles des VLAN 10 et 50 testées : le trafic autorisé passe, le reste est jeté et journalisé.',
+      'Cloisonnement inter-VLAN testé et prouvé au pare-feu (règles par alias).',
     ],
     resultats: [
-      'Socle réseau opérationnel : virtualisation, segmentation VLAN et pare-feux en service.',
-      'Zone applicative active (GLPI/MariaDB en conteneurs, inventaire natif).',
+      'Socle d\'infrastructure en production : hyperviseur, 7 zones segmentées, accès distant sécurisé.',
     ],
     difficultes: [],
     solutions: [],
     bilan:
-      "Le Home Lab est le fil conducteur de ma montée en compétences SISR : la conception " +
-      "d'ensemble est posée, le socle réseau et une première zone applicative sont en service. " +
-      'Le déploiement des zones restantes et la collecte des preuves (captures, configurations, ' +
-      'supervision) se poursuivent avant de considérer les compétences comme pleinement démontrées.',
+      "Projet conçu et déployé seul, en production sur matériel physique. Le socle (virtualisation, " +
+      'segmentation, cloisonnement, accès distant) est opérationnel ; la haute disponibilité, les ' +
+      'services d\'infrastructure et la supervision sont en cours de déploiement.',
     aCompleter: true,
     vedette: true,
+    liens: [{ label: 'Schéma d\'architecture (accueil)', href: '/' }],
     preuves: [
-      { id: 'hl-schema', type: 'schema', titre: "Schéma d'architecture du Home Lab", pourquoi: "Conception de l'infrastructure : sandwich de pare-feux, DMZ et 7 zones segmentées (volet conception E6.1).", href: '/', etat: 'disponible' },
-      { id: 'hl-pfsense', type: 'configuration', titre: 'Export de configuration pfSense (VLAN, règles)', pourquoi: "La configuration des pare-feux et des VLAN prouverait l'installation et le filtrage (E6.2).", etat: 'a-produire' },
-      { id: 'hl-ha', type: 'capture', titre: 'État CARP/pfsync (bascule testée)', pourquoi: "Une capture d'une bascule CARP démontrerait la continuité de service (E6.2.2 / E5.1.4).", etat: 'a-produire' },
-      { id: 'hl-superv', type: 'capture', titre: 'Supervision Graylog / détection Zeek', pourquoi: 'La métrologie et les journaux prouveraient la gestion d\'indicateurs et la supervision (E6.3.3).', etat: 'a-produire' },
-      { id: 'hl-detect', type: 'log', titre: 'Détection Zeek / journaux Cowrie', pourquoi: 'La détection d\'actions malveillantes illustrerait la cybersécurité de l\'infrastructure (E7.5.5).', etat: 'a-produire' },
-      { id: 'hl-pbs', type: 'capture', titre: 'Jobs de sauvegarde Proxmox Backup Server', pourquoi: 'Les sauvegardes prouveraient la gestion de la continuité (E5.1.5).', etat: 'a-produire' },
-      { id: 'hl-pki', type: 'configuration', titre: 'PKI step-ca + annuaire LDAP + FreeRADIUS', pourquoi: 'La PKI interne et l\'authentification centralisée relèvent de la sécurisation des accès (E7.2 / E7.5.3).', etat: 'a-produire' },
-      { id: 'hl-app', type: 'capture', titre: 'SRV-APP01 — GLPI/MariaDB en conteneurs', pourquoi: "Le service applicatif déployé (Debian/Docker) illustrerait la mise à disposition d'un service (E5.5).", etat: 'a-produire' },
+      { id: 'hl-schema', type: 'schema', titre: "Schéma d'architecture du Home Lab", pourquoi: "Conception de l'infrastructure : sandwich de pare-feux, DMZ et 7 zones segmentées (E6.1).", href: '/', etat: 'disponible' },
+      { id: 'hl-rules', type: 'test', titre: 'Cloisonnement inter-VLAN testé et prouvé', pourquoi: "L'isolation entre zones vérifiée au pare-feu démontre les tests d'acceptation et la sûreté (E6.2.5 / E7.5.1).", etat: 'a-produire' },
+      { id: 'hl-pfsense', type: 'configuration', titre: 'Configuration pfSense (VLAN, alias, règles)', pourquoi: "La configuration des VLAN et des règles prouve l'installation des éléments d'infrastructure (E6.2.1).", etat: 'a-produire' },
+      { id: 'hl-tailscale', type: 'configuration', titre: 'Accès distant Tailscale (subnet router)', pourquoi: "L'accès distant chiffré illustre l'administration à distance sécurisée (E6.3.1).", etat: 'a-produire' },
+      { id: 'hl-cron', type: 'script', titre: "Renouvellement Let's Encrypt par cron", pourquoi: "L'automatisation du renouvellement TLS relève de l'automatisation des tâches d'administration (E6.3.2).", etat: 'a-produire' },
+      { id: 'hl-ha', type: 'capture', titre: 'Haute disponibilité CARP/pfsync + HAProxy', pourquoi: 'La bascule CARP et la répartition de charge démontreraient la continuité de service (E6.2.2).', etat: 'a-produire' },
+      { id: 'hl-superv', type: 'capture', titre: 'Supervision Wazuh · Zeek · Zabbix', pourquoi: 'La métrologie et la détection illustreraient la supervision et la cybersécurité (E6.3.3 / E7.5.5).', etat: 'a-produire' },
+      { id: 'hl-pbs', type: 'capture', titre: 'Sauvegardes Proxmox Backup Server', pourquoi: 'Les sauvegardes prouveraient la gestion de la continuité (E5.1.5).', etat: 'a-produire' },
     ],
     competences: [
-      { sous: 'E6.1.1', niveau: 'mobilisee', justification: "Analyse du besoin d'un laboratoire SISR réaliste et de ses contraintes, traduite en architecture.", preuves: ['hl-schema'] },
-      { sous: 'E6.1.3', niveau: 'mobilisee', justification: "Dossier de conception : choix d'une architecture segmentée et spécifications par zone.", preuves: ['hl-schema'] },
-      { sous: 'E6.1.5', niveau: 'mobilisee', justification: "Maquette de la solution d'infrastructure (schéma d'architecture détaillé).", preuves: ['hl-schema'] },
-      { sous: 'E6.1.4', niveau: 'en-cours', justification: 'Choix d\'éléments de disponibilité : pare-feux CARP/pfsync, sauvegardes PBS.', preuves: ['hl-ha', 'hl-pbs'] },
-      { sous: 'E6.2.1', niveau: 'en-cours', justification: 'Installation et configuration de Proxmox, pfSense et des services d\'infrastructure.', preuves: ['hl-pfsense'] },
-      { sous: 'E6.2.2', niveau: 'en-cours', justification: 'Continuité assurée par CARP/pfsync et par Proxmox Backup Server.', preuves: ['hl-ha', 'hl-pbs'] },
-      { sous: 'E6.3.1', niveau: 'en-cours', justification: 'Administration à distance sécurisée via Tailscale (VLAN 90).', preuves: ['hl-pfsense'] },
-      { sous: 'E6.3.3', niveau: 'en-cours', justification: 'Indicateurs et journaux : Graylog (métrologie/logs), Zeek (analyse réseau).', preuves: ['hl-superv'] },
-      { sous: 'E5.1.4', niveau: 'en-cours', justification: 'Dispositifs de continuité de service (haute disponibilité, sauvegardes).', preuves: ['hl-ha'] },
-      { sous: 'E5.1.5', niveau: 'en-cours', justification: 'Sauvegardes centralisées avec Proxmox Backup Server.', preuves: ['hl-pbs'] },
-      { sous: 'E5.5.2', niveau: 'en-cours', justification: 'Déploiement d\'un service applicatif conteneurisé (SRV-APP01 : GLPI/MariaDB).', preuves: ['hl-app'] },
-      { sous: 'E7.2.1', niveau: 'en-cours', justification: 'Identité et confiance internes : PKI step-ca, annuaire LDAP.', preuves: ['hl-pki'] },
-      { sous: 'E7.5.1', niveau: 'en-cours', justification: 'Vérification de la sûreté des éléments conçus (segmentation, DMZ, durcissement).', preuves: ['hl-schema', 'hl-pfsense'] },
-      { sous: 'E7.5.2', niveau: 'mobilisee', justification: 'Sécurité prise en compte dès la conception : segmentation 7 zones, DMZ, double pare-feu.', preuves: ['hl-schema'] },
-      { sous: 'E7.5.3', niveau: 'en-cours', justification: 'Conformité des accès : PKI interne, LDAP, FreeRADIUS, 802.1X.', preuves: ['hl-pki'] },
-      { sous: 'E7.5.5', niveau: 'en-cours', justification: 'Détection des actions malveillantes : Zeek, pot de miel Cowrie.', preuves: ['hl-detect'] },
+      { sous: 'E6.1.1', niveau: 'demontree', justification: "Analyse du besoin et conception complète de l'infrastructure.", preuves: ['hl-schema'] },
+      { sous: 'E6.1.3', niveau: 'demontree', justification: "Dossier de conception : architecture segmentée et spécifications par zone.", preuves: ['hl-schema'] },
+      { sous: 'E6.1.5', niveau: 'demontree', justification: "Maquette puis déploiement réel de la solution d'infrastructure.", preuves: ['hl-schema'] },
+      { sous: 'E6.1.4', niveau: 'en-cours', justification: 'Éléments de disponibilité (CARP/pfsync, HAProxy) en cours de déploiement.', preuves: ['hl-ha'] },
+      { sous: 'E6.2.1', niveau: 'demontree', justification: 'Installation et configuration de Proxmox, pfSense, VLAN et règles par alias.', preuves: ['hl-pfsense', 'hl-schema'] },
+      { sous: 'E6.2.5', niveau: 'demontree', justification: "Cloisonnement inter-VLAN testé et prouvé (tests d'acceptation).", preuves: ['hl-rules'] },
+      { sous: 'E6.2.2', niveau: 'en-cours', justification: 'Continuité (CARP/pfsync, sauvegardes PBS) en cours de déploiement.', preuves: ['hl-ha', 'hl-pbs'] },
+      { sous: 'E6.3.1', niveau: 'demontree', justification: 'Administration à distance sécurisée via Tailscale (subnet router).', preuves: ['hl-tailscale'] },
+      { sous: 'E6.3.2', niveau: 'demontree', justification: "Automatisation : renouvellement Let's Encrypt par tâche cron.", preuves: ['hl-cron'] },
+      { sous: 'E6.3.3', niveau: 'en-cours', justification: 'Supervision (Wazuh, Zeek, Zabbix) en cours de déploiement.', preuves: ['hl-superv'] },
+      { sous: 'E5.1.4', niveau: 'en-cours', justification: 'Continuité de service (haute disponibilité) en cours.', preuves: ['hl-ha'] },
+      { sous: 'E5.1.5', niveau: 'en-cours', justification: 'Sauvegardes centralisées (PBS) en cours de déploiement.', preuves: ['hl-pbs'] },
+      { sous: 'E7.5.1', niveau: 'demontree', justification: 'Sûreté des éléments déployés : segmentation, DMZ, cloisonnement prouvé.', preuves: ['hl-rules', 'hl-schema'] },
+      { sous: 'E7.5.2', niveau: 'demontree', justification: 'Sécurité prise en compte dès la conception : 7 zones, DMZ, règles par alias.', preuves: ['hl-schema'] },
+      { sous: 'E7.5.4', niveau: 'mobilisee', justification: 'Prévention par cloisonnement inter-VLAN et filtrage par alias.', preuves: ['hl-rules'] },
+      { sous: 'E7.5.3', niveau: 'en-cours', justification: 'Conformité des accès (PKI step-ca, LDAPS, FreeRADIUS) en cours.', preuves: ['hl-superv'] },
+      { sous: 'E7.5.5', niveau: 'en-cours', justification: 'Détection (Wazuh, Zeek, honeypot Cowrie) en cours de déploiement.', preuves: ['hl-superv'] },
     ],
   },
 
   // ──────────────────────────────────────────────────────────────────────
-  //  ACTIVE DIRECTORY — TP documenté, preuves réelles
+  //  TP ACTIVE DIRECTORY — Windows Server 2022 (E5 : C, F, G, H)
   // ──────────────────────────────────────────────────────────────────────
   {
     slug: 'active-directory',
-    titre: 'Déploiement d\'un domaine Active Directory',
+    titre: 'TP Active Directory — Windows Server 2022',
     resume:
-      "Mise en place complète d'un domaine Windows Server : contrôleur de domaine, DNS, " +
-      'unités d\'organisation, comptes et groupes, GPO et durcissement des mots de passe.',
+      "Déploiement d'un domaine Active Directory : unités d'organisation, utilisateurs, groupes " +
+      'de sécurité, GPO, DHCP/DNS et scripts PowerShell de création de comptes en masse.',
     categories: ['systeme', 'securite'],
-    contexte: 'TP BTS SIO SISR',
-    organisation: 'Formation',
-    periode: '2026',
-    environnement: ['Oracle VirtualBox', 'Windows Server 2019 Standard', 'Domaine btssio.local', 'Serveur SRV-AD01'],
-    technologies: ['Windows Server 2019', 'Active Directory DS', 'DNS', 'GPO', 'PowerShell', 'Import CSV'],
+    contexte: 'TP BTS SIO SISR — en cours de formation',
+    organisation: 'Formation (ESUP)',
+    periode: '10/2025 → 12/2025',
+    environnement: ['Windows Server 2022', 'Active Directory DS', 'DHCP · DNS', 'PowerShell'],
+    technologies: ['Windows Server 2022', 'Active Directory DS', 'GPO', 'DHCP', 'DNS', 'PowerShell'],
     probleme:
-      "Centraliser la gestion des utilisateurs, des postes et des droits d'une organisation " +
-      'simulée, avec une politique de sécurité appliquée à l\'échelle du domaine.',
+      "Centraliser la gestion des utilisateurs, des postes et des droits d'une organisation, " +
+      'avec une politique de sécurité appliquée à l\'échelle du domaine.',
     objectifs: [
-      'Installer le rôle AD DS et promouvoir un contrôleur de domaine.',
-      'Structurer l\'annuaire (unités d\'organisation, comptes, groupes).',
-      'Appliquer des stratégies de groupe et une politique de mots de passe.',
+      'Installer AD DS et structurer l\'annuaire (OU, comptes, groupes de sécurité).',
+      'Déployer des GPO, le DHCP et le DNS.',
+      'Industrialiser la création de comptes par scripts PowerShell.',
     ],
     demarche: [
-      'Préparation de la VM (SRV-AD01) et installation de Windows Server 2019.',
-      'Configuration IP statique (192.168.10.10) et DNS local.',
-      'Installation du rôle AD DS et promotion en contrôleur de domaine btssio.local.',
-      'Création des unités d\'organisation, des comptes et des groupes de sécurité.',
-      'Import d\'utilisateurs en masse depuis un fichier CSV.',
-      'Définition des GPO et de la politique de mots de passe / verrouillage.',
-      'Activation de la stratégie d\'audit et consultation du journal de sécurité.',
+      'Installation d\'AD DS et promotion en contrôleur de domaine.',
+      'Création des unités d\'organisation, comptes et groupes de sécurité.',
+      'Déploiement des GPO et de la configuration intégrée DHCP/DNS.',
+      'Scripts PowerShell de création de comptes en masse (import).',
     ],
     miseEnOeuvre: [
-      'Arborescence : OU=Utilisateurs, OU=Groupes, OU=Ordinateurs, OU=Services.',
-      'Politique de mots de passe : longueur minimale 8, complexité activée, durées de vie définies.',
-      'Verrouillage de compte : seuil à 3 tentatives, durée 15 minutes.',
-      'Audit activé (connexions, gestion des comptes, accès aux objets, etc.).',
+      'Politique de sécurité appliquée par GPO (mots de passe, verrouillage, audit).',
+      'Jonction de postes et vérification de l\'application des stratégies.',
     ],
-    tests: [
-      'Vérification des rôles AD DS et DNS dans le Gestionnaire de serveur.',
-      'Contrôle de la zone DNS btssio.local et de la création du domaine dans ADUC.',
-      'Connexion au domaine avec un compte du domaine.',
-    ],
-    resultats: [
-      'Domaine btssio.local opérationnel avec contrôleur de domaine et DNS.',
-      'Comptes, groupes et GPO en place ; politique de sécurité appliquée.',
-    ],
-    difficultes: ['Des avertissements DNS/réplication sont apparus dans les journaux pendant la mise en place.'],
-    solutions: ['Analyse des événements via le Gestionnaire de serveur et l\'Observateur d\'événements.'],
+    tests: ['Vérification des services AD DS/DNS et de l\'application des GPO.'],
+    resultats: ['Domaine opérationnel : annuaire structuré, GPO, DHCP/DNS et comptes gérés.'],
+    difficultes: [],
+    solutions: [],
     bilan:
-      "TP le plus abouti et le mieux documenté : il démontre la mise en place d'un service " +
-      "d'annuaire et l'application d'une politique de sécurité à l'échelle d'un domaine.",
+      "TP système complet : il démontre la mise à disposition d'un service d'annuaire, " +
+      "l'automatisation par script et l'application d'une politique de sécurité de domaine.",
     aCompleter: false,
-    vedette: true,
-    liens: [
-      { label: 'Livrable complet (4 séances)', href: '/livrables/active-directory/' },
-    ],
+    liens: [{ label: 'Livrable détaillé (4 séances)', href: '/livrables/active-directory/' }],
     preuves: [
-      { id: 'ad-livrable', type: 'documentation', titre: 'Livrable Active Directory (4 séances)', pourquoi: 'Documentation technique structurée de bout en bout de la mise en œuvre.', href: '/livrables/active-directory/', etat: 'disponible' },
-      { id: 'ad-adds', type: 'capture', titre: 'Rôles AD DS et DNS actifs', pourquoi: 'Prouve l\'installation et la configuration des éléments d\'infrastructure.', href: '/livrables/active-directory/adds.jpg', alt: 'Gestionnaire de serveur montrant les rôles AD DS et DNS', etat: 'disponible' },
-      { id: 'ad-ip', type: 'capture', titre: 'Configuration IP statique du serveur', pourquoi: 'Montre la configuration réseau du contrôleur de domaine.', href: '/livrables/active-directory/ip.jpg', alt: 'Propriétés IPv4 : 192.168.10.10 / 255.255.255.0', etat: 'disponible' },
-      { id: 'ad-ou', type: 'capture', titre: 'Structure des unités d\'organisation', pourquoi: 'Recensement et organisation des ressources de l\'annuaire.', href: '/livrables/active-directory/ou.jpg', alt: 'Console ADUC avec les OU du domaine btssio.local', etat: 'disponible' },
-      { id: 'ad-gpo', type: 'capture', titre: 'Objets de stratégie de groupe (GPO)', pourquoi: 'Mise en place des habilitations et des règles de sécurité du domaine.', href: '/livrables/active-directory/gpo.jpg', alt: 'Console de gestion des stratégies de groupe', etat: 'disponible' },
-      { id: 'ad-mdp', type: 'capture', titre: 'Politique de mots de passe', pourquoi: 'Durcissement : complexité, longueur et durées de vie des mots de passe.', href: '/livrables/active-directory/mdp.jpg', alt: 'Stratégie de mot de passe dans la Default Domain Policy', etat: 'disponible' },
-      { id: 'ad-verrou', type: 'capture', titre: 'Verrouillage de compte', pourquoi: 'Défense contre les tentatives répétées d\'authentification.', href: '/livrables/active-directory/verrou.jpg', alt: 'Stratégie de verrouillage de compte : 3 tentatives, 15 minutes', etat: 'disponible' },
-      { id: 'ad-audit', type: 'capture', titre: 'Stratégie d\'audit', pourquoi: 'Journalisation des événements de sécurité du domaine.', href: '/livrables/active-directory/audit.jpg', alt: 'Stratégie d\'audit (réussite/échec) sur les contrôleurs de domaine', etat: 'disponible' },
+      { id: 'ad-livrable', type: 'documentation', titre: 'Rapport de TP Active Directory', pourquoi: 'Documentation technique structurée de la mise en œuvre.', href: '/livrables/active-directory/', etat: 'disponible' },
+      { id: 'ad-scripts', type: 'script', titre: 'Scripts PowerShell (comptes en masse)', pourquoi: "L'automatisation de la création de comptes relève de l'automatisation d'administration (E6.3.2).", etat: 'a-produire' },
+      { id: 'ad-gpo', type: 'capture', titre: 'GPO / DHCP / DNS', pourquoi: 'Mise en place des habilitations et des services (E5.1.3 / E6.2.1).', href: '/livrables/active-directory/gpo.jpg', alt: 'Console de gestion des stratégies de groupe', etat: 'disponible' },
+      { id: 'ad-mdp', type: 'capture', titre: 'Politique de mots de passe', pourquoi: 'Durcissement : complexité, longueur et durées de vie (E7.3.2).', href: '/livrables/active-directory/mdp.jpg', alt: 'Stratégie de mot de passe', etat: 'disponible' },
     ],
     competences: [
-      { sous: 'E5.1.1', niveau: 'mobilisee', justification: 'Recensement des ressources de l\'annuaire (OU, comptes, groupes).', preuves: ['ad-ou'] },
-      { sous: 'E5.1.3', niveau: 'demontree', justification: 'Niveaux d\'habilitation via groupes, OU et GPO.', preuves: ['ad-gpo', 'ad-ou'] },
-      { sous: 'E6.2.1', niveau: 'demontree', justification: 'Installation et configuration du contrôleur de domaine, DNS et réseau.', preuves: ['ad-adds', 'ad-ip'] },
-      { sous: 'E6.2.4', niveau: 'demontree', justification: 'Rédaction d\'une documentation technique complète (livrable 4 séances).', preuves: ['ad-livrable'] },
-      { sous: 'E6.2.5', niveau: 'mobilisee', justification: 'Liste de vérification des services AD/DNS et contrôle du domaine.', preuves: ['ad-livrable'] },
-      { sous: 'E6.3.3', niveau: 'mobilisee', justification: 'Stratégie d\'audit activée et consultation du journal de sécurité.', preuves: ['ad-audit'] },
-      { sous: 'E7.3.2', niveau: 'mobilisee', justification: 'Gestion des accès et des privilèges (groupes, GPO, politique de mots de passe).', preuves: ['ad-gpo', 'ad-mdp'] },
-      { sous: 'E7.3.1', niveau: 'en-cours', justification: 'Défenses de base : verrouillage de compte et audit des connexions.', preuves: ['ad-verrou', 'ad-audit'] },
+      { sous: 'E5.1.1', niveau: 'demontree', justification: 'Recensement et organisation des ressources de l\'annuaire (OU, comptes, groupes).', preuves: ['ad-livrable'] },
+      { sous: 'E5.1.3', niveau: 'demontree', justification: 'Niveaux d\'habilitation via groupes de sécurité et GPO.', preuves: ['ad-gpo'] },
+      { sous: 'E5.4.1', niveau: 'demontree', justification: 'Analyse des objectifs et organisation du TP.', preuves: ['ad-livrable'] },
+      { sous: 'E5.4.2', niveau: 'demontree', justification: 'Planification des séances de mise en œuvre.', preuves: ['ad-livrable'] },
+      { sous: 'E5.5.1', niveau: 'demontree', justification: 'Tests d\'intégration et d\'acceptation des services AD/DNS.', preuves: ['ad-livrable'] },
+      { sous: 'E5.5.2', niveau: 'demontree', justification: 'Déploiement du service d\'annuaire et des postes joints au domaine.', preuves: ['ad-livrable'] },
+      { sous: 'E5.6.4', niveau: 'demontree', justification: 'Développement du projet professionnel (compétences système).', preuves: ['ad-livrable'] },
+      { sous: 'E6.2.1', niveau: 'demontree', justification: 'Installation et configuration du contrôleur de domaine, DHCP et DNS.', preuves: ['ad-gpo'] },
+      { sous: 'E6.2.4', niveau: 'demontree', justification: 'Rédaction du rapport de TP (documentation technique).', preuves: ['ad-livrable'] },
+      { sous: 'E6.3.2', niveau: 'demontree', justification: 'Automatisation : création de comptes en masse par PowerShell.', preuves: ['ad-scripts'] },
+      { sous: 'E7.3.2', niveau: 'demontree', justification: 'Gestion des accès et privilèges (groupes, GPO, politique de mots de passe).', preuves: ['ad-gpo', 'ad-mdp'] },
+      { sous: 'E7.3.1', niveau: 'mobilisee', justification: 'Défenses : verrouillage de compte et audit des connexions.', preuves: ['ad-mdp'] },
     ],
   },
 
   // ──────────────────────────────────────────────────────────────────────
-  //  VLAN — TP documenté (Packet Tracer), preuve = livrable
+  //  TP VLAN — Cisco Packet Tracer (E5 : C, F, G, H)
   // ──────────────────────────────────────────────────────────────────────
   {
-    slug: 'vlan-comptafinance',
-    titre: 'Segmentation VLAN et routage inter-VLAN',
+    slug: 'vlan-cisco',
+    titre: 'TP Infrastructure VLAN — Cisco Packet Tracer',
     resume:
-      "Conception et configuration d'un réseau segmenté en VLAN pour un cabinet, avec " +
-      'routage inter-VLAN (router-on-a-stick) et serveur DHCP centralisé via relais.',
+      "Architecture réseau segmentée : VLAN par département, routage inter-VLAN " +
+      '(router-on-a-stick), ACL et ports trunk/access 802.1Q.',
     categories: ['reseau'],
-    contexte: 'TP BTS SIO SISR — cas « Cabinet Comptafinance »',
-    organisation: 'Formation',
-    periode: '2025',
-    environnement: ['Cisco Packet Tracer', 'Switch Cisco 2960', 'Routeur Cisco (sous-interfaces 802.1Q)'],
-    technologies: ['VLAN 802.1Q', 'Trunk', 'Router-on-a-stick', 'DHCP relay (ip helper-address)', 'Cisco IOS'],
+    contexte: 'TP BTS SIO SISR — en cours de formation',
+    organisation: 'Formation (ESUP)',
+    periode: '11/2025 → 01/2026',
+    environnement: ['Cisco Packet Tracer', 'Switch & routeur Cisco', '802.1Q'],
+    technologies: ['VLAN 802.1Q', 'Trunk / Access', 'Router-on-a-stick', 'ACL', 'DHCP', 'Cisco IOS'],
     probleme:
-      'Séparer deux services (Accueil et Gestion) pour améliorer la sécurité et ' +
-      "l'organisation du réseau, tout en gardant une administration centralisée de l'adressage.",
+      'Segmenter le réseau par département pour la sécurité et l\'organisation, avec routage ' +
+      'inter-VLAN contrôlé et adressage centralisé.',
     objectifs: [
-      'Créer deux VLAN distincts (Accueil, Gestion).',
-      'Assurer le routage inter-VLAN et un serveur DHCP centralisé.',
-      'Partager une imprimante réseau entre les deux VLAN.',
+      'Créer les VLAN par département et les affecter aux ports.',
+      'Assurer le routage inter-VLAN et filtrer les flux par ACL.',
+      'Documenter le plan d\'adressage et les configurations.',
     ],
     demarche: [
-      'Élaboration du plan d\'adressage et de l\'architecture (switch central + routeur).',
-      'Création des VLAN 10 (Accueil) et 20 (Gestion) et affectation des ports.',
-      'Configuration du lien trunk 802.1Q entre switch et routeur.',
-      'Sous-interfaces du routeur et relais DHCP (ip helper-address).',
-      'Configuration des pools DHCP et tests de connectivité.',
+      'Création des VLAN et affectation des ports (access/trunk 802.1Q).',
+      'Routage inter-VLAN par router-on-a-stick.',
+      'Mise en place d\'ACL pour contrôler les flux entre VLAN.',
+      'Plan d\'adressage IP et tests de connectivité.',
     ],
-    miseEnOeuvre: [
-      'VLAN 10 : 192.168.10.0/24 — VLAN 20 : 192.168.20.0/24.',
-      'Routage inter-VLAN par sous-interfaces (router-on-a-stick).',
-      'Relais DHCP du VLAN 20 vers le serveur du VLAN 10.',
-    ],
-    tests: [
-      'Connectivité intra-VLAN et inter-VLAN validée par ping.',
-      'Attribution DHCP vérifiée sur les postes des deux VLAN.',
-      'Accès à l\'imprimante réseau depuis les deux VLAN.',
-    ],
+    miseEnOeuvre: ['Un sous-réseau par VLAN, routage par sous-interfaces, filtrage par ACL.'],
+    tests: ['Connectivité intra/inter-VLAN validée ; flux filtrés conformes aux ACL.'],
     resultats: [
-      'Réseau segmenté fonctionnel avec routage inter-VLAN et DHCP centralisé.',
-      'Documentation technique complète (plan d\'adressage, configurations, tests, glossaire).',
+      'Réseau segmenté fonctionnel et documenté (schéma, plan d\'adressage, configurations).',
     ],
     difficultes: [],
     solutions: [],
     bilan:
-      'TP réseau complet et documenté : il démontre la maquette d\'une solution ' +
-      "d'infrastructure segmentée et sa configuration.",
+      'TP réseau complet : il démontre la maquette d\'une infrastructure segmentée, sa ' +
+      'configuration et la prise en compte de la sécurité par la segmentation.',
     aCompleter: false,
     liens: [{ label: 'Livrable complet (guide + annexes)', href: '/livrables/vlan/' }],
     preuves: [
-      { id: 'vlan-livrable', type: 'documentation', titre: 'Livrable VLAN (guide complet)', pourquoi: 'Dossier technique : contexte, architecture, plan d\'adressage, configurations, tests et dépannage.', href: '/livrables/vlan/', etat: 'disponible' },
+      { id: 'vlan-livrable', type: 'documentation', titre: 'Rapport de configuration (switches/routeurs)', pourquoi: 'Dossier technique : architecture, plan d\'adressage, configurations et tests.', href: '/livrables/vlan/', etat: 'disponible' },
+      { id: 'vlan-schema', type: 'schema', titre: 'Schéma réseau + plan d\'adressage IP', pourquoi: 'Spécifications et maquette de la solution (E6.1.3 / E6.1.5).', href: '/livrables/vlan/', etat: 'disponible' },
     ],
     competences: [
-      { sous: 'E6.1.3', niveau: 'mobilisee', justification: 'Plan d\'adressage et spécifications techniques de la solution.', preuves: ['vlan-livrable'] },
-      { sous: 'E6.1.5', niveau: 'demontree', justification: 'Maquette et prototypage de l\'infrastructure sous Packet Tracer.', preuves: ['vlan-livrable'] },
-      { sous: 'E6.1.6', niveau: 'mobilisee', justification: 'Plan de tests de validation défini dans le livrable.', preuves: ['vlan-livrable'] },
-      { sous: 'E6.2.1', niveau: 'demontree', justification: 'Configuration des VLAN, du trunk, du routage et du DHCP.', preuves: ['vlan-livrable'] },
-      { sous: 'E6.2.4', niveau: 'demontree', justification: 'Documentation technique complète de la solution.', preuves: ['vlan-livrable'] },
-      { sous: 'E6.2.5', niveau: 'mobilisee', justification: 'Tests d\'intégration et d\'acceptation (connectivité, DHCP, impression).', preuves: ['vlan-livrable'] },
-      { sous: 'E7.5.2', niveau: 'mobilisee', justification: 'Prise en compte de la sécurité par la segmentation réseau.', preuves: ['vlan-livrable'] },
+      { sous: 'E5.1.1', niveau: 'demontree', justification: 'Recensement des ressources et plan d\'adressage.', preuves: ['vlan-schema'] },
+      { sous: 'E5.4.1', niveau: 'demontree', justification: 'Analyse des objectifs et organisation du TP.', preuves: ['vlan-livrable'] },
+      { sous: 'E5.4.2', niveau: 'demontree', justification: 'Planification des étapes de configuration.', preuves: ['vlan-livrable'] },
+      { sous: 'E5.5.1', niveau: 'demontree', justification: 'Tests d\'intégration et d\'acceptation (connectivité, ACL).', preuves: ['vlan-livrable'] },
+      { sous: 'E5.6.4', niveau: 'demontree', justification: 'Développement du projet professionnel (compétences réseau).', preuves: ['vlan-livrable'] },
+      { sous: 'E6.1.3', niveau: 'demontree', justification: 'Plan d\'adressage et spécifications techniques.', preuves: ['vlan-schema'] },
+      { sous: 'E6.1.5', niveau: 'demontree', justification: 'Maquette de l\'infrastructure sous Packet Tracer.', preuves: ['vlan-schema'] },
+      { sous: 'E6.2.1', niveau: 'demontree', justification: 'Configuration des VLAN, trunks, routage inter-VLAN et ACL.', preuves: ['vlan-livrable'] },
+      { sous: 'E6.2.4', niveau: 'demontree', justification: 'Documentation technique de la solution.', preuves: ['vlan-livrable'] },
+      { sous: 'E6.2.5', niveau: 'demontree', justification: 'Tests d\'intégration et d\'acceptation de la solution.', preuves: ['vlan-livrable'] },
+      { sous: 'E7.5.2', niveau: 'mobilisee', justification: 'Sécurité prise en compte par la segmentation et les ACL.', preuves: ['vlan-schema'] },
     ],
   },
 
   // ──────────────────────────────────────────────────────────────────────
-  //  ALTERNANCE — support (preuves à produire, contexte professionnel)
+  //  TP CYBERSÉCURITÉ — Kali Linux (E5 : C, D, F, H)
   // ──────────────────────────────────────────────────────────────────────
   {
-    slug: 'support-alternance',
-    titre: 'Support utilisateurs en environnement grand compte',
+    slug: 'cybersecurite-kali',
+    titre: 'TP Cybersécurité — Kali Linux (chiffrement, audit, exploitation)',
     resume:
-      "Traitement des incidents et demandes d'assistance en alternance : prise en charge, " +
-      'diagnostic, résolution et suivi, avec rédaction de procédures.',
-    categories: ['pro', 'service'],
-    contexte: 'Alternance — technicien support utilisateurs',
-    organisation: 'Econocom (client Engie)',
-    periode: 'Depuis septembre 2025',
-    environnement: ['Postes Windows', 'Outil de gestion de tickets (ITSM)', 'Environnement grand compte'],
-    technologies: ['Support N1/N2', 'ITSM / ticketing', 'Windows', 'Gestion des incidents'],
-    probleme:
-      'Assurer la continuité du service aux utilisateurs dans un environnement exigeant, ' +
-      'avec des procédures et des niveaux de service à respecter.',
-    objectifs: [
-      'Collecter, qualifier et suivre les demandes des utilisateurs.',
-      'Traiter les incidents système et réseau de niveau 1 et 2.',
-      'Documenter les procédures pour fiabiliser la résolution.',
-    ],
-    demarche: [
-      'Prise en charge des tickets et qualification des demandes.',
-      'Diagnostic, résolution ou escalade selon le niveau.',
-      'Suivi jusqu\'à la clôture et rédaction de procédures.',
-    ],
-    miseEnOeuvre: [],
-    tests: [],
-    resultats: [],
-    difficultes: [],
-    solutions: [],
-    bilan:
-      "Cette expérience alimente directement le bloc E5. Les preuves (procédures, extraits " +
-      "d'activité) doivent être produites sous une forme anonymisée, compatible avec la " +
-      'confidentialité du contexte professionnel.',
-    aCompleter: true,
-    preuves: [
-      { id: 'sup-proc', type: 'documentation', titre: 'Procédure de résolution (anonymisée)', pourquoi: 'Une procédure rédigée prouverait la formalisation du traitement des demandes (E5.2).', etat: 'a-produire' },
-      { id: 'sup-ticket', type: 'capture', titre: 'Exemple de suivi de ticket (anonymisé)', pourquoi: 'Le cycle de vie d\'un incident illustrerait la collecte et le suivi des demandes (E5.2.1).', etat: 'a-produire' },
-    ],
-    competences: [
-      { sous: 'E5.2.1', niveau: 'mobilisee', justification: 'Collecte, suivi et orientation des demandes utilisateurs.', preuves: ['sup-ticket'] },
-      { sous: 'E5.2.2', niveau: 'mobilisee', justification: 'Traitement de demandes concernant les services système et réseau.', preuves: ['sup-proc'] },
-      { sous: 'E5.5.3', niveau: 'mobilisee', justification: 'Accompagnement des utilisateurs dans l\'usage de leurs services.', preuves: ['sup-proc'] },
-      { sous: 'E5.1.6', niveau: 'en-cours', justification: 'Application des règles d\'utilisation des ressources dans un cadre encadré.', preuves: ['sup-proc'] },
-    ],
-  },
-
-  // ──────────────────────────────────────────────────────────────────────
-  //  GLPI / KANBOARD — TP ITSM (preuves à produire)
-  // ──────────────────────────────────────────────────────────────────────
-  {
-    slug: 'glpi-kanboard',
-    titre: 'Service ITSM : GLPI et gestion de projet Kanboard',
-    resume:
-      "Déploiement d'un outil de gestion des services (GLPI) et d'un outil de gestion de " +
-      'projet (Kanboard) sur un serveur Linux, avec gestion des tickets et de l\'inventaire.',
-    categories: ['service', 'systeme'],
-    contexte: 'TP BTS SIO SISR',
-    organisation: 'Formation',
-    periode: '2025',
-    environnement: ['Debian', 'Apache', 'MySQL/MariaDB', 'PHP'],
-    technologies: ['GLPI', 'Kanboard', 'LAMP', 'Debian', 'ITSM'],
-    probleme:
-      "Outiller la gestion des incidents, de l'inventaire et du suivi de projet, comme dans " +
-      'un service informatique réel.',
-    objectifs: [
-      'Installer une pile LAMP sur Debian.',
-      'Déployer et paramétrer GLPI (catégories, priorités, groupes).',
-      'Mettre en place Kanboard pour le suivi de projet.',
-    ],
-    demarche: [
-      'Installation et configuration de la pile LAMP.',
-      'Déploiement de GLPI et paramétrage du helpdesk et de l\'inventaire.',
-      'Déploiement de Kanboard (tableaux, colonnes de workflow).',
-      'Simulation d\'un cycle de vie de ticket, de l\'ouverture à la clôture.',
-    ],
-    miseEnOeuvre: [],
-    tests: [],
-    resultats: [],
-    difficultes: [],
-    solutions: [],
-    bilan:
-      'TP orienté services et mode projet (E5). Les preuves (captures, exports de ' +
-      'configuration) restent à ajouter pour documenter la réalisation.',
-    aCompleter: true,
-    preuves: [
-      { id: 'glpi-helpdesk', type: 'capture', titre: 'Helpdesk GLPI configuré', pourquoi: 'Montrerait la mise à disposition d\'un service de gestion des demandes (E5.2 / E5.5).', etat: 'a-produire' },
-      { id: 'glpi-inv', type: 'capture', titre: 'Inventaire du parc dans GLPI', pourquoi: 'Illustrerait le recensement des ressources numériques (E5.1.1).', etat: 'a-produire' },
-      { id: 'glpi-kanban', type: 'capture', titre: 'Tableau Kanboard', pourquoi: 'Illustrerait l\'organisation du travail en mode projet (E5.4).', etat: 'a-produire' },
-    ],
-    competences: [
-      { sous: 'E5.1.1', niveau: 'en-cours', justification: 'Inventaire du parc matériel et logiciel dans GLPI.', preuves: ['glpi-inv'] },
-      { sous: 'E5.2.1', niveau: 'en-cours', justification: 'Collecte et suivi des demandes via le helpdesk GLPI.', preuves: ['glpi-helpdesk'] },
-      { sous: 'E5.4.2', niveau: 'en-cours', justification: 'Planification et suivi des activités avec Kanboard.', preuves: ['glpi-kanban'] },
-      { sous: 'E5.5.2', niveau: 'en-cours', justification: 'Déploiement d\'un service applicatif sur serveur Linux.', preuves: ['glpi-helpdesk'] },
-    ],
-  },
-
-  // ──────────────────────────────────────────────────────────────────────
-  //  LAB SÉCURITÉ — audit en environnement isolé (preuves à produire)
-  // ──────────────────────────────────────────────────────────────────────
-  {
-    slug: 'lab-securite',
-    titre: 'Analyse de vulnérabilités en environnement de lab',
-    resume:
-      "Travaux pratiques de sécurité en environnement isolé et encadré : découverte de " +
-      'services, identification de vulnérabilités et rédaction de recommandations.',
+      'Chiffrement symétrique/asymétrique et protocoles sécurisés, audit réseau (Nmap, ' +
+      'Wireshark) et exploitation encadrée d\'une faille Pixie Dust WPS, avec rapport de ' +
+      'vulnérabilités et contre-mesures.',
     categories: ['securite'],
-    contexte: 'TP BTS SIO SISR — environnement de lab isolé, encadré',
-    organisation: 'Formation',
-    periode: '2025',
-    environnement: ['Environnement virtualisé isolé', 'Cible de lab intentionnellement vulnérable'],
-    technologies: ['Découverte réseau', 'Analyse de vulnérabilités', 'Rapport de sécurité'],
+    contexte: 'TP BTS SIO SISR — en cours de formation, environnement encadré',
+    organisation: 'Formation (ESUP)',
+    periode: '01/2026 → 04/2026',
+    environnement: ['Kali Linux', 'Environnement de lab encadré'],
+    technologies: ['Chiffrement (sym./asym.)', 'Nmap', 'Wireshark', 'Aircrack-ng', 'Rapport de sécurité'],
     probleme:
-      "Comprendre comment une infrastructure est analysée afin de mieux la défendre, dans " +
-      'un cadre strictement pédagogique et autorisé.',
+      'Comprendre les mécanismes de chiffrement et la manière dont une infrastructure est ' +
+      'analysée, afin de mieux la défendre, dans un cadre strictement pédagogique et autorisé.',
     objectifs: [
-      'Découvrir les hôtes et services exposés.',
-      'Identifier et qualifier des vulnérabilités.',
-      'Proposer des contre-mesures et les présenter.',
+      'Mettre en œuvre le chiffrement symétrique/asymétrique et des protocoles sécurisés.',
+      'Réaliser un audit réseau (découverte, analyse de trames).',
+      'Qualifier une vulnérabilité et proposer des contre-mesures.',
     ],
     demarche: [
-      'Reconnaissance et découverte des services en environnement isolé.',
-      'Identification des vulnérabilités et de leur criticité.',
-      'Rédaction d\'un rapport orienté contre-mesures.',
+      'Chiffrement symétrique/asymétrique et protocoles sécurisés.',
+      'Audit réseau : scan Nmap, analyse Wireshark.',
+      'Exploitation encadrée de la faille Pixie Dust WPS (Aircrack-ng).',
+      'Rédaction d\'un rapport de vulnérabilités orienté contre-mesures.',
     ],
     miseEnOeuvre: [],
     tests: [],
-    resultats: [],
+    resultats: [
+      'Rapport d\'audit et rapport de faille exploitée, avec contre-mesures (ex. désactivation WPS).',
+    ],
     difficultes: [],
     solutions: [],
     bilan:
-      "Approche défensive : l'objectif est l'analyse et la remédiation, pas l'attaque. Les " +
-      'preuves (rapport anonymisé, synthèse des contre-mesures) restent à formaliser.',
-    aCompleter: true,
+      "Approche défensive : l'objectif est l'analyse, la qualification du risque et la " +
+      'remédiation. Ce TP alimente directement le volet cybersécurité (E7).',
+    aCompleter: false,
     preuves: [
-      { id: 'sec-rapport', type: 'documentation', titre: 'Rapport de vulnérabilités (contre-mesures)', pourquoi: 'Un rapport orienté remédiation prouverait l\'analyse d\'incidents et les contre-mesures (E7.5.6).', etat: 'a-produire' },
+      { id: 'kali-audit', type: 'documentation', titre: "Rapport d'audit réseau", pourquoi: 'Analyse des services et des faiblesses, orientée remédiation (E7.5.5 / E7.5.6).', etat: 'a-produire' },
+      { id: 'kali-faille', type: 'documentation', titre: 'Rapport de faille + contre-mesures', pourquoi: 'Qualification du risque et contre-mesures (E7.4.1 / E7.5.4).', etat: 'a-produire' },
+      { id: 'kali-captures', type: 'capture', titre: 'Captures Nmap / Aircrack-ng / Wireshark', pourquoi: 'Preuves techniques de l\'audit et de l\'analyse de trames.', etat: 'a-produire' },
     ],
     competences: [
-      { sous: 'E7.4.1', niveau: 'en-cours', justification: "Caractérisation des risques liés à l'utilisation malveillante d'un service.", preuves: ['sec-rapport'] },
-      { sous: 'E7.5.5', niveau: 'en-cours', justification: 'Identification de services et de faiblesses exploitables (volet détection).', preuves: ['sec-rapport'] },
-      { sous: 'E7.5.6', niveau: 'en-cours', justification: 'Analyse et proposition de contre-mesures dans un rapport.', preuves: ['sec-rapport'] },
+      { sous: 'E5.1.2', niveau: 'demontree', justification: 'Exploitation de référentiels et de standards de sécurité lors de l\'audit.', preuves: ['kali-audit'] },
+      { sous: 'E5.2.2', niveau: 'demontree', justification: 'Traitement d\'un incident de sécurité réseau (audit et remédiation).', preuves: ['kali-faille'] },
+      { sous: 'E5.4.1', niveau: 'demontree', justification: 'Analyse des objectifs et organisation du TP.', preuves: ['kali-audit'] },
+      { sous: 'E5.6.2', niveau: 'demontree', justification: 'Veille et outils de sécurité mis en œuvre.', preuves: ['kali-audit'] },
+      { sous: 'E7.4.1', niveau: 'demontree', justification: "Caractérisation des risques liés à l'utilisation malveillante d'un service.", preuves: ['kali-faille'] },
+      { sous: 'E7.5.4', niveau: 'demontree', justification: 'Contre-mesures proposées pour prévenir l\'attaque (ex. WPS).', preuves: ['kali-faille'] },
+      { sous: 'E7.5.5', niveau: 'demontree', justification: 'Détection et identification de services et faiblesses (Nmap, Wireshark).', preuves: ['kali-captures'] },
+      { sous: 'E7.5.6', niveau: 'demontree', justification: 'Analyse de l\'incident et proposition de contre-mesures (rapport).', preuves: ['kali-faille'] },
+      { sous: 'E7.3.1', niveau: 'mobilisee', justification: 'Identification des menaces et des défenses appropriées.', preuves: ['kali-audit'] },
     ],
   },
 
   // ──────────────────────────────────────────────────────────────────────
-  //  PORTFOLIO — le site lui-même est la preuve (E5.3 / E5.6)
+  //  PORTFOLIO — wenselreyes.tech (E5 : E, F, G, H)
   // ──────────────────────────────────────────────────────────────────────
   {
     slug: 'portfolio-web',
-    titre: 'Conception de ce portfolio de preuves',
+    titre: 'Portfolio professionnel — wenselreyes.tech',
     resume:
-      "Conception et développement d'un site statique reliant le référentiel BTS SIO SISR " +
-      'aux réalisations et aux preuves, avec une attention au référencement et à l\'accessibilité.',
+      "Conception et déploiement d'un site portfolio hébergé en ligne avec domaine personnalisé, " +
+      "mettant en valeur l'identité et les projets professionnels BTS SIO SISR.",
     categories: ['service'],
-    contexte: 'Projet personnel',
+    contexte: 'Projet personnel — en cours de formation',
     organisation: 'Personnel',
-    periode: '2026',
-    environnement: ['Astro', 'TypeScript', 'CSS moderne', 'GitHub Pages', 'Domaine wenselreyes.tech'],
-    technologies: ['Astro', 'TypeScript', 'HTML sémantique', 'CSS', 'SEO', 'Accessibilité'],
+    periode: '03/2026 → 04/2026',
+    environnement: ['Astro · TypeScript · CSS', 'GitHub Pages', 'Domaine wenselreyes.tech'],
+    technologies: ['Astro', 'TypeScript', 'HTML/CSS', 'SEO', 'GitHub Pages'],
     probleme:
-      'Présenter clairement, pour un jury ou un recruteur, quelles compétences du ' +
-      'référentiel sont démontrées, par quelles réalisations et avec quelles preuves.',
+      'Présenter clairement, pour un jury ou un recruteur, quelles compétences du référentiel ' +
+      'sont démontrées, par quelles réalisations et avec quelles preuves.',
     objectifs: [
       'Structurer le contenu autour de Référentiel → Compétence → Réalisation → Preuve.',
-      'Produire un site rapide, accessible et bien référencé.',
+      'Déployer un site rapide, accessible et référencé, avec domaine personnalisé.',
     ],
     demarche: [
-      'Modèle de données typé (référentiel, réalisations, preuves, veille).',
-      'Génération statique avec Astro et CSS sans dépendance lourde.',
-      'Métadonnées SEO, Open Graph, sitemap et robots.txt.',
+      'Modèle de données typé (référentiel, réalisations, preuves).',
+      'Génération statique (Astro) et déploiement continu sur GitHub Pages.',
+      'Métadonnées SEO, Open Graph, sitemap et robots.txt ; domaine personnalisé.',
     ],
-    miseEnOeuvre: [
-      'Statuts de compétences calculés automatiquement à partir des réalisations.',
-      'Tableau de synthèse réalisations × compétences.',
+    miseEnOeuvre: ['Statuts de compétences calculés automatiquement ; tableau de synthèse E5.'],
+    tests: ['Build statique, vérification des liens, contrôle responsive et accessibilité.'],
+    resultats: ['Site publié sur wenselreyes.tech, mis à jour par simple ajout de données.'],
+    difficultes: [],
+    solutions: [],
+    bilan:
+      "Le site valorise l'identité professionnelle en ligne et sert d'outil de suivi du " +
+      'référentiel ; il est lui-même une preuve pour E5.3 et E5.6.',
+    aCompleter: false,
+    liens: [{ label: 'Code source (GitHub)', href: 'https://github.com/Kor4aaa/Portfolio-IT' }],
+    preuves: [
+      { id: 'pf-site', type: 'depot', titre: 'Dépôt GitHub du portfolio', pourquoi: 'Le code et l\'historique documentent la conception et l\'évolution du site.', href: 'https://github.com/Kor4aaa/Portfolio-IT', etat: 'disponible' },
+      { id: 'pf-seo', type: 'documentation', titre: 'Métadonnées, sitemap et robots.txt', pourquoi: 'Référencement et mesure de visibilité (E5.3.2).', href: '/sitemap.xml', etat: 'disponible' },
     ],
-    tests: ['Build statique, vérification des liens internes, contrôle responsive.'],
+    competences: [
+      { sous: 'E5.3.2', niveau: 'demontree', justification: 'Référencement du site (métadonnées, sitemap, robots) et mesure de visibilité.', preuves: ['pf-seo'] },
+      { sous: 'E5.3.3', niveau: 'demontree', justification: 'Conception et évolution d\'un site Web exploitant des données structurées.', preuves: ['pf-site'] },
+      { sous: 'E5.4.1', niveau: 'demontree', justification: 'Analyse des objectifs et organisation du projet.', preuves: ['pf-site'] },
+      { sous: 'E5.4.2', niveau: 'demontree', justification: 'Planification de la conception et du déploiement.', preuves: ['pf-site'] },
+      { sous: 'E5.5.2', niveau: 'demontree', justification: 'Déploiement du service en ligne (GitHub Pages, domaine personnalisé).', preuves: ['pf-site'] },
+      { sous: 'E5.6.3', niveau: 'demontree', justification: 'Gestion de l\'identité professionnelle en ligne.', preuves: ['pf-site'] },
+      { sous: 'E5.6.4', niveau: 'demontree', justification: 'Développement du projet professionnel.', preuves: ['pf-site'] },
+    ],
+  },
+
+  // ──────────────────────────────────────────────────────────────────────
+  //  ALTERNANCE — Econocom × Engie (E5 : C, D, F, G, H)
+  // ──────────────────────────────────────────────────────────────────────
+  {
+    slug: 'support-alternance',
+    titre: 'Econocom × Engie — technicien support utilisateurs',
+    resume:
+      "Support IT quotidien en environnement grand compte : suivi et résolution de tickets " +
+      "d'incidents, optimisation logicielle des postes, relation utilisateur et respect de " +
+      'processus clients stricts.',
+    categories: ['pro', 'service'],
+    contexte: 'Alternance — en milieu professionnel (1ʳᵉ année)',
+    organisation: 'Econocom (client Engie)',
+    periode: '01/09/2025 → aujourd\'hui',
+    environnement: ['Environnement grand compte', 'Postes Windows', 'Outil de ticketing (ITSM)'],
+    technologies: ['Support N1/N2', 'ITSM / ticketing', 'Windows', 'Optimisation logicielle'],
+    probleme:
+      'Assurer la continuité du service aux utilisateurs dans un environnement exigeant, avec ' +
+      'des processus et des niveaux de service à respecter.',
+    objectifs: [
+      'Collecter, suivre et résoudre les incidents dans les délais.',
+      'Optimiser les postes de travail et accompagner les utilisateurs.',
+      'Respecter les processus clients et soigner la relation utilisateur.',
+    ],
+    demarche: [
+      'Prise en charge et qualification des tickets.',
+      'Diagnostic et résolution d\'incidents (résolution < 25 min).',
+      'Optimisation logicielle des postes ; suivi jusqu\'à la clôture.',
+    ],
+    miseEnOeuvre: [],
+    tests: [],
     resultats: [
-      'Site publié sur wenselreyes.tech, mis à jour par simple ajout de données.',
+      'Résolution d\'incidents dans les délais et respect des processus clients.',
     ],
     difficultes: [],
     solutions: [],
     bilan:
-      "Le site est à la fois l'outil de suivi du référentiel et une preuve en soi pour E5.3 " +
-      '(présence en ligne) et E5.6 (identité professionnelle).',
-    aCompleter: false,
-    liens: [
-      { label: 'Code source (GitHub)', href: 'https://github.com/Kor4aaa/Portfolio-IT' },
-    ],
+      "Expérience professionnelle au cœur du bloc E5 : collecte et traitement des demandes, " +
+      'mise à disposition de services et développement professionnel. Documents à joindre sous ' +
+      'forme anonymisée (confidentialité grand compte).',
+    aCompleter: true,
     preuves: [
-      { id: 'pf-site', type: 'depot', titre: 'Dépôt GitHub du portfolio', pourquoi: 'Le code source et l\'historique documentent la conception et l\'évolution du site.', href: 'https://github.com/Kor4aaa/Portfolio-IT', etat: 'disponible' },
-      { id: 'pf-seo', type: 'documentation', titre: 'Métadonnées, sitemap et robots.txt', pourquoi: 'Le référencement et la mesure de visibilité relèvent de E5.3.2.', href: '/sitemap.xml', etat: 'disponible' },
+      { id: 'alt-rapport', type: 'documentation', titre: "Rapport d'activité d'alternance", pourquoi: 'Formalise le périmètre, les demandes traitées et le suivi (E5.2).', etat: 'a-produire' },
+      { id: 'alt-ticket', type: 'capture', titre: 'Outil de ticketing (anonymisé)', pourquoi: 'Illustre la collecte et le suivi des demandes (E5.2.1).', etat: 'a-produire' },
+      { id: 'alt-bilan', type: 'document', titre: 'Bilan de résolution d\'incidents', pourquoi: 'Indicateurs de traitement des incidents (E5.2 / E5.5).', etat: 'a-produire' },
     ],
     competences: [
-      { sous: 'E5.3.2', niveau: 'mobilisee', justification: 'Référencement du site (métadonnées, sitemap, robots) et mesure de visibilité.', preuves: ['pf-seo'] },
-      { sous: 'E5.3.3', niveau: 'demontree', justification: 'Conception et évolution d\'un site Web exploitant des données structurées.', preuves: ['pf-site'] },
-      { sous: 'E5.6.3', niveau: 'mobilisee', justification: 'Gestion de l\'identité professionnelle en ligne.', preuves: ['pf-site'] },
-      { sous: 'E5.4.1', niveau: 'en-cours', justification: 'Analyse des objectifs et organisation du projet de portfolio.', preuves: ['pf-site'] },
+      { sous: 'E5.1.6', niveau: 'demontree', justification: 'Application des règles d\'utilisation et des processus clients.', preuves: ['alt-rapport'] },
+      { sous: 'E5.2.1', niveau: 'demontree', justification: 'Collecte, suivi et orientation des demandes (ticketing).', preuves: ['alt-ticket'] },
+      { sous: 'E5.2.2', niveau: 'demontree', justification: 'Traitement de demandes concernant les services système et réseau.', preuves: ['alt-bilan'] },
+      { sous: 'E5.2.3', niveau: 'mobilisee', justification: 'Traitement de demandes concernant les applications.', preuves: ['alt-ticket'] },
+      { sous: 'E5.4.1', niveau: 'demontree', justification: 'Organisation du travail selon les processus et les priorités.', preuves: ['alt-rapport'] },
+      { sous: 'E5.5.3', niveau: 'demontree', justification: 'Accompagnement des utilisateurs et optimisation de leurs postes.', preuves: ['alt-rapport'] },
+      { sous: 'E5.6.1', niveau: 'demontree', justification: 'Environnement d\'apprentissage en situation professionnelle.', preuves: ['alt-rapport'] },
+      { sous: 'E5.6.3', niveau: 'demontree', justification: 'Gestion de l\'identité et de la posture professionnelles.', preuves: ['alt-rapport'] },
+      { sous: 'E5.6.4', niveau: 'demontree', justification: 'Développement du projet professionnel.', preuves: ['alt-rapport'] },
     ],
   },
 ];

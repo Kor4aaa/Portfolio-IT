@@ -1,0 +1,54 @@
+name: Veille — flux RSS quotidien
+
+on:
+  schedule:
+    - cron: '17 5 * * *' # chaque jour vers 07h17 (Europe/Paris)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Rafraîchir la veille (RSS)
+        run: node scripts/fetch-veille.mjs
+      - name: Commit du flux si modifié
+        run: |
+          git config user.name "veille-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/veille-feed.json
+          git commit -m "Veille : mise à jour automatique du flux RSS" || echo "Aucun changement"
+          git push || echo "Rien à pousser"
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Build Astro
+        uses: withastro/action@v3
+        with:
+          node-version: 22
+
+  deploy:
+    needs: veille
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -36,17 +36,17 @@ const isImg = (h?: string) => !!h && /\.(jpg|jpeg|png|webp|gif)$/i.test(h);
   <section class="section--tight">
     <div class="container">
       <div class="section-head">
-        <span class="section-head__index">Faisceau de preuves</span>
-        <h1>Preuves</h1>
-        <p class="prose">
+        <span class="section-head__index" data-en="Body of evidence">Faisceau de preuves</span>
+        <h1 data-en="Evidence">Preuves</h1>
+        <p class="prose" data-en="The evidence that backs the skills: each item states <em>why</em> it demonstrates a skill, and links to the project and sub-skills concerned.">
           Les preuves qui justifient les compétences : chaque élément précise <em>pourquoi</em> il démontre
           une compétence, et renvoie à la réalisation et aux sous-compétences concernées.
         </p>
       </div>
 
       <div class="pstats">
-        <span class="pstat"><strong>{dispo.length}</strong> preuve{dispo.length > 1 ? 's' : ''} disponible{dispo.length > 1 ? 's' : ''}</span>
-        <span class="pstat pstat--todo"><strong>{todo.length}</strong> à produire</span>
+        <span class="pstat" data-en={`<strong>${dispo.length}</strong> available`}><strong>{dispo.length}</strong> preuve{dispo.length > 1 ? 's' : ''} disponible{dispo.length > 1 ? 's' : ''}</span>
+        <span class="pstat pstat--todo" data-en={`<strong>${todo.length}</strong> to provide`}><strong>{todo.length}</strong> à produire</span>
       </div>
 
       <div class="pgrid">
