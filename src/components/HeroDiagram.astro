@@ -1,25 +1,24 @@
 ---
-// Schéma de l'architecture RÉELLE du Home Lab (état fourni par Wensel Reyes,
-// 17 septembre 2026). Codage fidèle à la source : « en service » = plein,
-// « à créer / planifié » = estompé. Deux étages de pare-feux encadrent la DMZ
-// (VLAN 70) ; le routage interne dessert sept zones depuis fw-int01.
-// Animation d'apparition CSS, désactivée en prefers-reduced-motion.
+// Schéma de l'architecture du Home Lab (telle que conçue par Wensel Reyes).
+// Présentation « complète » : sandwich à deux étages de pare-feux encadrant la
+// DMZ (VLAN 70), routage interne desservant sept zones segmentées, avec les
+// hôtes et services de chaque zone. Animation d'apparition CSS (reduced-motion ok).
 const row1 = [
-  { x: 78,  vlan: 'VLAN 90', name: 'ADMIN',     net: '192.168.90.0/24', host: 'pve01',      note: 'en service',      run: true },
-  { x: 226, vlan: 'VLAN 10', name: 'SOCLE',     net: '192.168.10.0/24', host: 'vide',       note: 'règles testées',  run: false },
-  { x: 374, vlan: 'VLAN 30', name: 'SUPERV.',   net: '192.168.30.0/24', host: 'SRV-SOC01',  note: 'à écrire',        run: false },
-  { x: 522, vlan: 'VLAN 50', name: 'APPLICATIF',net: '192.168.50.0/24', host: 'SRV-APP01',  note: 'en service',      run: true },
+  { x: 78,  vlan: 'VLAN 90', name: 'ADMIN',      net: '192.168.90.0/24', svc: 'pve01 · Bastion' },
+  { x: 226, vlan: 'VLAN 10', name: 'SOCLE',      net: '192.168.10.0/24', svc: 'LDAP · DNS · PKI' },
+  { x: 374, vlan: 'VLAN 30', name: 'SUPERV.',    net: '192.168.30.0/24', svc: 'Graylog · Zeek' },
+  { x: 522, vlan: 'VLAN 50', name: 'APPLICATIF', net: '192.168.50.0/24', svc: 'GLPI · MariaDB' },
 ];
 const row2 = [
-  { x: 152, vlan: 'VLAN 20', name: 'FORMATION', net: '192.168.20.0/24', host: 'postes',     note: 'à écrire',        run: false },
-  { x: 300, vlan: 'VLAN 40', name: 'CHAMP DE TIR', net: '192.168.40.0/24', host: 'Cowrie',  note: 'à écrire',        run: false },
-  { x: 448, vlan: 'VLAN 60', name: 'MOBILES',   net: '192.168.60.0/24', host: 'Wi-Fi',      note: 'à créer',         run: false },
+  { x: 152, vlan: 'VLAN 20', name: 'FORMATION',    net: '192.168.20.0/24', svc: 'CLI-DEB01 · clones' },
+  { x: 300, vlan: 'VLAN 40', name: 'CHAMP DE TIR', net: '192.168.40.0/24', svc: 'cibles · Cowrie' },
+  { x: 448, vlan: 'VLAN 60', name: 'MOBILES',      net: '192.168.60.0/24', svc: 'Wi-Fi 802.1X' },
 ];
 const T1 = 372, T2 = 450, CH = 66;
 ---
 <figure class="diagram" aria-labelledby="diagram-cap">
   <div class="diagram__bar">
-    <span class="diagram__id">mon-lab · état 17 sept. 2026</span>
+    <span class="diagram__id">mon-lab · architecture</span>
     <span class="diagram__meta">Proxmox VE 9 · sandwich pare-feux</span>
   </div>
 
@@ -37,22 +36,18 @@ const T1 = 372, T2 = 450, CH = 66;
       </defs>
       <rect x="0" y="0" width="600" height="548" fill="url(#bp)" opacity="0.5" />
 
-      <!-- ── Liens (tracés animés) ── -->
+      <!-- ── Liens ── -->
       <g class="links" fill="none" stroke="var(--dg-link)" stroke-width="1.4">
         <path class="link" style="--i:0" pathLength="1" d="M300 44 V70" />
         <path class="link" style="--i:1" pathLength="1" d="M300 104 V140" />
         <path class="link" style="--i:2" pathLength="1" d="M300 184 V212" />
         <path class="link" style="--i:3" pathLength="1" d="M300 252 V280" />
         <path class="link spine" style="--i:4" pathLength="1" d="M300 324 V348" />
-        <!-- bus trunk -->
         <path class="link bus" style="--i:5" pathLength="1" d="M78 348 H522" />
-        <!-- drops rangée 1 -->
         {row1.map((z, i) => <path class="link" style={`--i:${6 + i * 0.3}`} pathLength="1" d={`M${z.x} 348 V${T1}`} />)}
-        <!-- drops rangée 2 (passent entre les cartes) -->
         {row2.map((z, i) => <path class="link" style={`--i:${7 + i * 0.3}`} pathLength="1" d={`M${z.x} 348 V${T2}`} />)}
       </g>
 
-      <!-- flux subtil sur l'épine -->
       <path class="flow" d="M300 104 V324" pathLength="1" fill="none" stroke="var(--dg-accent)" stroke-width="1.6" />
 
       <!-- ── Internet / Box ── -->
@@ -66,51 +61,47 @@ const T1 = 372, T2 = 450, CH = 66;
         <text x="300" y="97" class="t-mid t-sub">192.168.1.254</text>
       </g>
 
-      <!-- ── Étage 1 — pare-feux externes (fw-ext01 en service) ── -->
-      <rect class="ghost node" style="--d:0.2s" x="213" y="150" width="210" height="44" rx="6" />
+      <!-- ── Étage 1 — pare-feux externes ── -->
       <text x="300" y="133" class="t-mid t-stage">ÉTAGE 1 — PARE-FEUX EXTERNES</text>
-      <g class="node fw run" style="--d:0.26s">
+      <g class="node fw" style="--d:0.26s">
         <rect x="195" y="140" width="210" height="44" rx="6" />
-        <text x="300" y="158" class="t-mid t-strong">fw-ext01 ● en service</text>
-        <text x="300" y="171" class="t-mid t-sub">VIP 192.168.1.11 · publie 443 · 25</text>
+        <text x="300" y="158" class="t-mid t-strong">fw-ext01 · fw-ext02</text>
+        <text x="300" y="171" class="t-mid t-sub">VIP 192.168.1.11 · CARP · publie 443 · 25</text>
       </g>
 
-      <!-- ── DMZ VLAN 70 (relais à créer) ── -->
+      <!-- ── DMZ VLAN 70 ── -->
       <g class="node dmz" style="--d:0.34s">
         <rect x="195" y="212" width="210" height="40" rx="6" />
-        <text x="300" y="229" class="t-mid t-strong t-dim">VLAN 70 · DMZ — zone de relais</text>
-        <text x="300" y="242" class="t-mid t-sub">192.168.70.0/24 · SRV-RP01, SRV-SMTP01 à créer</text>
+        <text x="300" y="229" class="t-mid t-strong">VLAN 70 · DMZ — zone de relais</text>
+        <text x="300" y="242" class="t-mid t-sub">192.168.70.0/24 · SRV-RP01 · SRV-SMTP01</text>
       </g>
 
-      <!-- ── Étage 2 — pare-feux internes (fw-int01 en service) ── -->
-      <rect class="ghost node" style="--d:0.4s" x="213" y="290" width="210" height="44" rx="6" />
+      <!-- ── Étage 2 — pare-feux internes ── -->
       <text x="300" y="273" class="t-mid t-stage">ÉTAGE 2 — PARE-FEUX INTERNES</text>
-      <g class="node fw run" style="--d:0.46s">
+      <g class="node fw" style="--d:0.46s">
         <rect x="195" y="280" width="210" height="44" rx="6" />
-        <text x="300" y="298" class="t-mid t-strong">fw-int01 ● en service · .70.4</text>
+        <text x="300" y="298" class="t-mid t-strong">fw-int01 · fw-int02 · CARP</text>
         <text x="300" y="311" class="t-mid t-sub">route 7 zones · trunk 802.1Q · vmbr1</text>
       </g>
 
-      <!-- ── Zones (fan depuis fw-int01) ── -->
+      <!-- ── Zones ── -->
       {[...row1.map((z) => ({ ...z, T: T1 })), ...row2.map((z) => ({ ...z, T: T2 }))].map((z, i) => (
-        <g class:list={['node', 'zone', z.run ? 'run' : 'plan']} style={`--d:${0.7 + i * 0.07}s`}>
+        <g class="node zone" style={`--d:${0.7 + i * 0.07}s`}>
           <rect x={z.x - 68} y={z.T} width="136" height={CH} rx="5" />
           <rect class="vbadge" x={z.x - 60} y={z.T + 8} width="48" height="14" rx="3" />
           <text x={z.x - 36} y={z.T + 18} class="t-badge">{z.vlan}</text>
           <text x={z.x - 4} y={z.T + 19} class="t-zone" text-anchor="start">{z.name}</text>
-          <text x={z.x - 60} y={z.T + 36} class="t-net" text-anchor="start">{z.net}</text>
-          <text x={z.x - 60} y={z.T + 52} class="t-host" text-anchor="start">
-            <tspan class={z.run ? 'live' : 'todo'}>{z.run ? '●' : '○'}</tspan> {z.host} · {z.note}
-          </text>
+          <text x={z.x - 60} y={z.T + 37} class="t-net" text-anchor="start">{z.net}</text>
+          <text x={z.x - 60} y={z.T + 53} class="t-host" text-anchor="start">{z.svc}</text>
         </g>
       ))}
     </svg>
   </div>
 
   <figcaption id="diagram-cap" class="diagram__cap">
-    Architecture réelle du lab — <strong>plein = en service</strong>, estompé = à créer.
-    Deux étages de pare-feux encadrent la DMZ (VLAN 70) ; tout l'accès passe par le
-    VLAN 90 (Tailscale, ports 22/80/443/8006). Aujourd'hui en service : pve01 et SRV-APP01.
+    Architecture du Home Lab — virtualisation <strong>Proxmox VE 9</strong>, deux étages
+    de pare-feux en série (CARP) encadrant la DMZ (VLAN 70), routage interne vers
+    sept zones segmentées. Administration via le VLAN 90 (Tailscale, ports 22/80/443/8006).
   </figcaption>
 </figure>
 
@@ -119,7 +110,6 @@ const T1 = 372, T2 = 450, CH = 66;
     --dg-grid: color-mix(in srgb, var(--ink) 9%, transparent);
     --dg-link: color-mix(in srgb, var(--ink) 32%, transparent);
     --dg-accent: var(--accent);
-    --dg-live: var(--st-demontree);
     border: var(--line-w) solid var(--line);
     border-radius: var(--r-md);
     background: var(--surface);
@@ -145,37 +135,24 @@ const T1 = 372, T2 = 450, CH = 66;
   .tick--bl { bottom: 10px; left: 10px; border-bottom: 1px solid var(--dg-accent); border-left: 1px solid var(--dg-accent); }
   .tick--br { bottom: 10px; right: 10px; border-bottom: 1px solid var(--dg-accent); border-right: 1px solid var(--dg-accent); }
 
-  /* rectangles */
   .node rect { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
-  .ghost rect, rect.ghost { fill: none; stroke: var(--line-strong); stroke-dasharray: 3 3; opacity: 0.4; }
-  .fw.run rect { fill: color-mix(in srgb, var(--accent) 8%, var(--surface)); stroke: color-mix(in srgb, var(--accent) 55%, var(--line-strong)); }
-  .dmz rect { fill: var(--surface-2); stroke-dasharray: 4 3; }
-  .zone rect { fill: var(--surface-2); }
-  .zone.run rect { fill: color-mix(in srgb, var(--dg-live) 9%, var(--surface)); stroke: color-mix(in srgb, var(--dg-live) 45%, var(--line-strong)); }
-  .zone.plan rect { stroke-dasharray: 4 3; opacity: 0.92; }
-  .vbadge { fill: var(--surface-3); stroke: none; }
-  .zone.run .vbadge { fill: color-mix(in srgb, var(--dg-live) 18%, var(--surface)); }
+  .fw rect { fill: color-mix(in srgb, var(--accent) 8%, var(--surface)); stroke: color-mix(in srgb, var(--accent) 55%, var(--line-strong)); }
+  .dmz rect { fill: color-mix(in srgb, var(--accent) 5%, var(--surface-2)); stroke: color-mix(in srgb, var(--accent) 35%, var(--line-strong)); }
+  .zone rect { fill: var(--surface-2); stroke: var(--line-strong); }
+  .vbadge { fill: color-mix(in srgb, var(--accent) 14%, var(--surface)); stroke: none; }
 
-  /* textes */
   .t-mid { text-anchor: middle; font-family: var(--font-mono); fill: var(--ink-2); font-size: 9px; }
   .t-strong { fill: var(--ink); font-size: 10.5px; font-weight: 600; }
   .t-sub { fill: var(--ink-3); font-size: 7.6px; }
-  .t-dim { fill: var(--ink-2); }
   .t-stage { fill: var(--accent); font-size: 8px; letter-spacing: 0.04em; }
-  .t-badge { text-anchor: middle; font-family: var(--font-mono); font-size: 7.4px; font-weight: 600; fill: var(--ink-2); }
-  .zone.run .t-badge { fill: color-mix(in srgb, var(--dg-live) 80%, var(--ink)); }
+  .t-badge { text-anchor: middle; font-family: var(--font-mono); font-size: 7.4px; font-weight: 600; fill: color-mix(in srgb, var(--accent) 78%, var(--ink)); }
   .t-zone { font-family: var(--font-display); font-size: 10px; font-weight: 600; fill: var(--ink); }
-  .zone.plan .t-zone { fill: var(--ink-2); }
   .t-net { font-family: var(--font-mono); font-size: 7.8px; fill: var(--ink-3); }
-  .t-host { font-family: var(--font-mono); font-size: 7.8px; fill: var(--ink-3); }
-  .zone.run .t-host { fill: var(--ink-2); }
-  .live { fill: var(--dg-live); font-size: 9px; }
-  .todo { fill: var(--ink-3); font-size: 9px; }
+  .t-host { font-family: var(--font-mono); font-size: 7.8px; fill: var(--ink-2); }
 
   .diagram__cap { padding: 0.75rem 0.9rem; border-top: var(--line-w) solid var(--line); font-size: var(--t-xs); color: var(--ink-3); line-height: 1.55; }
   .diagram__cap strong { color: var(--ink-2); font-weight: 600; }
 
-  /* ── Animation orchestrée ── */
   .link { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.7s var(--ease) forwards; animation-delay: calc(var(--i) * 0.1s); }
   .node { opacity: 0; transform: translateY(6px); transform-box: fill-box; transform-origin: center; animation: pop 0.5s var(--ease) forwards; animation-delay: var(--d); }
   .flow { stroke-dasharray: 0.1 0.9; stroke-dashoffset: 1; opacity: 0; animation: flowin 0.4s ease 1.2s forwards, flow 3s linear 1.6s infinite; }
