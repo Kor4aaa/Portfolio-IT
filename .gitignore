@@ -1,0 +1,8 @@
+# Outillage skills (local, non versionné) — installé via `npx skills add`
+.agents/
+.claude/
+skills-lock.json
+
+# Divers
+node_modules/
+.DS_Store
