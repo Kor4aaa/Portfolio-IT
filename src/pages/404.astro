@@ -1,0 +1,28 @@
+---
+import Base from '@layouts/Base.astro';
+---
+<Base title="Page introuvable" description="Cette page n'existe pas.">
+  <section class="section nf">
+    <div class="container nf__inner">
+      <p class="nf__code mono">404</p>
+      <h1 class="nf__title">Page introuvable</h1>
+      <p class="nf__text prose">
+        Cette adresse ne correspond à aucune page du portfolio. Revenez à l'accueil ou explorez le référentiel.
+      </p>
+      <div class="nf__cta">
+        <a class="btn btn--primary" href="/">Accueil</a>
+        <a class="btn btn--ghost" href="/referentiel">Référentiel</a>
+        <a class="btn btn--ghost" href="/realisations">Réalisations</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { min-height: 60vh; display: flex; align-items: center; }
+  .nf__inner { max-width: 560px; }
+  .nf__code { font-size: var(--t-2xl); color: var(--accent); }
+  .nf__title { font-size: var(--t-xl); margin-top: var(--sp-2); }
+  .nf__text { color: var(--ink-2); margin-top: var(--sp-3); }
+  .nf__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-5); }
+</style>

@@ -1,0 +1,134 @@
+/* ============================================================================
+   TOKENS — Portfolio SISR
+   Direction : documentation technique / schéma d'ingénierie.
+   Spine neutre froid + un seul accent « signal » ambre. Statuts = couleurs de
+   contenu (toujours doublées d'un libellé et d'une forme, jamais la couleur seule).
+   Light par défaut ; dark via [data-theme] et prefers-color-scheme.
+============================================================================ */
+
+:root {
+  /* — Neutres (froids) — */
+  --bg:          #f3f5f8;
+  --surface:     #ffffff;
+  --surface-2:   #eaeef2;
+  --surface-3:   #e1e6ec;
+  --ink:         #0f151b;
+  --ink-2:       #38434e;
+  --ink-3:       #637080;
+  --line:        #d5dce3;
+  --line-strong: #bcc6cf;
+
+  /* — Accent « signal » (ambre ingénierie) — */
+  --accent:        #955a10;   /* texte/liens : contraste AA sur --bg */
+  --accent-hover:  #714409;
+  --accent-bright: #e2922f;   /* aplats/marqueurs larges */
+  --accent-wash:   #f6ede0;   /* fond très léger */
+  --accent-line:   #e4c79b;
+
+  /* — Statuts (contenu) — */
+  --st-demontree:   #1b7a53;
+  --st-mobilisee:   #2060a6;
+  --st-encours:     #a56a12;
+  --st-adev:        #596673;
+  --st-nondoc:      #97a1ac;
+  --st-demontree-bg: #e4f1ea;
+  --st-mobilisee-bg: #e3edf8;
+  --st-encours-bg:   #f6ecd9;
+  --st-adev-bg:      #e9edf1;
+  --st-nondoc-bg:    #eef1f4;
+
+  /* — Typo — */
+  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-body:    'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Échelle typographique (ratio ~1.2, base 16) */
+  --t-xs:   0.78rem;
+  --t-sm:   0.875rem;
+  --t-base: 1rem;
+  --t-md:   1.15rem;
+  --t-lg:   1.4rem;
+  --t-xl:   1.8rem;
+  --t-2xl:  clamp(2rem, 1.4rem + 2.2vw, 3rem);
+  --t-3xl:  clamp(2.6rem, 1.6rem + 4vw, 4.4rem);
+
+  /* — Espacements — */
+  --sp-1: 0.25rem; --sp-2: 0.5rem;  --sp-3: 0.75rem; --sp-4: 1rem;
+  --sp-5: 1.5rem;  --sp-6: 2rem;    --sp-7: 2.75rem; --sp-8: 4rem; --sp-9: 6rem;
+
+  /* — Rayons (Swiss : faibles) — */
+  --r-xs: 2px; --r-sm: 4px; --r-md: 6px; --r-lg: 10px;
+
+  /* — Divers — */
+  --line-w: 1px;
+  --ring: #955a10;
+  --shadow: 0 1px 2px rgba(15, 21, 27, 0.06), 0 8px 24px -16px rgba(15, 21, 27, 0.25);
+  --maxw: 1180px;
+  --maxw-text: 70ch;
+  --nav-h: 60px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme='dark'] {
+  --bg:          #0d1217;
+  --surface:     #141b22;
+  --surface-2:   #1b232b;
+  --surface-3:   #222c35;
+  --ink:         #e8eef4;
+  --ink-2:       #b2bdc8;
+  --ink-3:       #7e8b98;
+  --line:        #262f39;
+  --line-strong: #37424e;
+
+  --accent:        #e9a54a;
+  --accent-hover:  #f2b969;
+  --accent-bright: #e9a54a;
+  --accent-wash:   #221a0e;
+  --accent-line:   #4a3a1f;
+
+  --st-demontree:   #4cc38a;
+  --st-mobilisee:   #5aa0e6;
+  --st-encours:     #e0a53e;
+  --st-adev:        #93a0ad;
+  --st-nondoc:      #6a7682;
+  --st-demontree-bg: #112a20;
+  --st-mobilisee-bg: #112132;
+  --st-encours-bg:   #2a2111;
+  --st-adev-bg:      #1c242c;
+  --st-nondoc-bg:    #181f26;
+
+  --ring: #e9a54a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px -18px rgba(0, 0, 0, 0.7);
+}
+
+/* Respect du choix système quand aucun thème n'est forcé */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg:          #0d1217;
+    --surface:     #141b22;
+    --surface-2:   #1b232b;
+    --surface-3:   #222c35;
+    --ink:         #e8eef4;
+    --ink-2:       #b2bdc8;
+    --ink-3:       #7e8b98;
+    --line:        #262f39;
+    --line-strong: #37424e;
+    --accent:        #e9a54a;
+    --accent-hover:  #f2b969;
+    --accent-bright: #e9a54a;
+    --accent-wash:   #221a0e;
+    --accent-line:   #4a3a1f;
+    --st-demontree:   #4cc38a;
+    --st-mobilisee:   #5aa0e6;
+    --st-encours:     #e0a53e;
+    --st-adev:        #93a0ad;
+    --st-nondoc:      #6a7682;
+    --st-demontree-bg: #112a20;
+    --st-mobilisee-bg: #112132;
+    --st-encours-bg:   #2a2111;
+    --st-adev-bg:      #1c242c;
+    --st-nondoc-bg:    #181f26;
+    --ring: #e9a54a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px -18px rgba(0, 0, 0, 0.7);
+  }
+}

@@ -1,0 +1,56 @@
+---
+import { STATUTS } from '@data/referentiel';
+import type { Statut } from '@data/types';
+
+interface Props {
+  statut: Statut;
+  /** 'full' = pastille + libellé, 'dot' = pastille seule (avec libellé masqué accessible). */
+  variant?: 'full' | 'dot';
+  title?: boolean;
+}
+const { statut, variant = 'full', title = false } = Astro.props;
+const info = STATUTS[statut];
+---
+<span
+  class:list={['status', `status--${statut}`, variant === 'dot' && 'status--dot']}
+  title={title ? info.desc : undefined}
+>
+  <span class="status__mark" aria-hidden="true"></span>
+  {variant === 'full'
+    ? <span class="status__label">{info.label}</span>
+    : <span class="visually-hidden">{info.label}</span>}
+</span>
+
+<style>
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--t-xs);
+    font-weight: 500;
+    padding: 0.14rem 0.5rem 0.14rem 0.4rem;
+    border-radius: var(--r-xs);
+    border: var(--line-w) solid var(--line);
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+  .status--dot { padding: 0; border: 0; background: none; gap: 0; }
+  .status__mark {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--c);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 22%, transparent);
+  }
+  .status__label { color: var(--ink-2); }
+
+  .status--demontree     { --c: var(--st-demontree); background: var(--st-demontree-bg); border-color: color-mix(in srgb, var(--st-demontree) 30%, transparent); }
+  .status--mobilisee     { --c: var(--st-mobilisee); background: var(--st-mobilisee-bg); border-color: color-mix(in srgb, var(--st-mobilisee) 30%, transparent); }
+  .status--en-cours      { --c: var(--st-encours);   background: var(--st-encours-bg);   border-color: color-mix(in srgb, var(--st-encours) 30%, transparent); }
+  .status--a-developper  { --c: var(--st-adev);      background: var(--st-adev-bg);      border-color: color-mix(in srgb, var(--st-adev) 30%, transparent); }
+  .status--non-documentee{ --c: var(--st-nondoc);    background: var(--st-nondoc-bg);    border-color: var(--line); }
+
+  .status--demontree .status__label     { color: color-mix(in srgb, var(--st-demontree) 72%, var(--ink)); }
+  .status--mobilisee .status__label      { color: color-mix(in srgb, var(--st-mobilisee) 72%, var(--ink)); }
+  .status--en-cours .status__label       { color: color-mix(in srgb, var(--st-encours) 72%, var(--ink)); }
+</style>

@@ -1,0 +1,302 @@
+---
+import Base from '@layouts/Base.astro';
+import StatusBadge from '@components/StatusBadge.astro';
+import { realisations } from '@data/realisations';
+import { indexSousCompetences } from '@data/referentiel';
+import type { Niveau } from '@data/types';
+
+export function getStaticPaths() {
+  return realisations.map((r) => ({ params: { slug: r.slug }, props: { r } }));
+}
+const { r } = Astro.props;
+
+const idx = indexSousCompetences();
+const catLabels: Record<string, string> = {
+  reseau: 'Réseau', systeme: 'Système', securite: 'Sécurité', service: 'Service', pro: 'Professionnel',
+};
+const typeLabels: Record<string, string> = {
+  capture: 'Capture', schema: 'Schéma', configuration: 'Configuration', script: 'Script',
+  documentation: 'Documentation', test: 'Test', log: 'Journal', video: 'Vidéo', photo: 'Photo',
+  depot: 'Dépôt', document: 'Document',
+};
+
+// Regroupe les compétences mobilisées par épreuve.
+const parEpreuve = new Map<string, { titre: string; items: { code: string; sousTitre: string; compTitre: string; niveau: Niveau; justification: string }[] }>();
+for (const l of r.competences) {
+  const info = idx.get(l.sous);
+  if (!info) continue;
+  const key = info.epreuve.code;
+  if (!parEpreuve.has(key)) parEpreuve.set(key, { titre: info.epreuve.titre, items: [] });
+  parEpreuve.get(key)!.items.push({
+    code: l.sous, sousTitre: info.titre, compTitre: info.competenceTitre, niveau: l.niveau, justification: l.justification,
+  });
+}
+const epreuveKeys = ['E5', 'E6', 'E7'].filter((k) => parEpreuve.has(k));
+
+// Sections textuelles présentes.
+const sections: { t: string; items?: string[]; text?: string }[] = [
+  { t: 'Problème / besoin', text: r.probleme },
+  { t: 'Objectifs', items: r.objectifs },
+  { t: 'Démarche', items: r.demarche },
+  { t: 'Mise en œuvre', items: r.miseEnOeuvre },
+  { t: 'Tests', items: r.tests },
+  { t: 'Résultats', items: r.resultats },
+  { t: 'Difficultés rencontrées', items: r.difficultes },
+  { t: 'Solutions apportées', items: r.solutions },
+].filter((s) => (s.items && s.items.length) || (s.text && s.text.length));
+
+const preuvesDispo = r.preuves.filter((p) => p.etat === 'disponible');
+const preuvesTodo = r.preuves.filter((p) => p.etat === 'a-produire');
+
+// Navigation précédente / suivante.
+const i = realisations.findIndex((x) => x.slug === r.slug);
+const prev = realisations[(i - 1 + realisations.length) % realisations.length];
+const next = realisations[(i + 1) % realisations.length];
+---
+<Base title={r.titre} description={r.resume} path={`/realisations/${r.slug}`}>
+  <article class="section--tight">
+    <div class="container">
+      <a class="back link" href="/realisations">← Toutes les réalisations</a>
+
+      <header class="rhead">
+        <div class="rhead__cats">
+          {r.categories.map((c) => <span class="rhead__cat">{catLabels[c]}</span>)}
+          <span class="rhead__period mono">{r.periode}</span>
+        </div>
+        <h1>{r.titre}</h1>
+        <p class="rhead__resume prose">{r.resume}</p>
+        {r.aCompleter && (
+          <p class="notice">
+            Réalisation réelle en cours de documentation : certaines preuves ou certains résultats
+            restent à produire. Les éléments non disponibles sont signalés « à produire ».
+          </p>
+        )}
+      </header>
+
+      <div class="rbody">
+        <div class="rmain">
+          {sections.map((s) => (
+            <section class="block">
+              <h2 class="block__t">{s.t}</h2>
+              {s.text && <p class="prose">{s.text}</p>}
+              {s.items && (
+                <ul class="block__list">
+                  {s.items.map((it) => <li>{it}</li>)}
+                </ul>
+              )}
+            </section>
+          ))}
+
+          {r.bilan && (
+            <section class="block">
+              <h2 class="block__t">Bilan</h2>
+              <p class="prose">{r.bilan}</p>
+            </section>
+          )}
+
+          <!-- PREUVES -->
+          <section class="block" id="preuves">
+            <h2 class="block__t">Preuves</h2>
+            {preuvesDispo.length === 0 && preuvesTodo.length === 0 && <p class="muted">Aucune preuve enregistrée.</p>}
+
+            {preuvesDispo.length > 0 && (
+              <div class="proofs">
+                {preuvesDispo.map((p) => {
+                  const isImg = p.href && /\.(jpg|jpeg|png|webp|gif)$/i.test(p.href);
+                  return (
+                    <figure class="proof">
+                      {isImg ? (
+                        <a href={p.href} class="proof__media">
+                          <img src={p.href} alt={p.alt ?? p.titre} loading="lazy" decoding="async" />
+                        </a>
+                      ) : (
+                        <a href={p.href} class="proof__doc" rel="noopener">
+                          <span class="proof__doc-type mono">{typeLabels[p.type]}</span>
+                          <span class="proof__doc-open">Ouvrir →</span>
+                        </a>
+                      )}
+                      <figcaption class="proof__cap">
+                        <span class="proof__badge mono">{typeLabels[p.type]}</span>
+                        <span class="proof__title">{p.titre}</span>
+                        <span class="proof__why">{p.pourquoi}</span>
+                      </figcaption>
+                    </figure>
+                  );
+                })}
+              </div>
+            )}
+
+            {preuvesTodo.length > 0 && (
+              <div class="todo">
+                <h3 class="todo__t">Preuves à produire</h3>
+                <ul class="todo__list">
+                  {preuvesTodo.map((p) => (
+                    <li class="todo__item">
+                      <span class="proof__badge mono">{typeLabels[p.type]}</span>
+                      <span>
+                        <strong>{p.titre}</strong>
+                        <span class="todo__why">{p.pourquoi}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        </div>
+
+        <!-- ASIDE : contexte + compétences mobilisées -->
+        <aside class="raside">
+          <div class="info">
+            <h2 class="info__t">Contexte</h2>
+            <dl class="info__dl">
+              <dt>Contexte</dt><dd>{r.contexte}</dd>
+              {r.organisation && (<><dt>Organisation</dt><dd>{r.organisation}</dd></>)}
+              <dt>Période</dt><dd>{r.periode}</dd>
+            </dl>
+            {r.environnement.length > 0 && (
+              <>
+                <h3 class="info__sub">Environnement</h3>
+                <ul class="info__env">{r.environnement.map((e) => <li>{e}</li>)}</ul>
+              </>
+            )}
+            <h3 class="info__sub">Technologies</h3>
+            <div class="tags">{r.technologies.map((t) => <span class="tag">{t}</span>)}</div>
+            {r.liens && r.liens.length > 0 && (
+              <div class="info__links">
+                {r.liens.map((l) => <a class="btn btn--ghost" href={l.href} rel="noopener">{l.label}</a>)}
+              </div>
+            )}
+          </div>
+
+          <div class="info">
+            <h2 class="info__t">Compétences mobilisées</h2>
+            {epreuveKeys.map((k) => {
+              const grp = parEpreuve.get(k)!;
+              return (
+                <div class="cmob">
+                  <p class="cmob__ep"><span class="code-ref">{k}</span> {grp.titre}</p>
+                  <ul class="cmob__list">
+                    {grp.items.map((it) => (
+                      <li class="cmob__item">
+                        <a class="cmob__row" href={`/referentiel#${k.toLowerCase()}`}>
+                          <span class="code-ref">{it.code}</span>
+                          <StatusBadge statut={it.niveau} variant="dot" />
+                          <span class="cmob__st">{it.sousTitre}</span>
+                        </a>
+                        <p class="cmob__why">{it.justification}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </aside>
+      </div>
+
+      <nav class="rnav" aria-label="Autres réalisations">
+        <a class="rnav__a" href={`/realisations/${prev.slug}`}>
+          <span class="rnav__lbl">Précédente</span>
+          <span class="rnav__name">{prev.titre}</span>
+        </a>
+        <a class="rnav__a rnav__a--next" href={`/realisations/${next.slug}`}>
+          <span class="rnav__lbl">Suivante</span>
+          <span class="rnav__name">{next.titre}</span>
+        </a>
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .back { display: inline-block; font-size: var(--t-sm); margin-bottom: var(--sp-5); }
+  .rhead { max-width: 760px; }
+  .rhead__cats { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-3); flex-wrap: wrap; }
+  .rhead__cat { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--accent); }
+  .rhead__period { font-size: var(--t-xs); color: var(--ink-3); margin-left: auto; }
+  .rhead h1 { font-size: var(--t-2xl); }
+  .rhead__resume { color: var(--ink-2); margin-top: var(--sp-3); font-size: var(--t-md); }
+  .notice {
+    margin-top: var(--sp-4);
+    padding: var(--sp-3) var(--sp-4);
+    font-size: var(--t-sm);
+    color: var(--ink-2);
+    background: var(--st-encours-bg);
+    border: var(--line-w) solid color-mix(in srgb, var(--st-encours) 30%, transparent);
+    border-radius: var(--r-sm);
+  }
+
+  .rbody {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: var(--sp-7);
+    align-items: start;
+  }
+  .block { margin-bottom: var(--sp-6); }
+  .block__t { font-size: var(--t-md); padding-bottom: var(--sp-2); border-bottom: var(--line-w) solid var(--line); margin-bottom: var(--sp-3); }
+  .block__list { display: flex; flex-direction: column; gap: var(--sp-2); }
+  .block__list li { position: relative; padding-left: 1.2rem; color: var(--ink-2); font-size: var(--t-sm); line-height: 1.6; }
+  .block__list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; background: var(--accent); border-radius: 1px; }
+  .muted { color: var(--ink-3); font-size: var(--t-sm); }
+
+  /* Preuves */
+  .proofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-4); }
+  .proof { border: var(--line-w) solid var(--line); border-radius: var(--r-sm); overflow: hidden; background: var(--surface); display: flex; flex-direction: column; }
+  .proof__media { display: block; background: var(--surface-2); }
+  .proof__media img { width: 100%; height: 170px; object-fit: cover; object-position: top; transition: transform 0.3s var(--ease); }
+  .proof__media:hover img { transform: scale(1.03); }
+  .proof__doc { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-5) var(--sp-4); background: var(--surface-2); border-bottom: var(--line-w) solid var(--line); }
+  .proof__doc-type { color: var(--accent); font-size: var(--t-sm); }
+  .proof__doc-open { font-size: var(--t-sm); color: var(--ink-2); }
+  .proof__doc:hover .proof__doc-open { color: var(--accent); }
+  .proof__cap { padding: var(--sp-3); display: flex; flex-direction: column; gap: 0.3rem; }
+  .proof__badge { font-size: var(--t-xs); color: var(--accent); }
+  .proof__title { font-weight: 600; font-size: var(--t-sm); }
+  .proof__why { font-size: var(--t-xs); color: var(--ink-2); line-height: 1.5; }
+
+  .todo { margin-top: var(--sp-4); border: var(--line-w) dashed var(--line-strong); border-radius: var(--r-sm); padding: var(--sp-4); }
+  .todo__t { font-size: var(--t-sm); color: var(--st-encours); margin-bottom: var(--sp-3); }
+  .todo__list { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .todo__item { display: flex; gap: var(--sp-3); align-items: start; font-size: var(--t-sm); }
+  .todo__item strong { display: block; }
+  .todo__why { display: block; font-size: var(--t-xs); color: var(--ink-3); margin-top: 0.15rem; }
+
+  /* Aside */
+  .raside { display: flex; flex-direction: column; gap: var(--sp-4); position: sticky; top: calc(var(--nav-h) + 1rem); }
+  .info { border: var(--line-w) solid var(--line); border-radius: var(--r-md); padding: var(--sp-4); background: var(--surface); }
+  .info__t { font-size: var(--t-base); padding-bottom: var(--sp-2); border-bottom: var(--line-w) solid var(--line); margin-bottom: var(--sp-3); }
+  .info__sub { font-size: var(--t-xs); text-transform: none; color: var(--ink-3); margin: var(--sp-4) 0 var(--sp-2); font-family: var(--font-mono); }
+  .info__dl { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem var(--sp-3); font-size: var(--t-sm); }
+  .info__dl dt { color: var(--ink-3); }
+  .info__dl dd { color: var(--ink); }
+  .info__env { display: flex; flex-direction: column; gap: 0.2rem; font-size: var(--t-sm); color: var(--ink-2); }
+  .info__env li { padding-left: 0.9rem; position: relative; }
+  .info__env li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 5px; height: 5px; border-radius: 50%; background: var(--ink-3); }
+  .info__links { margin-top: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-2); }
+
+  .cmob + .cmob { margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: var(--line-w) solid var(--line); }
+  .cmob__ep { font-size: var(--t-sm); font-weight: 600; margin-bottom: var(--sp-2); }
+  .cmob__list { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .cmob__row { display: flex; align-items: center; gap: 0.45rem; }
+  .cmob__row:hover .cmob__st { color: var(--accent); }
+  .cmob__st { font-size: var(--t-sm); color: var(--ink); }
+  .cmob__why { font-size: var(--t-xs); color: var(--ink-3); margin-top: 0.15rem; padding-left: 0.2rem; line-height: 1.5; }
+
+  .rnav { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); margin-top: var(--sp-7); padding-top: var(--sp-5); border-top: var(--line-w) solid var(--line); }
+  .rnav__a { border: var(--line-w) solid var(--line); border-radius: var(--r-sm); padding: var(--sp-4); display: flex; flex-direction: column; gap: 0.2rem; transition: border-color 0.15s var(--ease); }
+  .rnav__a:hover { border-color: var(--accent-line); }
+  .rnav__a--next { text-align: right; }
+  .rnav__lbl { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--ink-3); }
+  .rnav__name { font-weight: 600; font-size: var(--t-sm); }
+
+  @media (max-width: 900px) {
+    .rbody { grid-template-columns: 1fr; }
+    .raside { position: static; }
+  }
+  @media (max-width: 520px) {
+    .rnav { grid-template-columns: 1fr; }
+    .rnav__a--next { text-align: left; }
+  }
+</style>

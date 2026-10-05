@@ -1,0 +1,109 @@
+---
+import Base from '@layouts/Base.astro';
+import { veille, themesVeille } from '@data/veille';
+
+const dateFmt = (iso: string) => {
+  const d = new Date(iso);
+  return isNaN(d.getTime()) ? iso : d.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+---
+<Base
+  title="Veille technologique"
+  description="Veille technologique de Wensel Reyes — suivi des sujets systèmes, réseaux et sécurité (compétence E5.6 du référentiel BTS SIO SISR)."
+  path="/veille"
+>
+  <section class="section--tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head__index">Développement professionnel — E5.6</span>
+        <h1>Veille technologique</h1>
+        <p class="prose">
+          Suivi régulier de l'actualité systèmes, réseaux et sécurité. Chaque entrée indique le sujet,
+          les sources, une synthèse et l'impact sur mes pratiques — au service de la compétence
+          <span class="code-ref">E5.6.2</span> « mettre en œuvre des outils et stratégies de veille ».
+        </p>
+      </div>
+
+      {veille.length === 0 ? (
+        <div class="empty">
+          <h2 class="empty__t">Section prête à être alimentée</h2>
+          <p class="empty__p">
+            Aucune entrée publiée pour le moment. La structure est en place : une nouvelle entrée s'ajoute
+            en complétant <code class="mono">src/data/veille.ts</code>, sans toucher à l'interface.
+          </p>
+          <div class="empty__themes">
+            <span class="empty__themes-lbl">Thèmes de veille envisagés</span>
+            <ul class="themes">
+              {themesVeille.map((t) => <li class="theme">{t}</li>)}
+            </ul>
+          </div>
+          <div class="empty__model">
+            <span class="empty__model-lbl mono">Structure d'une entrée</span>
+            <ul class="model">
+              <li><strong>Date</strong> — quand le sujet a été suivi</li>
+              <li><strong>Thème</strong> — domaine concerné</li>
+              <li><strong>Sources</strong> — d'où vient l'information</li>
+              <li><strong>Synthèse</strong> — ce qui a été retenu</li>
+              <li><strong>Apprentissages &amp; impact</strong> — effet sur mes pratiques</li>
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <ol class="ventries">
+          {veille.map((v) => (
+            <li class="ventry">
+              <div class="ventry__meta">
+                <time class="ventry__date mono">{dateFmt(v.date)}</time>
+                <span class="ventry__theme">{v.theme}</span>
+              </div>
+              <div class="ventry__body">
+                <h2 class="ventry__title">{v.titre}</h2>
+                <p class="ventry__synth">{v.synthese}</p>
+                {v.apprentissages && <p class="ventry__sub"><strong>Apprentissages —</strong> {v.apprentissages}</p>}
+                {v.impact && <p class="ventry__sub"><strong>Impact —</strong> {v.impact}</p>}
+                {v.sources.length > 0 && (
+                  <div class="ventry__sources">
+                    <span class="ventry__sources-lbl mono">Sources</span>
+                    {v.sources.map((s) => s.href
+                      ? <a class="link" href={s.href} rel="noopener" target="_blank">{s.label}</a>
+                      : <span>{s.label}</span>)}
+                  </div>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .empty { border: var(--line-w) dashed var(--line-strong); border-radius: var(--r-md); padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--surface); }
+  .empty__t { font-size: var(--t-md); }
+  .empty__p { color: var(--ink-2); margin-top: var(--sp-2); max-width: 70ch; font-size: var(--t-sm); }
+  .empty__p code { background: var(--surface-2); padding: 0.05rem 0.35rem; border-radius: var(--r-xs); border: var(--line-w) solid var(--line); }
+  .empty__themes { margin-top: var(--sp-5); }
+  .empty__themes-lbl, .empty__model-lbl { display: block; font-size: var(--t-xs); color: var(--ink-3); margin-bottom: var(--sp-2); }
+  .themes { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .theme { font-size: var(--t-sm); border: var(--line-w) solid var(--line); border-radius: var(--r-sm); padding: 0.25rem 0.7rem; background: var(--surface-2); color: var(--ink-2); }
+  .empty__model { margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: var(--line-w) solid var(--line); }
+  .model { display: flex; flex-direction: column; gap: 0.3rem; font-size: var(--t-sm); color: var(--ink-2); }
+  .model strong { color: var(--ink); }
+
+  .ventries { display: flex; flex-direction: column; }
+  .ventry { display: grid; grid-template-columns: 180px 1fr; gap: var(--sp-5); padding: var(--sp-5) 0; border-top: var(--line-w) solid var(--line); }
+  .ventry:first-child { border-top: 0; }
+  .ventry__meta { display: flex; flex-direction: column; gap: 0.3rem; }
+  .ventry__date { font-size: var(--t-sm); color: var(--ink); }
+  .ventry__theme { font-size: var(--t-xs); color: var(--accent); font-family: var(--font-mono); }
+  .ventry__title { font-size: var(--t-md); }
+  .ventry__synth { color: var(--ink-2); margin-top: var(--sp-2); font-size: var(--t-sm); }
+  .ventry__sub { font-size: var(--t-sm); color: var(--ink-2); margin-top: var(--sp-2); }
+  .ventry__sources { margin-top: var(--sp-3); display: flex; flex-wrap: wrap; gap: 0.4rem var(--sp-3); align-items: baseline; font-size: var(--t-sm); }
+  .ventry__sources-lbl { font-size: var(--t-xs); color: var(--ink-3); }
+
+  @media (max-width: 640px) {
+    .ventry { grid-template-columns: 1fr; gap: var(--sp-2); }
+  }
+</style>

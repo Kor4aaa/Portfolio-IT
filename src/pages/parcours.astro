@@ -1,0 +1,135 @@
+---
+import Base from '@layouts/Base.astro';
+import { experiences, formation } from '@data/experiences';
+import { realisations } from '@data/realisations';
+import { profil } from '@data/profil';
+
+const titreReal = (slug: string) => realisations.find((r) => r.slug === slug)?.titre ?? slug;
+const typeLabel: Record<string, string> = { alternance: 'Alternance', stage: 'Stage', formation: 'Formation' };
+---
+<Base
+  title="Parcours"
+  description="Formation et parcours professionnel de Wensel Reyes : BTS SIO SISR en alternance chez Econocom (client Engie) et stages, reliés aux réalisations."
+  path="/parcours"
+>
+  <section class="section--tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head__index">Formation &amp; expérience</span>
+        <h1>Parcours</h1>
+        <p class="prose">
+          Un parcours qui combine formation, alternance et stages. Les expériences renvoient, quand elles
+          existent, aux réalisations concrètes qu'elles ont permises.
+        </p>
+      </div>
+
+      <div class="pcols">
+        <section class="pcol">
+          <h2 class="pcol__h">Expérience professionnelle</h2>
+          <ol class="tl">
+            {experiences.map((e) => (
+              <li class="tl__item">
+                <div class="tl__dot" aria-hidden="true"></div>
+                <div class="tl__card">
+                  <div class="tl__top">
+                    <span class="tl__type mono">{typeLabel[e.type]}</span>
+                    <span class="tl__period mono">{e.periode}{e.dureeNote ? ` · ${e.dureeNote}` : ''}</span>
+                  </div>
+                  <h3 class="tl__poste">{e.poste}</h3>
+                  <p class="tl__org">{e.organisation}{e.client ? ` · client ${e.client}` : ''}{e.enCours ? ' · en cours' : ''}</p>
+                  <ul class="tl__missions">
+                    {e.missions.map((m) => <li>{m}</li>)}
+                  </ul>
+                  {e.realisations && e.realisations.length > 0 && (
+                    <div class="tl__links">
+                      <span class="tl__links-lbl">Réalisation :</span>
+                      {e.realisations.map((s) => <a class="link" href={`/realisations/${s}`}>{titreReal(s)}</a>)}
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="pcol">
+          <h2 class="pcol__h">Formation</h2>
+          <ol class="tl">
+            {formation.map((e) => (
+              <li class="tl__item">
+                <div class="tl__dot" aria-hidden="true"></div>
+                <div class="tl__card">
+                  <div class="tl__top">
+                    <span class="tl__type mono">{typeLabel[e.type]}</span>
+                    <span class="tl__period mono">{e.periode}{e.enCours ? ' · en cours' : ''}</span>
+                  </div>
+                  <h3 class="tl__poste">{e.poste}</h3>
+                  <p class="tl__org">{e.organisation}</p>
+                  <ul class="tl__missions">
+                    {e.missions.map((m) => <li>{m}</li>)}
+                  </ul>
+                  {e.realisations && e.realisations.length > 0 && (
+                    <div class="tl__links">
+                      <span class="tl__links-lbl">Réalisations :</span>
+                      {e.realisations.map((s) => <a class="link" href={`/realisations/${s}`}>{titreReal(s)}</a>)}
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div class="contactbox">
+            <h2 class="contactbox__h">Contact</h2>
+            <ul class="contactbox__list">
+              {profil.contacts.map((c) => (
+                <li><span class="contactbox__lbl mono">{c.label}</span><a class="link" href={c.href} rel="noopener">{c.valeur}</a></li>
+              ))}
+            </ul>
+            <p class="contactbox__loc">{profil.localisation}</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pcols { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(1.5rem, 4vw, 3.5rem); }
+  .pcol__h { font-size: var(--t-md); margin-bottom: var(--sp-5); padding-bottom: var(--sp-2); border-bottom: var(--line-w) solid var(--line); }
+
+  .tl { position: relative; display: flex; flex-direction: column; gap: var(--sp-5); }
+  .tl__item { position: relative; padding-left: var(--sp-6); }
+  .tl__item::before {
+    content: ''; position: absolute; left: 5px; top: 10px; bottom: -1.5rem;
+    width: 1px; background: var(--line);
+  }
+  .tl__item:last-child::before { display: none; }
+  .tl__dot {
+    position: absolute; left: 0; top: 7px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent);
+  }
+  .tl__card { }
+  .tl__top { display: flex; justify-content: space-between; gap: var(--sp-3); align-items: baseline; }
+  .tl__type { font-size: var(--t-xs); color: var(--accent); }
+  .tl__period { font-size: var(--t-xs); color: var(--ink-3); }
+  .tl__poste { font-size: var(--t-md); margin-top: 0.2rem; }
+  .tl__org { font-size: var(--t-sm); color: var(--ink-2); margin-top: 0.1rem; }
+  .tl__missions { margin-top: var(--sp-3); display: flex; flex-direction: column; gap: 0.3rem; }
+  .tl__missions li { position: relative; padding-left: 0.95rem; font-size: var(--t-sm); color: var(--ink-2); line-height: 1.55; }
+  .tl__missions li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--ink-3); }
+  .tl__links { margin-top: var(--sp-3); display: flex; flex-wrap: wrap; gap: 0.4rem var(--sp-3); align-items: baseline; font-size: var(--t-sm); }
+  .tl__links-lbl { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--ink-3); }
+
+  .contactbox { margin-top: var(--sp-7); border: var(--line-w) solid var(--line); border-radius: var(--r-md); padding: var(--sp-5); background: var(--surface); }
+  .contactbox__h { font-size: var(--t-base); margin-bottom: var(--sp-3); }
+  .contactbox__list { display: flex; flex-direction: column; gap: var(--sp-2); font-size: var(--t-sm); }
+  .contactbox__list li { display: flex; gap: var(--sp-3); }
+  .contactbox__lbl { color: var(--ink-3); min-width: 72px; }
+  .contactbox__loc { margin-top: var(--sp-3); font-size: var(--t-xs); color: var(--ink-3); }
+
+  @media (max-width: 860px) {
+    .pcols { grid-template-columns: 1fr; gap: var(--sp-7); }
+  }
+</style>

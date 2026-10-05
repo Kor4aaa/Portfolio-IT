@@ -1,0 +1,215 @@
+---
+import Base from '@layouts/Base.astro';
+import CoverageBar from '@components/CoverageBar.astro';
+import RealisationCard from '@components/RealisationCard.astro';
+import { profil } from '@data/profil';
+import { realisations } from '@data/realisations';
+import { apercuReferentiel, compteursGlobaux } from '@data/derive';
+
+const apercu = apercuReferentiel();
+const totaux = compteursGlobaux();
+const vedettes = realisations.filter((r) => r.vedette);
+
+const etapes = [
+  { t: 'Référentiel', d: 'Les épreuves E5, E6 et E7 et leurs compétences officielles.' },
+  { t: 'Compétence', d: 'Chaque sous-compétence, avec son statut de maîtrise.' },
+  { t: 'Réalisation', d: 'Les projets et expériences qui mobilisent la compétence.' },
+  { t: 'Preuve', d: 'Captures, schémas, configurations et documents à l\'appui.' },
+];
+---
+<Base path="/">
+  <!-- ============== HERO ============== -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__intro">
+        <p class="hero__eyebrow mono">Portfolio de preuves — BTS SIO SISR</p>
+        <h1 class="hero__name">{profil.nom}</h1>
+        <p class="hero__line">
+          BTS SIO SISR · <span class="hero__axes">Systèmes · Réseaux · Cybersécurité</span>
+        </p>
+        <p class="hero__pitch prose">{profil.pitch}</p>
+
+        <blockquote class="hero__q">
+          <span class="hero__q-mark" aria-hidden="true"></span>
+          {profil.question}
+        </blockquote>
+
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="/referentiel">Explorer le référentiel</a>
+          <a class="btn btn--ghost" href="/realisations">Voir les réalisations</a>
+        </div>
+      </div>
+
+      <aside class="hero__panel" aria-label="Couverture du référentiel">
+        <div class="panel__head">
+          <span class="panel__title">Couverture du référentiel</span>
+          <span class="panel__count mono">{totaux.sousTravaillees}/{totaux.sousTotal} sous-compétences travaillées</span>
+        </div>
+        <ul class="panel__list">
+          {apercu.map((a) => (
+            <li class="panel__row">
+              <a class="panel__epreuve" href={`/referentiel#${a.epreuve.code.toLowerCase()}`}>
+                <span class="panel__code mono">{a.epreuve.code}</span>
+                <span class="panel__name">{a.epreuve.titre}</span>
+              </a>
+              <CoverageBar dist={a.dist} total={a.total} />
+              <div class="panel__meta mono">
+                <span>{a.taux}% travaillé</span>
+                <span>{a.nbRealisations} réalisation{a.nbRealisations > 1 ? 's' : ''}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <a class="panel__foot link" href="/synthese">Tableau de synthèse détaillé</a>
+      </aside>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ============== CONCEPT (séquence réelle → numérotation légitime) ============== -->
+  <section class="section concept">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head__index">Comment lire ce portfolio</span>
+        <h2>Du référentiel à la preuve</h2>
+        <p>Chaque compétence affichée renvoie aux réalisations qui la mobilisent et aux preuves qui la justifient. Rien n'est coché sans réalisation ni preuve associée.</p>
+      </div>
+      <ol class="steps">
+        {etapes.map((e, i) => (
+          <li class="step">
+            <span class="step__num mono">{String(i + 1).padStart(2, '0')}</span>
+            <span class="step__arrow" aria-hidden="true"></span>
+            <span class="step__body">
+              <span class="step__t">{e.t}</span>
+              <span class="step__d">{e.d}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ============== RÉALISATIONS VEDETTES ============== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head section-head--row">
+        <div>
+          <span class="section-head__index">Réalisations principales</span>
+          <h2>Projets au cœur du portfolio</h2>
+        </div>
+        <a class="link" href="/realisations">Toutes les réalisations</a>
+      </div>
+      <div class="feat-grid">
+        {vedettes.map((r) => <RealisationCard r={r} />)}
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ============== PARCOURS TEASER ============== -->
+  <section class="section">
+    <div class="container teaser">
+      <div class="teaser__text">
+        <span class="section-head__index">En bref</span>
+        <h2>Formation, alternance et laboratoire personnel</h2>
+        <p class="prose">
+          {profil.alternance.poste} chez {profil.alternance.entreprise} (client {profil.alternance.client})
+          depuis {profil.alternance.depuis.toLowerCase()}, en parallèle du BTS SIO SISR.
+          Les expériences professionnelles et le Home Lab alimentent directement les compétences du référentiel.
+        </p>
+        <div class="teaser__cta">
+          <a class="btn btn--ghost" href="/parcours">Mon parcours</a>
+          <a class="btn btn--ghost" href="/preuves">Mes preuves</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* HERO */
+  .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .hero__eyebrow { color: var(--accent); font-size: var(--t-sm); margin-bottom: var(--sp-4); }
+  .hero__name { font-size: var(--t-3xl); line-height: 0.98; }
+  .hero__line { font-family: var(--font-display); font-size: var(--t-md); color: var(--ink); margin-top: var(--sp-3); }
+  .hero__axes { color: var(--ink-3); }
+  .hero__pitch { color: var(--ink-2); margin-top: var(--sp-4); font-size: var(--t-md); line-height: 1.6; }
+  .hero__q {
+    margin-top: var(--sp-5);
+    padding: var(--sp-4) var(--sp-5);
+    background: var(--surface);
+    border: var(--line-w) solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--r-sm);
+    font-family: var(--font-display);
+    font-size: var(--t-md);
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
+
+  /* HERO PANEL — l'élément mémorable */
+  .hero__panel {
+    background: var(--surface);
+    border: var(--line-w) solid var(--line);
+    border-radius: var(--r-md);
+    padding: var(--sp-5);
+    box-shadow: var(--shadow);
+  }
+  .panel__head { display: flex; flex-direction: column; gap: 0.2rem; padding-bottom: var(--sp-4); border-bottom: var(--line-w) solid var(--line); }
+  .panel__title { font-family: var(--font-display); font-weight: 600; font-size: var(--t-base); }
+  .panel__count { font-size: var(--t-xs); color: var(--ink-3); }
+  .panel__list { display: flex; flex-direction: column; gap: var(--sp-5); padding-block: var(--sp-5); }
+  .panel__row { display: flex; flex-direction: column; gap: var(--sp-2); }
+  .panel__epreuve { display: flex; align-items: baseline; gap: var(--sp-2); }
+  .panel__code { color: var(--accent); font-weight: 600; font-size: var(--t-sm); }
+  .panel__name { font-size: var(--t-sm); color: var(--ink); }
+  .panel__epreuve:hover .panel__name { color: var(--accent); }
+  .panel__meta { display: flex; justify-content: space-between; font-size: var(--t-xs); color: var(--ink-3); }
+  .panel__foot { display: inline-block; font-size: var(--t-sm); padding-top: var(--sp-4); border-top: var(--line-w) solid var(--line); width: 100%; }
+
+  /* CONCEPT STEPS */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: var(--line-w) solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .step { display: flex; align-items: flex-start; gap: var(--sp-3); padding: var(--sp-5); position: relative; }
+  .step + .step { border-left: var(--line-w) solid var(--line); }
+  .step__num { color: var(--accent); font-size: var(--t-sm); font-weight: 600; }
+  .step__arrow { display: none; }
+  .step__body { display: flex; flex-direction: column; gap: 0.25rem; }
+  .step__t { font-family: var(--font-display); font-weight: 600; }
+  .step__d { font-size: var(--t-xs); color: var(--ink-2); line-height: 1.5; }
+
+  /* FEATURED */
+  .section-head--row { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-4); }
+  .section-head--row h2 { font-size: var(--t-xl); margin-top: var(--sp-2); }
+  .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-4); }
+
+  /* TEASER */
+  .teaser__text h2 { font-size: var(--t-xl); margin-top: var(--sp-2); margin-bottom: var(--sp-3); }
+  .teaser__text p { color: var(--ink-2); }
+  .teaser__cta { display: flex; gap: var(--sp-3); margin-top: var(--sp-5); flex-wrap: wrap; }
+
+  @media (max-width: 920px) {
+    .hero__grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step:nth-child(3) { border-left: 0; }
+    .step:nth-child(odd) { border-left: 0; }
+    .step:nth-child(even) { border-left: var(--line-w) solid var(--line); }
+    .step:nth-child(3), .step:nth-child(4) { border-top: var(--line-w) solid var(--line); }
+  }
+  @media (max-width: 560px) {
+    .steps { grid-template-columns: 1fr; }
+    .step { border-left: 0 !important; }
+    .step + .step { border-top: var(--line-w) solid var(--line); }
+    .section-head--row { flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
+  }
+</style>

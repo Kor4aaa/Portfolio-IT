@@ -1,0 +1,147 @@
+---
+import Base from '@layouts/Base.astro';
+import StatusBadge from '@components/StatusBadge.astro';
+import { referentiel } from '@data/referentiel';
+import { matriceSynthese } from '@data/derive';
+import type { Niveau } from '@data/types';
+
+const niveauAbbr: Record<Niveau, string> = {
+  demontree: 'Dé', mobilisee: 'Mo', 'en-cours': 'EC', 'a-developper': 'AD',
+};
+const niveauLabel: Record<Niveau, string> = {
+  demontree: 'Démontrée', mobilisee: 'Mobilisée', 'en-cours': 'En cours', 'a-developper': 'À développer',
+};
+---
+<Base
+  title="Tableau de synthèse"
+  description="Tableau de synthèse des réalisations par compétence pour E5, E6 et E7 — vue de suivi du référentiel BTS SIO SISR, imprimable."
+  path="/synthese"
+>
+  <section class="section--tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head__index">Suivi du référentiel</span>
+        <h1>Tableau de synthèse</h1>
+        <p class="prose">
+          Vue de suivi : pour chaque épreuve, les réalisations en lignes et les compétences en colonnes.
+          Une case indique le niveau de mobilisation déclaré par la réalisation — jamais coché automatiquement
+          à partir d'une technologie.
+        </p>
+      </div>
+
+      <div class="toolbar no-print">
+        <div class="toolbar__legend">
+          {(['demontree','mobilisee','en-cours','a-developper'] as Niveau[]).map((n) => (
+            <span class="tlg"><StatusBadge statut={n} variant="dot" /> <strong>{niveauAbbr[n]}</strong> {niveauLabel[n]}</span>
+          ))}
+          <span class="tlg"><span class="tlg__dash">—</span> non mobilisée</span>
+        </div>
+        <button class="btn btn--ghost" type="button" id="print-btn">Imprimer / PDF</button>
+      </div>
+
+      {referentiel.map((ep) => {
+        const { colonnes, lignes } = matriceSynthese(ep);
+        return (
+          <section class="smatrix" id={`synthese-${ep.code.toLowerCase()}`}>
+            <h2 class="smatrix__title"><span class="code-ref">{ep.code}</span> {ep.titre}</h2>
+            {lignes.length === 0 ? (
+              <p class="muted">Aucune réalisation ne mobilise encore cette épreuve.</p>
+            ) : (
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="tbl__rh">Réalisation</th>
+                      <th scope="col" class="tbl__pr">Période</th>
+                      {colonnes.map((c) => (
+                        <th scope="col" class="tbl__ch" title={c.titre}><span class="code-ref">{c.code}</span></th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {lignes.map((row) => (
+                      <tr>
+                        <th scope="row" class="tbl__rh">
+                          <a class="tbl__link" href={`/realisations/${row.realisation.slug}`}>{row.realisation.titre}</a>
+                        </th>
+                        <td class="tbl__pr mono">{row.realisation.periode}</td>
+                        {row.cellules.map((cell) => (
+                          <td class="tbl__cell">
+                            {cell.niveau ? (
+                              <span class={`cellbadge cellbadge--${cell.niveau}`} title={`${niveauLabel[cell.niveau]} — ${cell.sousCodes.join(', ')}`}>
+                                {niveauAbbr[cell.niveau]}
+                                <span class="visually-hidden">{niveauLabel[cell.niveau]} ({cell.sousCodes.join(', ')})</span>
+                              </span>
+                            ) : (
+                              <span class="tbl__dash" aria-label="non mobilisée">—</span>
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        );
+      })}
+
+      <p class="disclaimer">
+        Les abréviations de cases renvoient aux statuts de mobilisation documentés dans ce portfolio
+        (Dé = démontrée, Mo = mobilisée, EC = en cours, AD = à développer). Elles ne préjugent pas
+        d'une validation officielle par le jury.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-6); }
+  .toolbar__legend { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); font-size: var(--t-xs); color: var(--ink-2); }
+  .tlg { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .tlg strong { color: var(--ink); font-family: var(--font-mono); }
+  .tlg__dash { color: var(--ink-3); font-family: var(--font-mono); }
+
+  .smatrix { margin-bottom: var(--sp-7); }
+  .smatrix__title { font-size: var(--t-md); margin-bottom: var(--sp-4); }
+  .muted { color: var(--ink-3); font-size: var(--t-sm); }
+
+  .tbl-wrap { overflow-x: auto; border: var(--line-w) solid var(--line); border-radius: var(--r-sm); }
+  .tbl { width: 100%; border-collapse: collapse; font-size: var(--t-sm); min-width: 640px; }
+  .tbl th, .tbl td { padding: 0.6rem 0.7rem; text-align: left; border-bottom: var(--line-w) solid var(--line); }
+  .tbl thead th { background: var(--surface-2); font-weight: 600; font-size: var(--t-xs); color: var(--ink-2); position: sticky; top: 0; }
+  .tbl__ch { text-align: center; }
+  .tbl__rh { position: sticky; left: 0; background: var(--surface); z-index: 1; min-width: 210px; }
+  .tbl thead .tbl__rh { z-index: 2; background: var(--surface-2); }
+  .tbl__link { font-weight: 500; color: var(--ink); }
+  .tbl__link:hover { color: var(--accent); }
+  .tbl__pr { color: var(--ink-3); white-space: nowrap; font-size: var(--t-xs); }
+  .tbl__cell { text-align: center; }
+  .tbl__dash { color: var(--ink-3); }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+
+  .cellbadge {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 26px; height: 22px; padding: 0 0.3rem;
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+    border-radius: var(--r-xs); color: #fff;
+  }
+  .cellbadge--demontree    { background: var(--st-demontree); }
+  .cellbadge--mobilisee    { background: var(--st-mobilisee); }
+  .cellbadge--en-cours     { background: var(--st-encours); }
+  .cellbadge--a-developper { background: var(--st-adev); }
+
+  .disclaimer { margin-top: var(--sp-4); font-size: var(--t-xs); color: var(--ink-3); border-left: 2px solid var(--line-strong); padding-left: var(--sp-3); }
+
+  @media print {
+    .tbl-wrap { overflow: visible; }
+    .tbl { min-width: 0; font-size: 10px; }
+    .smatrix { break-inside: avoid; }
+    .cellbadge { border: 1px solid #999; }
+  }
+</style>
+
+<script>
+  document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+</script>

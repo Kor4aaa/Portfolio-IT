@@ -6,3 +6,7 @@ skills-lock.json
 # Divers
 node_modules/
 .DS_Store
+
+# Astro
+dist/
+.astro/

@@ -1,0 +1,104 @@
+---
+import type { SousCompetence } from '@data/types';
+import StatusBadge from '@components/StatusBadge.astro';
+import { statutSous, liensSous } from '@data/derive';
+
+interface Props { sous: SousCompetence; }
+const { sous } = Astro.props;
+const statut = statutSous(sous.code);
+const liens = liensSous(sous.code);
+
+const typeLabels: Record<string, string> = {
+  capture: 'Capture', schema: 'Schéma', configuration: 'Config', script: 'Script',
+  documentation: 'Doc', test: 'Test', log: 'Log', video: 'Vidéo', photo: 'Photo',
+  depot: 'Dépôt', document: 'Document',
+};
+---
+<div class:list={['sous', `sous--${statut}`]}>
+  <div class="sous__main">
+    <span class="code-ref sous__code">{sous.code}</span>
+    <p class="sous__title">{sous.titre}</p>
+    <span class="sous__status"><StatusBadge statut={statut} title={true} /></span>
+  </div>
+
+  {liens.length > 0 && (
+    <div class="sous__links">
+      {liens.map((l) => (
+        <div class="sous__link">
+          <a class="sous__real" href={`/realisations/${l.realisation.slug}`}>
+            <StatusBadge statut={l.niveau} variant="dot" />
+            <span>{l.realisation.titre}</span>
+          </a>
+          <p class="sous__why">{l.justification}</p>
+          {l.preuves.length > 0 && (
+            <ul class="sous__proofs">
+              {l.preuves.map((pid) => {
+                const p = l.realisation.preuves.find((x) => x.id === pid);
+                if (!p) return null;
+                return (
+                  <li>
+                    {p.href && p.etat === 'disponible' ? (
+                      <a class="proof-chip" href={p.href}>
+                        <span class="proof-chip__type">{typeLabels[p.type]}</span>
+                        <span class="proof-chip__name">{p.titre}</span>
+                      </a>
+                    ) : (
+                      <span class="proof-chip proof-chip--todo">
+                        <span class="proof-chip__type">{typeLabels[p.type]}</span>
+                        <span class="proof-chip__name">{p.titre}</span>
+                        <span class="proof-chip__flag">à produire</span>
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .sous {
+    padding: var(--sp-4) 0;
+    border-top: var(--line-w) solid var(--line);
+  }
+  .sous__main {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--sp-3);
+    align-items: start;
+  }
+  .sous__code { padding-top: 0.1rem; }
+  .sous__title { font-size: var(--t-sm); color: var(--ink); line-height: 1.5; }
+  .sous__status { justify-self: end; }
+
+  .sous__links { margin-top: var(--sp-3); margin-left: calc(3.2rem); display: flex; flex-direction: column; gap: var(--sp-3); }
+  .sous__link { border-left: 2px solid var(--line); padding-left: var(--sp-3); }
+  .sous__real { display: inline-flex; align-items: center; gap: 0.45rem; font-size: var(--t-sm); font-weight: 500; color: var(--ink); }
+  .sous__real:hover { color: var(--accent); }
+  .sous__why { font-size: var(--t-xs); color: var(--ink-2); margin-top: 0.2rem; line-height: 1.5; }
+
+  .sous__proofs { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-2); }
+  .proof-chip {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: var(--t-xs);
+    border: var(--line-w) solid var(--line);
+    background: var(--surface-2);
+    border-radius: var(--r-xs);
+    padding: 0.1rem 0.45rem;
+  }
+  a.proof-chip:hover { border-color: var(--accent-line); background: var(--accent-wash); }
+  .proof-chip__type { font-family: var(--font-mono); color: var(--accent); }
+  .proof-chip__name { color: var(--ink-2); }
+  .proof-chip--todo { opacity: 0.8; }
+  .proof-chip__flag { font-family: var(--font-mono); color: var(--st-encours); font-size: 0.7rem; }
+
+  @media (max-width: 560px) {
+    .sous__main { grid-template-columns: auto 1fr; }
+    .sous__status { grid-column: 2; justify-self: start; margin-top: 0.2rem; }
+    .sous__links { margin-left: 0; }
+  }
+</style>

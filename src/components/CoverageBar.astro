@@ -1,0 +1,61 @@
+---
+import type { Statut } from '@data/types';
+import { ORDRE_STATUTS, STATUTS } from '@data/referentiel';
+
+interface Props {
+  dist: Record<Statut, number>;
+  total: number;
+  /** Affiche la légende des segments sous la barre. */
+  showLegend?: boolean;
+}
+const { dist, total, showLegend = false } = Astro.props;
+const segments = ORDRE_STATUTS
+  .filter((s) => dist[s] > 0)
+  .map((s) => ({ statut: s, n: dist[s], pct: total ? (dist[s] / total) * 100 : 0 }));
+---
+<div class="cov">
+  <div class="cov__bar" role="img"
+       aria-label={ORDRE_STATUTS.filter((s) => dist[s] > 0).map((s) => `${dist[s]} ${STATUTS[s].label}`).join(', ')}>
+    {segments.map((seg) => (
+      <span class={`cov__seg cov__seg--${seg.statut}`} style={`width:${seg.pct}%`}></span>
+    ))}
+  </div>
+  {showLegend && (
+    <ul class="cov__legend">
+      {ORDRE_STATUTS.filter((s) => dist[s] > 0).map((s) => (
+        <li class="cov__leg">
+          <span class={`cov__dot cov__seg--${s}`}></span>
+          <span>{STATUTS[s].label}</span>
+          <span class="cov__n">{dist[s]}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
+<style>
+  .cov__bar {
+    display: flex;
+    height: 8px;
+    border-radius: 99px;
+    overflow: hidden;
+    background: var(--surface-2);
+    border: var(--line-w) solid var(--line);
+  }
+  .cov__seg { height: 100%; }
+  .cov__seg + .cov__seg { box-shadow: inset 1px 0 0 var(--bg); }
+  .cov__seg--demontree      { background: var(--st-demontree); }
+  .cov__seg--mobilisee      { background: var(--st-mobilisee); }
+  .cov__seg--en-cours       { background: var(--st-encours); }
+  .cov__seg--a-developper   { background: var(--st-adev); }
+  .cov__seg--non-documentee { background: var(--st-nondoc); }
+
+  .cov__legend {
+    display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4);
+    margin-top: var(--sp-3);
+    font-size: var(--t-xs); color: var(--ink-2);
+  }
+  .cov__leg { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .cov__dot { width: 9px; height: 9px; border-radius: 50%; }
+  .cov__n { font-family: var(--font-mono); color: var(--ink-3); }
+</style>
