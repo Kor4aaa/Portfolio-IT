@@ -1,146 +1,65 @@
 ---
 import Base from '@layouts/Base.astro';
-import { enteteE5, colonnesE5, sectionsE5 } from '@data/synthese-e5';
+
+// Document officiel fourni par Wensel Reyes, publié tel quel (aucune retouche).
+const fichier = '/documents/Tableau-Synthese-E5-Wensel-Reyes.xlsx';
 ---
 <Base
   title="Tableau de synthèse E5"
-  description="Tableau de synthèse des réalisations professionnelles E5 (BTS SIO SISR, session 2026) de Wensel Reyes — imprimable."
+  description="Tableau de synthèse des réalisations professionnelles E5 (BTS SIO SISR, session 2026) de Wensel Reyes — document officiel à télécharger."
   path="/synthese"
 >
   <section class="section--tight">
     <div class="container">
-      <div class="section-head no-print">
+      <div class="section-head">
         <span class="section-head__index" data-en="Official E5 document">Document officiel E5</span>
         <h1 data-en="Summary table">Tableau de synthèse</h1>
-        <p class="prose" data-en="The summary table of professional projects for unit E5, as it will be presented to the examination board. The ticked boxes match the official document exactly.">
-          Le tableau de synthèse des réalisations professionnelles de l'épreuve E5, tel qu'il sera
-          présenté au jury. Les cases cochées reprennent exactement le document officiel.
+        <p class="prose" data-en="The summary table of professional projects for unit E5 (session 2026), as submitted to the examination board. The original file is provided as is.">
+          Le tableau de synthèse des réalisations professionnelles de l'épreuve E5 (session 2026),
+          tel que remis au jury. Le fichier original est fourni tel quel.
         </p>
       </div>
 
-      <div class="toolbar no-print">
-        <span class="toolbar__note" data-en="E6 and E7 are tracked on the Framework page.">E6 et E7 sont suivis sur la page Référentiel.</span>
-        <button class="btn btn--primary" type="button" id="print-btn" data-en="Print / PDF">Imprimer / PDF</button>
-      </div>
-
-      <div class="sheet" id="sheet-e5">
-        <!-- En-tête officiel -->
-        <header class="sheet__head">
-          <div class="sheet__row">
-            <span class="sheet__diplome">{enteteE5.diplome}</span>
-            <span class="sheet__session">{enteteE5.session}</span>
-          </div>
-          <h2 class="sheet__title">{enteteE5.titre}</h2>
-          <div class="sheet__meta">
-            <span><b>NOM et prénom :</b> {enteteE5.nom}</span>
-            <span><b>N° candidat :</b> {enteteE5.candidat || '—'}</span>
-            <span><b>Centre de formation :</b> {enteteE5.centre}</span>
-            <span><b>Option :</b> ☑ SISR&nbsp;&nbsp;▢ SLAM</span>
-            <span class="sheet__url"><b>Portfolio :</b> {enteteE5.url}</span>
-          </div>
-        </header>
-
-        <div class="tbl-wrap">
-          <table class="e5">
-            <thead>
-              <tr>
-                <th scope="col" class="e5__rh">
-                  <span class="e5__rh-top">Compétences mises en œuvre</span>
-                  <span class="e5__rh-bot">Réalisations professionnelles<br/><span>(intitulé et documents associés)</span></span>
-                </th>
-                <th scope="col" class="e5__per">Période</th>
-                {colonnesE5.map((c) => (
-                  <th scope="col" class="e5__ch">
-                    <span class="e5__code">{c.code}</span>
-                    <span class="e5__ctitle">{c.titre}</span>
-                    <ul class="e5__sous">
-                      {c.sous.map((s) => <li>{s}</li>)}
-                    </ul>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sectionsE5.map((sec) => (
-                <>
-                  <tr class="e5__section">
-                    <th scope="colgroup" colspan={8}>{sec.titre}</th>
-                  </tr>
-                  {sec.lignes.length === 0 ? (
-                    <tr class="e5__empty"><td colspan={8}>—</td></tr>
-                  ) : sec.lignes.map((l) => (
-                    <tr>
-                      <th scope="row" class="e5__real">
-                        <span class="e5__real-t">{l.titre}</span>
-                        <span class="e5__real-d">{l.description}</span>
-                        <span class="e5__real-doc"><b>Documents :</b> {l.documents}</span>
-                      </th>
-                      <td class="e5__per mono">{l.periode}</td>
-                      {l.croix.map((ok, i) => (
-                        <td class="e5__cell">
-                          {ok ? <span class="e5__check" title={colonnesE5[i].code}>✔<span class="visually-hidden">{colonnesE5[i].code} validée</span></span> : <span class="visually-hidden">non</span>}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </>
-              ))}
-            </tbody>
-          </table>
+      <div class="doc">
+        <div class="doc__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z M14 3v5h5 M9 13l6 6 M15 13l-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
         </div>
+        <div class="doc__body">
+          <p class="doc__name">Tableau-Synthese-E5-Wensel-Reyes.xlsx</p>
+          <p class="doc__meta mono" data-en="Excel workbook · BTS SIO SISR · session 2026">Classeur Excel · BTS SIO SISR · session 2026</p>
+        </div>
+        <a class="btn btn--primary doc__btn" href={fichier} download>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-en="Download / print">Télécharger / imprimer</span>
+        </a>
       </div>
+
+      <p class="note" data-en={'E6 and E7 coverage is tracked on the <a class="link" href="/referentiel">Framework</a> page.'}>
+        La couverture des épreuves E6 et E7 est suivie sur la page <a class="link" href="/referentiel">Référentiel</a>.
+      </p>
     </div>
   </section>
 </Base>
 
 <style>
-  .toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-5); }
-  .toolbar__note { font-size: var(--t-xs); color: var(--ink-3); }
+  .doc {
+    display: flex; align-items: center; gap: var(--sp-4);
+    padding: var(--sp-5);
+    border: var(--line-w) solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    max-width: 760px;
+  }
+  .doc__icon { color: var(--accent); flex-shrink: 0; }
+  .doc__body { flex: 1; min-width: 0; }
+  .doc__name { font-weight: 600; overflow-wrap: anywhere; }
+  .doc__meta { font-size: var(--t-xs); color: var(--ink-3); margin-top: 0.2rem; }
+  .doc__btn { flex-shrink: 0; }
+  .note { margin-top: var(--sp-5); font-size: var(--t-sm); color: var(--ink-3); }
 
-  .sheet { border: var(--line-w) solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); overflow: hidden; }
-  .sheet__head { padding: var(--sp-4) var(--sp-5); border-bottom: 2px solid var(--line-strong); }
-  .sheet__row { display: flex; justify-content: space-between; gap: var(--sp-3); font-family: var(--font-mono); font-size: var(--t-xs); color: var(--ink-2); }
-  .sheet__session { color: var(--accent); }
-  .sheet__title { font-size: var(--t-md); margin: var(--sp-2) 0; }
-  .sheet__meta { display: flex; flex-wrap: wrap; gap: 0.3rem var(--sp-5); font-size: var(--t-sm); color: var(--ink-2); }
-  .sheet__meta b { color: var(--ink); font-weight: 600; }
-
-  .tbl-wrap { overflow-x: auto; }
-  .e5 { width: 100%; border-collapse: collapse; font-size: var(--t-xs); min-width: 900px; }
-  .e5 th, .e5 td { border: var(--line-w) solid var(--line); vertical-align: top; padding: 0.5rem 0.6rem; text-align: left; }
-  .e5__rh { width: 300px; background: var(--surface-2); }
-  .e5__rh-top { display: block; font-size: var(--t-xs); color: var(--ink-3); font-weight: 600; }
-  .e5__rh-bot { display: block; margin-top: 1.5rem; font-weight: 700; color: var(--ink); }
-  .e5__rh-bot span { font-weight: 400; color: var(--ink-3); font-size: 0.7rem; }
-  .e5__per { width: 90px; text-align: center; }
-  .e5__ch { width: 120px; background: var(--surface-2); }
-  .e5__code { display: block; font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
-  .e5__ctitle { display: block; font-weight: 600; color: var(--ink); margin: 0.2rem 0 0.4rem; line-height: 1.25; }
-  .e5__sous { display: flex; flex-direction: column; gap: 0.2rem; }
-  .e5__sous li { position: relative; padding-left: 0.7rem; color: var(--ink-3); font-size: 0.68rem; line-height: 1.3; }
-  .e5__sous li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
-
-  .e5__section th { background: color-mix(in srgb, var(--accent) 10%, var(--surface-2)); font-weight: 700; color: var(--ink); font-size: var(--t-sm); }
-  .e5__empty td { text-align: center; color: var(--ink-3); }
-  .e5__real-t { display: block; font-weight: 700; color: var(--ink); font-size: var(--t-sm); }
-  .e5__real-d { display: block; color: var(--ink-2); margin: 0.3rem 0; line-height: 1.45; }
-  .e5__real-doc { display: block; color: var(--ink-3); font-size: 0.7rem; }
-  .e5__real-doc b { color: var(--ink-2); }
-  td.e5__per { color: var(--ink-3); white-space: pre-line; }
-  .e5__cell { text-align: center; vertical-align: middle; }
-  .e5__check { color: var(--st-demontree); font-weight: 700; font-size: 1rem; }
-
-  @media print {
-    @page { size: A4 landscape; margin: 8mm; }
-    .sheet { border-color: #000; }
-    .e5 { min-width: 0; font-size: 8.5px; }
-    .e5 th, .e5 td { border-color: #666; padding: 2px 3px; }
-    .e5__check { color: #000; }
-    .e5__sous li { font-size: 6.5px; }
-    .sheet__session, .e5__code { color: #000; }
+  @media (max-width: 600px) {
+    .doc { flex-wrap: wrap; }
+    .doc__btn { width: 100%; justify-content: center; }
   }
 </style>
-
-<script>
-  document.getElementById('print-btn')?.addEventListener('click', () => window.print());
-</script>
