@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T12:21:22.166Z",
+  "updated": "2026-10-06T12:03:58.495Z",
   "count": 15,
   "items": [
     {
@@ -59,44 +59,44 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Multiples vulnérabilités dans Wireshark (24 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1221/",
+      "title": "Multiples vulnérabilités dans les produits Elastic (25 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1228/",
+      "date": "2026-09-25T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans le noyau Linux d'Ubuntu (25 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1229/",
+      "date": "2026-09-25T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans le noyau Linux de Red Hat (25 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1230/",
+      "date": "2026-09-25T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans le noyau Linux de SUSE (25 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1231/",
+      "date": "2026-09-25T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Zabbix Agent (24 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1226/",
       "date": "2026-09-24T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans LibreNMS (24 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1222/",
+      "title": "Multiples vulnérabilités dans PHP (24 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1227/",
       "date": "2026-09-24T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Papercut (24 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1223/",
-      "date": "2026-09-24T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans Microsoft Office (24 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1224/",
-      "date": "2026-09-24T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans GitLab (24 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1225/",
-      "date": "2026-09-24T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans F5 BIG-IP (23 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1220/",
-      "date": "2026-09-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
