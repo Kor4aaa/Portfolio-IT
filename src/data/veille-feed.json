@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-06T12:03:58.495Z",
-  "count": 15,
+  "updated": "2026-10-07T11:49:33.441Z",
+  "count": 16,
   "items": [
     {
       "title": "ANSSI : Le gendarme de la cybersécurité français piraté",
@@ -59,6 +59,13 @@
       "theme": "Sécurité"
     },
     {
+      "title": "Multiples vulnérabilités dans MongoDB (28 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1234/",
+      "date": "2026-09-28T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "Multiples vulnérabilités dans les produits Elastic (25 septembre 2026)",
       "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1228/",
       "date": "2026-09-25T00:00:00.000Z",
@@ -87,16 +94,16 @@
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Zabbix Agent (24 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1226/",
-      "date": "2026-09-24T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans le noyau Linux de Debian LTS (25 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1232/",
+      "date": "2026-09-25T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans PHP (24 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1227/",
-      "date": "2026-09-24T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits IBM (25 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1233/",
+      "date": "2026-09-25T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
