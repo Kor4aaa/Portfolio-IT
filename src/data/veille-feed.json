@@ -1,7 +1,28 @@
 {
-  "updated": "2026-10-07T11:49:33.441Z",
+  "updated": "2026-10-08T12:04:34.216Z",
   "count": 16,
   "items": [
+    {
+      "title": "Confiance numérique : les entreprises françaises privilégient la sécurité et la conformité",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-confiance-numerique-les-entreprises-francaises-privilegient-la-securite-et-la-conformite-100840.html",
+      "date": "2026-10-08T09:42:49.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Cybersécurité : en 2026, les entreprises passent de la défense à la résilience",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-cybersecurite-en-2026-les-entreprises-passent-de-la-defense-a-la-resilience-100839.html",
+      "date": "2026-10-07T14:47:41.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Mistral dévoile Large 4, un modèle à plus de 1 000 milliards de paramètres",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-mistral-devoile-large-4-un-modele-a-plus-de-1-000-milliards-de-parametres-100838.html",
+      "date": "2026-10-07T14:42:23.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "ANSSI : Le gendarme de la cybersécurité français piraté",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-anssi-le-gendarme-de-la-cybersecurite-francais-pirate-100833.html",
@@ -24,6 +45,41 @@
       "theme": "Sécurité"
     },
     {
+      "title": "Multiples vulnérabilités dans Tenable Nessus (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1247/",
+      "date": "2026-10-02T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans CPython (01 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1243/",
+      "date": "2026-10-01T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Mozilla Thunderbird (01 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1244/",
+      "date": "2026-10-01T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Redmine (01 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1245/",
+      "date": "2026-10-01T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans Cisco Catalyst SD-WAN (01 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1246/",
+      "date": "2026-10-01T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "Bercy resserre les garde-fous autour des technologies stratégiques",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-bercy-resserre-les-garde-fous-autour-des-technologies-strategiques-100819.html",
       "date": "2026-09-30T17:55:10.000Z",
@@ -38,79 +94,23 @@
       "theme": "Sécurité"
     },
     {
-      "title": "OpenAI renonce à lancer son modèle GPT-6.1 Astra",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-openai-renonce-a-lancer-son-modele-gpt-61-astra-100821.html",
-      "date": "2026-09-30T09:36:48.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Anthropic dévoile Claude Sonnet 5.5",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-anthropic-devoile-claude-sonnet-55-100820.html",
-      "date": "2026-09-29T12:08:26.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Un agent d'OpenAI s'introduit dans Medicare en Australie",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-un-agent-d-openai-s-introduit-dans-medicare-en-australie-100810.html",
-      "date": "2026-09-28T10:32:30.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans MongoDB (28 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1234/",
-      "date": "2026-09-28T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Mozilla (30 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1240/",
+      "date": "2026-09-30T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Elastic (25 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1228/",
-      "date": "2026-09-25T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans OpenSSL (30 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1241/",
+      "date": "2026-09-30T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux d'Ubuntu (25 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1229/",
-      "date": "2026-09-25T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Red Hat (25 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1230/",
-      "date": "2026-09-25T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de SUSE (25 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1231/",
-      "date": "2026-09-25T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Debian LTS (25 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1232/",
-      "date": "2026-09-25T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits IBM (25 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1233/",
-      "date": "2026-09-25T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Roundcube (26 mai 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-0644/",
-      "date": "2026-05-26T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans GitLab (30 septembre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1242/",
+      "date": "2026-09-30T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     }
