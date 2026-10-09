@@ -1,7 +1,14 @@
 {
-  "updated": "2026-10-08T12:04:34.216Z",
+  "updated": "2026-10-09T11:56:22.929Z",
   "count": 16,
   "items": [
+    {
+      "title": "Orange muscle son offre SecNumCloud",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-orange-muscle-son-offre-secnumcloud-100841.html",
+      "date": "2026-10-09T09:16:16.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Confiance numérique : les entreprises françaises privilégient la sécurité et la conformité",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-confiance-numerique-les-entreprises-francaises-privilegient-la-securite-et-la-conformite-100840.html",
@@ -52,6 +59,27 @@
       "theme": "Vulnérabilités"
     },
     {
+      "title": "Multiples vulnérabilités dans Apache HTTP Server (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1248/",
+      "date": "2026-10-02T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits VMware (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1249/",
+      "date": "2026-10-02T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Moxa (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1250/",
+      "date": "2026-10-02T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "Multiples vulnérabilités dans CPython (01 octobre 2026)",
       "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1243/",
       "date": "2026-10-01T00:00:00.000Z",
@@ -85,34 +113,6 @@
       "date": "2026-09-30T17:55:10.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Carrefour alerte ses clients après une fuite de données chez le prestataire Shipup",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-carrefour-alerte-ses-clients-apres-une-fuite-de-donnees-chez-le-prestataire-shipup-100822.html",
-      "date": "2026-09-30T11:57:19.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits Mozilla (30 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1240/",
-      "date": "2026-09-30T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans OpenSSL (30 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1241/",
-      "date": "2026-09-30T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans GitLab (30 septembre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1242/",
-      "date": "2026-09-30T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     }
   ]
 }
