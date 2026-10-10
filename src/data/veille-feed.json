@@ -1,7 +1,21 @@
 {
-  "updated": "2026-10-09T11:56:22.929Z",
+  "updated": "2026-10-10T11:12:58.452Z",
   "count": 16,
   "items": [
+    {
+      "title": "La plateforme de vote en ligne pour la primaire de gauche, victime d'une cyberattaque",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-la-plateforme-de-vote-en-ligne-pour-la-primaire-de-gauche-victime-d-une-cyberattaque-100845.html",
+      "date": "2026-10-09T13:56:49.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Détecteur d'IA : Google ouvre SynthID Detector au grand public",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-detecteur-d-ia-google-ouvre-synthid-detector-au-grand-public-100842.html",
+      "date": "2026-10-09T13:55:34.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Orange muscle son offre SecNumCloud",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-orange-muscle-son-offre-secnumcloud-100841.html",
@@ -45,74 +59,60 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Les géants de la tech et Trump signent un accord sur la sécurité de l'IA",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-les-geants-de-la-tech-et-trump-signent-un-accord-sur-la-securite-de-l-ia-100826.html",
-      "date": "2026-10-02T15:57:09.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
+      "title": "Vulnérabilité dans Microsoft Exchange Server (05 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1258/",
+      "date": "2026-10-05T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Tenable Nessus (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1247/",
+      "title": "Multiples vulnérabilités dans Google Chrome (05 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1259/",
+      "date": "2026-10-05T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans le noyau Linux d'Ubuntu (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1252/",
       "date": "2026-10-02T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Apache HTTP Server (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1248/",
+      "title": "Multiples vulnérabilités dans le noyau Linux de Debian (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1253/",
       "date": "2026-10-02T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits VMware (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1249/",
+      "title": "Multiples vulnérabilités dans le noyau Linux de Red Hat (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1254/",
       "date": "2026-10-02T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Moxa (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1250/",
+      "title": "Multiples vulnérabilités dans le noyau Linux de SUSE (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1255/",
       "date": "2026-10-02T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans CPython (01 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1243/",
-      "date": "2026-10-01T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits IBM (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1256/",
+      "date": "2026-10-02T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Mozilla Thunderbird (01 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1244/",
-      "date": "2026-10-01T00:00:00.000Z",
+      "title": "Vulnérabilité dans Fortinet FortiMail (02 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1257/",
+      "date": "2026-10-02T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Redmine (01 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1245/",
-      "date": "2026-10-01T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans Cisco Catalyst SD-WAN (01 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1246/",
-      "date": "2026-10-01T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Bercy resserre les garde-fous autour des technologies stratégiques",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-bercy-resserre-les-garde-fous-autour-des-technologies-strategiques-100819.html",
-      "date": "2026-09-30T17:55:10.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
     }
   ]
 }
