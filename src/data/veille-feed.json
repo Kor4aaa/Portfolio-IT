@@ -1,7 +1,21 @@
 {
-  "updated": "2026-10-12T13:13:41.973Z",
+  "updated": "2026-10-13T12:45:10.410Z",
   "count": 16,
   "items": [
+    {
+      "title": "La Cnaf signale une fuite de données sur sa plateforme Vacaf",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-la-cnaf-signale-une-fuite-de-donnees-sur-sa-plateforme-vacaf-100851.html",
+      "date": "2026-10-13T14:22:44.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Une cyberattaque perturbe les installations frigorifiques de centaines de supermarchés",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-une-cyberattaque-perturbe-les-installations-frigorifiques-de-centaines-de-supermarches-100850.html",
+      "date": "2026-10-13T10:44:23.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "La plateforme de vote en ligne pour la primaire de gauche, victime d'une cyberattaque",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-la-plateforme-de-vote-en-ligne-pour-la-primaire-de-gauche-victime-d-une-cyberattaque-100845.html",
@@ -45,20 +59,6 @@
       "theme": "Sécurité"
     },
     {
-      "title": "ANSSI : Le gendarme de la cybersécurité français piraté",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-anssi-le-gendarme-de-la-cybersecurite-francais-pirate-100833.html",
-      "date": "2026-10-05T12:13:30.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Microsoft pointe la montée en puissance des attaques assistées par l'IA",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-microsoft-pointe-la-montee-en-puissance-des-attaques-assistees-par-l-ia-100829.html",
-      "date": "2026-10-05T09:36:09.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
       "title": "Vulnérabilité dans Microsoft Exchange Server (05 octobre 2026)",
       "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1258/",
       "date": "2026-10-05T00:00:00.000Z",
@@ -73,30 +73,30 @@
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux d'Ubuntu (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1252/",
-      "date": "2026-10-02T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans OpenOffice (05 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1260/",
+      "date": "2026-10-05T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Debian (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1253/",
-      "date": "2026-10-02T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Zabbix (05 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1261/",
+      "date": "2026-10-05T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Red Hat (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1254/",
-      "date": "2026-10-02T00:00:00.000Z",
+      "title": "Vulnérabilité dans GitLab (05 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1262/",
+      "date": "2026-10-05T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux de SUSE (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1255/",
-      "date": "2026-10-02T00:00:00.000Z",
+      "title": "Vulnérabilité dans Citrix NetScaler ADC et Gateway (05 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1263/",
+      "date": "2026-10-05T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
