@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14T10:16:52.552Z",
+  "updated": "2026-10-15T10:00:22.221Z",
   "count": 16,
   "items": [
     {
@@ -38,11 +38,46 @@
       "theme": "Sécurité"
     },
     {
+      "title": "Multiples vulnérabilités dans les produits Nextcloud (09 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1283/",
+      "date": "2026-10-09T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans les produits Tenable (09 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1284/",
+      "date": "2026-10-09T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "Confiance numérique : les entreprises françaises privilégient la sécurité et la conformité",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-confiance-numerique-les-entreprises-francaises-privilegient-la-securite-et-la-conformite-100840.html",
       "date": "2026-10-08T09:42:49.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
+    },
+    {
+      "title": "Vulnérabilité dans Ceph (08 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1280/",
+      "date": "2026-10-08T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Splunk (08 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1281/",
+      "date": "2026-10-08T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Cisco (08 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1282/",
+      "date": "2026-10-08T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
     },
     {
       "title": "Cybersécurité : en 2026, les entreprises passent de la défense à la résilience",
@@ -59,58 +94,23 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Vulnérabilité dans Microsoft Exchange Server (05 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1258/",
-      "date": "2026-10-05T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits HPE Aruba Networking (07 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1277/",
+      "date": "2026-10-07T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Google Chrome (05 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1259/",
-      "date": "2026-10-05T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Veeam (07 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1278/",
+      "date": "2026-10-07T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans OpenOffice (05 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1260/",
-      "date": "2026-10-05T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Zabbix (05 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1261/",
-      "date": "2026-10-05T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans GitLab (05 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1262/",
-      "date": "2026-10-05T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans Citrix NetScaler ADC et Gateway (05 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1263/",
-      "date": "2026-10-05T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits IBM (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1256/",
-      "date": "2026-10-02T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans Fortinet FortiMail (02 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1257/",
-      "date": "2026-10-02T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans SPIP (07 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1279/",
+      "date": "2026-10-07T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     }
