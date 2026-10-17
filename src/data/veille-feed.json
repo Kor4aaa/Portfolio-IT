@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T09:53:53.356Z",
+  "updated": "2026-10-17T09:26:18.277Z",
   "count": 16,
   "items": [
     {
@@ -8,6 +8,34 @@
       "date": "2026-10-15T17:41:35.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Adobe (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1301/",
+      "date": "2026-10-14T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Xen (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1302/",
+      "date": "2026-10-14T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans Symantec Endpoint Detection and Response (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1303/",
+      "date": "2026-10-14T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans MongoDB Server (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1304/",
+      "date": "2026-10-14T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
     },
     {
       "title": "La Cnaf signale une fuite de données sur sa plateforme Vacaf",
@@ -24,23 +52,30 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Multiples vulnérabilités dans PostgreSQL JDBC (12 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1292/",
-      "date": "2026-10-12T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Mozilla Firefox (13 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1297/",
+      "date": "2026-10-13T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans MongoDB (12 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1293/",
-      "date": "2026-10-12T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Siemens (13 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1298/",
+      "date": "2026-10-13T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans GitLab (12 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1294/",
-      "date": "2026-10-12T00:00:00.000Z",
+      "title": "Vulnérabilité dans Schneider Electric Harmony (13 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1299/",
+      "date": "2026-10-13T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits SAP (13 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1300/",
+      "date": "2026-10-13T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
@@ -64,41 +99,6 @@
       "date": "2026-10-09T09:16:16.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Red Hat (09 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1287/",
-      "date": "2026-10-09T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de SUSE (09 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1288/",
-      "date": "2026-10-09T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Debian LTS (09 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1289/",
-      "date": "2026-10-09T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Apache Struts (09 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1290/",
-      "date": "2026-10-09T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits IBM (09 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1291/",
-      "date": "2026-10-09T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     },
     {
       "title": "Confiance numérique : les entreprises françaises privilégient la sécurité et la conformité",
