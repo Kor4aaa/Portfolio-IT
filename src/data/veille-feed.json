@@ -1,7 +1,14 @@
 {
-  "updated": "2026-10-18T09:40:21.238Z",
+  "updated": "2026-10-19T10:49:48.064Z",
   "count": 16,
   "items": [
+    {
+      "title": "Cybersécurité : les infrastructures critiques françaises peinent à automatiser leur réponse aux attaques",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-cybersecurite-les-infrastructures-critiques-francaises-peinent-a-automatiser-leur-reponse-aux-attaques-100854.html",
+      "date": "2026-10-19T12:14:00.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Microsoft corrige un nombre record de 1 411 failles de sécurité",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-microsoft-corrige-un-nombre-record-de-1-411-failles-de-securite-100853.html",
@@ -104,13 +111,6 @@
       "title": "Confiance numérique : les entreprises françaises privilégient la sécurité et la conformité",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-confiance-numerique-les-entreprises-francaises-privilegient-la-securite-et-la-conformite-100840.html",
       "date": "2026-10-08T09:42:49.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Cybersécurité : en 2026, les entreprises passent de la défense à la résilience",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-cybersecurite-en-2026-les-entreprises-passent-de-la-defense-a-la-resilience-100839.html",
-      "date": "2026-10-07T14:47:41.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
     }
