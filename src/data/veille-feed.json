@@ -1,7 +1,14 @@
 {
-  "updated": "2026-10-20T10:07:29.559Z",
+  "updated": "2026-10-21T10:14:58.794Z",
   "count": 16,
   "items": [
+    {
+      "title": "Synacktiv étend sa solution d'investigation mobile aux entreprises",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-synacktiv-etend-sa-solution-d-investigation-mobile-aux-entreprises-100860.html",
+      "date": "2026-10-20T17:32:37.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Anthropic soumet en privé un projet de loi fédéral sur l'IA",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-anthropic-soumet-en-prive-un-projet-de-loi-federal-sur-l-ia-100858.html",
@@ -29,20 +36,6 @@
       "date": "2026-10-15T17:41:35.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Vulnérabilité dans Symantec Endpoint Detection and Response (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1303/",
-      "date": "2026-10-14T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans MongoDB Server (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1304/",
-      "date": "2026-10-14T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     },
     {
       "title": "Multiples vulnérabilités dans les produits Mozilla (14 octobre 2026)",
@@ -87,6 +80,20 @@
       "theme": "Vulnérabilités"
     },
     {
+      "title": "Multiples vulnérabilités dans les produits Ivanti (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1311/",
+      "date": "2026-10-14T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Microsoft Office (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1312/",
+      "date": "2026-10-14T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "La Cnaf signale une fuite de données sur sa plateforme Vacaf",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-la-cnaf-signale-une-fuite-de-donnees-sur-sa-plateforme-vacaf-100851.html",
       "date": "2026-10-13T14:22:44.000Z",
@@ -104,13 +111,6 @@
       "title": "La plateforme de vote en ligne pour la primaire de gauche, victime d'une cyberattaque",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-la-plateforme-de-vote-en-ligne-pour-la-primaire-de-gauche-victime-d-une-cyberattaque-100845.html",
       "date": "2026-10-09T13:56:49.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Détecteur d'IA : Google ouvre SynthID Detector au grand public",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-detecteur-d-ia-google-ouvre-synthid-detector-au-grand-public-100842.html",
-      "date": "2026-10-09T13:55:34.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
     }
