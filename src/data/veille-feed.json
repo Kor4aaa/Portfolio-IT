@@ -1,7 +1,14 @@
 {
-  "updated": "2026-10-21T10:14:58.794Z",
+  "updated": "2026-10-22T10:16:03.951Z",
   "count": 16,
   "items": [
+    {
+      "title": "Nir Peleg, directeur mondial de la sécurité des systèmes d'information chez JFrog : «La gouvernance doit fonctionner à la vitesse des agents »",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-nir-peleg-directeur-mondial-de-la-securite-des-systemes-d-information-chez-jfrog-la-gouvernance-doit-fonctionner-a-la-vitesse-des-agents-100861.html",
+      "date": "2026-10-21T13:48:10.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Synacktiv étend sa solution d'investigation mobile aux entreprises",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-synacktiv-etend-sa-solution-d-investigation-mobile-aux-entreprises-100860.html",
@@ -38,57 +45,57 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Mozilla (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1305/",
+      "title": "Multiples vulnérabilités dans les produits F5 (15 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1317/",
+      "date": "2026-10-15T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Moodle (15 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1318/",
+      "date": "2026-10-15T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans PostgreSQL psqlODBC (15 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1319/",
+      "date": "2026-10-15T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Sonicwall Network Security Manager (15 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1320/",
+      "date": "2026-10-15T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Drupal (15 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1321/",
+      "date": "2026-10-15T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Microsoft Windows (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1314/",
       "date": "2026-10-14T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Fortinet (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1306/",
+      "title": "Multiples vulnérabilités dans Microsoft Azure (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1315/",
       "date": "2026-10-14T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Curl (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1307/",
-      "date": "2026-10-14T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Google Chrome (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1308/",
-      "date": "2026-10-14T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans Zabbix (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1309/",
-      "date": "2026-10-14T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits Citrix (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1310/",
-      "date": "2026-10-14T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits Ivanti (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1311/",
-      "date": "2026-10-14T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Microsoft Office (14 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1312/",
+      "title": "Multiples vulnérabilités dans les produits Microsoft (14 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1316/",
       "date": "2026-10-14T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
@@ -104,13 +111,6 @@
       "title": "Une cyberattaque perturbe les installations frigorifiques de centaines de supermarchés",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-une-cyberattaque-perturbe-les-installations-frigorifiques-de-centaines-de-supermarches-100850.html",
       "date": "2026-10-13T10:44:23.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "La plateforme de vote en ligne pour la primaire de gauche, victime d'une cyberattaque",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-la-plateforme-de-vote-en-ligne-pour-la-primaire-de-gauche-victime-d-une-cyberattaque-100845.html",
-      "date": "2026-10-09T13:56:49.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
     }
