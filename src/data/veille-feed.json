@@ -1,7 +1,21 @@
 {
-  "updated": "2026-10-23T10:09:02.008Z",
+  "updated": "2026-10-24T09:35:25.191Z",
   "count": 16,
   "items": [
+    {
+      "title": "GitLab corrige une faille critique vieille de douze ans",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-gitlab-corrige-une-faille-critique-vieille-de-douze-ans-100870.html",
+      "date": "2026-10-23T15:53:05.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Meta condamné à verser 25 Md$ pour avoir trompé ses utilisateurs sur la confidentialité",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-meta-condamne-a-verser-25-md$-pour-avoir-trompe-ses-utilisateurs-sur-la-confidentialite-100868.html",
+      "date": "2026-10-23T15:42:25.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Frigos de supermarchés piratés : l'Anssi pointe des failles de sécurité élémentaires",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-frigos-de-supermarches-pirates-l-anssi-pointe-des-failles-de-securite-elementaires-100864.html",
@@ -31,6 +45,13 @@
       "theme": "Sécurité"
     },
     {
+      "title": "Multiples vulnérabilités dans les produits StormShield (21 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1345/",
+      "date": "2026-10-21T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "Synacktiv étend sa solution d'investigation mobile aux entreprises",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-synacktiv-etend-sa-solution-d-investigation-mobile-aux-entreprises-100860.html",
       "date": "2026-10-20T17:32:37.000Z",
@@ -45,72 +66,51 @@
       "theme": "Sécurité"
     },
     {
-      "title": "ServiceNow lance AI Passport pour gouverner les agents IA",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-servicenow-lance-ai-passport-pour-gouverner-les-agents-ia-100857.html",
-      "date": "2026-10-20T08:01:35.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Cybersécurité : les infrastructures critiques françaises peinent à automatiser leur réponse aux attaques",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-cybersecurite-les-infrastructures-critiques-francaises-peinent-a-automatiser-leur-reponse-aux-attaques-100854.html",
-      "date": "2026-10-19T12:14:00.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Moxa AIG-302 Series (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1327/",
-      "date": "2026-10-16T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Laravel (20 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1343/",
+      "date": "2026-10-20T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Mattermost (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1328/",
-      "date": "2026-10-16T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Mattermost Server (20 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1344/",
+      "date": "2026-10-20T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Google Chrome (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1329/",
-      "date": "2026-10-16T00:00:00.000Z",
+      "title": "Vulnérabilité dans Mattermost Server (19 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1338/",
+      "date": "2026-10-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Traefik (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1330/",
-      "date": "2026-10-16T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Stormshield Network Security (19 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1339/",
+      "date": "2026-10-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Microsoft Office (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1331/",
-      "date": "2026-10-16T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Roundcube Webmail (19 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1340/",
+      "date": "2026-10-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Microsoft (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1332/",
-      "date": "2026-10-16T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits F5 (19 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1341/",
+      "date": "2026-10-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux d'Ubuntu (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1333/",
-      "date": "2026-10-16T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Red Hat (16 octobre 2026)",
-      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1334/",
-      "date": "2026-10-16T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Microsoft Edge (19 octobre 2026)",
+      "link": "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-1342/",
+      "date": "2026-10-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     }
