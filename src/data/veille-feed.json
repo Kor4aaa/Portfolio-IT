@@ -1,7 +1,42 @@
 {
-  "updated": "2026-10-27T10:38:46.521Z",
+  "updated": "2026-10-28T11:23:04.473Z",
   "count": 16,
   "items": [
+    {
+      "title": "Un pirate revendique des fuites de données chez trois partis politiques français",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-un-pirate-revendique-des-fuites-de-donnees-chez-trois-partis-politiques-francais-100879.html",
+      "date": "2026-10-28T11:59:22.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Anthropic révèle que Mythos 5 a tenté de soumettre du code malveillant à un projet open source",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-anthropic-revele-que-mythos-5-a-tente-de-soumettre-du-code-malveillant-a-un-projet-open-source-100874.html",
+      "date": "2026-10-28T11:52:05.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Des agents IA accèdent à des données internes d'Anthropic",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-des-agents-ia-accedent-a-des-donnees-internes-d-anthropic-100881.html",
+      "date": "2026-10-28T11:47:15.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Sortie d'environnement : OpenAI met ses agents hors ligne après plusieurs failles de confinement",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-sortie-d-environnement-openai-met-ses-agents-hors-ligne-apres-plusieurs-failles-de-confinement-100876.html",
+      "date": "2026-10-28T11:42:07.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Alcatel-Lucent Enterprise intègre une IA souveraine à Rainbow pour séduire le secteur public",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-alcatel-lucent-enterprise-integre-une-ia-souveraine-a-rainbow-pour-seduire-le-secteur-public-100875.html",
+      "date": "2026-10-28T11:41:05.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "GitLab corrige une faille critique vieille de douze ans",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-gitlab-corrige-une-faille-critique-vieille-de-douze-ans-100870.html",
@@ -24,95 +59,60 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Deux failles critiques dans PHP : les entreprises sous pression",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-deux-failles-critiques-dans-php-les-entreprises-sous-pression-100866.html",
-      "date": "2026-10-22T17:58:36.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
+      "title": "Multiples vulnérabilités dans les produits Cisco (22 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1360/",
+      "date": "2026-10-22T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
     },
     {
-      "title": "Körber s'appuie sur les SBOM pour unifier la sécurité de ses logiciels",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-kurber-s-appuie-sur-les-sbom-pour-unifier-la-securite-de-ses-logiciels-100863.html",
-      "date": "2026-10-22T14:54:30.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
+      "title": "Vulnérabilité dans les produits Mozilla (22 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1361/",
+      "date": "2026-10-22T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
     },
     {
-      "title": "Nir Peleg, DG de la sécurité des systèmes d'information pour les équipes terrain chez JFrog : «La gouvernance doit fonctionner à la vitesse des agents »",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-nir-peleg-dg-de-la-securite-des-systemes-d-information-pour-les-equipes-terrain-chez-jfrog-la-gouvernance-doit-fonctionner-a-la-vitesse-des-agents-100861.html",
-      "date": "2026-10-21T13:48:10.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
+      "title": "Multiples vulnérabilités dans GitLab (22 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1363/",
+      "date": "2026-10-22T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Mozilla (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1346/",
+      "title": "Multiples vulnérabilités dans les produits SolarWinds (22 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1364/",
+      "date": "2026-10-22T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans Traefik (21 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1356/",
       "date": "2026-10-21T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Vulnérabilité dans MongoDB PHP Driver (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1347/",
+      "title": "Multiples vulnérabilités dans Google Chrome (21 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1357/",
       "date": "2026-10-21T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Mattermost Server (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1348/",
+      "title": "Multiples vulnérabilités dans Apache Tomcat (21 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1358/",
       "date": "2026-10-21T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Oracle Database Server (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1349/",
+      "title": "Multiples vulnérabilités dans PHP (21 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1359/",
       "date": "2026-10-21T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Oracle Java SE (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1350/",
-      "date": "2026-10-21T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Oracle MySQL (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1351/",
-      "date": "2026-10-21T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Oracle PeopleSoft (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1352/",
-      "date": "2026-10-21T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Oracle Systems (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1353/",
-      "date": "2026-10-21T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Synacktiv étend sa solution d'investigation mobile aux entreprises",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-synacktiv-etend-sa-solution-d-investigation-mobile-aux-entreprises-100860.html",
-      "date": "2026-10-20T17:32:37.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Anthropic soumet en privé un projet de loi fédéral sur l'IA",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-anthropic-soumet-en-prive-un-projet-de-loi-federal-sur-l-ia-100858.html",
-      "date": "2026-10-20T08:27:05.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
     }
   ]
 }
