@@ -1,7 +1,14 @@
 {
-  "updated": "2026-10-28T11:23:04.473Z",
+  "updated": "2026-10-29T11:33:58.393Z",
   "count": 16,
   "items": [
+    {
+      "title": "IoT : les vulnérabilités persistent sur les équipements connectés",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-iot-les-vulnerabilites-persistent-sur-les-equipements-connectes-100884.html",
+      "date": "2026-10-28T22:37:24.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Un pirate revendique des fuites de données chez trois partis politiques français",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-un-pirate-revendique-des-fuites-de-donnees-chez-trois-partis-politiques-francais-100879.html",
@@ -52,65 +59,58 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Frigos de supermarchés piratés : l'Anssi pointe des failles de sécurité élémentaires",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-frigos-de-supermarches-pirates-l-anssi-pointe-des-failles-de-securite-elementaires-100864.html",
-      "date": "2026-10-22T18:09:15.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits Cisco (22 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1360/",
-      "date": "2026-10-22T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits HPE Aruba Networking (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1369/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Vulnérabilité dans les produits Mozilla (22 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1361/",
-      "date": "2026-10-22T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Tenable (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1370/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans GitLab (22 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1363/",
-      "date": "2026-10-22T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Microsoft Edge (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1371/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits SolarWinds (22 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1364/",
-      "date": "2026-10-22T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits SUSE (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1372/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Vulnérabilité dans Traefik (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1356/",
-      "date": "2026-10-21T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Red Hat (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1373/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Google Chrome (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1357/",
-      "date": "2026-10-21T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans le noyau Linux de Debian (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1374/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Apache Tomcat (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1358/",
-      "date": "2026-10-21T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans le noyau Linux de Debian LTS (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1375/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans PHP (21 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1359/",
-      "date": "2026-10-21T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans le noyau Linux d'Ubuntu (23 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1376/",
+      "date": "2026-10-23T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     }
