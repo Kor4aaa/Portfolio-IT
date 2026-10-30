@@ -1,7 +1,28 @@
 {
-  "updated": "2026-10-29T11:33:58.393Z",
+  "updated": "2026-10-30T11:25:50.534Z",
   "count": 16,
   "items": [
+    {
+      "title": "Mistral AI ouvre les poids de son modèle Large 4",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-mistral-ai-ouvre-les-poids-de-son-modele-large-4-100889.html",
+      "date": "2026-10-30T11:14:52.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Une cyberattaque expose les données personnelles de clients d'Engie",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-une-cyberattaque-expose-les-donnees-personnelles-de-clients-d-engie-100888.html",
+      "date": "2026-10-29T14:53:54.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "La Mutuelle Communale victime d'une fuite de données",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-la-mutuelle-communale-victime-d-une-fuite-de-donnees-100887.html",
+      "date": "2026-10-29T13:23:40.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "IoT : les vulnérabilités persistent sur les équipements connectés",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-iot-les-vulnerabilites-persistent-sur-les-equipements-connectes-100884.html",
@@ -38,79 +59,58 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Alcatel-Lucent Enterprise intègre une IA souveraine à Rainbow pour séduire le secteur public",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-alcatel-lucent-enterprise-integre-une-ia-souveraine-a-rainbow-pour-seduire-le-secteur-public-100875.html",
-      "date": "2026-10-28T11:41:05.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "GitLab corrige une faille critique vieille de douze ans",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-gitlab-corrige-une-faille-critique-vieille-de-douze-ans-100870.html",
-      "date": "2026-10-23T15:53:05.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Meta condamné à verser 25 Md$ pour avoir trompé ses utilisateurs sur la confidentialité",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-meta-condamne-a-verser-25-md$-pour-avoir-trompe-ses-utilisateurs-sur-la-confidentialite-100868.html",
-      "date": "2026-10-23T15:42:25.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits HPE Aruba Networking (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1369/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Apple (27 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1387/",
+      "date": "2026-10-27T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Tenable (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1370/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Vulnérabilité dans Mattermost Server (27 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1388/",
+      "date": "2026-10-27T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Microsoft Edge (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1371/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Tenable (26 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1381/",
+      "date": "2026-10-26T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits SUSE (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1372/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Microsoft .Net (26 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1382/",
+      "date": "2026-10-26T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Red Hat (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1373/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Vulnérabilité dans les produits Microsoft (26 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1383/",
+      "date": "2026-10-26T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Debian (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1374/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Vulnérabilité dans Citrix XenServer (26 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1384/",
+      "date": "2026-10-26T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Debian LTS (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1375/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits VMware (26 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1385/",
+      "date": "2026-10-26T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans le noyau Linux d'Ubuntu (23 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1376/",
-      "date": "2026-10-23T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits MongoDB (26 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1386/",
+      "date": "2026-10-26T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     }
