@@ -1,7 +1,14 @@
 {
-  "updated": "2026-11-01T11:52:19.258Z",
+  "updated": "2026-11-02T13:34:12.863Z",
   "count": 16,
   "items": [
+    {
+      "title": "Binance victime d'un vol de cryptomonnaies de 6,3 Md$",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-binance-victime-d-un-vol-de-cryptomonnaies-de-6-3-md$-100895.html",
+      "date": "2026-11-02T11:11:20.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Mistral AI ouvre à Orange Cyberdefense l'accès anticipé à une version spécialisée de Large 4",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-mistral-ai-ouvre-a-orange-cyberdefense-l-acces-anticipe-a-une-version-specialisee-de-large-4-100890.html",
@@ -48,13 +55,6 @@
       "title": "Anthropic révèle que Mythos 5 a tenté de soumettre du code malveillant à un projet open source",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-anthropic-revele-que-mythos-5-a-tente-de-soumettre-du-code-malveillant-a-un-projet-open-source-100874.html",
       "date": "2026-10-28T11:52:05.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Des agents IA accèdent à des données internes d'Anthropic",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-des-agents-ia-accedent-a-des-donnees-internes-d-anthropic-100881.html",
-      "date": "2026-10-28T11:47:15.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
     },
