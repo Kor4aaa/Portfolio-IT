@@ -1,7 +1,21 @@
 {
-  "updated": "2026-11-03T12:50:34.344Z",
+  "updated": "2026-11-04T13:01:51.488Z",
   "count": 16,
   "items": [
+    {
+      "title": "BlackLine se déploie sur S3NS",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-blackline-se-deploie-sur-s3ns-100897.html",
+      "date": "2026-11-03T17:10:25.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Les frigos des supermarchés européens victimes d'une nouvelle vague de cyberattaques",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-les-frigos-des-supermarches-europeens-victimes-d-une-nouvelle-vague-de-cyberattaques-100899.html",
+      "date": "2026-11-03T16:53:40.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Binance victime d'un vol de cryptomonnaies de 6,3 Md$",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-binance-victime-d-un-vol-de-cryptomonnaies-de-6-3-md$-100895.html",
@@ -52,60 +66,46 @@
       "theme": "Vulnérabilités"
     },
     {
+      "title": "Multiples vulnérabilités dans Veeam Backup for Microsoft 365 (29 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1411/",
+      "date": "2026-10-29T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Vulnérabilité dans les produits Cisco (29 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1412/",
+      "date": "2026-10-29T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans PostgreSQL Anonymizer (29 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1413/",
+      "date": "2026-10-29T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Juniper Networks (29 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1414/",
+      "date": "2026-10-29T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Apache Kafka (29 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1415/",
+      "date": "2026-10-29T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "IoT : les vulnérabilités persistent sur les équipements connectés",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-iot-les-vulnerabilites-persistent-sur-les-equipements-connectes-100884.html",
       "date": "2026-10-28T22:37:24.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Un pirate revendique des fuites de données chez trois partis politiques français",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-un-pirate-revendique-des-fuites-de-donnees-chez-trois-partis-politiques-francais-100879.html",
-      "date": "2026-10-28T11:59:22.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Anthropic révèle que Mythos 5 a tenté de soumettre du code malveillant à un projet open source",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-anthropic-revele-que-mythos-5-a-tente-de-soumettre-du-code-malveillant-a-un-projet-open-source-100874.html",
-      "date": "2026-10-28T11:52:05.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Mitel OpenScape Endpoint Management (28 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1404/",
-      "date": "2026-10-28T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Microsoft Edge (28 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1405/",
-      "date": "2026-10-28T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits Mozilla (28 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1406/",
-      "date": "2026-10-28T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans les produits Belden (28 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1407/",
-      "date": "2026-10-28T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans Axis Camera Station Pro (28 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1408/",
-      "date": "2026-10-28T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     },
     {
       "title": "Multiples vulnérabilités dans Roundcube Webmail (19 octobre 2026)",
