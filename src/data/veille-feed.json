@@ -1,7 +1,14 @@
 {
-  "updated": "2026-11-06T12:59:26.806Z",
+  "updated": "2026-11-07T11:45:53.979Z",
   "count": 16,
   "items": [
+    {
+      "title": "L'Établissement français du sang touché par une cyberattaque",
+      "link": "https://www.lemondeinformatique.fr/actualites/lire-l-etablissement-francais-du-sang-touche-par-une-cyberattaque-100924.html",
+      "date": "2026-11-06T16:37:19.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "OpenAI dévoile GPT-6 Cyber",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-openai-devoile-gpt-6-cyber-100921.html",
@@ -24,6 +31,13 @@
       "theme": "Sécurité"
     },
     {
+      "title": "Multiples vulnérabilités dans Apache Zookeeper (04 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1448/",
+      "date": "2026-11-04T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "BlackLine se déploie sur S3NS",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-blackline-se-deploie-sur-s3ns-100897.html",
       "date": "2026-11-03T17:10:25.000Z",
@@ -38,6 +52,41 @@
       "theme": "Sécurité"
     },
     {
+      "title": "Multiples vulnérabilités dans Google Android (03 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1443/",
+      "date": "2026-11-03T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans GLPI (03 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1444/",
+      "date": "2026-11-03T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans PostgreSQL (03 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1445/",
+      "date": "2026-11-03T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans NetApp ONTAP 9 (03 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1446/",
+      "date": "2026-11-03T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Xen (03 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1447/",
+      "date": "2026-11-03T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "Binance victime d'un vol de cryptomonnaies de 6,3 Md$",
       "link": "https://www.lemondeinformatique.fr/actualites/lire-binance-victime-d-un-vol-de-cryptomonnaies-de-6-3-md$-100895.html",
       "date": "2026-11-02T11:11:20.000Z",
@@ -45,22 +94,8 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Multiples vulnérabilités dans Redmine (02 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1434/",
-      "date": "2026-11-02T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits Synology (02 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1435/",
-      "date": "2026-11-02T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Tenable Identity Exposure (02 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1436/",
+      "title": "Multiples vulnérabilités dans Ivanti Connect Secure (02 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1442/",
       "date": "2026-11-02T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
@@ -71,41 +106,6 @@
       "date": "2026-11-01T11:21:52.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Mistral AI ouvre les poids de son modèle Large 4",
-      "link": "https://www.lemondeinformatique.fr/actualites/lire-mistral-ai-ouvre-les-poids-de-son-modele-large-4-100889.html",
-      "date": "2026-10-30T11:14:52.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits MongoDB (30 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1430/",
-      "date": "2026-10-30T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de Red Hat (30 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1431/",
-      "date": "2026-10-30T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans le noyau Linux de SUSE (30 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1432/",
-      "date": "2026-10-30T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits IBM (30 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1433/",
-      "date": "2026-10-30T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     },
     {
       "title": "Multiples vulnérabilités dans Roundcube Webmail (19 octobre 2026)",
