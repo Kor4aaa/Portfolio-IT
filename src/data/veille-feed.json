@@ -1,53 +1,74 @@
 {
-  "updated": "2026-11-09T13:57:34.621Z",
-  "count": 8,
+  "updated": "2026-11-10T13:31:00.509Z",
+  "count": 11,
   "items": [
     {
-      "title": "Multiples vulnérabilités dans Apache Zookeeper (04 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1448/",
+      "title": "Cisco et IBM vont intégrer Mythos à leurs outils de cybersécurité",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/cisco-et-ibm-vont-integrer-mythos-a-leurs-outils-d",
+      "date": "2026-11-10T10:58:58.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Qubole : des accès cloud oubliés exposent les entreprises au vol de données",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/qubole-des-acces-cloud-oublies-exposent-les-entrep",
+      "date": "2026-11-10T07:47:39.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "NIS 2 : la loi Résilience arrive enfin à l’Assemblée",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/nis-2-la-loi-resilience-arrive-enfin-a-l-assemblee",
+      "date": "2026-11-10T06:30:04.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Multiples vulnérabilités dans les produits Citrix (04 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1449/",
       "date": "2026-11-04T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Google Android (03 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1443/",
-      "date": "2026-11-03T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Google Chrome (04 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1450/",
+      "date": "2026-11-04T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans GLPI (03 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1444/",
-      "date": "2026-11-03T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits HPE Aruba Networking (04 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1451/",
+      "date": "2026-11-04T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans PostgreSQL (03 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1445/",
-      "date": "2026-11-03T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Ruby on Rails (04 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1452/",
+      "date": "2026-11-04T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans NetApp ONTAP 9 (03 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1446/",
-      "date": "2026-11-03T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans NetApp StorageGRID (04 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1453/",
+      "date": "2026-11-04T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Xen (03 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1447/",
-      "date": "2026-11-03T00:00:00.000Z",
+      "title": "Vulnérabilité dans MongoDB (04 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1454/",
+      "date": "2026-11-04T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Ivanti Connect Secure (02 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1442/",
-      "date": "2026-11-02T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans WordPress (29 octobre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1420/",
+      "date": "2026-10-29T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
