@@ -1,7 +1,21 @@
 {
-  "updated": "2026-11-11T12:45:32.035Z",
-  "count": 12,
+  "updated": "2026-11-12T13:48:47.415Z",
+  "count": 14,
   "items": [
+    {
+      "title": "Zoom Workplace : une faille critique et une faille élevée corrigées sous Windows",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/zoom-workplace-une-faille-critique-et-une-faille-e",
+      "date": "2026-11-12T10:46:15.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "Grok Build : plus de 35 000 applications IA accessibles sans authentification",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/grok-build-plus-de-35-000-applications-ia-accessib",
+      "date": "2026-11-12T07:45:45.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Scality devient autorité de numérotation CVE sous l’égide de l’ENISA",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/scality-devient-autorite-de-numerotation-cve-sous-",
