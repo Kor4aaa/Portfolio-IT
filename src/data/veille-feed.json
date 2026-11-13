@@ -1,7 +1,14 @@
 {
-  "updated": "2026-11-12T13:48:47.415Z",
-  "count": 14,
+  "updated": "2026-11-13T13:10:15.967Z",
+  "count": 15,
   "items": [
+    {
+      "title": "Cybersécurité : OpenAI enrichit Daybreak de deux outils d’IA pour traquer les failles",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/cybersecurite-openai-enrichit-daybreak-de-deux-out",
+      "date": "2026-11-13T06:37:37.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Zoom Workplace : une faille critique et une faille élevée corrigées sous Windows",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/zoom-workplace-une-faille-critique-et-une-faille-e",
@@ -45,58 +52,58 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Multiples vulnérabilités dans MongoDB (05 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1462/",
-      "date": "2026-11-05T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Apple (10 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1487/",
+      "date": "2026-11-10T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans OpenOffice (05 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1463/",
-      "date": "2026-11-05T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Google Chrome (10 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1488/",
+      "date": "2026-11-10T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Siemens (05 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1464/",
-      "date": "2026-11-05T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Roundcube (10 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1489/",
+      "date": "2026-11-10T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans SPIP (05 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1465/",
-      "date": "2026-11-05T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Mozilla Firefox (10 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1490/",
+      "date": "2026-11-10T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans SolarWinds Dameware (04 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1459/",
-      "date": "2026-11-04T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans le greffon OpenID Connect OpenID Provider (OIDC OP) pour Shibboleth (10 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1491/",
+      "date": "2026-11-10T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Symfony (04 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1460/",
-      "date": "2026-11-04T00:00:00.000Z",
+      "title": "Vulnérabilité dans Atlassian Confluence Data Center (10 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1492/",
+      "date": "2026-11-10T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans les produits Elastic (04 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1461/",
-      "date": "2026-11-04T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Synology DSM (10 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1493/",
+      "date": "2026-11-10T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans WordPress (29 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1420/",
-      "date": "2026-10-29T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits VMware (09 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1486/",
+      "date": "2026-11-09T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     }
