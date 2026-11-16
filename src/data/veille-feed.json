@@ -1,7 +1,21 @@
 {
-  "updated": "2026-11-15T12:47:31.955Z",
+  "updated": "2026-11-16T13:42:50.171Z",
   "count": 16,
   "items": [
+    {
+      "title": "Cursor : une clé volée chez Fireworks AI à l’origine d’une cyberattaque",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/cursor-une-cle-volee-chez-fireworks-ai-a-l-origine",
+      "date": "2026-11-16T07:39:57.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
+    {
+      "title": "PostgreSQL corrige 52 failles, dont une vieille de 22 ans",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/postgresql-corrige-52-failles-dont-une-vieille-de-",
+      "date": "2026-11-16T07:38:50.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Rennes va accueillir un centre international dédié à l’IA de défense",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/rennes-va-accueillir-un-centre-international-dedie",
@@ -97,20 +111,6 @@
       "title": "Cisco et IBM vont intégrer Mythos à leurs outils de cybersécurité",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/cisco-et-ibm-vont-integrer-mythos-a-leurs-outils-d",
       "date": "2026-11-10T10:58:58.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Qubole : des accès cloud oubliés exposent les entreprises au vol de données",
-      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/qubole-des-acces-cloud-oublies-exposent-les-entrep",
-      "date": "2026-11-10T07:47:39.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "NIS 2 : la loi Résilience arrive enfin à l’Assemblée",
-      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/nis-2-la-loi-resilience-arrive-enfin-a-l-assemblee",
-      "date": "2026-11-10T06:30:04.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
     }
