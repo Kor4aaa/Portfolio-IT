@@ -1,7 +1,14 @@
 {
-  "updated": "2026-11-18T14:05:52.130Z",
+  "updated": "2026-11-19T14:28:49.415Z",
   "count": 16,
   "items": [
+    {
+      "title": "Présidentielle 2027 : Numeum propose cinq mesures pour renforcer la souveraineté numérique française",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/presidentielle-2027-numeum-propose-cinq-mesures-pour-renforcer-la-souverainete-numerique-francaise",
+      "date": "2026-11-19T09:27:33.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Cursor : une clé volée chez Fireworks AI à l’origine d’une cyberattaque",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/cursor-une-cle-volee-chez-fireworks-ai-a-l-origine",
@@ -29,13 +36,6 @@
       "date": "2026-11-13T06:37:37.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans VMware Tanzu Greenplum (13 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1527/",
-      "date": "2026-11-13T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     },
     {
       "title": "Multiples vulnérabilités dans les produits Citrix (13 novembre 2026)",
@@ -87,6 +87,13 @@
       "theme": "Vulnérabilités"
     },
     {
+      "title": "Multiples vulnérabilités dans le noyau Linux de SUSE (13 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1535/",
+      "date": "2026-11-13T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
       "title": "Zoom Workplace : une faille critique et une faille élevée corrigées sous Windows",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/zoom-workplace-une-faille-critique-et-une-faille-e",
       "date": "2026-11-12T10:46:15.000Z",
@@ -104,13 +111,6 @@
       "title": "Scality devient autorité de numérotation CVE sous l’égide de l’ENISA",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/scality-devient-autorite-de-numerotation-cve-sous-",
       "date": "2026-11-10T14:56:07.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Cisco et IBM vont intégrer Mythos à leurs outils de cybersécurité",
-      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/cisco-et-ibm-vont-integrer-mythos-a-leurs-outils-d",
-      "date": "2026-11-10T10:58:58.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
     }
