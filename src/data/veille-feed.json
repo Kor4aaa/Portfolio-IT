@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20T14:04:54.570Z",
+  "updated": "2026-11-21T13:30:16.331Z",
   "count": 16,
   "items": [
     {
@@ -10,16 +10,44 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Multiples vulnérabilités dans Mitel MiCollab (17 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1547/",
-      "date": "2026-11-17T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Oracle Database Server (18 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1561/",
+      "date": "2026-11-18T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Vulnérabilité dans GLPI (17 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1548/",
-      "date": "2026-11-17T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Oracle Java SE (18 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1562/",
+      "date": "2026-11-18T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Oracle MySQL (18 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1563/",
+      "date": "2026-11-18T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Oracle PeopleSoft (18 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1564/",
+      "date": "2026-11-18T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Oracle Weblogic (18 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1565/",
+      "date": "2026-11-18T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Oracle Virtualization (18 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1566/",
+      "date": "2026-11-18T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
@@ -36,34 +64,6 @@
       "date": "2026-11-16T07:38:50.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Vulnérabilité dans VMware Tanzu (16 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1543/",
-      "date": "2026-11-16T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans MongoDB (16 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1544/",
-      "date": "2026-11-16T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Vulnérabilité dans Citrix App Layering (16 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1545/",
-      "date": "2026-11-16T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Microsoft Edge (16 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1546/",
-      "date": "2026-11-16T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     },
     {
       "title": "Rennes va accueillir un centre international dédié à l’IA de défense",
