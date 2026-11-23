@@ -1,7 +1,14 @@
 {
-  "updated": "2026-11-22T13:24:06.908Z",
+  "updated": "2026-11-23T16:03:33.949Z",
   "count": 16,
   "items": [
+    {
+      "title": "Cyberattaque : la Banque Delubac & Cie déjoue une tentative de fraude mais subit une fuite de données",
+      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/cyberattaque-la-banque-delubac-cie-dejoue-une-tentative-de-fraude-mais-subit-une-fuite-de-donnees",
+      "date": "2026-11-23T11:16:34.000Z",
+      "source": "Le Monde Informatique",
+      "theme": "Sécurité"
+    },
     {
       "title": "Présidentielle 2027 : Numeum propose cinq mesures pour renforcer la souveraineté numérique française",
       "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/presidentielle-2027-numeum-propose-cinq-mesures-pour-renforcer-la-souverainete-numerique-francaise",
@@ -10,44 +17,58 @@
       "theme": "Sécurité"
     },
     {
-      "title": "Multiples vulnérabilités dans Oracle Database Server (18 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1561/",
-      "date": "2026-11-18T00:00:00.000Z",
+      "title": "Vulnérabilité dans VMware Tanzu (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1568/",
+      "date": "2026-11-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Oracle Java SE (18 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1562/",
-      "date": "2026-11-18T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Mitel (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1569/",
+      "date": "2026-11-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Oracle MySQL (18 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1563/",
-      "date": "2026-11-18T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Progress WS_FTP Server (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1570/",
+      "date": "2026-11-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Oracle PeopleSoft (18 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1564/",
-      "date": "2026-11-18T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans Laravel (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1571/",
+      "date": "2026-11-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Oracle Weblogic (18 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1565/",
-      "date": "2026-11-18T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans ClamAV (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1572/",
+      "date": "2026-11-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
     {
-      "title": "Multiples vulnérabilités dans Oracle Virtualization (18 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1566/",
-      "date": "2026-11-18T00:00:00.000Z",
+      "title": "Multiples vulnérabilités dans les produits Cisco (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1573/",
+      "date": "2026-11-19T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans WordPress (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1574/",
+      "date": "2026-11-19T00:00:00.000Z",
+      "source": "CERT-FR · Avis",
+      "theme": "Vulnérabilités"
+    },
+    {
+      "title": "Multiples vulnérabilités dans Wireshark (19 novembre 2026)",
+      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1575/",
+      "date": "2026-11-19T00:00:00.000Z",
       "source": "CERT-FR · Avis",
       "theme": "Vulnérabilités"
     },
@@ -92,27 +113,6 @@
       "date": "2026-11-12T07:45:45.000Z",
       "source": "Le Monde Informatique",
       "theme": "Sécurité"
-    },
-    {
-      "title": "Scality devient autorité de numérotation CVE sous l’égide de l’ENISA",
-      "link": "https://www.lemondeinformatique.fr/cybersecurite-conformite/scality-devient-autorite-de-numerotation-cve-sous-",
-      "date": "2026-11-10T14:56:07.000Z",
-      "source": "Le Monde Informatique",
-      "theme": "Sécurité"
-    },
-    {
-      "title": "Multiples vulnérabilités dans les produits Mattermost (04 novembre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1458/",
-      "date": "2026-11-04T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
-    },
-    {
-      "title": "Multiples vulnérabilités dans Mattermost Server (20 octobre 2026)",
-      "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1344/",
-      "date": "2026-10-20T00:00:00.000Z",
-      "source": "CERT-FR · Avis",
-      "theme": "Vulnérabilités"
     }
   ]
 }
